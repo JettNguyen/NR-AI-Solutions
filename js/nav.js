@@ -6,16 +6,20 @@
 (function () {
   'use strict';
 
-  /* ── Active page link ── */
-  const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
+  /* ── Active page link ──
+     Use link.href (browser-resolved absolute URL) so relative hrefs
+     like "../about/" work correctly from any directory depth.        */
+  var currentNorm = window.location.pathname.replace(/\/+$/, '') || '/';
 
   document.querySelectorAll('.nav-links a, .nav-drawer a').forEach(function (link) {
-    const href = (link.getAttribute('href') || '').replace(/\/$/, '') || '/';
-    if (href === '/' && currentPath === '/') {
-      link.classList.add('active');
-    } else if (href !== '/' && (currentPath === href || currentPath.startsWith(href + '/'))) {
-      link.classList.add('active');
-    }
+    try {
+      var linkNorm = new URL(link.href).pathname.replace(/\/+$/, '') || '/';
+      if (linkNorm === currentNorm) {
+        link.classList.add('active');
+      } else if (linkNorm !== '/' && currentNorm.startsWith(linkNorm + '/')) {
+        link.classList.add('active');
+      }
+    } catch (e) { /* skip non-navigable hrefs */ }
   });
 
   /* ── Scroll: nav opacity ── */
