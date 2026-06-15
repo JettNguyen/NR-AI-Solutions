@@ -44,7 +44,7 @@
     <a href="../questionnaire/" class="btn btn-primary nav-drawer-cta active">Get Started</a>
   </nav>
 
-  <main>
+  <main style="padding-top: var(--nav-height)">
 
     <!-- ==============================
          Progress Bar
@@ -65,6 +65,8 @@
          Form
          ============================== -->
     <form id="questionnaireForm" novalidate aria-label="Intake questionnaire">
+      <!-- Formspree honeypot — bots fill this, humans don't, keeps spam out -->
+      <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
       <div class="form-container">
 
         <!-- ── Section 1: Introduction ── -->

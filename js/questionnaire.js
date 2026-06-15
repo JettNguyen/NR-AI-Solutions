@@ -45,8 +45,8 @@
     currentStep = index;
     updateProgress();
 
-    if (!skipScroll && progressWrap) {
-      window.scrollTo({ top: progressWrap.offsetTop - 20, behavior: 'smooth' });
+    if (!skipScroll) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
 
@@ -265,24 +265,49 @@
   }
 
   /* ── Submit handler ── */
+  var FORMSPREE_ID = 'mgobddpy'; // ← replace with your 8-char Formspree ID
+
+  function showThankyou() {
+    var fullName  = (document.getElementById('fullName') || {}).value || '';
+    var firstName = fullName.trim().split(' ')[0] || 'there';
+    if (formEl)       formEl.style.display = 'none';
+    if (progressWrap) progressWrap.style.display = 'none';
+    if (thankyou) {
+      thankyou.classList.add('visible');
+      var nameEl = document.getElementById('thankyouName');
+      if (nameEl) nameEl.textContent = firstName;
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
   var submitBtn = document.getElementById('submitBtn');
   if (submitBtn) {
     submitBtn.addEventListener('click', function (e) {
       e.preventDefault();
       if (!validateStep(currentStep)) return;
 
-      var fullName  = (document.getElementById('fullName') || {}).value || '';
-      var firstName = fullName.trim().split(' ')[0] || 'there';
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending\u2026';
 
-      if (formEl)       formEl.style.display = 'none';
-      if (progressWrap) progressWrap.style.display = 'none';
-      if (thankyou) {
-        thankyou.classList.add('visible');
-        var nameEl = document.getElementById('thankyouName');
-        if (nameEl) nameEl.textContent = firstName;
-      }
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+        method: 'POST',
+        body: new FormData(formEl),
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(function (res) {
+        if (res.ok) {
+          showThankyou();
+        } else {
+          return res.json().then(function (json) {
+            throw new Error(json.errors ? json.errors.map(function(e){return e.message;}).join(', ') : 'Submission failed');
+          });
+        }
+      })
+      .catch(function () {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit';
+        alert('Something went wrong. Please try again or email us at questions@nrsolveai.com');
+      });
     });
   }
 
