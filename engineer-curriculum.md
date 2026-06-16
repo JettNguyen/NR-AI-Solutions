@@ -41,7 +41,8 @@ Client has ordered or is sourcing the Mac Mini. Skip the OpenClaw install steps 
 
 ### Prepare the Session Agenda
 - Write down 3–5 clarifying questions based on the intake
-- Have the OpenClaw install link or instructions ready (Track A only)
+- Have the OpenClaw install link or instructions ready
+- Have the Tailscale install link and quick setup checklist ready
 - Note the AI model you plan to recommend and why (based on their existing tools and budget)
 - Have a blank copy of the client profile template ready to fill in during the call
 
@@ -106,6 +107,7 @@ Collect the following and record in the client profile:
 | Best days and times for Zoom | Capture 2–3 options |
 | Monthly budget sensitivity | Gauge comfort with the ~$20/month AI model cost |
 | Existing AI tools paid for | Confirm from intake; recommend model if none |
+| Remote access approval | Confirm they approve Tailscale for off-call maintenance |
 
 ---
 
@@ -121,7 +123,20 @@ If they already pay for one, lean into that to keep costs simple. If not, make a
 
 ---
 
-### 2.6 — OpenClaw Install (skip if hardware not yet received) (15–20 min)
+### 2.6 — Remote Access Plan (Tailscale) (5 min)
+
+Explain this before installation work starts:
+
+1. We install Tailscale on the Mac Mini so we can maintain the assistant off-call
+2. This avoids needing a Zoom call for every fix or update
+3. Access is private, encrypted, and revocable at any time
+4. We use access only for assistant maintenance and agreed support work
+
+Confirm explicit approval before proceeding.
+
+---
+
+### 2.7 — OpenClaw Install (skip if hardware not yet received) (15–20 min)
 
 > Only if the client already has the Mac Mini or spare machine in hand. If not, this step moves to the Setup & Handoff Call.
 
@@ -137,7 +152,7 @@ If anything fails or the client is not comfortable, stop and schedule a short fo
 
 ---
 
-### 2.7 — Set Expectations & Close (5–10 min)
+### 2.8 — Set Expectations & Close (5–10 min)
 
 Confirm the following before ending:
 
@@ -154,6 +169,8 @@ Close with: "You don't need to do anything between now and our next call. I'll t
 ## Phase 3 — Build & Configure (Off-Call)
 
 > Engineer works alone. Client does not need to be involved.
+
+**Prerequisite:** Tailscale access to the Mac Mini has been installed and verified.
 
 ### 3.1 — Configure OpenClaw
 
@@ -209,7 +226,19 @@ Keep it to 2–4 solid workflows at launch. Better to do fewer things well than 
 - Note anything that changed in their life or workflow since then
 - Walk through what was built and what it can do today (plain language, no code)
 
-### 4.2 — Account Connections (20–30 min)
+### 4.2 — Tailscale Installation & Verification (10–15 min)
+
+If not already completed in Discovery Call, do this first:
+
+1. Install Tailscale on the Mac Mini
+2. Sign in and attach the machine to the N&R admin network/account
+3. Verify remote SSH or screen access from your machine
+4. Confirm client understands access can be revoked anytime
+5. Record device name and status in client profile
+
+If Tailscale was already installed during Discovery Call, quickly re-verify connectivity and continue.
+
+### 4.3 — Account Connections (20–30 min)
 
 Connect each account one at a time over screen share:
 
@@ -223,7 +252,7 @@ For each account:
 
 **Never rush this section.** If a client hesitates or has a question, stop and answer it fully before continuing.
 
-### 4.3 — Live Demo (10–15 min)
+### 4.4 — Live Demo (10–15 min)
 
 Walk through 2–3 real tasks with the client watching and/or participating:
 
@@ -234,14 +263,14 @@ Walk through 2–3 real tasks with the client watching and/or participating:
 
 Encourage them to send a message themselves by the end of the demo.
 
-### 4.4 — Establish Check-In Rhythm (5 min)
+### 4.5 — Establish Check-In Rhythm (5 min)
 
 - Confirm meeting frequency (weekly recommended for first 2–4 weeks)
 - Confirm best day and time
 - Give them a direct contact method for questions between check-ins
 - Set expectations for the tuning period: "Things will need tweaking. That's normal and expected. Just send me feedback as you go."
 
-### 4.5 — Close (5 min)
+### 4.6 — Close (5 min)
 
 - Confirm they know how to message the assistant
 - Confirm they know how to reach you
@@ -296,6 +325,7 @@ When a client asks for a new capability:
 ### 5.4 — Ongoing Infrastructure
 
 - Verify OpenClaw is running and current on the Mac Mini
+- Verify Tailscale connectivity and remove stale/unknown devices
 - Renew or rotate API keys before expiry
 - Watch for AI model pricing or API changes from providers
 - Keep client informed of any changes that affect cost or behavior
@@ -333,6 +363,9 @@ Preferred Contact Method Between Calls:
 --- Setup ---
 Hardware: [ ] Mac Mini  [ ] Spare machine (describe: ___________)
 OpenClaw Installed: [ ] Yes  [ ] No  [ ] Pending
+Tailscale Installed: [ ] Yes  [ ] No  [ ] Pending
+Tailscale Verified From Engineer Machine: [ ] Yes  [ ] No
+Remote Access Approved By Client: [ ] Yes  [ ] No
 Accounts Connected:
   - [ ]
   - [ ]

@@ -7,6 +7,91 @@
   'use strict';
 
   var DATA_PATH = '../assets/ai-glossary-final.md';
+  var FALLBACK_GLOSSARY_MARKDOWN = [
+    '**AGI (Artificial General Intelligence)** - A theoretical AI that can learn and reason across many tasks at human-like level.',
+    'Example: "A single system that could plan your week, learn accounting basics, and help write legal drafts without retraining."',
+    '',
+    '**AI Agent** - An AI system that can take actions in steps to complete a goal, not just answer once.',
+    'Example: "Book a meeting, email the invite, and update your calendar notes automatically."',
+    '',
+    '**AI Assistant** - A practical AI helper that supports your day-to-day tasks through chat, email, or voice.',
+    'Example: "Draft this reply, summarize this thread, and remind me what to send next."',
+    '',
+    '**Anthropomorphism** - Treating AI like it has human intentions or emotions when it is still software.',
+    'Example: "It sounded confident, so I assumed it understood me emotionally."',
+    '',
+    '**ASI (Artificial Super Intelligence)** - A hypothetical AI that would exceed human ability in nearly all domains.',
+    'Example: "People discussing future scenarios where AI can outperform top experts everywhere."',
+    '',
+    '**Automation** - Using software rules and AI to handle repetitive tasks with less manual effort.',
+    'Example: "Automatically label incoming emails and draft responses for approval."',
+    '',
+    '**Chatbot** - A conversational interface that answers questions or completes simple flows.',
+    'Example: "A website bot that handles common support questions 24/7."',
+    '',
+    '**ChatGPT** - A widely used conversational AI product built on large language models.',
+    'Example: "Use ChatGPT to brainstorm, summarize documents, or draft a first version of an email."',
+    '',
+    '**Context Window** - The amount of text an AI model can consider at once when generating an answer.',
+    'Example: "If a long thread exceeds context, the model may miss earlier details unless summarized."',
+    '',
+    '**Conversational AI** - AI designed to interact in natural language through chat or voice.',
+    'Example: "A voice assistant that can answer follow-up questions in the same conversation."',
+    '',
+    '**Emergent Behavior** - Unexpected capabilities or patterns that appear when a model becomes large or complex.',
+    'Example: "A model starts solving tasks it was not explicitly trained to do."',
+    '',
+    '**Generative AI** - AI that creates new content like text, images, audio, or code from prompts.',
+    'Example: "Generate a first draft of a client proposal from bullet points."',
+    '',
+    '**Hallucination** - When AI produces incorrect or fabricated information that sounds plausible.',
+    'Example: "The assistant cites a policy that does not actually exist."',
+    '',
+    '**Human-in-the-Loop** - A workflow where a person reviews, approves, or corrects AI output before final action.',
+    'Example: "AI drafts customer replies, then you approve before sending."',
+    '',
+    '**Personal CRM** - A lightweight system for tracking relationships, conversations, and follow-ups.',
+    'Example: "Remember who you met, what you discussed, and when to check in."',
+    '',
+    '**Prompt** - The instruction or input you give an AI to guide its response.',
+    'Example: "Summarize this email thread into three action items and one decision."',
+    '',
+    '**Fine-Tuning** - Additional training on specific data to make a base model better at a narrow task.',
+    'Example: "Train a support model on your past ticket style so responses match your team tone."',
+    '',
+    '**Inference** - The step where a trained model generates an output for a new input.',
+    'Example: "You ask a question and the model returns an answer in real time."',
+    '',
+    '**Knowledge Base** - A structured set of documents and data an assistant can reference for accurate answers.',
+    'Example: "Policies, SOPs, and onboarding docs your assistant can search before responding."',
+    '',
+    '**Large Language Model (LLM)** - A model trained on massive text datasets to understand and generate language.',
+    'Example: "An LLM can draft emails, summarize calls, and rewrite content."',
+    '',
+    '**Latency** - The time delay between your request and the AI response.',
+    'Example: "A 2-second latency feels instant; 15 seconds feels slow for chat."',
+    '',
+    '**Model Drift** - Performance changes over time as real-world inputs shift away from original training conditions.',
+    'Example: "A workflow that worked last quarter now misses new customer phrasing."',
+    '',
+    '**Multimodal AI** - AI that can work with multiple input/output types like text, images, audio, and video.',
+    'Example: "Upload a screenshot and ask the assistant to explain what is wrong."',
+    '',
+    '**RAG (Retrieval-Augmented Generation)** - A method where AI retrieves relevant documents first, then writes an answer using them.',
+    'Example: "Assistant searches your policy docs before drafting a compliant customer reply."',
+    '',
+    '**Token** - A small text unit models use internally for processing and pricing.',
+    'Example: "Longer prompts use more tokens and can cost more to run."',
+    '',
+    '**Vector Database** - A database optimized to store embeddings and find semantically similar content quickly.',
+    'Example: "Find past notes related to this customer issue even when wording differs."',
+    '',
+    '**Workflow Orchestration** - Coordinating multiple tools, steps, and approvals so an AI process runs reliably end to end.',
+    'Example: "Collect lead info, enrich data, draft outreach, and queue human approval in one flow."',
+    '',
+    '**Singularity** - A speculative point where AI progress accelerates beyond normal human control or prediction.',
+    'Example: "A future scenario often discussed in AI philosophy and forecasting."'
+  ].join('\n');
   var START_HERE_TERMS = [
     'AI Assistant',
     'AI Agent',
@@ -89,6 +174,16 @@
     }
 
     return entries;
+  }
+
+  function dedupeEntries(entries) {
+    var seen = {};
+    return entries.filter(function (entry) {
+      var key = entry.term.toLowerCase();
+      if (seen[key]) return false;
+      seen[key] = true;
+      return true;
+    });
   }
 
   function makeEntryCard(entry) {
@@ -263,12 +358,18 @@
   }
 
   fetch(DATA_PATH)
-    .then(function (res) { return res.text(); })
+    .then(function (res) {
+      if (!res.ok) {
+        throw new Error('Failed to load glossary markdown');
+      }
+      return res.text();
+    })
     .then(function (markdown) {
-      var entries = parseGlossaryMarkdown(markdown);
+      var entries = dedupeEntries(parseGlossaryMarkdown(markdown));
       init(entries);
     })
     .catch(function () {
-      entriesWrap.innerHTML = '<p>Unable to load glossary entries right now.</p>';
+      var entries = dedupeEntries(parseGlossaryMarkdown(FALLBACK_GLOSSARY_MARKDOWN));
+      init(entries);
     });
 })();
