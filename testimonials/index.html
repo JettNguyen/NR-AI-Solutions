@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Agent Successes | N&amp;R AI Solutions</title>
-  <meta name="description" content="Outcome-focused success stories from AI agents we build, organized by workflow rather than client identity." />
+  <meta name="description" content="Outcome-focused success stories from the core skills we build into your agent, organized by workflow rather than client identity." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -68,60 +68,156 @@
       <div class="container">
         <div class="section-header">
           <span class="section-label fade-up">Workflow Outcomes</span>
-          <h2 id="successes-heading" class="fade-up delay-1">What Well-Built Agents Actually Do</h2>
-          <p class="fade-up delay-2">Each story below is tied to an agent pattern we deploy and maintain.</p>
+          <h2 id="successes-heading" class="fade-up delay-1">What Well-Built Agent Skills Actually Do</h2>
+          <p class="fade-up delay-2">Each story below highlights a practical skill we configure inside your agent.</p>
         </div>
 
-        <div class="feature-grid">
-          <article class="feature-card fade-up delay-1">
-            <h3>Calendar Briefing Agent</h3>
-            <p><strong>Success:</strong> Pre-meeting briefs reduced prep time from 25 minutes to under 8 minutes for recurring internal meetings.</p>
-            <p><strong>How:</strong> Agent compiles attendees, previous notes, and likely action items before each meeting.</p>
-          </article>
+        <div class="success-accordion">
+          <div class="success-item fade-up delay-1">
+            <button class="success-trigger" aria-expanded="false">
+              <div class="success-trigger-text">
+                <h3>Calendar Briefing Skill</h3>
+                <p class="success-brief">Pre-meeting context compiled in &lt;2 minutes instead of manual 15–20 minute search</p>
+              </div>
+              <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </button>
+            <div class="success-body">
+              <div class="success-body-inner">
+                <div class="success-content">
+                  <p><strong>Success:</strong> Pre-meeting context compiled in &lt;2 minutes instead of manual 15–20 minute search through emails and notes.</p>
+                  <p><strong>How:</strong> Skill pulls attendees, previous meeting notes, and likely agenda items before each meeting using gog + memory integration, surfaced at meeting start time.</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-          <article class="feature-card fade-up delay-2">
-            <h3>Inbox Triage Agent</h3>
-            <p><strong>Success:</strong> Morning inbox processing dropped from 90 minutes to around 25 minutes.</p>
-            <p><strong>How:</strong> Agent tags priority messages, drafts responses, and batches low-risk replies for approval.</p>
-          </article>
+          <div class="success-item fade-up delay-2">
+            <button class="success-trigger" aria-expanded="false">
+              <div class="success-trigger-text">
+                <h3>Financial Snapshot Skill</h3>
+                <p class="success-brief">Real-time awareness of runway, vesting cliffs, and budget targets</p>
+              </div>
+              <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </button>
+            <div class="success-body">
+              <div class="success-body-inner">
+                <div class="success-content">
+                  <p><strong>Success:</strong> Real-time awareness of runway, vesting cliffs, and budget targets — preventing overspend and catching ACA deadline misses before they become problems.</p>
+                  <p><strong>How:</strong> Skill maintains persistent snapshots of net worth, burn rate, and pending financial events; flags items requiring immediate action (e.g., COBRA/ACA transitions).</p>
+                </div>
+                <div class="success-graphic">
+                  <!-- Placeholder for graphic PNG -->
+                  <div class="graphic-placeholder">Graphic will be added here</div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-          <article class="feature-card fade-up delay-3">
-            <h3>Follow-Up Agent</h3>
-            <p><strong>Success:</strong> Missed follow-ups fell substantially after automated reminders and draft check-ins.</p>
-            <p><strong>How:</strong> Agent tracks conversations, trigger dates, and next actions across contacts.</p>
-          </article>
+          <div class="success-item fade-up delay-1">
+            <button class="success-trigger" aria-expanded="false">
+              <div class="success-trigger-text">
+                <h3>Email Reply Skill</h3>
+                <p class="success-brief">Professional and personal emails drafted in 30 seconds with contextually appropriate tone</p>
+              </div>
+              <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </button>
+            <div class="success-body">
+              <div class="success-body-inner">
+                <div class="success-content">
+                  <p><strong>Success:</strong> Professional and personal emails drafted in 30 seconds with contextually appropriate tone — reducing composition time and decision fatigue on routine correspondence.</p>
+                  <p><strong>How:</strong> Skill analyzes message intent, sender relationship history, and prior email patterns; generates tone-matched replies that feel natural and require minimal editing.</p>
+                </div>
+                <div class="success-graphic">
+                  <!-- Placeholder for graphic PNG -->
+                  <div class="graphic-placeholder">Graphic will be added here</div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-          <article class="feature-card fade-up delay-1">
-            <h3>Meeting Notes Agent</h3>
-            <p><strong>Success:</strong> Action-item clarity improved by turning raw notes into owner + due-date checklists after every meeting.</p>
-            <p><strong>How:</strong> Agent converts notes into a structured summary, decisions, blockers, and task list.</p>
-          </article>
+          <div class="success-item fade-up delay-2">
+            <button class="success-trigger" aria-expanded="false">
+              <div class="success-trigger-text">
+                <h3>Personal CRM Skill</h3>
+                <p class="success-brief">Relationship context maintained across months without manual note-taking</p>
+              </div>
+              <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </button>
+            <div class="success-body">
+              <div class="success-body-inner">
+                <div class="success-content">
+                  <p><strong>Success:</strong> Relationship context maintained across months — remembering last conversations, upcoming birthdays, and relationship priorities without manual note-taking.</p>
+                  <p><strong>How:</strong> Skill tracks contacts, conversation history, and follow-up dates; prompts outreach and surfaces relationship context before calls or meetups.</p>
+                </div>
+                <div class="success-graphic">
+                  <!-- Placeholder for graphic PNG -->
+                  <div class="graphic-placeholder">Graphic will be added here</div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-          <article class="feature-card fade-up delay-2">
-            <h3>Lead Qualification Agent</h3>
-            <p><strong>Success:</strong> Response speed improved while keeping qualification criteria consistent.</p>
-            <p><strong>How:</strong> Agent enriches lead context and drafts personalized first responses for review.</p>
-          </article>
+          <div class="success-item fade-up delay-1">
+            <button class="success-trigger" aria-expanded="false">
+              <div class="success-trigger-text">
+                <h3>Memory & Context Skill</h3>
+                <p class="success-brief">Session continuity maintained across days without re-context</p>
+              </div>
+              <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </button>
+            <div class="success-body">
+              <div class="success-body-inner">
+                <div class="success-content">
+                  <p><strong>Success:</strong> Session continuity maintained across days — decisions, preferences, and pending actions recovered instantly without re-context.</p>
+                  <p><strong>How:</strong> Skill distills daily sessions into tiered memory (hot/warm/cold), maintains priorities and preferences, retrieves relevant context before responding to questions about prior work.</p>
+                </div>
+                <div class="success-graphic">
+                  <!-- Placeholder for graphic PNG -->
+                  <div class="graphic-placeholder">Graphic will be added here</div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-          <article class="feature-card fade-up delay-3">
-            <h3>Daily Operations Agent</h3>
-            <p><strong>Success:</strong> End-of-day status reporting became a 2-minute scan instead of manual wrap-up work.</p>
-            <p><strong>How:</strong> Agent aggregates activity logs, unresolved tasks, and tomorrow priorities into one summary.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section-alt" aria-labelledby="notes-heading">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label fade-up">How To Read This Page</span>
-          <h2 id="notes-heading" class="fade-up delay-1">Outcome Notes</h2>
-        </div>
-
-        <div class="story-text fade-up delay-1">
-          <p>These are representative workflow outcomes from systems we implement and support. Exact results depend on your process quality, responsiveness, and tool stack.</p>
-          <p>We focus on measurable operational gains: time saved, consistency improved, and fewer dropped tasks.</p>
+          <div class="success-item fade-up delay-2">
+            <button class="success-trigger" aria-expanded="false">
+              <div class="success-trigger-text">
+                <h3>Resource Optimization Skill</h3>
+                <p class="success-brief">Complex multi-step tasks completed in parallel — 60 minutes to 15–20 minutes</p>
+              </div>
+              <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </button>
+            <div class="success-body">
+              <div class="success-body-inner">
+                <div class="success-content">
+                  <p><strong>Success:</strong> Complex multi-step tasks completed in parallel — work that would take 60 minutes sequentially completes in 15–20 minutes via sub-agent spawning.</p>
+                  <p><strong>How:</strong> Skill assesses task complexity and dependencies, spawns isolated sub-agents for parallel work, coordinates results without blocking on sequential execution.</p>
+                </div>
+                <div class="success-graphic">
+                  <!-- Placeholder for graphic PNG -->
+                  <div class="graphic-placeholder">Graphic will be added here</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -171,5 +267,6 @@
   </footer>
 
   <script src="../js/nav.js"></script>
+  <script src="../js/success-accordion.js"></script>
 </body>
 </html>

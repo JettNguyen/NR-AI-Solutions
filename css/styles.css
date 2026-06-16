@@ -2731,3 +2731,212 @@ fieldset .checkbox-group {
     border-color: var(--accent);
   }
 }
+
+/* ========================================
+   28. Success Stories Accordion
+   ======================================== */
+.success-accordion {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.success-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.success-item.open {
+  border-color: rgba(224, 64, 64, 0.35);
+  box-shadow: 0 4px 16px rgba(224, 64, 64, 0.1);
+}
+
+.success-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 28px;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  min-height: 44px;
+  transition: background var(--transition);
+  gap: 16px;
+}
+
+.success-trigger:hover {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.success-trigger-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.success-trigger h3 {
+  font-size: 1.0625rem;
+  margin: 0;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.success-brief {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.success-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  color: var(--text-muted);
+  transition: transform var(--transition), color var(--transition);
+}
+
+.success-item.open .success-icon {
+  transform: rotate(45deg);
+  color: var(--accent);
+}
+
+.success-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+.success-body-inner {
+  padding: 0 28px 24px;
+}
+
+.success-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 10px;
+}
+
+.success-content p {
+  font-size: 0.9375rem;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.success-content strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+
+/* ========================================
+   29. Calendar Booking Section (Questionnaire)
+   ======================================== */
+.booking-section {
+  margin-top: 48px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+  max-width: 700px;
+}
+
+.booking-section h3 {
+  font-size: 1.25rem;
+  margin-bottom: 12px;
+  margin-top: 0;
+}
+
+.booking-section > p {
+  font-size: 1rem;
+  margin-bottom: 28px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.booking-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin: 24px 0;
+}
+
+.booking-container iframe {
+  width: 100%;
+  height: 600px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.booking-note {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin: 16px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.booking-note a {
+  color: var(--accent);
+  font-weight: 500;
+  transition: color var(--transition);
+}
+
+.booking-note a:hover {
+  color: var(--accent-hover);
+}
+
+/* ========================================
+   29b. Responsive Booking Section
+   ======================================== */
+@media (max-width: 768px) {
+  .booking-section {
+    margin-top: 40px;
+    padding-top: 32px;
+  }
+
+  .booking-section h3 {
+    font-size: 1.125rem;
+  }
+
+  .booking-container {
+    padding: 16px;
+  }
+
+  .booking-container iframe {
+    height: 500px;
+  }
+}
+
+/* ========================================
+   28b. Responsive Accordion
+   ======================================== */
+@media (max-width: 768px) {
+  .success-body-inner {
+  }
+
+  .success-trigger {
+    padding: 20px 20px;
+  }
+
+  .success-trigger-text {
+    gap: 4px;
+  }
+
+  .success-trigger h3 {
+    font-size: 1rem;
+  }
+
+  .success-brief {
+    font-size: 0.8125rem;
+  }
+}
