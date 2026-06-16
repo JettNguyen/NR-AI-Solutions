@@ -1629,6 +1629,7 @@ fieldset .checkbox-group {
    21. About Page
    ======================================== */
 .story-text {
+  padding-top: 10px;
   max-width: 680px;
   margin: 0 auto 56px;
 }
@@ -1637,6 +1638,34 @@ fieldset .checkbox-group {
   font-size: 1rem;
   line-height: 1.9;
   margin-bottom: 20px;
+}
+
+.resource-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.resource-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.2;
+  transition: color var(--transition), border-color var(--transition), background var(--transition), transform var(--transition);
+}
+
+.resource-link:hover {
+  color: var(--text-primary);
+  border-color: rgba(224, 64, 64, 0.45);
+  background: var(--accent-subtle);
+  transform: translateY(-1px);
 }
 
 .team-grid {
@@ -2571,6 +2600,16 @@ fieldset .checkbox-group {
 
   .included-grid {
     grid-template-columns: 1fr;
+  }
+
+  .resource-links {
+    gap: 8px;
+  }
+
+  .resource-link {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
   }
 
   .contact-layout {
