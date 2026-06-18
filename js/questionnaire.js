@@ -79,6 +79,45 @@
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
   }
 
+  function scrollToFirstStepError(stepIndex) {
+    var stepEl = steps[stepIndex];
+    if (!stepEl) return;
+
+    var firstFieldError = stepEl.querySelector('.field-error');
+    var firstVisibleError = stepEl.querySelector('.form-error-msg.visible');
+    var target = null;
+
+    if (firstFieldError) {
+      target = firstFieldError.closest('.form-group') || firstFieldError;
+    } else if (firstVisibleError) {
+      target = firstVisibleError.closest('.form-group') || firstVisibleError;
+    }
+
+    if (!target) return;
+
+    document.querySelectorAll('.form-group.error-flash').forEach(function (el) {
+      el.classList.remove('error-flash');
+    });
+    target.classList.add('error-flash');
+    window.setTimeout(function () {
+      target.classList.remove('error-flash');
+    }, 1400);
+
+    var navEl = document.getElementById('nav');
+    var progressEl = document.getElementById('progressWrap');
+    var navOffset = navEl ? navEl.offsetHeight : 0;
+    var progressOffset = (progressEl && progressEl.offsetParent !== null) ? progressEl.offsetHeight : 0;
+    var extraOffset = 18;
+    var y = target.getBoundingClientRect().top + window.pageYOffset - navOffset - progressOffset - extraOffset;
+
+    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+
+    var focusTarget = firstFieldError || target.querySelector('input, textarea, select');
+    if (focusTarget && typeof focusTarget.focus === 'function') {
+      focusTarget.focus({ preventScroll: true });
+    }
+  }
+
   /* ── Validate the current step ── */
   function validateStep(stepIndex) {
     const stepEl = steps[stepIndex];
@@ -199,6 +238,8 @@
         if (currentStep < TOTAL_STEPS - 1) {
           showStep(currentStep + 1);
         }
+      } else {
+        scrollToFirstStepError(currentStep);
       }
     });
   });
@@ -289,7 +330,10 @@
   if (submitBtn) {
     submitBtn.addEventListener('click', function (e) {
       e.preventDefault();
-      if (!validateStep(currentStep)) return;
+      if (!validateStep(currentStep)) {
+        scrollToFirstStepError(currentStep);
+        return;
+      }
 
       submitBtn.disabled = true;
       submitBtn.textContent = 'Sending\u2026';

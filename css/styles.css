@@ -1146,6 +1146,21 @@ fieldset legend + * {
   padding: 20px 24px;
 }
 
+.form-container .form-group.error-flash {
+  border-color: rgba(224, 64, 64, 0.75);
+  box-shadow: 0 0 0 3px rgba(224, 64, 64, 0.16);
+  animation: errorFlashPulse 1.2s ease-out;
+}
+
+@keyframes errorFlashPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(224, 64, 64, 0.38);
+  }
+  100% {
+    box-shadow: 0 0 0 12px rgba(224, 64, 64, 0);
+  }
+}
+
 .form-label {
   display: block;
   font-size: 0.875rem;
