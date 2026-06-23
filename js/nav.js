@@ -6,6 +6,136 @@
 (function () {
   'use strict';
 
+  var THEME_KEY = 'nr-theme';
+  var root = document.documentElement;
+
+  function getStoredTheme() {
+    try {
+      return window.localStorage.getItem(THEME_KEY);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function buildCalendlyUrl(baseUrl, theme) {
+    var url = new URL(baseUrl, window.location.origin);
+    var isDark = theme === 'dark';
+    url.searchParams.set('background_color', isDark ? '0d0d0d' : 'f7efe4');
+    url.searchParams.set('text_color', isDark ? 'f0f0f0' : '2f241f');
+    url.searchParams.set('primary_color', isDark ? 'e04040' : 'c8654f');
+    return url.toString();
+  }
+
+  function updateCalendlyWidgets(theme) {
+    document.querySelectorAll('.calendly-inline-widget[data-calendly-base]').forEach(function (widget) {
+      var baseUrl = widget.getAttribute('data-calendly-base');
+      if (!baseUrl) return;
+
+      var nextUrl = buildCalendlyUrl(baseUrl, theme);
+      widget.setAttribute('data-url', nextUrl);
+
+      var iframe = widget.querySelector('iframe');
+      if (!iframe || !iframe.src) return;
+
+      try {
+        var iframeUrl = new URL(iframe.src);
+        var themedUrl = new URL(nextUrl);
+        iframeUrl.searchParams.set('background_color', themedUrl.searchParams.get('background_color'));
+        iframeUrl.searchParams.set('text_color', themedUrl.searchParams.get('text_color'));
+        iframeUrl.searchParams.set('primary_color', themedUrl.searchParams.get('primary_color'));
+        iframe.src = iframeUrl.toString();
+      } catch (e) {
+        iframe.src = nextUrl;
+      }
+    });
+  }
+
+  function updateNavLogos(theme) {
+    var logoFile = theme === 'dark' ? 'icon-1024.png' : 'logo-1024-light.png';
+
+    document.querySelectorAll('.nav-logo img').forEach(function (img) {
+      if (!img.dataset.logoBaseHref) {
+        img.dataset.logoBaseHref = img.getAttribute('src') || '';
+      }
+
+      var baseHref = img.dataset.logoBaseHref;
+      if (!baseHref) return;
+
+      try {
+        var resolved = new URL(baseHref, window.location.href);
+        resolved.pathname = resolved.pathname.replace(/[^/]+$/, logoFile);
+        img.src = resolved.toString();
+      } catch (e) {
+        img.src = baseHref.replace(/[^/]+$/, logoFile);
+      }
+    });
+  }
+
+  function applyTheme(theme, shouldPersist) {
+    var nextTheme = theme === 'dark' ? 'dark' : 'light';
+    root.setAttribute('data-theme', nextTheme);
+
+    document.querySelectorAll('.theme-toggle').forEach(function (toggle) {
+      var isDark = nextTheme === 'dark';
+      toggle.setAttribute('aria-pressed', String(isDark));
+      toggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+      var label = toggle.querySelector('.theme-toggle-label');
+      if (label) {
+        label.textContent = isDark ? 'Dark Mode' : 'Light Mode';
+      }
+    });
+
+    updateNavLogos(nextTheme);
+    updateCalendlyWidgets(nextTheme);
+
+    if (!shouldPersist) return;
+
+    try {
+      window.localStorage.setItem(THEME_KEY, nextTheme);
+    } catch (e) {
+      /* localStorage unavailable */
+    }
+  }
+
+  function createThemeToggle(extraClassName) {
+    var button = document.createElement('button');
+    button.type = 'button';
+    button.className = extraClassName ? 'theme-toggle ' + extraClassName : 'theme-toggle';
+    button.innerHTML = '<span class="theme-toggle-label">Light Mode</span><span class="theme-toggle-track" aria-hidden="true"><span class="theme-toggle-thumb"></span></span>';
+    button.addEventListener('click', function () {
+      var currentTheme = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      applyTheme(currentTheme === 'dark' ? 'light' : 'dark', true);
+    });
+    return button;
+  }
+
+  function mountThemeToggles() {
+    var navInner = document.querySelector('.nav-inner');
+    if (navInner && !navInner.querySelector('.theme-toggle')) {
+      var desktopToggle = createThemeToggle('theme-toggle--nav');
+      var navCta = navInner.querySelector('.nav-cta');
+      if (navCta) {
+        navInner.insertBefore(desktopToggle, navCta);
+      } else {
+        navInner.appendChild(desktopToggle);
+      }
+    }
+
+    var drawer = document.getElementById('navDrawer');
+    if (drawer && !drawer.querySelector('.theme-toggle')) {
+      var drawerToggle = createThemeToggle('theme-toggle--drawer');
+      var drawerCta = drawer.querySelector('.nav-drawer-cta');
+      if (drawerCta) {
+        drawer.insertBefore(drawerToggle, drawerCta);
+      } else {
+        drawer.appendChild(drawerToggle);
+      }
+    }
+  }
+
+  mountThemeToggles();
+  applyTheme(getStoredTheme() || 'light', false);
+
   /* ── Active page link ──
      Use link.href (browser-resolved absolute URL) so relative hrefs
      like "../about/" work correctly from any directory depth.        */
