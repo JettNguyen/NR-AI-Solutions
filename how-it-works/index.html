@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="icon" href="../assets/icon-1024.png" type="image/png" />
+  <link rel="icon" href="../assets/icon-1024-dark.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="stylesheet" href="../css/styles.css" />
 </head>
@@ -19,7 +19,7 @@
        ============================== -->
   <nav class="nav" id="nav" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="../" class="nav-logo"><img src="../assets/icon-1024.png" alt="N&amp;R AI Solutions" /></a>
+      <a href="../" class="nav-logo"><img src="../assets/icon-1024-dark.svg" alt="N&amp;R AI Solutions" /><span class="nav-logo-text"> | <strong>N&amp;R</strong> AI Solutions</span></a>
       <div class="nav-links">
         <a href="../">Home</a>
         <a href="../how-it-works/">How It Works</a>
@@ -31,6 +31,7 @@
           <div class="nav-more-menu" id="navMoreMenu" role="menu" aria-label="More pages">
             <a href="../about/" role="menuitem">About</a>
             <a href="../ai-explained/" role="menuitem">AI Explained</a>
+            <a href="../resources/" role="menuitem">Resources</a>
             <a href="../equipment/" role="menuitem">Equipment Needed</a>
             <a href="../testimonials/" role="menuitem">Agent Successes</a>
             <a href="../contact/" role="menuitem">Contact</a>
@@ -53,7 +54,8 @@
     <a href="../about/">About</a>
     <a href="../faq/">FAQ</a>
     <a href="../ai-explained/">AI Explained</a>
-    <a href="../equipment/">Equipment Needed</a>
+    <a href="../resources/">Resources</a>
+            <a href="../equipment/">Equipment Needed</a>
     <a href="../testimonials/">Agent Successes</a>
     <a href="../contact/">Contact</a>
     <a href="../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
@@ -344,68 +346,6 @@
     </section>
 
     <!-- ==============================
-         FAQ Teaser
-         ============================== -->
-    <section class="section" aria-labelledby="faq-teaser-heading">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label fade-up">Common Questions</span>
-          <h2 id="faq-teaser-heading" class="fade-up delay-1">Things People Usually Wonder About</h2>
-        </div>
-
-        <div class="accordion fade-up delay-1">
-
-          <div class="accordion-item">
-            <button class="accordion-trigger" aria-expanded="false">
-              Do I need any technical experience?
-              <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-              </svg>
-            </button>
-            <div class="accordion-body">
-              <div class="accordion-body-inner">
-                None. We guide you through setup and decisions in plain language. You can be as hands-on or hands-off as you want while still building on your own machine.
-              </div>
-            </div>
-          </div>
-
-          <div class="accordion-item">
-            <button class="accordion-trigger" aria-expanded="false">
-              What accounts will my assistant have access to?
-              <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-              </svg>
-            </button>
-            <div class="accordion-body">
-              <div class="accordion-body-inner">
-                Only the ones you explicitly approve. We walk through every connection with you before anything is linked. You can remove access at any time.
-              </div>
-            </div>
-          </div>
-
-          <div class="accordion-item">
-            <button class="accordion-trigger" aria-expanded="false">
-              How long does the whole process take?
-              <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-              </svg>
-            </button>
-            <div class="accordion-body">
-              <div class="accordion-body-inner">
-                Most clients are up and running within a few weeks of completing the intake form, depending on the complexity of their setup. We move quickly and keep you informed the whole way through.
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="text-center fade-up delay-2 mt-40">
-          <a href="../faq/" class="btn btn-secondary">See All FAQs →</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==============================
          CTA
          ============================== -->
     <section class="section section-alt" aria-label="Call to action">
@@ -427,7 +367,7 @@
     <div class="footer-inner">
       <div class="footer-grid">
         <div>
-          <div class="footer-logo"><img src="../assets/logo-1024-full.png" alt="N&amp;R AI Solutions" /></div>
+          <div class="footer-logo"><img src="../assets/icon-1024-dark.svg" alt="N&amp;R AI Solutions" /></div>
           <p class="footer-tagline">AI assistants built for real life</p>
         </div>
         <div>
@@ -439,6 +379,7 @@
             <a href="../about/">About</a>
             <a href="../faq/">FAQ</a>
             <a href="../ai-explained/">AI Explained</a>
+    <a href="../resources/">Resources</a>
             <a href="../equipment/">Equipment Needed</a>
             <a href="../testimonials/">Agent Successes</a>
             <a href="../contact/">Contact</a>
@@ -447,18 +388,17 @@
         <div>
           <h4 class="footer-col-title">Contact</h4>
           <a href="mailto:questions@nrsolveai.com" class="footer-contact-email">questions@nrsolveai.com</a>
-          <a href="../questionnaire/" class="btn btn-primary btn-sm">Get Started</a>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2026 N&amp;R AI Solutions. All rights reserved.</p>
+        <p>&copy; 2026 N&amp;R AI Solutions. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
   <script src="../js/nav.js"></script>
   <script>
-    /* ── Accordion ── */
+    /* â”€â”€ Accordion â”€â”€ */
     document.querySelectorAll('.accordion-trigger').forEach(function (btn) {
       btn.addEventListener('click', function () {
         var item   = btn.closest('.accordion-item');
@@ -483,3 +423,9 @@
   </script>
 </body>
 </html>
+
+
+
+
+
+

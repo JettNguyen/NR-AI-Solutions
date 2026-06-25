@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Agent Successes | N&amp;R AI Solutions</title>
-  <meta name="description" content="Outcome-focused success stories from the core skills we build into your agent, organized by workflow rather than client identity." />
+  <title>Resources | N&amp;R AI Solutions</title>
+  <meta name="description" content="Practical AI articles, workflow playbooks, and user stories from the N&amp;R AI Solutions community." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -50,52 +50,35 @@
     <a href="../about/">About</a>
     <a href="../faq/">FAQ</a>
     <a href="../ai-explained/">AI Explained</a>
-    <a href="../resources/">Resources</a>
-            <a href="../equipment/">Equipment Needed</a>
-    <a href="../testimonials/" class="active">Agent Successes</a>
+    <a href="../resources/" class="active">Resources</a>
+    <a href="../equipment/">Equipment Needed</a>
+    <a href="../testimonials/">Agent Successes</a>
     <a href="../contact/">Contact</a>
     <a href="../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
   </nav>
 
   <main>
-    <section class="page-hero" aria-label="Page introduction">
+    <section class="page-hero resource-hero resources-hero" aria-label="Page introduction">
       <div class="page-hero-inner">
-        <span class="section-label fade-up">Results</span>
-        <h1 class="fade-up delay-1">Agent Successes</h1>
-        <p class="fade-up delay-2">Specific wins from specific workflows. No named clients, just outcomes you can evaluate.</p>
+        <span class="section-label fade-up">Knowledge Hub</span>
+        <h1 class="fade-up delay-1">Resources &amp; Articles</h1>
+        <p class="fade-up delay-2">Real stories from clients and the N&amp;R AI Solutions team on what it actually looks like to put an AI agent to work.</p>
       </div>
     </section>
 
-    <section class="section" aria-labelledby="successes-heading">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label fade-up">Workflow Outcomes</span>
-          <h2 id="successes-heading" class="fade-up delay-1">What Well-Built Agent Skills Actually Do</h2>
-          <p class="fade-up delay-2">Each story below highlights a practical skill we configure inside your agent.</p>
+    <section class="section" aria-labelledby="resources-feed-heading">
+      <div class="container resources-layout">
+        <div class="resources-toolbar fade-up">
+          <h2 id="resources-feed-heading">Published Posts</h2>
+          <p>Browse articles by topic or keyword.</p>
+          <input id="resourceSearch" class="form-input" type="search" placeholder="Search title, summary, tags, or author" aria-label="Search resources" />
+          <div id="resourceCategoryFilters" class="resource-filter-row" aria-label="Filter by category"></div>
         </div>
 
-        <div class="feature-grid">
-          <article class="feature-card fade-up delay-1">
-            <h3>Email Triage Skill</h3>
-            <p><strong>Success:</strong> Morning inbox processing dropped from 90 minutes to around 25 minutes.</p>
-            <p><strong>How:</strong> The agent uses this skill to tag priority messages, draft responses, and batch low-risk replies for approval.</p>
-          </article>
-
-          <article class="feature-card fade-up delay-2">
-            <h3>Personal CRM Skill</h3>
-            <p><strong>Success:</strong> Missed follow-ups fell substantially after automated reminders and draft check-ins.</p>
-            <p><strong>How:</strong> The agent uses this skill to track conversations, trigger dates, and next actions across contacts.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" aria-label="Call to action">
-      <div class="container">
-        <div class="cta-banner fade-up">
-          <h2>Want outcomes like these in your workflow?</h2>
-          <p>Tell us your bottlenecks and we will map the right agent pattern for your setup.</p>
-          <a href="../questionnaire/" class="btn btn-primary btn-lg">Start My Setup Call</a>
+        <div class="resources-content fade-up delay-2">
+          <article id="resourceFeatured" class="resource-featured"></article>
+          <div id="resourceGrid" class="resource-grid" role="list"></div>
+          <p id="resourceCount" class="resource-count"></p>
         </div>
       </div>
     </section>
@@ -117,7 +100,7 @@
             <a href="../about/">About</a>
             <a href="../faq/">FAQ</a>
             <a href="../ai-explained/">AI Explained</a>
-    <a href="../resources/">Resources</a>
+            <a href="../resources/">Resources</a>
             <a href="../equipment/">Equipment Needed</a>
             <a href="../testimonials/">Agent Successes</a>
             <a href="../contact/">Contact</a>
@@ -135,11 +118,6 @@
   </footer>
 
   <script src="../js/nav.js"></script>
+  <script src="../js/resources.js"></script>
 </body>
 </html>
-
-
-
-
-
-

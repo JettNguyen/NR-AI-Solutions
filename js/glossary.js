@@ -38,6 +38,8 @@
 
   function cleanText(value) {
     return String(value || '')
+      .replace(/\u00e2\u20ac[\u201c\u201d]/g, ' - ')
+      .replace(/â€“|â€”/g, ' - ')
       .replace(/[\u2013\u2014]/g, ' - ')
       .replace(/\s+-\s+/g, ' - ')
       .replace(/\s{2,}/g, ' ')
@@ -58,8 +60,8 @@
     var entries = [];
 
     for (var i = 0; i < lines.length; i += 1) {
-      var line = lines[i].trim();
-      var entryMatch = line.match(/^\*\*(.+?)\*\*\s+[–-]\s+(.+)$/);
+      var line = cleanText(lines[i].trim());
+      var entryMatch = line.match(/^\*\*(.+?)\*\*\s*-\s*(.+)$/);
       if (entryMatch) {
         var term = entryMatch[1].trim();
         var definition = cleanText(entryMatch[2].trim());

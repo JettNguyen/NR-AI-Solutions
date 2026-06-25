@@ -17,43 +17,10 @@
     }
   }
 
-  function buildCalendlyUrl(baseUrl, theme) {
-    var url = new URL(baseUrl, window.location.origin);
-    var isDark = theme === 'dark';
-    url.searchParams.set('background_color', isDark ? '0d0d0d' : 'f7efe4');
-    url.searchParams.set('text_color', isDark ? 'f0f0f0' : '2f241f');
-    url.searchParams.set('primary_color', isDark ? 'e04040' : 'c8654f');
-    return url.toString();
-  }
-
-  function updateCalendlyWidgets(theme) {
-    document.querySelectorAll('.calendly-inline-widget[data-calendly-base]').forEach(function (widget) {
-      var baseUrl = widget.getAttribute('data-calendly-base');
-      if (!baseUrl) return;
-
-      var nextUrl = buildCalendlyUrl(baseUrl, theme);
-      widget.setAttribute('data-url', nextUrl);
-
-      var iframe = widget.querySelector('iframe');
-      if (!iframe || !iframe.src) return;
-
-      try {
-        var iframeUrl = new URL(iframe.src);
-        var themedUrl = new URL(nextUrl);
-        iframeUrl.searchParams.set('background_color', themedUrl.searchParams.get('background_color'));
-        iframeUrl.searchParams.set('text_color', themedUrl.searchParams.get('text_color'));
-        iframeUrl.searchParams.set('primary_color', themedUrl.searchParams.get('primary_color'));
-        iframe.src = iframeUrl.toString();
-      } catch (e) {
-        iframe.src = nextUrl;
-      }
-    });
-  }
-
   function updateNavLogos(theme) {
-    var logoFile = theme === 'dark' ? 'icon-1024.png' : 'logo-1024-light.png';
+    var logoFile = theme === 'dark' ? 'icon-1024-dark.svg' : 'icon-1024-light.svg';
 
-    document.querySelectorAll('.nav-logo img').forEach(function (img) {
+    document.querySelectorAll('.nav-logo img, .footer-logo img').forEach(function (img) {
       if (!img.dataset.logoBaseHref) {
         img.dataset.logoBaseHref = img.getAttribute('src') || '';
       }
@@ -86,7 +53,6 @@
     });
 
     updateNavLogos(nextTheme);
-    updateCalendlyWidgets(nextTheme);
 
     if (!shouldPersist) return;
 

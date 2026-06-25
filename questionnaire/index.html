@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -8,17 +8,28 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="icon" href="../assets/icon-1024.png" type="image/png" />
+  <link rel="icon" href="../assets/icon-1024-dark.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="../css/styles.css" />
 </head>
 <body>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <filter id="calendarCreamTint" color-interpolation-filters="sRGB" x="0" y="0" width="100%" height="100%">
+        <feFlood class="cf-cream" result="cream" />
+        <feBlend in="SourceGraphic" in2="cream" mode="multiply" result="creamy" />
+        <feFlood class="cf-soft-strong" result="soft" />
+        <feComposite in="soft" in2="creamy" operator="over" />
+      </filter>
+    </defs>
+  </svg>
 
   <!-- ==============================
        Navigation
        ============================== -->
   <nav class="nav" id="nav" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="../" class="nav-logo"><img src="../assets/icon-1024.png" alt="N&amp;R AI Solutions" /></a>
+      <a href="../" class="nav-logo"><img src="../assets/icon-1024-dark.svg" alt="N&amp;R AI Solutions" /><span class="nav-logo-text"> | <strong>N&amp;R</strong> AI Solutions</span></a>
       <div class="nav-links">
         <a href="../">Home</a>
         <a href="../how-it-works/">How It Works</a>
@@ -30,6 +41,7 @@
           <div class="nav-more-menu" id="navMoreMenu" role="menu" aria-label="More pages">
             <a href="../about/" role="menuitem">About</a>
             <a href="../ai-explained/" role="menuitem">AI Explained</a>
+            <a href="../resources/" role="menuitem">Resources</a>
             <a href="../equipment/" role="menuitem">Equipment Needed</a>
             <a href="../testimonials/" role="menuitem">Agent Successes</a>
             <a href="../contact/" role="menuitem">Contact</a>
@@ -52,7 +64,8 @@
     <a href="../about/">About</a>
     <a href="../faq/">FAQ</a>
     <a href="../ai-explained/">AI Explained</a>
-    <a href="../equipment/">Equipment Needed</a>
+    <a href="../resources/">Resources</a>
+            <a href="../equipment/">Equipment Needed</a>
     <a href="../testimonials/">Agent Successes</a>
     <a href="../contact/">Contact</a>
     <a href="../questionnaire/" class="btn btn-primary nav-drawer-cta active">Get Started</a>
@@ -79,11 +92,11 @@
          Form
          ============================== -->
     <form id="questionnaireForm" novalidate aria-label="Intake questionnaire">
-      <!-- Formspree honeypot — bots fill this, humans don't, keeps spam out -->
+      <!-- Formspree honeypot -- bots fill this, humans don't, keeps spam out -->
       <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
       <div class="form-container">
 
-        <!-- ── Section 1: Introduction ── -->
+        <!-- â”€â”€ Section 1: Introduction â”€â”€ -->
         <div class="form-step active" id="step-1" aria-label="Section 1: Introduction">
           <h2 class="step-heading">N&amp;R AI Solutions Intake Questionnaire</h2>
           <p class="step-subheading">A short form before we start your AI Assistant journey with N&amp;R AI Solutions!</p>
@@ -96,7 +109,7 @@
           </div>
         </div>
 
-        <!-- ── Section 2: Welcome ── -->
+        <!-- â”€â”€ Section 2: Welcome â”€â”€ -->
         <div class="form-step" id="step-2" aria-label="Section 2: Welcome">
           <h2 class="step-heading">Welcome!</h2>
 
@@ -125,7 +138,7 @@
           </div>
         </div>
 
-        <!-- ── Section 3: About You ── -->
+        <!-- â”€â”€ Section 3: About You â”€â”€ -->
         <div class="form-step" id="step-3" aria-label="Section 3: About You">
           <h2 class="step-heading">About You</h2>
 
@@ -163,7 +176,7 @@
           </div>
         </div>
 
-        <!-- ── Section 4: What You Want Help With ── -->
+        <!-- â”€â”€ Section 4: What You Want Help With â”€â”€ -->
         <div class="form-step" id="step-4" aria-label="Section 4: What You Want Help With">
           <h2 class="step-heading">What You Want Help With</h2>
 
@@ -278,7 +291,7 @@
           </div>
         </div>
 
-        <!-- ── Section 5: How Hands-On You Want To Be ── -->
+        <!-- â”€â”€ Section 5: How Hands-On You Want To Be â”€â”€ -->
         <div class="form-step" id="step-5" aria-label="Section 5: How Hands-On You Want To Be">
           <h2 class="step-heading">How Hands-On You Want To Be</h2>
           <p class="step-subheading">We set up every assistant with sensible defaults that protect you from day one. It will never send a message, make a purchase, or take an irreversible action without your approval first. These questions help us understand your preferences beyond those basics.</p>
@@ -374,7 +387,7 @@
           </div>
         </div>
 
-        <!-- ── Section 6: Your Comfort Level ── -->
+        <!-- â”€â”€ Section 6: Your Comfort Level â”€â”€ -->
         <div class="form-step" id="step-6" aria-label="Section 6: Your Comfort Level">
           <h2 class="step-heading">Your Comfort Level</h2>
 
@@ -478,7 +491,7 @@
           </div>
         </div>
 
-        <!-- ── Section 7: Closing ── -->
+        <!-- â”€â”€ Section 7: Closing â”€â”€ -->
         <div class="form-step" id="step-7" aria-label="Section 7: Closing">
           <h2 class="step-heading">Closing</h2>
 
@@ -550,7 +563,9 @@
         <h3>Next Step: Schedule Your Discovery Call</h3>
         <p>Pick a time that works for you. We'll discuss your setup, timeline, and any questions you have.</p>
         <div class="booking-container" id="bookingContainer">
-          <div class="calendly-inline-widget" data-calendly-base="https://calendly.com/nrsolveai/new-meeting" data-url="https://calendly.com/nrsolveai/new-meeting?background_color=f7efe4&text_color=2f241f&primary_color=c8654f" style="min-width:320px;height:700px;"></div>
+          <div class="booking-frame">
+            <iframe src="https://calendar.app.google/bnJFuCFGs2mqfeur9" title="Book a time on our Google Calendar" loading="lazy"></iframe>
+          </div>
           <p class="booking-note">If the calendar isn't loading, you can also <a href="mailto:questions@nrsolveai.com?subject=Schedule%20a%20Discovery%20Call">email us to schedule</a>.</p>
         </div>
       </div>
@@ -567,7 +582,7 @@
     <div class="footer-inner">
       <div class="footer-grid">
         <div>
-          <div class="footer-logo"><img src="../assets/logo-1024-full.png" alt="N&amp;R AI Solutions" /></div>
+          <div class="footer-logo"><img src="../assets/icon-1024-dark.svg" alt="N&amp;R AI Solutions" /></div>
           <p class="footer-tagline">AI assistants built for real life</p>
         </div>
         <div>
@@ -579,6 +594,7 @@
             <a href="../about/">About</a>
             <a href="../faq/">FAQ</a>
             <a href="../ai-explained/">AI Explained</a>
+    <a href="../resources/">Resources</a>
             <a href="../equipment/">Equipment Needed</a>
             <a href="../testimonials/">Agent Successes</a>
             <a href="../contact/">Contact</a>
@@ -587,17 +603,21 @@
         <div>
           <h4 class="footer-col-title">Contact</h4>
           <a href="mailto:questions@nrsolveai.com" class="footer-contact-email">questions@nrsolveai.com</a>
-          <a href="../questionnaire/" class="btn btn-primary btn-sm">Get Started</a>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2026 N&amp;R AI Solutions. All rights reserved.</p>
+        <p>&copy; 2026 N&amp;R AI Solutions. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
   <script src="../js/nav.js"></script>
-  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
   <script src="../js/questionnaire.js"></script>
 </body>
 </html>
+
+
+
+
+
+

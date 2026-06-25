@@ -1,0 +1,23 @@
+<svg width="1024" height="1024" viewBox="93 37 838 950" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&amp;display=swap');
+    </style>
+  </defs>
+  <polygon
+    points="512,92 148.27,302 148.27,722 512,932 875.73,722 875.73,302"
+    fill="none"
+    stroke="#2f241f"
+    stroke-width="50"
+  />
+  <text
+    x="512"
+    y="612"
+    text-anchor="middle"
+    font-family="Inter, sans-serif"
+    font-weight="800"
+    font-size="270"
+    fill="#2f241f"
+    style="letter-spacing:-5px"
+  >N&amp;R</text>
+</svg>

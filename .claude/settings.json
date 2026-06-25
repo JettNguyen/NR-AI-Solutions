@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(run)",
+      "Skill(run:*)",
+      "Bash(command -v chromium-cli)",
+      "Read(//c/Users/Jett/.claude//**)",
+      "Bash(npx --yes playwright --version)",
+      "Bash(node -e \"require.resolve\\('playwright'\\)\")",
+      "Bash(npm install *)",
+      "Bash(node verify_booking.js)",
+      "Bash(npx playwright *)",
+      "Bash(node verify_booking2.js)",
+      "Bash(pkill -f \"http.server 8731\")",
+      "Bash(node verify_layout.js)",
+      "Bash(node verify_layout2.js)",
+      "Bash(python -c ' *)",
+      "Bash(find resources *)",
+      "Bash(ls resources *)",
+      "Bash(node verify_logos2.js)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:8731/assets/favicon.svg)",
+      "Bash(cd \"/c/Users/Jett/NR-AI-Solutions\" && ls -la assets/ | grep -i svg)",
+      "Read(//c/c/Users/Jett/NR-AI-Solutions/**)",
+      "Bash(node debug_404.js)"
+    ]
+  }
+}

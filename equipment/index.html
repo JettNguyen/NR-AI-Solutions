@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -8,14 +8,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="icon" href="../assets/icon-1024.png" type="image/png" />
+  <link rel="icon" href="../assets/icon-1024-dark.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="../css/styles.css" />
 </head>
 <body>
 
   <nav class="nav" id="nav" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="../" class="nav-logo"><img src="../assets/icon-1024.png" alt="N&amp;R AI Solutions" /></a>
+      <a href="../" class="nav-logo"><img src="../assets/icon-1024-dark.svg" alt="N&amp;R AI Solutions" /><span class="nav-logo-text"> | <strong>N&amp;R</strong> AI Solutions</span></a>
       <div class="nav-links">
         <a href="../">Home</a>
         <a href="../how-it-works/">How It Works</a>
@@ -27,6 +27,7 @@
           <div class="nav-more-menu" id="navMoreMenu" role="menu" aria-label="More pages">
             <a href="../about/" role="menuitem">About</a>
             <a href="../ai-explained/" role="menuitem">AI Explained</a>
+            <a href="../resources/" role="menuitem">Resources</a>
             <a href="../equipment/" role="menuitem">Equipment Needed</a>
             <a href="../testimonials/" role="menuitem">Agent Successes</a>
             <a href="../contact/" role="menuitem">Contact</a>
@@ -49,7 +50,8 @@
     <a href="../about/">About</a>
     <a href="../faq/">FAQ</a>
     <a href="../ai-explained/">AI Explained</a>
-    <a href="../equipment/" class="active">Equipment Needed</a>
+    <a href="../resources/">Resources</a>
+            <a href="../equipment/" class="active">Equipment Needed</a>
     <a href="../testimonials/">Agent Successes</a>
     <a href="../contact/">Contact</a>
     <a href="../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
@@ -85,6 +87,7 @@
         </div>
 
         <div class="checklist-group fade-up delay-1">
+          <h3 class="checklist-group-heading">Required</h3>
 
           <label class="checklist-item">
             <input type="checkbox" class="checklist-checkbox" data-key="mac-mini" />
@@ -110,20 +113,6 @@
               <p class="checklist-item-desc">A stable broadband connection keeps your assistant synced, your integrations connected, and your automations running without interruption.</p>
               <div class="checklist-item-links">
                 <a class="resource-link" href="https://www.speedtest.net/" target="_blank" rel="noopener noreferrer">Test your internet speed</a>
-              </div>
-            </div>
-          </label>
-
-          <label class="checklist-item">
-            <input type="checkbox" class="checklist-checkbox" data-key="ups" />
-            <div class="checklist-item-content">
-              <div class="checklist-item-head">
-                <span class="checklist-item-title">Backup Power (UPS)</span>
-                <span class="checklist-badge checklist-badge-optional">Optional</span>
-              </div>
-              <p class="checklist-item-desc">Keeps your assistant alive through short power interruptions so nothing drops mid-task. Not required, but recommended for peace of mind.</p>
-              <div class="checklist-item-links">
-                <a class="resource-link" href="https://www.apc.com/us/en/product-category/88988-back-ups-battery-backup/" target="_blank" rel="noopener noreferrer">APC UPS battery backup</a>
               </div>
             </div>
           </label>
@@ -194,17 +183,33 @@
             </div>
           </label>
 
+          <h3 class="checklist-group-heading">Optional</h3>
+
           <label class="checklist-item">
-            <input type="checkbox" class="checklist-checkbox" data-key="email-calendar" />
+            <input type="checkbox" class="checklist-checkbox" data-key="ups" />
             <div class="checklist-item-content">
               <div class="checklist-item-head">
-                <span class="checklist-item-title">Email &amp; Calendar</span>
+                <span class="checklist-item-title">Backup Power (UPS)</span>
                 <span class="checklist-badge checklist-badge-optional">Optional</span>
               </div>
-              <p class="checklist-item-desc">Needed only if you want your assistant reading, drafting, or organizing email and calendar events. Some clients prefer to keep their assistant out of their inbox entirely - that's a fine choice too.</p>
+              <p class="checklist-item-desc">Keeps your assistant alive through short power interruptions so nothing drops mid-task. Not required, but recommended for peace of mind.</p>
               <div class="checklist-item-links">
-                <a class="resource-link" href="https://workspace.google.com/" target="_blank" rel="noopener noreferrer">Google Workspace</a>
-                <a class="resource-link" href="https://www.microsoft.com/microsoft-365" target="_blank" rel="noopener noreferrer">Microsoft 365</a>
+                <a class="resource-link" href="https://www.apc.com/us/en/product-category/88988-back-ups-battery-backup/" target="_blank" rel="noopener noreferrer">APC UPS battery backup</a>
+              </div>
+            </div>
+          </label>
+
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-checkbox" data-key="microphone" />
+            <div class="checklist-item-content">
+              <div class="checklist-item-head">
+                <span class="checklist-item-title">Microphone</span>
+                <span class="checklist-badge checklist-badge-optional">Optional</span>
+              </div>
+              <p class="checklist-item-desc">Useful if you want voice notes, better call audio, or voice-driven workflows. A built-in mic can work, but an external mic usually sounds clearer.</p>
+              <div class="checklist-item-links">
+                <a class="resource-link" href="https://www.logitech.com/en-us/products/microphones.html" target="_blank" rel="noopener noreferrer">Logitech microphones</a>
+                <a class="resource-link" href="https://www.shure.com/en-US/products/microphones" target="_blank" rel="noopener noreferrer">Shure microphones</a>
               </div>
             </div>
           </label>
@@ -255,7 +260,7 @@
     <div class="footer-inner">
       <div class="footer-grid">
         <div>
-          <div class="footer-logo"><img src="../assets/logo-1024-full.png" alt="N&amp;R AI Solutions" /></div>
+          <div class="footer-logo"><img src="../assets/icon-1024-dark.svg" alt="N&amp;R AI Solutions" /></div>
           <p class="footer-tagline">AI assistants built for real life</p>
         </div>
         <div>
@@ -267,6 +272,7 @@
             <a href="../about/">About</a>
             <a href="../faq/">FAQ</a>
             <a href="../ai-explained/">AI Explained</a>
+    <a href="../resources/">Resources</a>
             <a href="../equipment/">Equipment Needed</a>
             <a href="../testimonials/">Agent Successes</a>
             <a href="../contact/">Contact</a>
@@ -275,7 +281,6 @@
         <div>
           <h4 class="footer-col-title">Contact</h4>
           <a href="mailto:questions@nrsolveai.com" class="footer-contact-email">questions@nrsolveai.com</a>
-          <a href="../questionnaire/" class="btn btn-primary btn-sm">Get Started</a>
         </div>
       </div>
       <div class="footer-bottom">
@@ -288,3 +293,9 @@
   <script src="../js/equipment.js"></script>
 </body>
 </html>
+
+
+
+
+
+
