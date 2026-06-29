@@ -66,7 +66,23 @@
       "Bash(node finalsanity.mjs)",
       "Bash(pkill -f \"http.server 8103\")",
       "Bash(pkill -f \"http.server 8104\")",
-      "Bash(node herocheck.mjs)"
+      "Bash(node herocheck.mjs)",
+      "Bash(taskkill //F //IM python.exe)",
+      "Bash(grep -n \"^/\\\\* ========\" \"c:/Users/Jett/NR-AI-Solutions/css/styles.css\")",
+      "Bash(grep -n \"^/\\\\* ========\" css/styles.css)",
+      "Bash(grep -n \"^/\\\\* ========\" -A1 css/styles.css)",
+      "Bash(grep -n -A1 \"^/\\\\* ========\" css/styles.css)",
+      "Bash(ls .claude/skills)",
+      "Bash(which chromium-cli *)",
+      "Bash(which python3 *)",
+      "Bash(which python *)",
+      "Bash(which npx *)",
+      "Bash(chromium-cli --help)",
+      "Bash(npx --yes playwright install chromium)",
+      "Bash(node shot.js)",
+      "Bash(pkill -f \"http.server 8723\")",
+      "Bash(node shot4.js)",
+      "Bash(node shot3.js)"
     ],
     "additionalDirectories": [
       "C:\\Users\\Jett\\AppData\\Local\\Temp\\claude\\c--Users-Jett-NR-AI-Solutions\\ba3104bf-435d-472e-a38f-e5c13fe69523\\scratchpad"

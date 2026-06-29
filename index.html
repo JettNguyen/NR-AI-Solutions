@@ -104,7 +104,25 @@
           </div>
         </div>
         <div class="hero-visual fade-up delay-2">
-          <img src="assets/home-sample.png" alt="Sample text conversation with a personal AI assistant drafting an email reply for approval" class="hero-visual-img" />
+          <div class="screenshot-gallery hero-gallery" aria-label="Screenshots of the assistant in everyday use">
+            <div class="screenshot-gallery-track" id="heroGalleryTrack">
+              <div class="screenshot-gallery-item">
+                <img src="assets/home-sample.png" alt="Sample text conversation with a personal AI assistant drafting an email reply for approval" class="hero-visual-img" />
+              </div>
+              <div class="screenshot-gallery-item">
+                <img src="assets/business-inquiry-ss.png" alt="Assistant drafting a reply to a business partnership inquiry email" class="hero-visual-img" />
+              </div>
+              <div class="screenshot-gallery-item">
+                <img src="assets/business-calendar-ss.png" alt="Assistant confirming a meeting and drafting a calendar reply" class="hero-visual-img" />
+              </div>
+              <div class="screenshot-gallery-item">
+                <img src="assets/evening-ss.png" alt="Assistant sending an evening reflection check-in and the next day's schedule" class="hero-visual-img" />
+              </div>
+              <div class="screenshot-gallery-item">
+                <img src="assets/hevy-appt-ss.png" alt="Assistant sending a workout plan and flagging a new appointment to add to the calendar" class="hero-visual-img" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -174,9 +192,46 @@
     </section>
 
     <!-- ==============================
+         Cost & Why
+         ============================== -->
+    <section class="section section-alt cost-why" aria-labelledby="cost-why-heading">
+      <div class="container">
+        <div class="cost-why-inner">
+          <div class="cost-why-content">
+            <span class="section-label fade-up">Transparent Pricing</span>
+            <h2 id="cost-why-heading" class="fade-up delay-1">What It Actually Costs to Run</h2>
+            <p class="fade-up delay-2">Beyond our guided setup, the only ongoing cost is the AI model itself - and it's smaller than most people expect. The API usage shown here runs separately from the model's subscription, but it's typically even less than the subscription cost - for an average month of everyday use, expect it to land somewhere around that same $20-ish range, and we configure your setup to stay efficient.</p>
+            <table class="cost-why-table fade-up delay-2">
+              <tbody>
+                <tr>
+                  <td class="cost-why-table-point">Hours back, almost instantly.</td>
+                  <td class="cost-why-table-desc">Most clients save 10+ hours a week starting in their very first week, not months down the line.</td>
+                </tr>
+                <tr>
+                  <td class="cost-why-table-point">A skill you keep, not a subscription you rent.</td>
+                  <td class="cost-why-table-desc">Every guided session teaches you how your assistant works, so you understand and can adjust it yourself going forward.</td>
+                </tr>
+                <tr>
+                  <td class="cost-why-table-point">A fraction of a human assistant's cost.</td>
+                  <td class="cost-why-table-desc">A part-time personal assistant can run thousands of dollars a year. The AI doing the same tasks costs around $20 a month - and works instantly, any time you need it.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cost-why-visual fade-up delay-2">
+            <div class="cost-why-screenshot">
+              <img src="assets/api.png" alt="Claude API console showing one month of token usage costs totaling $14.47" />
+            </div>
+            <p class="cost-why-caption">Real billing from an active client's account &mdash; one full month of everyday assistant use.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
          What It Can Help With
          ============================== -->
-    <section class="section section-alt" aria-labelledby="help-heading">
+    <section class="section" aria-labelledby="help-heading">
       <div class="container">
         <div class="section-header">
           <span class="section-label fade-up">Capabilities</span>
@@ -330,6 +385,7 @@
   </footer>
 
   <script src="js/nav.js"></script>
+  <script src="js/screenshot-gallery.js"></script>
 </body>
 </html>
 
