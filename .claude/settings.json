@@ -82,7 +82,10 @@
       "Bash(node shot.js)",
       "Bash(pkill -f \"http.server 8723\")",
       "Bash(node shot4.js)",
-      "Bash(node shot3.js)"
+      "Bash(node shot3.js)",
+      "Bash(git fetch *)",
+      "Bash(git merge *)",
+      "Bash(git push *)"
     ],
     "additionalDirectories": [
       "C:\\Users\\Jett\\AppData\\Local\\Temp\\claude\\c--Users-Jett-NR-AI-Solutions\\ba3104bf-435d-472e-a38f-e5c13fe69523\\scratchpad"

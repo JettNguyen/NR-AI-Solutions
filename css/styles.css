@@ -936,7 +936,7 @@ html[data-theme="dark"] .theme-toggle-thumb {
 }
 
 .screenshot-gallery.hero-gallery {
-  width: 420px;
+  width: 550px;
   height: 560px;
   max-width: 100%;
 }
@@ -3241,7 +3241,7 @@ html[data-theme="dark"] .availability-widget iframe {
   }
 
   .screenshot-gallery.hero-gallery {
-    width: 280px;
+    width: 450px;
     height: 380px;
   }
 
