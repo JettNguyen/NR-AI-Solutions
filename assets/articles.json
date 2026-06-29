@@ -1,29 +1,12 @@
 [
   {
-    "title": "Test Article Delete Me (Edited)",
-    "summary": "A throwaway test article for verifying site-tool.py",
-    "author": "Jett Nguyen",
-    "date": "2026-06-29",
-    "readTime": "2 min read",
-    "category": "Internal Test",
-    "tags": [
-      "test",
-      "internal"
-    ],
-    "url": "test-article-delete-me/"
-  },
-  {
     "title": "My Workout App Didn't Know What I Should Lift. So I Built Something That Does.",
     "summary": "Every weekday, Jack's AI agent builds his workout from 60 days of training history, sleep, travel, and his golf schedule, then pushes it to his phone before he's out of bed. No mental math, no guessing what he lifted last week.",
     "author": "Jack Raney",
     "date": "2026-06-25",
     "readTime": "4 min read",
     "category": "Team Stories",
-    "tags": [
-      "Personal Automation",
-      "Workflow Automation",
-      "Fitness"
-    ],
+    "tags": ["Personal Automation", "Workflow Automation", "Fitness"],
     "url": "ai-built-my-workout-program/"
   },
   {
@@ -33,11 +16,7 @@
     "date": "2026-06-23",
     "readTime": "9 min read",
     "category": "Team Stories",
-    "tags": [
-      "Security",
-      "Account Recovery",
-      "Incident Response"
-    ],
+    "tags": ["Security", "Account Recovery", "Incident Response"],
     "url": "socially-engineered-google-call/"
   }
 ]
