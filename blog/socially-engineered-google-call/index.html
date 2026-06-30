@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>I Got Socially Engineered by a Fake Google Call | N&amp;R AI Solutions</title>
-  <meta name="description" content="A call from Google's real phone number talked one of our clients into handing over his Gmail account. Here's how his AI agent caught what he couldn't and locked the attacker out for good." />
+  <title>How My Agent Caught What a Gmail Hacker Left Behind | N&amp;R AI Solutions</title>
+  <meta name="description" content="A call from Google's real phone number talked me into handing over my Gmail account. Here's how my AI agent caught what I couldn't and locked the attacker out for good." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -83,9 +83,17 @@
 
   <main>
     <section class="page-hero article-hero" aria-label="Article introduction">
+      <nav class="breadcrumb-bar" aria-label="Breadcrumb">
+        <div class="breadcrumb-bar-inner">
+          <ol class="breadcrumb-list">
+            <li class="breadcrumb-item"><a href="../../blog/">Blog</a></li>
+            <li class="breadcrumb-item breadcrumb-item--current" aria-current="page">How My Agent Caught What a Gmail Hacker Left Behind</li>
+          </ol>
+        </div>
+      </nav>
       <div class="page-hero-inner">
         <span class="section-label fade-up">Team Story</span>
-        <h1 class="fade-up delay-1">I Got Socially Engineered by a Fake Google Call. My AI Agent Helped Me Stop What Came Next.</h1>
+        <h1 class="fade-up delay-1">How My Agent Caught What a Gmail Hacker Left Behind</h1>
         <div class="article-byline fade-up delay-2">
           <strong>Jack Raney</strong>
           <span>&middot;</span>
@@ -100,75 +108,73 @@
       <div class="container">
         <article class="article-body fade-up delay-1">
 
-          <p>On Sunday night, I received an email from Coinbase notifying me that someone was attempting to log into my account. A few seconds later, two separate 2FA codes arrived on my phone &mdash; neither of which I had requested.</p>
-
-          <blockquote class="article-pullquote">My stomach dropped.</blockquote>
+          <p>On Sunday night, I received an email from Coinbase notifying me that someone was attempting to log into my account. A few seconds later, two separate 2FA codes arrived on my phone (the short one-time passcodes apps send to verify it's really you), neither of which I had requested.</p>
 
           <p>Less than an hour earlier, I had gotten off the phone with someone I believed was a Google support representative. The call came from Google's actual outbound number. The caller knew enough about Google's recovery process to sound completely legitimate, and by the end of the conversation I was convinced I had just helped secure my account from an attacker. Instead, I had handed control of it to one.</p>
 
-          <p>The realization hit fast. I opened Gmail to investigate &mdash; I wanted to find the security alerts, retrace what had happened, and understand what the attacker was doing. Except the emails weren't there. The Coinbase alerts that should have been sitting in my inbox had completely disappeared.</p>
-
-          <p>At that moment I knew this wasn't just a compromised password. Someone had access to my account and was actively covering their tracks. That's when I opened a session with my AI agent, and what followed felt less like troubleshooting and more like running a full incident response operation.</p>
-
           <h2>The Phone Call</h2>
-          <p>The attack started with a call that appeared to come directly from Google. My phone displayed their real outbound number, and an automated voice informed me that someone was attempting to change the recovery email address on my account. I was instructed to press a button to reject the request and was immediately transferred to a live representative.</p>
+          <p>This is called social engineering: when an attacker manipulates you psychologically rather than hacking anything technically. No malware, no stolen passwords. Just a convincing script and enough pressure to make you act before you think.</p>
 
-          <p>The caller sounded credible. He claimed a hacker was actively trying to compromise my account and that he needed my help deploying a security firewall to stop it. Looking back, the script was brilliant because it created urgency while making me feel like I was already the victim of an attack in progress &mdash; when in reality, the attack was the phone call.</p>
+          <p>The call appeared to come directly from Google. My phone displayed their real outbound number (a spoofing trick that makes a call appear to come from a number it isn't actually originating from), and an automated voice told me someone was attempting to change the recovery email on my account. A recovery email is a backup address Google uses to verify your identity if you get locked out. Changing it is one of the first things an attacker does to take permanent control.</p>
 
-          <p>Over the next eighteen minutes, he walked me through what appeared to be legitimate Google recovery workflows, coaching me to read verification codes that were actually granting him access. Every email I received looked authentic because it was authentic &mdash; Google was sending them. I just completely misunderstood what they were being used for.</p>
+          <p>I was transferred to a live &ldquo;representative&rdquo; who told me a hacker was actively trying to compromise my account and that he needed my help to stop it. The script was effective because it made me feel like I was already a victim, when the attack was the phone call itself.</p>
 
-          <p>By the end of the call, the attacker had established a recovery path, initiated Google's account recovery process, and gained administrative access to my Gmail. He had changed my password and created multiple persistence mechanisms designed to survive even if I eventually figured out what had happened. When we hung up, I thought my account had been secured. So did he.</p>
+          <p>Over eighteen minutes, he walked me through what looked like legitimate Google security steps, coaching me to read verification codes aloud that were actually granting him access. Every email I received looked real because it was real. Google was sending them. I just didn't understand what they were actually authorizing.</p>
+
+          <p>By the end of the call, he had changed my password, established a new recovery path, and created multiple ways back into the account designed to survive even if I eventually figured out what had happened.</p>
 
           <h2>The Coinbase Alert</h2>
-          <p>Roughly forty-five minutes later, the plan started to unravel. Having gained access to my inbox, the attacker began searching for valuable targets, and Coinbase quickly moved to the top of the list. When he attempted to access the account and trigger recovery workflows, it set off multiple security notifications and two-factor authentication requests &mdash; codes that were sent directly to my physical phone. Unlike during the Google call, there was no one on the line coaching me through what to do with them. The attacker never received the codes, Coinbase flagged the suspicious activity and automatically froze the account, and my assets stayed safe.</p>
+          <p>About forty-five minutes later, the plan started to unravel. With access to my inbox, the attacker found Coinbase and attempted to trigger the account recovery process there too. That set off security alerts and 2FA codes sent to my physical phone, which he didn't have. Coinbase flagged the suspicious activity, automatically froze the account, and the assets stayed safe.</p>
 
-          <p>But something still didn't add up. If Coinbase had been sending alerts, where were the emails?</p>
+          <p>But the Coinbase alert emails were nowhere in my inbox. That didn't add up.</p>
 
           <h2>The Audit</h2>
-          <p>This is where the AI agent became invaluable. Like most people in that situation, I was focused on the obvious things &mdash; passwords, devices, login history, active sessions. The AI agent wasn't. Instead of asking what devices were connected, it started asking a different set of questions entirely.</p>
+          <p>This is where the AI agent became critical. I was focused on the obvious things: changing my password, checking which devices were logged in, reviewing login history. The AI agent started asking a completely different set of questions.</p>
 
-          <p><strong>What passkeys exist? What app passwords exist? What recovery relationships exist? What filters exist? What forwarding rules exist?</strong></p>
+          <p><strong>What passkeys exist? What app passwords exist? What recovery relationships exist? What email filters exist?</strong></p>
 
-          <p>It wasn't looking for evidence of the attack. It was looking for evidence that the attacker planned to come back. That distinction turned out to be everything.</p>
+          <p>It wasn't looking for evidence of the attack. It was looking for evidence the attacker planned to come back.</p>
 
-          <p>The agent directed me into a section of Gmail settings I hadn't touched in years: Filters and Blocked Addresses. That's where we found it. The attacker had created a series of custom rules targeting financial institutions and crypto-related services &mdash; any email containing keywords like "Coinbase" or "Wells Fargo" was automatically marked as read and archived before it ever reached my inbox.</p>
+          <p>It directed me into a section of Gmail settings most people never touch: Filters and Blocked Addresses. Email filters are rules you can set to automatically sort, label, or hide incoming messages. Useful for organizing your inbox, and apparently useful for hiding evidence of a crime. That's where we found it. The attacker had created rules targeting financial institutions: any email containing words like &ldquo;Coinbase&rdquo; or &ldquo;Wells Fargo&rdquo; was automatically marked as read and archived before it ever reached my inbox.</p>
 
-          <blockquote class="article-pullquote">The alerts weren't missing. They were being hidden.</blockquote>
+          <blockquote class="article-pullquote">The alerts weren't missing. They were being hidden in real time.</blockquote>
 
-          <p>I remember sitting there staring at the screen as it clicked into place. This wasn't a smash-and-grab operation. The attacker was building a blindfold &mdash; a notification blackout where security alerts, fraud warnings, withdrawal confirmations, and password reset emails would quietly vanish while everything looked completely normal from my end. Without the AI agent directing me to those filters, I genuinely don't know how long it would have taken me to find them on my own. We deleted every malicious rule one by one, and the blackout ended immediately.</p>
+          <p>The attacker was building a blind spot: a quiet blackout where security alerts, fraud warnings, and password reset emails would disappear while everything looked normal from my end. We deleted every malicious rule, and the blackout ended immediately.</p>
 
           <h2>Finding the Backdoors</h2>
-          <p>The filters weren't the only thing left behind. As the audit continued, the agent helped me methodically work through every possible persistence mechanism in the account, and that's when we found an unauthorized passkey &mdash; particularly concerning because a passkey isn't just another password. It's designed to provide durable authentication, and if left in place it could have served as a re-entry point even after everything else was changed. We removed it. Then we found an app password that had been generated during the attack, the kind of token used by external applications to maintain access without repeatedly prompting for credentials. We removed that too. After that, we invalidated all active sessions, signed every device out globally, and removed the malicious recovery relationship that had been established during the phone call.</p>
+          <p>The filters weren't the only thing left behind. The agent walked me through every other way an attacker can maintain access to an account even after a password change.</p>
 
-          <p>By the time we finished, every known backdoor had been identified and closed. The attacker had lost the front door, the side door, and every spare key hidden under the mat.</p>
+          <p>We found an unauthorized passkey (a modern login credential tied to a physical device, designed to be more secure than a password). Left in place, it would have been a working key to the account regardless of what else was changed. We removed it.</p>
 
-          <h2>The Ghost</h2>
-          <p>The next day brought one final scare. While reviewing Google's device dashboard, I noticed a generic Android device that had been authorized months earlier but appeared to show a recent sync event. After everything that had already happened, it looked immediately suspicious, and I sent the details to the AI agent.</p>
+          <p>We found an app password (a special access token generated so that external apps can connect to Gmail without needing the main password each time). The attacker had created one during the call. We removed that too.</p>
 
-          <p>Within minutes it had reconstructed the timeline and pointed out something I had completely missed: the behavior didn't match an active attacker &mdash; it matched Google's own cleanup process. When passwords are reset and tokens are revoked, Google's infrastructure reaches out to previously authorized devices to terminate their sessions. The sync event I was seeing was almost certainly an old household device responding to that revocation request. The device wasn't waking up. It was being kicked out. The ghost wasn't evidence of a new compromise; it was evidence the cleanup had worked.</p>
+          <p>Then we invalidated all active sessions globally, signing out every device at once, and removed the recovery relationship established during the phone call.</p>
 
-          <h2>Building the Fortress</h2>
-          <p>By that point the account was secure, but secure and resilient aren't the same thing. The attacker had successfully reached my Gmail, and I wasn't interested in relying on luck if it ever happened again. We disabled SMS-based authentication, migrated to stronger methods, and added a physical YubiKey as an additional layer of protection.</p>
+          <p>Every known way back in was closed.</p>
 
-          <p>What surprised me most was learning that Google applies a built-in delay before newly added hardware security keys can become recovery mechanisms. At first it felt inconvenient, but it makes perfect sense &mdash; if an attacker ever manages to add their own key to an account, the legitimate owner has a window to discover and remove it before it becomes a usable backdoor. The system is designed to protect against exactly the kind of attack I had just lived through.</p>
+          <h2>The False Alarm</h2>
+          <p>The next day I spotted a generic Android device in Google's device dashboard that appeared to show a recent sync, months after being authorized. Given everything that had happened, it looked like a new threat.</p>
+
+          <p>The AI agent reconstructed the timeline and caught what I had missed: the behavior matched Google's own cleanup process, not an active attacker. When you reset a password and revoke tokens, Google reaches out to previously authorized devices to terminate their sessions. What I was seeing was an old household device being kicked out, not something waking up. The cleanup had worked.</p>
+
+          <h2>Locking It Down</h2>
+          <p>With the account secured, we looked at making it harder to compromise in the first place. We disabled SMS-based two-factor authentication (codes sent via text message, which can be intercepted or redirected by attackers who compromise your phone number) and switched to stronger verification methods. We also added a YubiKey, a small physical USB device that acts as a second form of ID. You have to physically have it to log in, which means a remote attacker can't get past it no matter what credentials they have.</p>
+
+          <p>One detail worth noting: Google adds a built-in delay before a newly added hardware key can be used as a recovery method. It feels like friction at first, but the logic is sound. If an attacker adds their own key, you have a window to catch and remove it before it works.</p>
 
           <h2>What I Learned</h2>
-          <p>The attacker successfully got into my Gmail. What he didn't get was anything else &mdash; not Coinbase, not my financial accounts, not my assets. And looking back, the reason wasn't that I handled everything perfectly under pressure, because I didn't. I was stressed, frustrated, and trying to make sense of something evolving faster than I could follow.</p>
+          <p>The attacker got into my Gmail. He didn't get anything else: not Coinbase, not my financial accounts, not my assets.</p>
 
-          <p>The reason the attack stopped where it did was that the investigation was better than the attack. While I was focused on the obvious signs of compromise, the AI agent was focused on persistence mechanisms, hidden rules, audit trails, recovery relationships, and backdoors &mdash; approaching the situation like an incident response analyst rather than a panicked account owner.</p>
+          <p>That wasn't because I handled everything well under pressure. The situation was moving faster than I could follow, and I was making decisions without fully understanding what was happening.</p>
 
-          <p>That's what stood out to me most. The value wasn't that it knew how to reset a password. The value was that it knew where to look after the password had already been changed. In a world where cyberattacks are increasingly psychological rather than technical, that kind of operational thinking may end up being one of the most important uses of AI there is.</p>
+          <p>What stopped the damage from spreading was that the investigation was more systematic than the attack. The AI agent approached it like an incident response analyst (someone trained to methodically document, audit, and close off an active breach) rather than a panicked account owner checking the obvious things. The value wasn't knowing how to reset a password. It was knowing where to look after the password had already been changed.</p>
 
-          <p><strong>The attacker got into Gmail. The AI agent made sure they never got any further.</strong></p>
+          <h2>Want an Agent Like This?</h2>
+          <p>What protected me wasn't a security subscription or a canned tool. It was an AI agent that knew how to think through a crisis methodically when I couldn't.</p>
 
-          <h2>Want an Agent Like This Working for You?</h2>
-          <p>What protected me wasn't a security product or a subscription service &mdash; it was an AI agent that knew how to think through a crisis methodically when I couldn't. The difference between losing everything and losing nothing came down to having the right kind of intelligence in my corner at the right moment.</p>
+          <p>That's what we build at N&amp;R AI Solutions: personal AI agents designed around how you actually live and work. Not a chatbot. An agent that knows your accounts, your context, and what to do when something goes wrong.</p>
 
-          <p>That's exactly what we build at N&amp;R AI Solutions.</p>
-
-          <p>We design and deploy personal AI agents tailored to how you live and work &mdash; agents that can help you respond to security incidents, audit your accounts, identify what you'd never think to look for, and move fast when it matters most. Not a generic chatbot. Not a canned FAQ. An agent built around your life, your accounts, and your threat surface.</p>
-
-          <p>If this story made you think "I would have had no idea what to do," that's the point. You shouldn't have to.</p>
+          <p>If this story made you think &ldquo;I would have had no idea what to do,&rdquo; reach out. That's exactly the gap we close.</p>
 
         </article>
 

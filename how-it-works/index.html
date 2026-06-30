@@ -97,10 +97,24 @@
           <h1>How It Works</h1>
           <p>From first question to live workflows on your own computer, with guidance matched to your comfort level.</p>
         </div>
-        <div class="demo-video-wrap fade-up delay-1">
-          <video class="demo-video" autoplay loop muted playsinline>
-            <source src="../assets/nr-demo.webm" type="video/webm" />
-          </video>
+        <div class="screenshot-gallery hero-gallery fade-up delay-1" aria-label="Screenshots of the assistant in everyday use">
+          <div class="screenshot-gallery-track" id="heroGalleryTrack">
+            <div class="screenshot-gallery-item">
+              <img src="../assets/home-sample.png" alt="Sample text conversation with a personal AI assistant drafting an email reply for approval" class="hero-visual-img" />
+            </div>
+            <div class="screenshot-gallery-item">
+              <img src="../assets/business-inquiry-ss.png" alt="Assistant drafting a reply to a business partnership inquiry email" class="hero-visual-img" />
+            </div>
+            <div class="screenshot-gallery-item">
+              <img src="../assets/business-calendar-ss.png" alt="Assistant confirming a meeting and drafting a calendar reply" class="hero-visual-img" />
+            </div>
+            <div class="screenshot-gallery-item">
+              <img src="../assets/evening-ss.png" alt="Assistant sending an evening reflection check-in and the next day's schedule" class="hero-visual-img" />
+            </div>
+            <div class="screenshot-gallery-item">
+              <img src="../assets/hevy-appt-ss.png" alt="Assistant sending a workout plan and flagging a new appointment to add to the calendar" class="hero-visual-img" />
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -429,6 +443,7 @@
   </footer>
 
   <script src="../js/nav.js"></script>
+  <script src="../js/screenshot-gallery.js"></script>
   <script>
     /* â”€â”€ Accordion â”€â”€ */
     document.querySelectorAll('.accordion-trigger').forEach(function (btn) {

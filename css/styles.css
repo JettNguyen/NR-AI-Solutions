@@ -922,7 +922,7 @@ html[data-theme="dark"] .theme-toggle-thumb {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 48px;
+  gap: 20px;
 }
 
 .hero-content {
@@ -3167,6 +3167,59 @@ html[data-theme="dark"] .availability-widget iframe {
 
 .article-cta {
   margin-top: 56px;
+}
+
+.breadcrumb-bar {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .breadcrumb-bar {
+    display: block;
+    position: absolute;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+    z-index: 2;
+  }
+
+  .breadcrumb-bar-inner {
+    padding: 9px 24px;
+  }
+
+  .breadcrumb-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .breadcrumb-item + .breadcrumb-item::before {
+    content: '/';
+    opacity: 0.4;
+    margin-right: 6px;
+  }
+
+  .breadcrumb-item a {
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+
+  .breadcrumb-item a:hover {
+    color: var(--text-primary);
+  }
+
+  .breadcrumb-item--current {
+    color: var(--text-secondary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 420px;
+  }
 }
 
 .resource-tag {
