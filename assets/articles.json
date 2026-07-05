@@ -1,5 +1,25 @@
 [
   {
+    "title": "Everyone Is Either Scared of AI Agents or Ignoring Them. Both Are Wrong.",
+    "summary": "AI agents are one of the most underrated shifts in how people work. Most people are either afraid of them or haven't thought about them at all. Here's what they're actually missing — and why the gap between \"I use AI sometimes\" and \"I have an agent running my workflow\" is going to matter a lot.",
+    "author": "Jett Nguyen",
+    "date": "2026-07-05",
+    "readTime": "5 min read",
+    "category": "Team Stories",
+    "tags": ["AI Agents", "Future of Work", "Productivity"],
+    "url": "ai-agents-underrated/"
+  },
+  {
+    "title": "My Business Agent Drafted a Fake Client Plan. Here's Exactly Why That Happened.",
+    "summary": "The agent produced a professional email with a detailed action plan. It was also completely made up. Here's what was missing, why the model filled in the gaps confidently, and what building a reliable agent actually requires.",
+    "author": "Jett Nguyen",
+    "date": "2026-06-30",
+    "readTime": "5 min read",
+    "category": "Team Stories",
+    "tags": ["AI Agents", "Building AI", "Automation"],
+    "url": "agent-hallucination-context/"
+  },
+  {
     "title": "My Workout App Didn't Know What I Should Lift. So I Built Something That Does.",
     "summary": "Every weekday, Jack's AI agent builds his workout from 60 days of training history, sleep, travel, and his golf schedule, then pushes it to his phone before he's out of bed. No mental math, no guessing what he lifted last week.",
     "author": "Jack Raney",
