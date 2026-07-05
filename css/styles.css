@@ -1117,7 +1117,7 @@ html[data-theme="dark"] .theme-toggle-thumb {
    ======================================== */
 .use-cases-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 12px;
 }
 
@@ -3412,10 +3412,6 @@ html[data-theme="dark"] .availability-widget iframe {
     grid-column: auto;
   }
 
-  .use-cases-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
   .cta-banner {
     padding: 48px 24px;
   }
@@ -3468,6 +3464,12 @@ html[data-theme="dark"] .availability-widget iframe {
 
   .two-col-card {
     padding: 24px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .use-cases-grid {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
