@@ -97,7 +97,19 @@
       "Bash(curl -s http://localhost:8642/index.html)",
       "Bash(pkill -f \"python -m http.server 8642\")",
       "Bash(python3 -)",
-      "Bash(pkill -f \"python -m http.server 8643\")"
+      "Bash(pkill -f \"python -m http.server 8643\")",
+      "Bash(grep -n \"^\\\\s*ul\\\\b\\\\|^ul\\\\b\\\\|ul {\\\\|ul,\\\\|list-style\" css/styles.css)",
+      "Bash(npx --yes serve -l 5959 .)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5959/privacy-policy/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5959/terms-of-service/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5959/)",
+      "Bash(curl -s http://localhost:5959/privacy-policy/)",
+      "Bash(curl -s http://localhost:5959/terms-of-service/)",
+      "Bash(curl -s -o /dev/null -w \"home->privacy: %{http_code}\\\\n\" http://localhost:5959/privacy-policy/)",
+      "Bash(curl -s http://localhost:5959/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5959/blog/ai-agents-underrated/../../privacy-policy/)",
+      "Bash(curl -s http://localhost:5959/blog/ai-agents-underrated/)",
+      "Bash(taskkill //F //IM node.exe)"
     ],
     "additionalDirectories": [
       "C:\\Users\\Jett\\AppData\\Local\\Temp\\claude\\c--Users-Jett-NR-AI-Solutions\\ba3104bf-435d-472e-a38f-e5c13fe69523\\scratchpad"
