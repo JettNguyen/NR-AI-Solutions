@@ -1,0 +1,88 @@
+{
+  "id": "calendar-management",
+  "name": "Calendar Management",
+  "version": "1.0.0",
+  "author": "Archie (built-in)",
+  "price_cents": 0,
+  "description": "Full Google Calendar management — create, read, update, and delete events via natural language.",
+  "long_description": "Give your agent the ability to fully manage a Google Calendar. It can check availability, create events, reschedule meetings, set reminders, find free slots, and summarize upcoming schedules. All changes require confirmation before executing. Requires a connected Google account with calendar access.",
+  "category": "productivity",
+  "required_variables": [
+    {
+      "key": "TIMEZONE",
+      "label": "Your timezone",
+      "placeholder": "America/New_York",
+      "input_type": "text",
+      "default": "",
+      "help": "IANA timezone (e.g. America/Los_Angeles, Europe/London, Asia/Tokyo)",
+      "options": [],
+      "optional": false
+    },
+    {
+      "key": "CALENDAR_ID",
+      "label": "Calendar ID",
+      "placeholder": "primary",
+      "input_type": "text",
+      "default": "primary",
+      "help": "Usually 'primary' for your main calendar. For a shared calendar, use its email address.",
+      "options": [],
+      "optional": true
+    },
+    {
+      "key": "WORKING_HOURS_START",
+      "label": "Work day starts at",
+      "placeholder": "09:00",
+      "input_type": "text",
+      "default": "09:00",
+      "help": "24-hour format (e.g. 09:00). The agent won't schedule events before this time unless you explicitly ask.",
+      "options": [],
+      "optional": true
+    },
+    {
+      "key": "WORKING_HOURS_END",
+      "label": "Work day ends at",
+      "placeholder": "17:00",
+      "input_type": "text",
+      "default": "17:00",
+      "help": "24-hour format (e.g. 17:00). The agent won't schedule events after this time unless you explicitly ask.",
+      "options": [],
+      "optional": true
+    },
+    {
+      "key": "DEFAULT_EVENT_DURATION",
+      "label": "Default event duration (minutes)",
+      "placeholder": "30",
+      "input_type": "text",
+      "default": "30",
+      "help": "When no duration is specified, events will be created with this length.",
+      "options": [],
+      "optional": true
+    },
+    {
+      "key": "SCHEDULING_PREFERENCES",
+      "label": "Scheduling preferences",
+      "placeholder": "Prefer mornings for deep work, keep Fridays light",
+      "input_type": "textarea",
+      "default": "",
+      "help": "Any personal preferences for how events should be scheduled.",
+      "options": [],
+      "optional": true
+    }
+  ],
+  "required_integrations": ["google_calendar"],
+  "triggers": [
+    "calendar", "schedule", "meeting", "appointment", "event",
+    "book", "reschedule", "cancel event", "free time", "availability",
+    "busy", "upcoming", "block time", "reminder", "agenda"
+  ],
+  "model": {
+    "tier": "balanced"
+  },
+  "setup_steps": [
+    "Connect your Google account by clicking 'Connect Google' in the agent settings.",
+    "Fill in your timezone (e.g. America/New_York).",
+    "Set your working hours so the agent respects your schedule boundaries.",
+    "Optionally add scheduling preferences (e.g. 'prefer mornings for focus time')."
+  ],
+  "builtin": true
+}

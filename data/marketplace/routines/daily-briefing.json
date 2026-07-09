@@ -1,0 +1,36 @@
+{
+  "id": "daily-briefing",
+  "name": "Daily Briefing",
+  "version": "1.0.0",
+  "author": "Otian AI",
+  "price_cents": 0,
+  "description": "A morning summary of today's calendar events sent to Telegram.",
+  "long_description": "Start every day informed. The Daily Briefing routine checks your Google Calendar each morning and sends a concise summary of the day's events to your Telegram chat. Includes meeting times, titles, and any preparation notes.",
+  "category": "productivity",
+  "required_variables": [
+    {
+      "key": "BRIEFING_TIME",
+      "label": "When to send the briefing",
+      "placeholder": "08:00",
+      "input_type": "text",
+      "default": "08:00",
+      "help": "24-hour format, UTC (e.g. 08:00 for 8 AM UTC).",
+      "options": [],
+      "optional": false
+    }
+  ],
+  "required_skill": "calendar-management",
+  "default_trigger": {
+    "daily_at": { "hour": 8, "minute": 0, "tz": null }
+  },
+  "default_action": {
+    "skill_slug": "calendar-management",
+    "prompt": "Give me a complete summary of today's calendar. Include event times, titles, locations, and any preparation I should do.",
+    "delivery": "notify_telegram"
+  },
+  "setup_steps": [
+    "Install the Calendar Management skill and connect Google Calendar first.",
+    "Set your preferred briefing time (UTC)."
+  ],
+  "builtin": true
+}

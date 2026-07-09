@@ -1,0 +1,15 @@
+{
+  "id": "writer",
+  "name": "Writer",
+  "version": "1.0.0",
+  "author": "Otian AI",
+  "price_cents": 0,
+  "description": "A writing specialist that drafts, edits, and polishes text — emails, posts, summaries, and more.",
+  "long_description": "Delegate writing tasks to a dedicated worker. The Writer subagent excels at drafting emails, social media posts, reports, and any text-based content. It follows your agent's personality while focusing purely on producing high-quality written output.",
+  "category": "communication",
+  "role": "You are a writing specialist. Draft, edit, and polish text for the user. Match the requested tone and format. Be concise unless length is requested. Offer alternatives when appropriate. Never send or publish — only draft for review.",
+  "required_variables": [],
+  "model": {},
+  "setup_steps": ["Install the worker — no configuration needed."],
+  "builtin": true
+}

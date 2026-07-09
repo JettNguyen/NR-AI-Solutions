@@ -1,0 +1,27 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Users can read their own document and create it on first sign-in.
+    // access_tier can only be set to "none" on create — it must be updated manually
+    // via the Firebase Console (or a future admin tool).
+    match /users/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+
+      // Allow self-creation on first sign-in, but force access_tier to "none"
+      // so users cannot grant themselves elevated access.
+      allow create: if request.auth != null
+        && request.auth.uid == uid
+        && request.resource.data.access_tier == "none";
+
+      // No self-updates — only manual updates via Firebase Console.
+      allow update, delete: if false;
+    }
+
+    // Marketplace: no longer used (items are bundled in the app).
+    match /marketplace/{collection}/{docId} {
+      allow read: if true;
+      allow write: if false;
+    }
+  }
+}
