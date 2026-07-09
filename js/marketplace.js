@@ -1,30 +1,42 @@
 /* ========================================
-   Otian AI | Skills Marketplace Waitlist
+   Otian AI | Product Marketplace
    js/marketplace.js
    ======================================== */
 
 (function () {
   'use strict';
 
-  /* ── Category filter + search ── */
-  var filterBar    = document.getElementById('marketplaceFilterBar');
-  var searchInput  = document.getElementById('marketplaceSearchInput');
-  var grid         = document.getElementById('marketplaceCategoryGrid');
-  var emptyState   = document.getElementById('marketplaceFilterEmpty');
+  /* ── Product filtering ── */
+  var typeTabs    = document.getElementById('mpTypeTabs');
+  var filterBar   = document.getElementById('marketplaceFilterBar');
+  var searchInput = document.getElementById('marketplaceSearchInput');
+  var priceToggle = document.getElementById('mpPriceToggle');
+  var grid        = document.getElementById('mpProductGrid');
+  var emptyState  = document.getElementById('marketplaceFilterEmpty');
 
-  if (filterBar && grid) {
-    var pills = Array.prototype.slice.call(filterBar.querySelectorAll('.marketplace-filter-pill'));
-    var cards = Array.prototype.slice.call(grid.querySelectorAll('[data-category]'));
-    var activeFilter = 'all';
+  if (grid) {
+    var typeButtons  = typeTabs    ? Array.prototype.slice.call(typeTabs.querySelectorAll('.mp-type-tab'))            : [];
+    var filterPills  = filterBar   ? Array.prototype.slice.call(filterBar.querySelectorAll('.marketplace-filter-pill')) : [];
+    var priceButtons = priceToggle ? Array.prototype.slice.call(priceToggle.querySelectorAll('.mp-price-btn'))        : [];
+    var cards        = Array.prototype.slice.call(grid.querySelectorAll('.mp-product-card'));
+
+    var activeType     = 'all';
+    var activeCategory = 'all';
+    var activePrice    = 'all';
 
     function applyFilters() {
       var query = searchInput ? searchInput.value.trim().toLowerCase() : '';
       var visibleCount = 0;
 
       cards.forEach(function (card) {
-        var matchesFilter = activeFilter === 'all' || card.dataset.category === activeFilter;
-        var matchesSearch = !query || card.dataset.category.toLowerCase().indexOf(query) !== -1;
-        var match = matchesFilter && matchesSearch;
+        var matchType     = activeType     === 'all' || card.dataset.type     === activeType;
+        var matchCategory = activeCategory === 'all' || card.dataset.category === activeCategory;
+        var matchPrice    = activePrice    === 'all' || card.dataset.price    === activePrice;
+        var matchSearch   = !query
+          || card.dataset.name.indexOf(query) !== -1
+          || card.dataset.desc.indexOf(query) !== -1;
+
+        var match = matchType && matchCategory && matchPrice && matchSearch;
         card.hidden = !match;
         if (match) visibleCount++;
       });
@@ -34,27 +46,55 @@
       }
     }
 
-    filterBar.addEventListener('click', function (e) {
-      var pill = e.target.closest('.marketplace-filter-pill');
-      if (!pill) return;
+    /* Type tab click */
+    if (typeTabs) {
+      typeTabs.addEventListener('click', function (e) {
+        var tab = e.target.closest('.mp-type-tab');
+        if (!tab) return;
+        typeButtons.forEach(function (t) { t.classList.remove('is-active'); });
+        tab.classList.add('is-active');
+        activeType = tab.dataset.type;
+        applyFilters();
+      });
+    }
 
-      pills.forEach(function (p) { p.classList.remove('is-active'); });
-      pill.classList.add('is-active');
-      activeFilter = pill.dataset.filter;
-      applyFilters();
-    });
+    /* Category filter click */
+    if (filterBar) {
+      filterBar.addEventListener('click', function (e) {
+        var pill = e.target.closest('.marketplace-filter-pill');
+        if (!pill) return;
+        filterPills.forEach(function (p) { p.classList.remove('is-active'); });
+        pill.classList.add('is-active');
+        activeCategory = pill.dataset.filter;
+        applyFilters();
+      });
+    }
 
+    /* Price toggle click */
+    if (priceToggle) {
+      priceToggle.addEventListener('click', function (e) {
+        var btn = e.target.closest('.mp-price-btn');
+        if (!btn) return;
+        priceButtons.forEach(function (b) { b.classList.remove('is-active'); });
+        btn.classList.add('is-active');
+        activePrice = btn.dataset.price;
+        applyFilters();
+      });
+    }
+
+    /* Search input */
     if (searchInput) {
       searchInput.addEventListener('input', applyFilters);
     }
   }
 
+  /* ── Waitlist form ── */
   var form         = document.getElementById('marketplaceWaitlistForm');
   var confirmation = document.getElementById('marketplaceConfirmationMessage');
 
   if (!form) return;
 
-  /* ── Error helpers ── */
+  /* Error helpers */
   function showError(input, msg) {
     input.classList.add('field-error');
     var errEl = input.parentElement.querySelector('.form-error-msg');
@@ -80,7 +120,7 @@
     el.addEventListener('change', function () { clearError(el); });
   });
 
-  /* ── Submit ── */
+  /* Submit */
   form.addEventListener('submit', function (e) {
     e.preventDefault();
 

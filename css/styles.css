@@ -3383,6 +3383,10 @@ html[data-theme="dark"] .availability-widget iframe {
   .glossary-side {
     position: static;
   }
+
+  .mp-product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* ========================================
@@ -3456,6 +3460,27 @@ html[data-theme="dark"] .availability-widget iframe {
   /* Grids */
   .feature-grid {
     grid-template-columns: 1fr;
+  }
+
+  .mp-product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mp-controls-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .mp-controls-row .marketplace-filter-bar {
+    justify-content: flex-start;
+  }
+
+  .mp-price-toggle {
+    align-self: flex-start;
+  }
+
+  .mp-chat-bubble {
+    max-width: 90%;
   }
 
   .steps-row {
@@ -3637,6 +3662,16 @@ html[data-theme="dark"] .availability-widget iframe {
     border-color: var(--accent);
     color: var(--text-primary);
     background: var(--accent-subtle);
+  }
+
+  .mp-product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .mp-product-card.is-coming-soon:hover {
+    transform: none;
+    box-shadow: none;
   }
 }
 
@@ -4481,4 +4516,486 @@ html[data-theme="dark"] .booking-container iframe {
   color: var(--text-muted);
   font-size: 0.9375rem;
   padding: 32px 0 0;
+}
+
+/* ── Product Marketplace ── */
+
+/* Type tabs */
+.mp-type-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.mp-type-tab {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 10px 22px;
+  transition: color var(--transition), background var(--transition), border-color var(--transition);
+}
+
+.mp-type-tab:hover {
+  color: var(--text-primary);
+  border-color: var(--accent);
+}
+
+.mp-type-tab.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* Controls row (category pills + price toggle) */
+.mp-controls-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.mp-controls-row .marketplace-filter-bar {
+  margin-bottom: 0;
+}
+
+/* Price toggle group */
+.mp-price-toggle {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 3px;
+}
+
+.mp-price-btn {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: 999px;
+  padding: 6px 14px;
+  transition: color var(--transition), background var(--transition);
+}
+
+.mp-price-btn:hover {
+  color: var(--text-primary);
+}
+
+.mp-price-btn.is-active {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Product grid */
+.mp-product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* Product card */
+.mp-product-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.mp-product-card[hidden] {
+  display: none;
+}
+
+.mp-product-card.is-coming-soon {
+  opacity: 0.6;
+}
+
+/* Card badges row */
+.mp-card-badges {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.mp-type-badge,
+.mp-category-badge {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.mp-type-badge {
+  background: var(--accent-subtle);
+  color: var(--accent-hover);
+}
+
+.mp-category-badge {
+  background: var(--surface-soft-strong);
+  color: var(--text-secondary);
+}
+
+/* Card content */
+.mp-product-card h3 {
+  font-size: 1.0625rem;
+  margin-bottom: 4px;
+}
+
+.mp-card-author {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.mp-card-tagline {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.mp-card-desc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Card bottom bar */
+.mp-card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+/* Price badges */
+.mp-price-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.mp-price-badge.is-free {
+  background: rgba(76, 175, 80, 0.12);
+  color: #2e7d32;
+}
+
+[data-theme="dark"] .mp-price-badge.is-free {
+  background: rgba(76, 175, 80, 0.2);
+  color: #81c784;
+}
+
+.mp-price-badge.is-premium {
+  background: var(--accent-subtle);
+  color: var(--accent-hover);
+}
+
+.mp-price-badge.is-coming-soon {
+  background: var(--surface-soft-strong);
+  color: var(--text-muted);
+}
+
+/* Card detail link */
+.mp-card-link {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--accent);
+  transition: color var(--transition);
+}
+
+.mp-card-link:hover {
+  color: var(--accent-hover);
+}
+
+/* ── Product Detail Pages ── */
+
+.mp-detail {
+  padding: calc(var(--nav-height) + 40px) 24px 96px;
+}
+
+.mp-detail-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Breadcrumb */
+.mp-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+}
+
+.mp-breadcrumb a {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.mp-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.mp-breadcrumb-sep {
+  color: var(--text-muted);
+}
+
+/* Detail header */
+.mp-detail-badges {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.mp-detail-title {
+  margin-bottom: 8px;
+}
+
+.mp-detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+}
+
+.mp-detail-tagline {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.mp-detail-desc {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 40px;
+}
+
+/* Detail sections */
+.mp-detail-section {
+  margin-bottom: 40px;
+}
+
+.mp-detail-section h3 {
+  font-size: 1.125rem;
+  margin-bottom: 16px;
+}
+
+/* Chat preview bubbles */
+.mp-chat-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mp-chat-bubble {
+  max-width: 80%;
+  padding: 14px 18px;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.mp-chat-bubble.is-user {
+  align-self: flex-end;
+  background: var(--accent);
+  color: var(--text-on-accent);
+  border-bottom-right-radius: 4px;
+}
+
+.mp-chat-bubble.is-bot {
+  align-self: flex-start;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-bottom-left-radius: 4px;
+}
+
+/* Info list (setup steps, guidelines, etc.) */
+.mp-info-list {
+  list-style: none;
+  padding: 0;
+}
+
+.mp-info-list li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.mp-info-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 8px;
+  height: 8px;
+  background: var(--accent-subtle);
+  border-radius: 50%;
+}
+
+/* Numbered list variant */
+.mp-numbered-list {
+  list-style: none;
+  padding: 0;
+  counter-reset: step;
+}
+
+.mp-numbered-list li {
+  position: relative;
+  padding-left: 36px;
+  margin-bottom: 14px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  counter-increment: step;
+}
+
+.mp-numbered-list li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  background: var(--accent-subtle);
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Tags list (triggers) */
+.mp-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.mp-tag {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--surface-soft-strong);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+/* Variables table */
+.mp-var-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.mp-var-table th,
+.mp-var-table td {
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.mp-var-table th {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.mp-var-table td {
+  color: var(--text-secondary);
+}
+
+/* Tier badge */
+.mp-tier-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-subtle);
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+
+/* Highlighted box (for role descriptions, schedule info) */
+.mp-highlight-box {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* Callout (e.g., "Requires: calendar-management") */
+.mp-callout {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent-subtle);
+  border-radius: var(--radius-sm);
+  padding: 12px 18px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--accent-hover);
+  margin-bottom: 24px;
+}
+
+/* CTA section */
+.mp-detail-cta {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+
+.mp-back-link {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color var(--transition);
+}
+
+.mp-back-link:hover {
+  color: var(--accent);
 }

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Researcher | Product Marketplace | Otian AI</title>
+  <meta name="description" content="A dedicated research worker that digs into topics, summarizes findings, and presents structured answers. Free worker for your Archie agent." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="../../../../assets/icon-1024-dark.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../../../css/styles.css" />
+</head>
+<body>
+
+  <nav class="nav" id="nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="../../../../" class="nav-logo"><img src="../../../../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Consulting &amp; Development</span></span></a>
+      <div class="nav-links">
+        <div class="nav-more" id="navMarketplace">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Skills Marketplace</button>
+          <div class="nav-more-menu" id="navMarketplaceMenu" role="menu" aria-label="Skills Marketplace">
+            <a href="../../../../skills-marketplace/what-is-a-skill/" role="menuitem">What Is a Skill?</a>
+            <a href="../../../../skills-marketplace/browse/" role="menuitem">The Marketplace</a>
+            <a href="../../../../skills-marketplace/for-developers/" role="menuitem">For Developers</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navServices">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navServicesMenu" type="button">Services</button>
+          <div class="nav-more-menu" id="navServicesMenu" role="menu" aria-label="Services">
+            <a href="../../../../individuals/" role="menuitem">For Individuals</a>
+            <a href="../../../../business/" role="menuitem">For Business</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navLearn">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navLearnMenu" type="button">Learn</button>
+          <div class="nav-more-menu" id="navLearnMenu" role="menu" aria-label="Learn">
+            <a href="../../../../how-it-works/" role="menuitem">How It Works</a>
+            <a href="../../../../ai-explained/" role="menuitem">AI Explained</a>
+            <a href="../../../../blog/" role="menuitem">Blog</a>
+            <a href="../../../../equipment/" role="menuitem">Equipment Needed</a>
+            <a href="../../../../faq/" role="menuitem">FAQ</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navCompany">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompanyMenu" type="button">Company</button>
+          <div class="nav-more-menu" id="navCompanyMenu" role="menu" aria-label="Company">
+            <a href="../../../../about/" role="menuitem">About</a>
+            <a href="../../../../testimonials/" role="menuitem">Agent Successes</a>
+            <a href="../../../../contact/" role="menuitem">Contact</a>
+          </div>
+        </div>
+      </div>
+      <a href="../../../../questionnaire/" class="btn btn-primary btn-sm nav-cta">Get Started</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navDrawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+  <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutMarketplace" aria-expanded="false" aria-controls="navDrawerFlyout">Skills Marketplace</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutServices" aria-expanded="false" aria-controls="navDrawerFlyout">Services</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
+    <a href="../../../../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
+  </nav>
+
+  <div class="nav-drawer-flyout" id="navDrawerFlyout" aria-hidden="true">
+    <button class="nav-drawer-back" type="button">
+      <svg class="nav-drawer-back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      <span id="navDrawerFlyoutTitle">Services</span>
+    </button>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutMarketplace">
+      <a href="../../../../skills-marketplace/what-is-a-skill/">What Is a Skill?</a>
+      <a href="../../../../skills-marketplace/browse/">The Marketplace</a>
+      <a href="../../../../skills-marketplace/for-developers/">For Developers</a>
+    </div>
+    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutServices">
+      <a href="../../../../individuals/">For Individuals</a>
+      <a href="../../../../business/">For Business</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutLearn">
+      <a href="../../../../how-it-works/">How It Works</a>
+      <a href="../../../../ai-explained/">AI Explained</a>
+      <a href="../../../../blog/">Blog</a>
+      <a href="../../../../equipment/">Equipment Needed</a>
+      <a href="../../../../faq/">FAQ</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompany">
+      <a href="../../../../about/">About</a>
+      <a href="../../../../testimonials/">Agent Successes</a>
+      <a href="../../../../contact/">Contact</a>
+    </div>
+  </div>
+
+  <main>
+    <div class="mp-detail">
+      <div class="mp-detail-inner">
+
+        <nav class="mp-breadcrumb" aria-label="Breadcrumb">
+          <a href="../../../../skills-marketplace/browse/">Marketplace</a>
+          <span class="mp-breadcrumb-sep" aria-hidden="true">/</span>
+          <a href="../../../../skills-marketplace/browse/">Workers</a>
+          <span class="mp-breadcrumb-sep" aria-hidden="true">/</span>
+          <span>Researcher</span>
+        </nav>
+
+        <div class="mp-detail-badges">
+          <span class="mp-type-badge">Worker</span>
+          <span class="mp-category-badge">research</span>
+        </div>
+
+        <h1 class="mp-detail-title">Researcher</h1>
+
+        <div class="mp-detail-meta">
+          <span>by Otian AI</span>
+          <span>v1.0.0</span>
+          <span class="mp-price-badge is-free">Free</span>
+        </div>
+
+        <p class="mp-detail-desc">Hand off research-heavy questions to a specialized worker. The Researcher subagent focuses on breaking down complex topics, gathering relevant information, and presenting clear, well-organized summaries. Great for market research, competitive analysis, or learning about new subjects.</p>
+
+        <div class="mp-detail-section">
+          <h3>Role</h3>
+          <div class="mp-highlight-box">You are a research specialist. When given a topic or question, break it down systematically. Present findings in a clear, organized format with headers and bullet points. Cite reasoning and note confidence levels. If you&rsquo;re unsure, say so rather than guessing.</div>
+        </div>
+
+        <div class="mp-detail-section">
+          <h3>Model Tier</h3>
+          <span class="mp-tier-badge">Balanced</span>
+        </div>
+
+        <div class="mp-detail-section">
+          <h3>Setup Steps</h3>
+          <ol class="mp-numbered-list">
+            <li>Install the worker &mdash; no configuration needed.</li>
+          </ol>
+        </div>
+
+        <div class="mp-detail-cta">
+          <a href="#" class="btn btn-primary">Install in Archie</a>
+          <a href="../../../../skills-marketplace/browse/" class="mp-back-link">&larr; Back to Marketplace</a>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer" aria-label="Site footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo"><img src="../../../../assets/icon-1024-dark.svg" alt="Otian AI" /></div>
+          <p class="footer-tagline">Guided AI assistants for real life</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Pages</h4>
+          <nav class="footer-nav-links" aria-label="Footer navigation">
+            <a href="../../../../">Home</a>
+            <a href="../../../../how-it-works/">How It Works</a>
+            <a href="../../../../skills-marketplace/browse/">Skills Marketplace</a>
+            <a href="../../../../individuals/">For Individuals</a>
+            <a href="../../../../business/">For Business</a>
+            <a href="../../../../about/">About</a>
+            <a href="../../../../faq/">FAQ</a>
+            <a href="../../../../ai-explained/">AI Explained</a>
+            <a href="../../../../blog/">Blog</a>
+            <a href="../../../../equipment/">Equipment Needed</a>
+            <a href="../../../../testimonials/">Agent Successes</a>
+            <a href="../../../../contact/">Contact</a>
+          </nav>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Contact</h4>
+          <a href="mailto:questions@otianai.com" class="footer-contact-email">questions@otianai.com</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Otian AI. All rights reserved.</p>
+        <nav class="footer-legal-links" aria-label="Legal">
+          <a href="../../../../privacy-policy/">Privacy Policy</a>
+          <a href="../../../../terms-of-service/">Terms of Service</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../../../js/nav.js"></script>
+</body>
+</html>

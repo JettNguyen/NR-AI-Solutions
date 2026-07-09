@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Skills Marketplace | Otian AI</title>
-  <meta name="description" content="Shop skills for your Archie assistant, built by developers and ready to add in one click. Browse by category, buy once, and it syncs everywhere your assistant runs." />
+<title>Product Marketplace | Otian AI</title>
+  <meta name="description" content="Browse skills, personalities, routines, and workers for your Archie assistant. Built by developers, ready to install in one click." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -105,22 +105,22 @@
          ============================== -->
     <section class="page-hero" aria-label="Page introduction">
       <div class="page-hero-inner">
-        <span class="marketplace-status-badge fade-up">In Development</span>
-        <span class="section-label fade-up">Shop Skills</span>
-        <h1 class="fade-up delay-1">The Skills Marketplace</h1>
-        <p class="fade-up delay-2">Browse skills for your Archie assistant, built by developers and ready to add in one click. Buy once from the website or the app, and it's there on both.</p>
+        <span class="marketplace-status-badge fade-up">Browse &amp; Install</span>
+        <span class="section-label fade-up">Browse Products</span>
+        <h1 class="fade-up delay-1">The Product Marketplace</h1>
+        <p class="fade-up delay-2">Browse skills, personalities, routines, and workers for your Archie assistant. Built by developers, ready to install in one click.</p>
       </div>
     </section>
 
     <!-- ==============================
-         Categories
+         Products
          ============================== -->
-    <section class="section" aria-labelledby="categories-heading">
+    <section class="section" aria-labelledby="products-heading">
       <div class="container">
         <div class="section-header">
-          <span class="section-label fade-up">Shop by Category</span>
-          <h2 id="categories-heading" class="fade-up delay-1">Skills, Organized Around Real Life</h2>
-          <p class="fade-up delay-2">Sixteen categories and growing. Search or filter to see what's planned for the area you care about most.</p>
+          <span class="section-label fade-up">Browse Products</span>
+          <h2 id="products-heading" class="fade-up delay-1">Everything Your Agent Needs</h2>
+          <p class="fade-up delay-2">Skills, personalities, routines, and workers &mdash; all in one place. Search, filter, and find exactly what you're looking for.</p>
         </div>
 
         <div class="marketplace-search-bar fade-up delay-1">
@@ -128,231 +128,281 @@
             <circle cx="11" cy="11" r="8"/>
             <line x1="21" y1="21" x2="16.65" y2="16.65"/>
           </svg>
-          <input type="search" id="marketplaceSearchInput" class="marketplace-search-input" placeholder="Search skills or categories&hellip;" aria-label="Search skills or categories" />
+          <input type="search" id="marketplaceSearchInput" class="marketplace-search-input" placeholder="Search products&hellip;" aria-label="Search products" />
         </div>
 
-        <div class="marketplace-filter-bar fade-up delay-1" id="marketplaceFilterBar" role="group" aria-label="Filter skills by category">
-          <button type="button" class="marketplace-filter-pill is-active" data-filter="all">All Categories</button>
-          <button type="button" class="marketplace-filter-pill" data-filter="Auto-Updates">Auto-Updates</button>
-          <button type="button" class="marketplace-filter-pill" data-filter="Calls &amp; Weather">Calls &amp; Weather</button>
-          <button type="button" class="marketplace-filter-pill" data-filter="Connect Your Apps">Connect Your Apps</button>
-          <button type="button" class="marketplace-filter-pill" data-filter="Documents, Images &amp; Writing">Documents, Images &amp; Writing</button>
-          <button type="button" class="marketplace-filter-pill" data-filter="Entertainment">Entertainment</button>
-          <button type="button" class="marketplace-filter-pill" data-filter="Health &amp; Fitness">Health &amp; Fitness</button>
-          <button type="button" class="marketplace-filter-pill" data-filter="Home &amp; Life Admin">Home &amp; Life Admin</button>
-          <button type="button" class="marketplace-filter-pill" data-filter="Learning &amp; Growth">Learning &amp; Growth</button>
-          <button type="button" class="marketplace-filter-pill" data-filter="Mental Health &amp; Mindfulness">Mental Health &amp; Mindfulness</button>
-          <button type="button" class="marketplace-filter-pill" data-filter="Money &amp; Finance">Money &amp; Finance</button>
-          <button type="button" class="marketplace-filter-pill" data-filter="Safety &amp; Security">Safety &amp; Security</button>
-          <button type="button" class="marketplace-filter-pill" data-filter="Search &amp; Browse">Search &amp; Browse</button>
-          <button type="button" class="marketplace-filter-pill" data-filter="Shopping &amp; Commerce">Shopping &amp; Commerce</button>
-          <button type="button" class="marketplace-filter-pill" data-filter="Smart Assistant Upgrades">Smart Assistant Upgrades</button>
-          <button type="button" class="marketplace-filter-pill" data-filter="Social &amp; Relationships">Social &amp; Relationships</button>
-          <button type="button" class="marketplace-filter-pill" data-filter="Work &amp; Career">Work &amp; Career</button>
+        <div class="mp-type-tabs fade-up delay-1" id="mpTypeTabs" role="group" aria-label="Filter by product type">
+          <button type="button" class="mp-type-tab is-active" data-type="all">All (17)</button>
+          <button type="button" class="mp-type-tab" data-type="skill">Skills (4)</button>
+          <button type="button" class="mp-type-tab" data-type="personality">Personalities (6)</button>
+          <button type="button" class="mp-type-tab" data-type="routine">Routines (3)</button>
+          <button type="button" class="mp-type-tab" data-type="worker">Workers (4)</button>
         </div>
 
-        <div class="feature-grid marketplace-category-grid fade-up delay-2" id="marketplaceCategoryGrid">
+        <div class="mp-controls-row fade-up delay-1" id="mpControlsRow">
+          <div class="marketplace-filter-bar" id="marketplaceFilterBar" role="group" aria-label="Filter by category">
+            <button type="button" class="marketplace-filter-pill is-active" data-filter="all">All</button>
+            <button type="button" class="marketplace-filter-pill" data-filter="productivity">Productivity</button>
+            <button type="button" class="marketplace-filter-pill" data-filter="communication">Communication</button>
+            <button type="button" class="marketplace-filter-pill" data-filter="finance">Finance</button>
+            <button type="button" class="marketplace-filter-pill" data-filter="research">Research</button>
+            <button type="button" class="marketplace-filter-pill" data-filter="operations">Operations</button>
+            <button type="button" class="marketplace-filter-pill" data-filter="personal">Personal</button>
+          </div>
+          <div class="mp-price-toggle" id="mpPriceToggle" role="group" aria-label="Filter by price">
+            <button type="button" class="mp-price-btn is-active" data-price="all">All Prices</button>
+            <button type="button" class="mp-price-btn" data-price="free">Free</button>
+            <button type="button" class="mp-price-btn" data-price="premium">Premium</button>
+          </div>
+        </div>
 
-          <article class="feature-card" data-category="Auto-Updates">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="23 4 23 10 17 10"/>
-                <polyline points="1 20 1 14 7 14"/>
-                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
-              </svg>
+        <div class="mp-product-grid fade-up delay-2" id="mpProductGrid">
+
+          <!-- ===== SKILLS ===== -->
+
+          <article class="mp-product-card" data-type="skill" data-category="productivity" data-price="free" data-name="calendar management" data-desc="full google calendar management — create, read, update, and delete events via natural language.">
+            <div class="mp-card-badges">
+              <span class="mp-type-badge">Skill</span>
+              <span class="mp-category-badge">productivity</span>
             </div>
-            <h3>Auto-Updates</h3>
-            <p>Skills that keep themselves current, so pricing, schedules, and information never quietly go stale.</p>
-            <span class="marketplace-category-count">Coming soon</span>
+            <h3>Calendar Management</h3>
+            <p class="mp-card-author">by Archie (built-in)</p>
+            <p class="mp-card-desc">Full Google Calendar management — create, read, update, and delete events via natural language.</p>
+            <div class="mp-card-bottom">
+              <span class="mp-price-badge is-free">Free</span>
+              <a href="skills/calendar-management/" class="mp-card-link">View Details &rarr;</a>
+            </div>
           </article>
 
-          <article class="feature-card" data-category="Calls &amp; Weather">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.68 3.4 2 2 0 0 1 3.64 1.24h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l1.09-1.09a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z"/>
-              </svg>
+          <article class="mp-product-card is-coming-soon" data-type="skill" data-category="communication" data-price="premium" data-name="inbox pilot" data-desc="ai-powered email triage — flags urgent mail, drafts replies, and summarizes threads.">
+            <div class="mp-card-badges">
+              <span class="mp-type-badge">Skill</span>
+              <span class="mp-category-badge">communication</span>
             </div>
-            <h3>Calls &amp; Weather</h3>
-            <p>Call handling and day-ahead forecasts, woven right into your everyday routine.</p>
-            <span class="marketplace-category-count">Coming soon</span>
+            <h3>Inbox Pilot</h3>
+            <p class="mp-card-author">by Otian AI</p>
+            <p class="mp-card-desc">AI-powered email triage — flags urgent mail, drafts replies, and summarizes threads.</p>
+            <div class="mp-card-bottom">
+              <span class="mp-price-badge is-coming-soon">Coming soon</span>
+            </div>
           </article>
 
-          <article class="feature-card" data-category="Connect Your Apps">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-              </svg>
+          <article class="mp-product-card is-coming-soon" data-type="skill" data-category="finance" data-price="premium" data-name="revenue steward" data-desc="track revenue, flag anomalies, and get daily financial snapshots.">
+            <div class="mp-card-badges">
+              <span class="mp-type-badge">Skill</span>
+              <span class="mp-category-badge">finance</span>
             </div>
-            <h3>Connect Your Apps</h3>
-            <p>Connectors for the tools you already use, so your assistant reaches further than what's built in.</p>
-            <span class="marketplace-category-count">Coming soon</span>
+            <h3>Revenue Steward</h3>
+            <p class="mp-card-author">by Otian AI</p>
+            <p class="mp-card-desc">Track revenue, flag anomalies, and get daily financial snapshots.</p>
+            <div class="mp-card-bottom">
+              <span class="mp-price-badge is-coming-soon">Coming soon</span>
+            </div>
           </article>
 
-          <article class="feature-card" data-category="Documents, Images &amp; Writing">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                <polyline points="14 2 14 8 20 8"/>
-                <line x1="16" y1="13" x2="8" y2="13"/>
-                <line x1="16" y1="17" x2="8" y2="17"/>
-              </svg>
+          <article class="mp-product-card is-coming-soon" data-type="skill" data-category="operations" data-price="premium" data-name="ops sentinel" data-desc="monitor systems, surface alerts, and auto-escalate critical issues.">
+            <div class="mp-card-badges">
+              <span class="mp-type-badge">Skill</span>
+              <span class="mp-category-badge">operations</span>
             </div>
-            <h3>Documents, Images &amp; Writing</h3>
-            <p>Drafting, editing, summarizing, and organizing documents, images, and everyday writing.</p>
-            <span class="marketplace-category-count">Coming soon</span>
+            <h3>Ops Sentinel</h3>
+            <p class="mp-card-author">by Otian AI</p>
+            <p class="mp-card-desc">Monitor systems, surface alerts, and auto-escalate critical issues.</p>
+            <div class="mp-card-bottom">
+              <span class="mp-price-badge is-coming-soon">Coming soon</span>
+            </div>
           </article>
 
-          <article class="feature-card" data-category="Entertainment">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <polygon points="10 8 16 12 10 16 10 8"/>
-              </svg>
+          <!-- ===== PERSONALITIES ===== -->
+
+          <article class="mp-product-card" data-type="personality" data-category="communication" data-price="free" data-name="professional" data-desc="a polished, executive-level assistant voice. clear, concise, and confident — ideal for business communication and scheduling.">
+            <div class="mp-card-badges">
+              <span class="mp-type-badge">Personality</span>
+              <span class="mp-category-badge">communication</span>
             </div>
-            <h3>Entertainment</h3>
-            <p>Recommendations, watchlists, and things to do, tuned to what you actually enjoy.</p>
-            <span class="marketplace-category-count">Coming soon</span>
+            <h3>Professional</h3>
+            <p class="mp-card-author">by Otian AI</p>
+            <p class="mp-card-tagline">Boardroom-ready precision</p>
+            <p class="mp-card-desc">A polished, executive-level assistant voice. Clear, concise, and confident — ideal for business communication and scheduling.</p>
+            <div class="mp-card-bottom">
+              <span class="mp-price-badge is-free">Free</span>
+              <a href="personalities/professional/" class="mp-card-link">View Details &rarr;</a>
+            </div>
           </article>
 
-          <article class="feature-card" data-category="Health &amp; Fitness">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-              </svg>
+          <article class="mp-product-card" data-type="personality" data-category="communication" data-price="free" data-name="friendly" data-desc="a warm and conversational assistant that feels like chatting with a capable friend. helpful without being stiff.">
+            <div class="mp-card-badges">
+              <span class="mp-type-badge">Personality</span>
+              <span class="mp-category-badge">communication</span>
             </div>
-            <h3>Health &amp; Fitness</h3>
-            <p>Workout plans, meal prep, and habit tracking that adjust as your goals change.</p>
-            <span class="marketplace-category-count">Coming soon</span>
+            <h3>Friendly</h3>
+            <p class="mp-card-author">by Otian AI</p>
+            <p class="mp-card-tagline">Warm, helpful, and approachable</p>
+            <p class="mp-card-desc">A warm and conversational assistant that feels like chatting with a capable friend. Helpful without being stiff.</p>
+            <div class="mp-card-bottom">
+              <span class="mp-price-badge is-free">Free</span>
+              <a href="personalities/friendly/" class="mp-card-link">View Details &rarr;</a>
+            </div>
           </article>
 
-          <article class="feature-card" data-category="Home &amp; Life Admin">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                <polyline points="9 22 9 12 15 12 15 22"/>
-              </svg>
+          <article class="mp-product-card" data-type="personality" data-category="communication" data-price="free" data-name="concise" data-desc="a no-nonsense assistant that gets straight to the point. every word earns its place. perfect for power users who know what they want.">
+            <div class="mp-card-badges">
+              <span class="mp-type-badge">Personality</span>
+              <span class="mp-category-badge">communication</span>
             </div>
-            <h3>Home &amp; Life Admin</h3>
-            <p>Bills, renewals, errands, and the small recurring tasks that keep a household running.</p>
-            <span class="marketplace-category-count">Coming soon</span>
+            <h3>Concise</h3>
+            <p class="mp-card-author">by Otian AI</p>
+            <p class="mp-card-tagline">Maximum signal, minimum words</p>
+            <p class="mp-card-desc">A no-nonsense assistant that gets straight to the point. Every word earns its place. Perfect for power users who know what they want.</p>
+            <div class="mp-card-bottom">
+              <span class="mp-price-badge is-free">Free</span>
+              <a href="personalities/concise/" class="mp-card-link">View Details &rarr;</a>
+            </div>
           </article>
 
-          <article class="feature-card" data-category="Learning &amp; Growth">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-              </svg>
+          <article class="mp-product-card is-coming-soon" data-type="personality" data-category="personal" data-price="premium" data-name="motivational coach" data-desc="encouraging, goal-oriented, celebrates wins.">
+            <div class="mp-card-badges">
+              <span class="mp-type-badge">Personality</span>
+              <span class="mp-category-badge">personal</span>
             </div>
-            <h3>Learning &amp; Growth</h3>
-            <p>Study plans, skill-building, and steady nudges toward whatever you're trying to learn.</p>
-            <span class="marketplace-category-count">Coming soon</span>
+            <h3>Motivational Coach</h3>
+            <p class="mp-card-author">by Otian AI</p>
+            <p class="mp-card-tagline">Encouraging, goal-oriented, celebrates wins</p>
+            <p class="mp-card-desc">An encouraging personality that keeps you focused on goals, celebrates your wins, and nudges you forward when motivation dips.</p>
+            <div class="mp-card-bottom">
+              <span class="mp-price-badge is-coming-soon">Coming soon</span>
+            </div>
           </article>
 
-          <article class="feature-card" data-category="Mental Health &amp; Mindfulness">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
-                <line x1="9" y1="9" x2="9.01" y2="9"/>
-                <line x1="15" y1="9" x2="15.01" y2="9"/>
-              </svg>
+          <article class="mp-product-card is-coming-soon" data-type="personality" data-category="communication" data-price="premium" data-name="corporate diplomat" data-desc="polished stakeholder communication.">
+            <div class="mp-card-badges">
+              <span class="mp-type-badge">Personality</span>
+              <span class="mp-category-badge">communication</span>
             </div>
-            <h3>Mental Health &amp; Mindfulness</h3>
-            <p>Check-ins, reflection prompts, and gentle accountability for staying grounded.</p>
-            <span class="marketplace-category-count">Coming soon</span>
+            <h3>Corporate Diplomat</h3>
+            <p class="mp-card-author">by Otian AI</p>
+            <p class="mp-card-tagline">Polished stakeholder communication</p>
+            <p class="mp-card-desc">A diplomatic voice built for navigating complex stakeholder relationships and corporate communication with finesse.</p>
+            <div class="mp-card-bottom">
+              <span class="mp-price-badge is-coming-soon">Coming soon</span>
+            </div>
           </article>
 
-          <article class="feature-card" data-category="Money &amp; Finance">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="1" x2="12" y2="23"/>
-                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-              </svg>
+          <article class="mp-product-card is-coming-soon" data-type="personality" data-category="personal" data-price="premium" data-name="tech bro" data-desc="casual silicon valley energy.">
+            <div class="mp-card-badges">
+              <span class="mp-type-badge">Personality</span>
+              <span class="mp-category-badge">personal</span>
             </div>
-            <h3>Money &amp; Finance</h3>
-            <p>Budgeting, spending check-ins, and financial admin handled without the spreadsheet guilt.</p>
-            <span class="marketplace-category-count">Coming soon</span>
+            <h3>Tech Bro</h3>
+            <p class="mp-card-author">by Otian AI</p>
+            <p class="mp-card-tagline">Casual Silicon Valley energy</p>
+            <p class="mp-card-desc">A casual, high-energy personality inspired by startup culture. Thinks big, talks fast, and is always shipping.</p>
+            <div class="mp-card-bottom">
+              <span class="mp-price-badge is-coming-soon">Coming soon</span>
+            </div>
           </article>
 
-          <article class="feature-card" data-category="Safety &amp; Security">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                <polyline points="9 12 11 14 15 10"/>
-              </svg>
+          <!-- ===== ROUTINES ===== -->
+
+          <article class="mp-product-card" data-type="routine" data-category="productivity" data-price="free" data-name="daily briefing" data-desc="a morning summary of today's calendar events sent to telegram.">
+            <div class="mp-card-badges">
+              <span class="mp-type-badge">Routine</span>
+              <span class="mp-category-badge">productivity</span>
             </div>
-            <h3>Safety &amp; Security</h3>
-            <p>Account monitoring, password hygiene, and alerts that catch problems before they grow.</p>
-            <span class="marketplace-category-count">Coming soon</span>
+            <h3>Daily Briefing</h3>
+            <p class="mp-card-author">by Otian AI</p>
+            <p class="mp-card-desc">A morning summary of today's calendar events sent to Telegram. Start every day informed.</p>
+            <div class="mp-card-bottom">
+              <span class="mp-price-badge is-free">Free</span>
+              <a href="routines/daily-briefing/" class="mp-card-link">View Details &rarr;</a>
+            </div>
           </article>
 
-          <article class="feature-card" data-category="Search &amp; Browse">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="11" cy="11" r="8"/>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-              </svg>
+          <article class="mp-product-card is-coming-soon" data-type="routine" data-category="productivity" data-price="premium" data-name="weekly report" data-desc="auto-generate a weekly summary every monday.">
+            <div class="mp-card-badges">
+              <span class="mp-type-badge">Routine</span>
+              <span class="mp-category-badge">productivity</span>
             </div>
-            <h3>Search &amp; Browse</h3>
-            <p>Deeper web lookups and monitoring, with findings delivered on your schedule.</p>
-            <span class="marketplace-category-count">Coming soon</span>
+            <h3>Weekly Report</h3>
+            <p class="mp-card-author">by Otian AI</p>
+            <p class="mp-card-desc">Auto-generate a weekly summary every Monday. Stay on top of what happened without lifting a finger.</p>
+            <div class="mp-card-bottom">
+              <span class="mp-price-badge is-coming-soon">Coming soon</span>
+            </div>
           </article>
 
-          <article class="feature-card" data-category="Shopping &amp; Commerce">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="9" cy="21" r="1"/>
-                <circle cx="20" cy="21" r="1"/>
-                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-              </svg>
+          <article class="mp-product-card is-coming-soon" data-type="routine" data-category="productivity" data-price="premium" data-name="stand-up prep" data-desc="daily standup notes pulled from calendar + tasks.">
+            <div class="mp-card-badges">
+              <span class="mp-type-badge">Routine</span>
+              <span class="mp-category-badge">productivity</span>
             </div>
-            <h3>Shopping &amp; Commerce</h3>
-            <p>Price tracking, restocks, and order management so you're not the one checking tabs.</p>
-            <span class="marketplace-category-count">Coming soon</span>
+            <h3>Stand-up Prep</h3>
+            <p class="mp-card-author">by Otian AI</p>
+            <p class="mp-card-desc">Daily standup notes pulled from calendar and tasks. Walk into every standup prepared.</p>
+            <div class="mp-card-bottom">
+              <span class="mp-price-badge is-coming-soon">Coming soon</span>
+            </div>
           </article>
 
-          <article class="feature-card" data-category="Smart Assistant Upgrades">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-              </svg>
+          <!-- ===== WORKERS ===== -->
+
+          <article class="mp-product-card" data-type="worker" data-category="research" data-price="free" data-name="researcher" data-desc="a dedicated research worker that digs into topics, summarizes findings, and presents structured answers.">
+            <div class="mp-card-badges">
+              <span class="mp-type-badge">Worker</span>
+              <span class="mp-category-badge">research</span>
             </div>
-            <h3>Smart Assistant Upgrades</h3>
-            <p>Core capability boosts that make your assistant sharper at everything else it does.</p>
-            <span class="marketplace-category-count">Coming soon</span>
+            <h3>Researcher</h3>
+            <p class="mp-card-author">by Otian AI</p>
+            <p class="mp-card-desc">A dedicated research worker that digs into topics, summarizes findings, and presents structured answers.</p>
+            <div class="mp-card-bottom">
+              <span class="mp-price-badge is-free">Free</span>
+              <a href="workers/researcher/" class="mp-card-link">View Details &rarr;</a>
+            </div>
           </article>
 
-          <article class="feature-card" data-category="Social &amp; Relationships">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                <circle cx="9" cy="7" r="4"/>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-              </svg>
+          <article class="mp-product-card" data-type="worker" data-category="communication" data-price="free" data-name="writer" data-desc="a writing specialist that drafts, edits, and polishes text — emails, posts, summaries, and more.">
+            <div class="mp-card-badges">
+              <span class="mp-type-badge">Worker</span>
+              <span class="mp-category-badge">communication</span>
             </div>
-            <h3>Social &amp; Relationships</h3>
-            <p>Keeping up with people who matter &mdash; birthdays, check-ins, and staying in touch.</p>
-            <span class="marketplace-category-count">Coming soon</span>
+            <h3>Writer</h3>
+            <p class="mp-card-author">by Otian AI</p>
+            <p class="mp-card-desc">A writing specialist that drafts, edits, and polishes text — emails, posts, summaries, and more.</p>
+            <div class="mp-card-bottom">
+              <span class="mp-price-badge is-free">Free</span>
+              <a href="workers/writer/" class="mp-card-link">View Details &rarr;</a>
+            </div>
           </article>
 
-          <article class="feature-card" data-category="Work &amp; Career">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-              </svg>
+          <article class="mp-product-card is-coming-soon" data-type="worker" data-category="research" data-price="premium" data-name="data analyst" data-desc="crunch numbers, build reports, spot trends.">
+            <div class="mp-card-badges">
+              <span class="mp-type-badge">Worker</span>
+              <span class="mp-category-badge">research</span>
             </div>
-            <h3>Work &amp; Career</h3>
-            <p>Job searching, meeting prep, and the career admin that's easy to let slide.</p>
-            <span class="marketplace-category-count">Coming soon</span>
+            <h3>Data Analyst</h3>
+            <p class="mp-card-author">by Otian AI</p>
+            <p class="mp-card-desc">Crunch numbers, build reports, and spot trends. Your agent's dedicated data specialist.</p>
+            <div class="mp-card-bottom">
+              <span class="mp-price-badge is-coming-soon">Coming soon</span>
+            </div>
+          </article>
+
+          <article class="mp-product-card is-coming-soon" data-type="worker" data-category="communication" data-price="premium" data-name="customer success agent" data-desc="handle customer inquiries with empathy and precision.">
+            <div class="mp-card-badges">
+              <span class="mp-type-badge">Worker</span>
+              <span class="mp-category-badge">communication</span>
+            </div>
+            <h3>Customer Success Agent</h3>
+            <p class="mp-card-author">by Otian AI</p>
+            <p class="mp-card-desc">Handle customer inquiries with empathy and precision. A dedicated support specialist for your agent.</p>
+            <div class="mp-card-bottom">
+              <span class="mp-price-badge is-coming-soon">Coming soon</span>
+            </div>
           </article>
 
         </div>
 
-        <p class="marketplace-filter-empty" id="marketplaceFilterEmpty" hidden>No skills match yet &mdash; check back soon, or <a href="#waitlist-heading">join the waitlist</a> to hear when it's ready.</p>
+        <p class="marketplace-filter-empty" id="marketplaceFilterEmpty" hidden>No products match your filters. Try adjusting your search or <a href="#waitlist-heading">join the waitlist</a> to hear about new releases.</p>
       </div>
     </section>
 
