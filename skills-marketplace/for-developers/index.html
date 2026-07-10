@@ -18,7 +18,7 @@
        ============================== -->
   <nav class="nav" id="nav" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="../../" class="nav-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Consulting &amp; Development</span></span></a>
+      <a href="../../" class="nav-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Guided AI Assistants</span></span></a>
       <div class="nav-links">
         <div class="nav-more" id="navMarketplace">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Marketplace</button>
@@ -123,7 +123,7 @@
           <p class="fade-up delay-2">Three steps, once the marketplace opens for submissions.</p>
         </div>
         <figure class="explain-figure fade-up delay-1">
-          <svg viewBox="0 0 560 205" role="img" aria-labelledby="dev-t" xmlns="http://www.w3.org/2000/svg" style="max-width:660px;font-family:inherit">
+          <svg class="explain-svg--desktop" viewBox="0 0 560 205" role="img" aria-labelledby="dev-t" xmlns="http://www.w3.org/2000/svg" style="max-width:660px;font-family:inherit">
             <title id="dev-t">A pipeline from building a skill to earning: build it, submit it for review, Otian distributes and syncs it out to users on the website and inside Archie, and you get paid on every sale.</title>
             <style>
               .dev-node{fill:rgba(224,138,91,.08);stroke:var(--accent);stroke-width:1.5}
@@ -136,7 +136,8 @@
               .dev-arrow{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.4;stroke-linecap:round;stroke-linejoin:round}
               .dev-wire{fill:none;stroke:currentColor;stroke-width:1.3;opacity:.3;stroke-linecap:round}
               .dev-dglyph{fill:none;stroke:var(--accent);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-              .dev-dlbl{fill:currentColor;opacity:.6;font-size:9px;text-anchor:middle}
+              .dev-amark{fill:var(--accent)}
+              .dev-dlbl{fill:currentColor;opacity:.6;font-size:11px;text-anchor:middle}
               .dev-port{fill:var(--accent)}
               .dev-run{fill:var(--accent);opacity:0}
               .dev-sale{fill:var(--accent);opacity:0}
@@ -147,8 +148,8 @@
                 @keyframes devRun{0%{opacity:0;transform:translateX(0)}12%{opacity:1}80%{opacity:1}100%{opacity:0;transform:translateX(76px)}}
                 .dev-s1{animation:devSaleA 3s ease-in-out infinite .4s}
                 .dev-s2{animation:devSaleB 3s ease-in-out infinite 1.7s}
-                @keyframes devSaleA{0%{opacity:0;transform:translate(0,0)}18%{opacity:1}82%{opacity:1;transform:translate(22px,-60px)}100%{opacity:0;transform:translate(22px,-60px)}}
-                @keyframes devSaleB{0%{opacity:0;transform:translate(0,0)}18%{opacity:1}82%{opacity:1;transform:translate(-22px,-60px)}100%{opacity:0;transform:translate(-22px,-60px)}}
+                @keyframes devSaleA{0%{opacity:0;transform:translate(0,0)}18%{opacity:1}82%{opacity:1;transform:translate(28px,-74px)}100%{opacity:0;transform:translate(28px,-74px)}}
+                @keyframes devSaleB{0%{opacity:0;transform:translate(0,0)}18%{opacity:1}82%{opacity:1;transform:translate(-28px,-74px)}100%{opacity:0;transform:translate(-28px,-74px)}}
                 .dev-coin{animation:devPulse 3.4s ease-in-out infinite}
                 @keyframes devPulse{0%,100%{opacity:1}50%{opacity:.62}}
               }
@@ -191,31 +192,129 @@
 
             <!-- 4 · Earn -->
             <rect class="dev-node dev-node--pay" x="432" y="36" width="56" height="56" rx="16"/>
-            <g class="dev-coin">
+            <g class="dev-coin" transform="translate(0,2)">
               <circle class="dev-glyph" cx="460" cy="62" r="10"/>
               <path class="dev-glyph" d="M460 55 L460 69"/>
               <path class="dev-glyph" d="M464 58 C464 55 456 55 456 58.5 C456 62 464 61.5 464 65 C464 68.5 456 68.5 456 65"/>
             </g>
             <circle class="dev-badge" cx="432" cy="36" r="11"/><text class="dev-num" x="432" y="40">4</text>
             <text class="dev-name" x="460" y="120">Earn</text>
-            <text class="dev-sub" x="460" y="136">paid on each sale</text>
+            <text class="dev-sub" x="460" y="136">paid per sale</text>
 
             <!-- reach: it sells on the Website and inside Archie, revenue flows up into Earn -->
-            <path class="dev-wire" d="M424 152 L446 92"/>
-            <path class="dev-wire" d="M496 152 L474 92"/>
-            <circle class="dev-port" cx="446" cy="92" r="2.5"/>
-            <circle class="dev-port" cx="474" cy="92" r="2.5"/>
-            <circle class="dev-sale dev-s1" cx="424" cy="152" r="3"/>
-            <circle class="dev-sale dev-s2" cx="496" cy="152" r="3"/>
+            <path class="dev-wire" d="M404 152 L432 78"/>
+            <path class="dev-wire" d="M516 152 L488 78"/>
+            <circle class="dev-port" cx="432" cy="78" r="2.5"/>
+            <circle class="dev-port" cx="488" cy="78" r="2.5"/>
+            <circle class="dev-sale dev-s1" cx="404" cy="152" r="3"/>
+            <circle class="dev-sale dev-s2" cx="516" cy="152" r="3"/>
 
-            <rect class="dev-dglyph" x="413" y="155" width="22" height="15" rx="3"/>
-            <path class="dev-dglyph" d="M424 170 L424 174 M417 174 L431 174"/>
-            <text class="dev-dlbl" x="424" y="190">Website</text>
+            <rect class="dev-dglyph" x="393" y="155" width="22" height="15" rx="3"/>
+            <path class="dev-dglyph" d="M404 170 L404 174 M397 174 L411 174"/>
+            <text class="dev-dlbl" x="404" y="190">Website</text>
 
-            <path class="dev-dglyph" d="M488 173 L496 154 L504 173"/>
-            <path class="dev-dglyph" d="M491.5 166 L500.5 166"/>
-            <text class="dev-dlbl" x="496" y="190">in Archie</text>
+            <g class="dev-amark" transform="translate(503.2,151.3) scale(0.025)">
+              <path fill-rule="evenodd" d="M 512,85 L 200,850 L 824,850 Z M 512,300 L 400,600 L 624,600 Z M 200,850 L 824,850 L 512,725 Z"/>
+              <polygon points="290,890 512,725 734,890"/>
+            </g>
+            <text class="dev-dlbl" x="516" y="190">in Archie</text>
           </svg>
+          <svg class="explain-svg--mobile" viewBox="0 0 340 652" role="img" aria-labelledby="devm-t" xmlns="http://www.w3.org/2000/svg" style="max-width:340px;font-family:inherit">
+  <title id="devm-t">A pipeline from building a skill to earning: build it, submit it for review, Otian distributes and syncs it out to users on the website and inside Archie, and you get paid on every sale.</title>
+  <style>
+    .devm-node{fill:rgba(224,138,91,.08);stroke:var(--accent);stroke-width:1.5}
+    .devm-node--pay{fill:rgba(224,138,91,.14)}
+    .devm-glyph{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .devm-badge{fill:var(--accent)}
+    .devm-num{fill:var(--text-on-accent);font-size:12px;font-weight:700;text-anchor:middle}
+    .devm-name{fill:currentColor;font-size:12.5px;font-weight:700;text-anchor:middle}
+    .devm-sub{fill:currentColor;opacity:.6;font-size:10px;text-anchor:middle}
+    .devm-arrow{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.4;stroke-linecap:round;stroke-linejoin:round}
+    .devm-wire{fill:none;stroke:currentColor;stroke-width:1.3;opacity:.3;stroke-linecap:round}
+    .devm-dglyph{fill:none;stroke:var(--accent);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+    .devm-amark{fill:var(--accent)}
+    .devm-dlbl{fill:currentColor;opacity:.6;font-size:11px;text-anchor:middle}
+    .devm-port{fill:var(--accent)}
+    .devm-run{fill:var(--accent);opacity:0}
+    .devm-sale{fill:var(--accent);opacity:0}
+    @media (prefers-reduced-motion:no-preference){
+      .devm-r1{animation:devmRun 2.8s linear infinite}
+      .devm-r2{animation:devmRun 2.8s linear infinite .93s}
+      .devm-r3{animation:devmRun 2.8s linear infinite 1.86s}
+      @keyframes devmRun{0%{opacity:0;transform:translateY(0)}12%{opacity:1}80%{opacity:1}100%{opacity:0;transform:translateY(32px)}}
+      .devm-s1{animation:devmSaleA 3s ease-in-out infinite .4s}
+      .devm-s2{animation:devmSaleB 3s ease-in-out infinite 1.7s}
+      @keyframes devmSaleA{0%{opacity:0;transform:translate(0,0)}18%{opacity:1}82%{opacity:1;transform:translate(42px,-86px)}100%{opacity:0;transform:translate(42px,-86px)}}
+      @keyframes devmSaleB{0%{opacity:0;transform:translate(0,0)}18%{opacity:1}82%{opacity:1;transform:translate(-42px,-86px)}100%{opacity:0;transform:translate(-42px,-86px)}}
+      .devm-coin{animation:devmPulse 3.4s ease-in-out infinite}
+      @keyframes devmPulse{0%,100%{opacity:1}50%{opacity:.62}}
+    }
+  </style>
+
+  <!-- spine connectors -->
+  <path class="devm-arrow" d="M170 134 L170 166 M164 158 L170 166 L176 158"/>
+  <path class="devm-arrow" d="M170 282 L170 314 M164 306 L170 314 L176 306"/>
+  <path class="devm-arrow" d="M170 430 L170 462 M164 454 L170 462 L176 454"/>
+  <circle class="devm-run devm-r1" cx="170" cy="134" r="3.5"/>
+  <circle class="devm-run devm-r2" cx="170" cy="282" r="3.5"/>
+  <circle class="devm-run devm-r3" cx="170" cy="430" r="3.5"/>
+
+  <!-- 1 · Build -->
+  <rect class="devm-node" x="142" y="24" width="56" height="56" rx="16"/>
+  <path class="devm-glyph" d="M163 44 L157 52 L163 60"/>
+  <path class="devm-glyph" d="M177 44 L183 52 L177 60"/>
+  <path class="devm-glyph" d="M173 43 L167 61"/>
+  <circle class="devm-badge" cx="142" cy="24" r="11"/><text class="devm-num" x="142" y="28">1</text>
+  <text class="devm-name" x="170" y="104">Build</text>
+  <text class="devm-sub" x="170" y="120">package the task</text>
+
+  <!-- 2 · Submit -->
+  <rect class="devm-node" x="142" y="172" width="56" height="56" rx="16"/>
+  <path class="devm-glyph" d="M170 207 L170 191"/>
+  <path class="devm-glyph" d="M163 198 L170 190 L177 198"/>
+  <path class="devm-glyph" d="M158 210 L182 210"/>
+  <circle class="devm-badge" cx="142" cy="172" r="11"/><text class="devm-num" x="142" y="176">2</text>
+  <text class="devm-name" x="170" y="252">Submit</text>
+  <text class="devm-sub" x="170" y="268">we review it</text>
+
+  <!-- 3 · List / distribute -->
+  <rect class="devm-node" x="142" y="320" width="56" height="56" rx="16"/>
+  <circle class="devm-port" cx="163" cy="348" r="3"/>
+  <path class="devm-glyph" d="M171 341 A9 9 0 0 1 171 355"/>
+  <path class="devm-glyph" d="M177 336 A15 15 0 0 1 177 360"/>
+  <circle class="devm-badge" cx="142" cy="320" r="11"/><text class="devm-num" x="142" y="324">3</text>
+  <text class="devm-name" x="170" y="400">List</text>
+  <text class="devm-sub" x="170" y="416">we distribute &amp; sync</text>
+
+  <!-- 4 · Earn -->
+  <rect class="devm-node devm-node--pay" x="142" y="468" width="56" height="56" rx="16"/>
+  <g class="devm-coin">
+    <circle class="devm-glyph" cx="170" cy="494" r="10"/>
+    <path class="devm-glyph" d="M170 487 L170 501"/>
+    <path class="devm-glyph" d="M174 490 C174 487 166 487 166 490.5 C166 494 174 493.5 174 497 C174 500.5 166 500.5 166 497"/>
+  </g>
+  <circle class="devm-badge" cx="142" cy="468" r="11"/><text class="devm-num" x="142" y="472">4</text>
+  <text class="devm-name" x="170" y="548">Earn</text>
+  <text class="devm-sub" x="170" y="564">paid per sale</text>
+
+  <!-- reach: it sells on the Website and inside Archie, revenue flows up into Earn -->
+  <path class="devm-wire" d="M100 596 L142 510"/>
+  <path class="devm-wire" d="M240 596 L198 510"/>
+  <circle class="devm-port" cx="142" cy="510" r="2.5"/>
+  <circle class="devm-port" cx="198" cy="510" r="2.5"/>
+  <circle class="devm-sale devm-s1" cx="100" cy="596" r="3"/>
+  <circle class="devm-sale devm-s2" cx="240" cy="596" r="3"/>
+
+  <rect class="devm-dglyph" x="89" y="600" width="22" height="15" rx="3"/>
+  <path class="devm-dglyph" d="M100 615 L100 619 M93 619 L107 619"/>
+  <text class="devm-dlbl" x="100" y="635">Website</text>
+
+  <g class="devm-amark" transform="translate(227.2,595.6) scale(0.025)">
+    <path fill-rule="evenodd" d="M 512,85 L 200,850 L 824,850 Z M 512,300 L 400,600 L 624,600 Z M 200,850 L 824,850 L 512,725 Z"/>
+    <polygon points="290,890 512,725 734,890"/>
+  </g>
+  <text class="devm-dlbl" x="240" y="635">in Archie</text>
+</svg>
           <figcaption>You build and submit; Otian distributes and syncs it out to the website and inside Archie, and pays you on every sale.</figcaption>
         </figure>
 

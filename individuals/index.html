@@ -18,7 +18,7 @@
        ============================== -->
   <nav class="nav" id="nav" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="../" class="nav-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Consulting &amp; Development</span></span></a>
+      <a href="../" class="nav-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Guided AI Assistants</span></span></a>
       <div class="nav-links">
         <div class="nav-more" id="navMarketplace">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Marketplace</button>
@@ -122,7 +122,7 @@
           <p class="fade-up delay-2">Whether you're managing a packed calendar, a flooded inbox, or a long list of personal admin you never get to, your assistant takes the repetitive work off your plate.</p>
         </div>
         <figure class="explain-figure fade-up delay-1">
-          <svg viewBox="0 0 560 214" role="img" aria-labelledby="ind-loop-t" xmlns="http://www.w3.org/2000/svg" style="max-width:660px;font-family:inherit">
+          <svg class="explain-svg--desktop" viewBox="0 0 560 214" role="img" aria-labelledby="ind-loop-t" xmlns="http://www.w3.org/2000/svg" style="max-width:660px;font-family:inherit">
             <title id="ind-loop-t">Repetitive inbox, calendar, and follow-up tasks funnel into Archie, which hands back a ready-to-send draft to a "you approve" gate before anything acts.</title>
             <style>
               .ind-chip{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.3}
@@ -131,7 +131,7 @@
               .ind-wire{fill:none;stroke:currentColor;stroke-width:1.4;opacity:.32;stroke-linecap:round}
               .ind-port{fill:var(--accent)}
               .ind-ring{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.5}
-              .ind-a{fill:none;stroke:var(--accent);stroke-width:4.5;stroke-linecap:round;stroke-linejoin:round}
+              .ind-a{fill:var(--accent)}
               .ind-card{fill:rgba(224,138,91,.04);stroke:var(--accent);stroke-width:1.5}
               .ind-bar{fill:currentColor}
               .ind-gate{fill:none;stroke:currentColor;stroke-width:1.4;opacity:.4;stroke-dasharray:3 5;stroke-linecap:round}
@@ -187,8 +187,10 @@
             <circle class="ind-port" cx="188" cy="117" r="3"/>
 
             <circle class="ind-ring" cx="228" cy="117" r="40"/>
-            <path class="ind-a" d="M212 137 L228 97 L244 137"/>
-            <path class="ind-a" d="M219 121 L237 121"/>
+            <g class="ind-a" transform="translate(195.7,86.3) scale(0.063)">
+              <path fill-rule="evenodd" d="M 512,85 L 200,850 L 824,850 Z M 512,300 L 400,600 L 624,600 Z M 200,850 L 824,850 L 512,725 Z"/>
+              <polygon points="290,890 512,725 734,890"/>
+            </g>
             <text class="ind-name" x="228" y="171">Archie</text>
 
             <circle class="ind-port" cx="268" cy="117" r="3"/>
@@ -203,15 +205,107 @@
             <line class="ind-gate" x1="418" y1="58" x2="418" y2="176"/>
             <circle class="ind-pulse" cx="418" cy="117" r="16"/>
             <circle class="ind-badge" cx="418" cy="117" r="16"/>
-            <path class="ind-check" d="M410 117 L416 123 L427 108"/>
+            <path class="ind-check" d="M410 118 L416 124 L427 109"/>
             <text class="ind-name" x="418" y="171">You approve</text>
 
             <circle class="ind-port" cx="476" cy="117" r="3"/>
             <rect class="ind-card" x="476" y="94" width="58" height="46" rx="12"/>
-            <path class="ind-glyph" d="M494 118 L518 109 L507 129 L504 120 Z"/>
-            <path class="ind-glyph" d="M504 120 L518 109"/>
+            <path class="ind-glyph" d="M493 116 L517 107 L506 127 L503 118 Z"/>
+            <path class="ind-glyph" d="M503 118 L517 107"/>
             <text class="ind-name" x="505" y="171">Then it acts</text>
           </svg>
+          <svg class="explain-svg--mobile" viewBox="0 0 340 474" role="img" aria-labelledby="indm-t" xmlns="http://www.w3.org/2000/svg" style="max-width:340px;font-family:inherit">
+  <title id="indm-t">Repetitive inbox, calendar, and follow-up tasks funnel down into Archie, which hands back a ready-to-send draft to a "you approve" gate before anything acts.</title>
+  <style>
+    .indm-chip{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.3}
+    .indm-tile{fill:rgba(224,138,91,.12);stroke:var(--accent);stroke-width:1.3}
+    .indm-glyph{fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+    .indm-wire{fill:none;stroke:currentColor;stroke-width:1.4;opacity:.32;stroke-linecap:round}
+    .indm-port{fill:var(--accent)}
+    .indm-ring{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.5}
+    .indm-a{fill:var(--accent)}
+    .indm-card{fill:rgba(224,138,91,.04);stroke:var(--accent);stroke-width:1.5}
+    .indm-bar{fill:currentColor}
+    .indm-gate{fill:none;stroke:currentColor;stroke-width:1.4;opacity:.4;stroke-dasharray:3 5;stroke-linecap:round}
+    .indm-badge{fill:var(--accent)}
+    .indm-check{fill:none;stroke:var(--text-on-accent);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+    .indm-pulse{fill:none;stroke:var(--accent);stroke-width:1.5;transform-box:fill-box;transform-origin:center}
+    .indm-name{fill:currentColor;font-size:11px;font-weight:600;text-anchor:middle}
+    .indm-lbl{fill:currentColor;font-size:11px;font-weight:600}
+    .indm-spark{fill:var(--accent)}
+    @media (prefers-reduced-motion:no-preference){
+      .indm-pulse{animation:indmPulse 2.6s ease-out infinite}
+      @keyframes indmPulse{0%{transform:scale(1);opacity:.5}70%,100%{transform:scale(1.9);opacity:0}}
+      .indm-spark{animation:indmSpark 2.8s linear infinite}
+      @keyframes indmSpark{0%{opacity:0;transform:translateY(0)}12%{opacity:1}80%{opacity:1}100%{opacity:0;transform:translateY(58px)}}
+    }
+  </style>
+
+  <path class="indm-wire" d="M56 80 C56 114 170 106 170 138"/>
+  <path class="indm-wire" d="M170 80 L170 138"/>
+  <path class="indm-wire" d="M284 80 C284 114 170 106 170 138"/>
+  <path class="indm-wire" d="M170 218 L170 244"/>
+  <path class="indm-wire" d="M170 314 L170 340"/>
+  <path class="indm-wire" d="M170 372 L170 414"/>
+
+  <g transform="translate(6,14)">
+    <rect class="indm-chip" x="0" y="0" width="100" height="66" rx="12"/>
+    <rect class="indm-tile" x="38" y="10" width="24" height="24" rx="7"/>
+    <rect class="indm-glyph" x="41" y="16" width="18" height="12" rx="2.5"/>
+    <polyline class="indm-glyph" points="41,17 50,24 59,17"/>
+    <text class="indm-name" x="50" y="54">Inbox</text>
+  </g>
+  <g transform="translate(120,14)">
+    <rect class="indm-chip" x="0" y="0" width="100" height="66" rx="12"/>
+    <rect class="indm-tile" x="38" y="10" width="24" height="24" rx="7"/>
+    <rect class="indm-glyph" x="41" y="16" width="18" height="13" rx="2.5"/>
+    <line class="indm-glyph" x1="41" y1="21" x2="59" y2="21"/>
+    <line class="indm-glyph" x1="46" y1="13" x2="46" y2="16"/>
+    <line class="indm-glyph" x1="54" y1="13" x2="54" y2="16"/>
+    <text class="indm-name" x="50" y="54">Calendar</text>
+  </g>
+  <g transform="translate(234,14)">
+    <rect class="indm-chip" x="0" y="0" width="100" height="66" rx="12"/>
+    <rect class="indm-tile" x="38" y="10" width="24" height="24" rx="7"/>
+    <circle class="indm-glyph" cx="50" cy="18" r="3.8"/>
+    <path class="indm-glyph" d="M43 30 a7 6 0 0 1 14 0"/>
+    <text class="indm-name" x="50" y="54">Follow-ups</text>
+  </g>
+
+  <circle class="indm-port" cx="56" cy="80" r="3"/>
+  <circle class="indm-port" cx="170" cy="80" r="3"/>
+  <circle class="indm-port" cx="284" cy="80" r="3"/>
+  <circle class="indm-spark" cx="170" cy="80" r="3"/>
+  <circle class="indm-port" cx="170" cy="138" r="3"/>
+
+  <circle class="indm-ring" cx="170" cy="178" r="40"/>
+  <g class="indm-a" transform="translate(137.7,147.3) scale(0.063)">
+    <path fill-rule="evenodd" d="M 512,85 L 200,850 L 824,850 Z M 512,300 L 400,600 L 624,600 Z M 200,850 L 824,850 L 512,725 Z"/>
+    <polygon points="290,890 512,725 734,890"/>
+  </g>
+  <text class="indm-lbl" x="222" y="182">Archie</text>
+
+  <circle class="indm-port" cx="170" cy="218" r="3"/>
+  <circle class="indm-port" cx="170" cy="244" r="3"/>
+
+  <rect class="indm-card" x="127" y="244" width="86" height="70" rx="12"/>
+  <rect class="indm-bar" x="143" y="260" width="54" height="7" rx="3.5" opacity=".22"/>
+  <rect class="indm-bar" x="143" y="274" width="40" height="6" rx="3" opacity=".14"/>
+  <rect class="indm-bar" x="143" y="286" width="48" height="6" rx="3" opacity=".14"/>
+  <text class="indm-lbl" x="221" y="283">Draft reply</text>
+
+  <line class="indm-gate" x1="112" y1="356" x2="200" y2="356"/>
+  <circle class="indm-pulse" cx="170" cy="356" r="16"/>
+  <circle class="indm-badge" cx="170" cy="356" r="16"/>
+  <path class="indm-check" d="M162 358 L168 364 L179 349"/>
+  <text class="indm-lbl" x="206" y="360">You approve</text>
+
+  <circle class="indm-port" cx="170" cy="414" r="3"/>
+  <rect class="indm-card" x="141" y="414" width="58" height="46" rx="12"/>
+  <path class="indm-glyph" d="M159 438 L183 429 L172 449 L169 440 Z"/>
+  <path class="indm-glyph" d="M169 440 L183 429"/>
+  <text class="indm-lbl" x="207" y="441">Then it acts</text>
+</svg>
           <figcaption>The repetitive stuff funnels into Archie, which hands back ready-to-send drafts — and nothing acts until you approve.</figcaption>
         </figure>
 

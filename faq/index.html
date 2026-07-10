@@ -18,7 +18,7 @@
        ============================== -->
   <nav class="nav" id="nav" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="../" class="nav-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Consulting &amp; Development</span></span></a>
+      <a href="../" class="nav-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Guided AI Assistants</span></span></a>
       <div class="nav-links">
         <div class="nav-more" id="navMarketplace">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Marketplace</button>
@@ -405,6 +405,96 @@
             </div>
           </div>
 
+          <!-- faq-subscription-vs-api -->
+          <div class="accordion-item" role="listitem" id="faq-subscription-vs-api">
+            <button class="accordion-trigger" aria-expanded="false">
+              I already pay for Claude (or ChatGPT). Why do I need to connect an API key too?
+              <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                They&rsquo;re two different products from the same company. A Claude or ChatGPT subscription only works on that company&rsquo;s own website and app &mdash; it can&rsquo;t be used by other programs. Your Archie assistant runs on <strong>your own computer</strong>, so it connects to the AI through a separate doorway called an <em>API</em>, which bills on its own based on actual use. The upside: for most people the API costs <strong>less</strong> than a monthly subscription, because you only pay for the messages your assistant actually sends &mdash; often just a few dollars a month &mdash; and you stay in full control of the account and the spending. Your existing Claude Pro or ChatGPT Plus plan keeps working as normal; the API is simply what lets a program you own talk to the AI on your behalf.
+              </div>
+            </div>
+          </div>
+
+          <!-- faq-what-is-api-key -->
+          <div class="accordion-item" role="listitem" id="faq-what-is-api-key">
+            <button class="accordion-trigger" aria-expanded="false">
+              What is an API key, and why does Archie need one?
+              <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                An API key is like a password that lets your assistant use the AI on your behalf. Because your assistant lives on your computer &mdash; not on our servers &mdash; it talks to the AI company <strong>directly, with your key</strong>. That means you always own the account, you see exactly what&rsquo;s spent, and your conversations never pass through us. Getting a key takes about two minutes, and the app walks you through every step in plain language.
+              </div>
+            </div>
+          </div>
+
+          <!-- faq-api-costs -->
+          <div class="accordion-item" role="listitem" id="faq-api-costs">
+            <button class="accordion-trigger" aria-expanded="false">
+              Will this cost a lot? How does the AI billing work?
+              <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                You only pay for what your assistant actually does. Each message costs anywhere from a fraction of a cent to a few cents, depending on how much thinking it needs &mdash; a typical personal assistant runs a few dollars a month. You add a small amount of credit up front (say $5&ndash;$20) and it draws down slowly; nothing is charged beyond what you load, and you can set a hard spending cap on the AI provider&rsquo;s website. Inside Archie you can also dial each assistant between <strong>Economy, Balanced, and Best</strong> models, so you decide the balance of cost and quality.
+              </div>
+            </div>
+          </div>
+
+          <!-- faq-privacy -->
+          <div class="accordion-item" role="listitem" id="faq-privacy">
+            <button class="accordion-trigger" aria-expanded="false">
+              Do you store my personal information or read my conversations?
+              <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                No. Archie runs entirely on your own computer. Your assistant&rsquo;s instructions, your uploaded files, your chat history, and your API key all stay <strong>on your Mac</strong> &mdash; the key is kept in the Mac&rsquo;s built-in Keychain and never leaves your device. Otian AI does not store, read, or have any access to your data. The only thing our servers know is whether your subscription is active (your email and payment status) so we can let you into the app. Nothing else.
+              </div>
+            </div>
+          </div>
+
+          <!-- faq-data-location -->
+          <div class="accordion-item" role="listitem" id="faq-data-location">
+            <button class="accordion-trigger" aria-expanded="false">
+              Where do my assistant and its data actually live?
+              <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                On your computer, in a private folder just for Archie. Your assistant&rsquo;s setup, saved files, and message history stay on your machine and go nowhere else. If you remove the app, that data goes with it. We keep none of it on the internet.
+              </div>
+            </div>
+          </div>
+
+          <!-- faq-cancel -->
+          <div class="accordion-item" role="listitem" id="faq-cancel">
+            <button class="accordion-trigger" aria-expanded="false">
+              What happens if I cancel my subscription?
+              <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                Everything you built stays on your computer, but the app locks until you subscribe again. Any skills you purchased are yours to keep. Your AI provider account and its key are completely separate and unaffected &mdash; you manage those directly with Anthropic or OpenAI.
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -490,6 +580,19 @@
         }
       });
     });
+
+    /* Deep-link support: /faq#faq-... opens that question and scrolls to it. */
+    function openFromHash() {
+      var id = (location.hash || '').replace('#', '');
+      if (!id) return;
+      var item = document.getElementById(id);
+      if (!item || !item.classList.contains('accordion-item')) return;
+      var trigger = item.querySelector('.accordion-trigger');
+      if (trigger && !item.classList.contains('open')) trigger.click();
+      setTimeout(function () { item.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 60);
+    }
+    window.addEventListener('hashchange', openFromHash);
+    openFromHash();
   </script>
 </body>
 </html>

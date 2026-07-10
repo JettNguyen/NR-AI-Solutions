@@ -18,7 +18,7 @@
        ============================== -->
   <nav class="nav" id="nav" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="./" class="nav-logo"><img src="assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Consulting &amp; Development</span></span></a>
+      <a href="./" class="nav-logo"><img src="assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Guided AI Assistants</span></span></a>
       <div class="nav-links">
         <div class="nav-more" id="navMarketplace">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Marketplace</button>
@@ -107,8 +107,8 @@
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-inner">
         <div class="hero-content">
-          <span class="section-label fade-up">Guided Build. On Your Computer. Anywhere in the US.</span>
-          <h1 class="fade-up delay-1">Your Personal AI&nbsp;Assistant.<br><em>Set Up For&nbsp;You.</em></h1>
+          <span class="section-label fade-up">Guided Build. On Your Computer. Anywhere.</span>
+          <h1 class="fade-up delay-1"><span class="hero-title-full">Your Personal AI&nbsp;Assistant.<br><em>Set Up For&nbsp;You.</em></span><span class="hero-title-short">Your AI Assistant.<br><em>Set Up For&nbsp;You.</em></span></h1>
           <p class="hero-subtitle fade-up delay-2">
             We'll build it with you, on your own computer - as hands-on or hands-off as you like.
           </p>
@@ -155,11 +155,11 @@
           <p class="fade-up delay-2">Think of it as a remote assistant powered by AI. Text or email it tasks - "reply to this client," "find me a flight," "sort these files" - and it gets to work, then checks in when needed.</p>
         </div>
         <figure class="explain-figure fade-up delay-1">
-          <svg viewBox="0 0 476 292" role="img" aria-labelledby="dl-t" xmlns="http://www.w3.org/2000/svg" style="max-width:560px;font-family:inherit">
+          <svg class="explain-svg--desktop" viewBox="0 0 476 292" role="img" aria-labelledby="dl-t" xmlns="http://www.w3.org/2000/svg" style="max-width:560px;font-family:inherit">
             <title id="dl-t">The delegation loop: you send a task by text or email, the assistant works in the background, checks in for your approval, then acts and reports back — a continuous cycle around the assistant.</title>
             <style>
               .dl-ring{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.5}
-              .dl-a{fill:none;stroke:var(--accent);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+              .dl-a{fill:var(--accent)}
               .dl-tile{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.4}
               .dl-glyph{fill:none;stroke:var(--accent);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
               .dl-dot{fill:var(--accent)}
@@ -205,8 +205,10 @@
 
             <!-- assistant core -->
             <circle class="dl-ring" cx="238" cy="153" r="46"/>
-            <path class="dl-a" d="M221 178 L238 126 L255 178"/>
-            <path class="dl-a" d="M227 160 L249 160"/>
+            <g class="dl-a" transform="translate(201.1,117.9) scale(0.072)">
+              <path fill-rule="evenodd" d="M 512,85 L 200,850 L 824,850 Z M 512,300 L 400,600 L 624,600 Z M 200,850 L 824,850 L 512,725 Z"/>
+              <polygon points="290,890 512,725 734,890"/>
+            </g>
 
             <!-- You -->
             <g class="dl-grp dg1">
@@ -220,9 +222,9 @@
             <!-- Working -->
             <g class="dl-grp dg2">
               <rect class="dl-tile" x="344" y="40" width="96" height="70" rx="14"/>
-              <circle class="dl-dot" cx="383" cy="58" r="2.6"/>
-              <circle class="dl-dot" cx="392" cy="58" r="2.6"/>
-              <circle class="dl-dot" cx="401" cy="58" r="2.6"/>
+              <circle class="dl-dot" cx="383" cy="64" r="2.6"/>
+              <circle class="dl-dot" cx="392" cy="64" r="2.6"/>
+              <circle class="dl-dot" cx="401" cy="64" r="2.6"/>
               <text class="dl-name" x="392" y="91">Working</text>
               <text class="dl-sub" x="392" y="104">in the background</text>
             </g>
@@ -230,9 +232,9 @@
             <!-- Checks in (approval gate) -->
             <g class="dl-grp dg3">
               <rect class="dl-tile" x="344" y="196" width="96" height="70" rx="14"/>
-              <rect class="dl-glyph" x="380" y="205" width="24" height="16" rx="5"/>
-              <path class="dl-glyph" d="M386 221 l-1 5 5-4"/>
-              <path class="dl-glyph" d="M385 212 l3 3 6-6"/>
+              <rect class="dl-glyph" x="380" y="207" width="24" height="16" rx="5"/>
+              <path class="dl-glyph" d="M386 223 l-1 5 5-4"/>
+              <path class="dl-glyph" d="M386 215 l3 3 6-6"/>
               <text class="dl-name" x="392" y="247">Checks in</text>
               <text class="dl-sub" x="392" y="260">for your approval</text>
             </g>
@@ -240,12 +242,106 @@
             <!-- Done -->
             <g class="dl-grp dg4">
               <rect class="dl-tile" x="36" y="196" width="96" height="70" rx="14"/>
-              <circle class="dl-glyph" cx="84" cy="212" r="10"/>
-              <path class="dl-glyph" d="M79 212 l3.5 4 7-8"/>
+              <circle class="dl-glyph" cx="84" cy="215" r="10"/>
+              <path class="dl-glyph" d="M79 215 l3.5 4 7-8"/>
               <text class="dl-name" x="84" y="247">Done</text>
               <text class="dl-sub" x="84" y="260">handled for you</text>
             </g>
           </svg>
+          <svg class="explain-svg--mobile" viewBox="0 0 340 464" role="img" aria-labelledby="dlm-t" xmlns="http://www.w3.org/2000/svg" style="max-width:340px;font-family:inherit">
+  <title id="dlm-t">The delegation loop: you send a task by text or email, the assistant works in the background, checks in for your approval, then acts and reports back — a continuous cycle around the assistant.</title>
+  <style>
+    .dlm-ring{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.5}
+    .dlm-a{fill:var(--accent)}
+    .dlm-tile{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.4}
+    .dlm-glyph{fill:none;stroke:var(--accent);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+    .dlm-dot{fill:var(--accent)}
+    .dlm-flow{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.34;stroke-linecap:round;stroke-linejoin:round}
+    .dlm-name{fill:currentColor;font-size:12px;font-weight:700;text-anchor:middle}
+    .dlm-sub{fill:currentColor;opacity:.6;font-size:10.5px;text-anchor:middle}
+    .dlm-alabel{fill:currentColor;font-size:10.5px;font-weight:600;text-anchor:start;opacity:.72}
+    .dlm-run{fill:var(--accent)}
+    @media (prefers-reduced-motion:no-preference){
+      .dlm-grp{animation:dlmIn .7s cubic-bezier(.22,1,.36,1) both}
+      .dlm-g1{animation-delay:.06s}.dlm-g2{animation-delay:.2s}.dlm-g3{animation-delay:.34s}.dlm-g4{animation-delay:.48s}
+      @keyframes dlmIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+      .dlm-r-d1{animation:dlmDrop54 1.1s linear infinite}
+      .dlm-r-d2{animation:dlmDrop44 .9s linear infinite}
+      .dlm-r-d3{animation:dlmDrop54 1.1s linear infinite}
+      @keyframes dlmDrop54{0%{opacity:0;transform:translateY(0)}20%{opacity:1}80%{opacity:1}100%{opacity:0;transform:translateY(54px)}}
+      @keyframes dlmDrop44{0%{opacity:0;transform:translateY(0)}20%{opacity:1}80%{opacity:1}100%{opacity:0;transform:translateY(44px)}}
+      .dlm-r-up{animation:dlmRise 3.4s linear infinite}
+      @keyframes dlmRise{0%{opacity:0;transform:translateY(0)}10%{opacity:1}90%{opacity:1}100%{opacity:0;transform:translateY(-362px)}}
+    }
+  </style>
+
+  <!-- downward flow arrows between the stacked tiles -->
+  <line class="dlm-flow" x1="96" y1="86" x2="96" y2="140"/>
+  <path class="dlm-flow" d="M91 132 L96 140 L101 132"/>
+  <line class="dlm-flow" x1="96" y1="210" x2="96" y2="254"/>
+  <path class="dlm-flow" d="M91 246 L96 254 L101 246"/>
+  <line class="dlm-flow" x1="96" y1="324" x2="96" y2="378"/>
+  <path class="dlm-flow" d="M91 370 L96 378 L101 370"/>
+
+  <!-- return wire closing the loop up the right side -->
+  <path class="dlm-flow" d="M176 413 H324 V51 H176"/>
+  <path class="dlm-flow" d="M184 46 L176 51 L184 56"/>
+
+  <!-- circulating dots -->
+  <circle class="dlm-run dlm-r-d1" cx="96" cy="86" r="3"/>
+  <circle class="dlm-run dlm-r-d2" cx="96" cy="210" r="3"/>
+  <circle class="dlm-run dlm-r-d3" cx="96" cy="324" r="3"/>
+  <circle class="dlm-run dlm-r-up" cx="324" cy="413" r="3"/>
+
+  <!-- arrow labels -->
+  <text class="dlm-alabel" x="110" y="117">text or email</text>
+  <text class="dlm-alabel" x="110" y="355">it acts on your OK</text>
+
+  <!-- assistant core, enclosed by the loop -->
+  <circle class="dlm-ring" cx="250" cy="232" r="44"/>
+  <g class="dlm-a" transform="translate(214.7,198.4) scale(0.069)">
+    <path fill-rule="evenodd" d="M 512,85 L 200,850 L 824,850 Z M 512,300 L 400,600 L 624,600 Z M 200,850 L 824,850 L 512,725 Z"/>
+    <polygon points="290,890 512,725 734,890"/>
+  </g>
+
+  <!-- You -->
+  <g class="dlm-grp dlm-g1">
+    <rect class="dlm-tile" x="16" y="16" width="160" height="70" rx="14"/>
+    <circle class="dlm-glyph" cx="96" cy="34" r="5.5"/>
+    <path class="dlm-glyph" d="M86 50 a10 9 0 0 1 20 0"/>
+    <text class="dlm-name" x="96" y="67">You</text>
+    <text class="dlm-sub" x="96" y="80">delegate a task</text>
+  </g>
+
+  <!-- Working -->
+  <g class="dlm-grp dlm-g2">
+    <rect class="dlm-tile" x="16" y="140" width="160" height="70" rx="14"/>
+    <circle class="dlm-dot" cx="87" cy="158" r="2.6"/>
+    <circle class="dlm-dot" cx="96" cy="158" r="2.6"/>
+    <circle class="dlm-dot" cx="105" cy="158" r="2.6"/>
+    <text class="dlm-name" x="96" y="191">Working</text>
+    <text class="dlm-sub" x="96" y="204">in the background</text>
+  </g>
+
+  <!-- Checks in (approval gate) -->
+  <g class="dlm-grp dlm-g3">
+    <rect class="dlm-tile" x="16" y="254" width="160" height="70" rx="14"/>
+    <rect class="dlm-glyph" x="84" y="263" width="24" height="16" rx="5"/>
+    <path class="dlm-glyph" d="M90 279 l-1 5 5-4"/>
+    <path class="dlm-glyph" d="M89 270 l3 3 6-6"/>
+    <text class="dlm-name" x="96" y="305">Checks in</text>
+    <text class="dlm-sub" x="96" y="318">for your approval</text>
+  </g>
+
+  <!-- Done -->
+  <g class="dlm-grp dlm-g4">
+    <rect class="dlm-tile" x="16" y="378" width="160" height="70" rx="14"/>
+    <circle class="dlm-glyph" cx="96" cy="394" r="10"/>
+    <path class="dlm-glyph" d="M91 394 l3.5 4 7-8"/>
+    <text class="dlm-name" x="96" y="429">Done</text>
+    <text class="dlm-sub" x="96" y="442">handled for you</text>
+  </g>
+</svg>
           <figcaption>You send a task; it works in the background, checks in for your approval, then acts — nothing sends without your OK.</figcaption>
         </figure>
 
@@ -286,6 +382,31 @@
           </article>
 
         </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         Your Data Stays With You
+         ============================== -->
+    <section class="section section-alt" aria-labelledby="privacy-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">Your Data, Your Machine</span>
+          <h2 id="privacy-heading" class="fade-up delay-1">Nothing Leaves Your Computer</h2>
+          <p class="fade-up delay-2">Your assistant runs entirely on your own machine, and we retain none of your data. Your emails, files, and conversations never sit on our servers, because there are no servers holding them. The information simply stays where it already lives &mdash; with you.</p>
+        </div>
+
+        <div class="before-after-grid fade-up delay-1">
+          <div class="before-after-card">
+            <span class="before-after-label">Typical Cloud AI</span>
+            <p>Your accounts, messages, and files are copied to a company's servers to be processed. That data sits in the cloud indefinitely &mdash; and anything stored in the cloud is a standing target for a breach, no matter how careful the provider.</p>
+          </div>
+          <div class="before-after-card is-after">
+            <span class="before-after-label">Your Otian Assistant</span>
+            <p>Everything runs locally, on the computer in your home or office. We don't retain your data, and there's no central store of it to be hacked. You hold the keys, you decide what it can touch, and you can pull the plug anytime.</p>
+          </div>
+        </div>
+        <p class="marketplace-split-note fade-up delay-2">In short: you stay in charge of your own information &mdash; not us, and not a cloud you can't see into.</p>
       </div>
     </section>
 
