@@ -4989,6 +4989,12 @@ html[data-theme="dark"] .booking-container iframe {
   border-top: 1px solid var(--border);
 }
 
+.btn-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .mp-back-link {
   font-size: 0.875rem;
   font-weight: 500;
