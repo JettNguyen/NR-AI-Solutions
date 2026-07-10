@@ -1037,6 +1037,11 @@ html[data-theme="dark"] .theme-toggle-thumb {
   color: var(--text-secondary);
 }
 
+.hero-pronunciation {
+  font-style: italic;
+  color: var(--text-muted);
+}
+
 .hero-actions {
   display: flex;
   gap: 16px;
