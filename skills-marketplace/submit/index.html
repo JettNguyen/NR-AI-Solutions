@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Submit a Skill | Otian AI</title>
+  <meta name="description" content="Submit your skill to the Archie marketplace. Sign in, describe what it does, paste your SKILL.md template, and we'll review it for listing." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="../../assets/icon-1024-dark.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../css/styles.css" />
+</head>
+<body>
+
+  <!-- ==============================
+       Navigation
+       ============================== -->
+  <nav class="nav" id="nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="../../" class="nav-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Consulting &amp; Development</span></span></a>
+      <div class="nav-links">
+        <div class="nav-more" id="navMarketplace">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Skills Marketplace</button>
+          <div class="nav-more-menu" id="navMarketplaceMenu" role="menu" aria-label="Skills Marketplace">
+            <a href="../../skills-marketplace/what-is-a-skill/" role="menuitem">What Is a Skill?</a>
+            <a href="../../skills-marketplace/browse/" role="menuitem">The Marketplace</a>
+            <a href="../../skills-marketplace/for-developers/" role="menuitem">For Developers</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navServices">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navServicesMenu" type="button">Services</button>
+          <div class="nav-more-menu" id="navServicesMenu" role="menu" aria-label="Services">
+            <a href="../../individuals/" role="menuitem">For Individuals</a>
+            <a href="../../business/" role="menuitem">For Business</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navLearn">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navLearnMenu" type="button">Learn</button>
+          <div class="nav-more-menu" id="navLearnMenu" role="menu" aria-label="Learn">
+            <a href="../../how-it-works/" role="menuitem">How It Works</a>
+            <a href="../../ai-explained/" role="menuitem">AI Explained</a>
+            <a href="../../blog/" role="menuitem">Blog</a>
+            <a href="../../equipment/" role="menuitem">Equipment Needed</a>
+            <a href="../../faq/" role="menuitem">FAQ</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navCompany">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompanyMenu" type="button">Company</button>
+          <div class="nav-more-menu" id="navCompanyMenu" role="menu" aria-label="Company">
+            <a href="../../about/" role="menuitem">About</a>
+            <a href="../../testimonials/" role="menuitem">Agent Successes</a>
+            <a href="../../contact/" role="menuitem">Contact</a>
+          </div>
+        </div>
+      </div>
+      <a href="../../questionnaire/" class="btn btn-primary btn-sm nav-cta">Get Started</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navDrawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+  <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutMarketplace" aria-expanded="false" aria-controls="navDrawerFlyout">Skills Marketplace</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutServices" aria-expanded="false" aria-controls="navDrawerFlyout">Services</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
+    <a href="../../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
+  </nav>
+
+  <div class="nav-drawer-flyout" id="navDrawerFlyout" aria-hidden="true">
+    <button class="nav-drawer-back" type="button">
+      <svg class="nav-drawer-back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      <span id="navDrawerFlyoutTitle">Services</span>
+    </button>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutMarketplace">
+      <a href="../../skills-marketplace/what-is-a-skill/">What Is a Skill?</a>
+      <a href="../../skills-marketplace/browse/">The Marketplace</a>
+      <a href="../../skills-marketplace/for-developers/">For Developers</a>
+    </div>
+    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutServices">
+      <a href="../../individuals/">For Individuals</a>
+      <a href="../../business/">For Business</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutLearn">
+      <a href="../../how-it-works/">How It Works</a>
+      <a href="../../ai-explained/">AI Explained</a>
+      <a href="../../blog/">Blog</a>
+      <a href="../../equipment/">Equipment Needed</a>
+      <a href="../../faq/">FAQ</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompany">
+      <a href="../../about/">About</a>
+      <a href="../../testimonials/">Agent Successes</a>
+      <a href="../../contact/">Contact</a>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ==============================
+         Page Hero
+         ============================== -->
+    <section class="page-hero" aria-label="Page introduction">
+      <div class="page-hero-inner">
+        <span class="section-label fade-up">For Developers</span>
+        <h1 class="fade-up delay-1">Submit a Skill</h1>
+        <p class="fade-up delay-2">Describe your skill, paste its instructions template, and submit it for review. Approved skills are listed on the marketplace under your name.</p>
+      </div>
+    </section>
+
+    <!-- ==============================
+         Submission form
+         ============================== -->
+    <section class="section" aria-label="Skill submission form">
+      <div class="container" style="max-width: 720px;">
+
+        <!-- Sign-in gate: submissions are tied to a Google account so we can attribute and
+             follow up. The form stays hidden until authenticated. -->
+        <div id="signinGate" class="cta-banner fade-up">
+          <h2>Sign in to submit</h2>
+          <p>Submissions are linked to your Google account so we can credit you and follow up during review.</p>
+          <button id="btnSignIn" class="btn btn-primary btn-lg" type="button">Sign in with Google</button>
+          <p id="signinError" style="display:none; color:#b00020; margin-top:0.75rem;"></p>
+        </div>
+
+        <form id="skillForm" style="display:none;" novalidate>
+          <p style="margin-bottom:1.5rem; color:var(--color-text-muted, #666);">
+            Signed in as <strong id="signedInAs"></strong> · <a href="#" id="btnSignOut">sign out</a>
+          </p>
+
+          <div class="form-group">
+            <label class="form-label" for="skillName">Skill name<span class="required-star" aria-hidden="true">*</span></label>
+            <input class="form-input" type="text" id="skillName" maxlength="64" placeholder="e.g. Inbox Pilot" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="skillDescription">Short description<span class="required-star" aria-hidden="true">*</span></label>
+            <input class="form-input" type="text" id="skillDescription" maxlength="280" placeholder="One sentence: what does it let an agent do?" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="skillCategory">Category</label>
+            <select class="form-input" id="skillCategory">
+              <option value="productivity">Productivity</option>
+              <option value="communication">Communication</option>
+              <option value="finance">Finance</option>
+              <option value="research">Research</option>
+              <option value="sales">Sales</option>
+              <option value="operations">Operations</option>
+              <option value="personal">Personal</option>
+              <option value="custom">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="skillTriggers">Trigger keywords</label>
+            <input class="form-input" type="text" id="skillTriggers" placeholder="comma-separated, e.g. email, inbox, unread" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="skillPrice">Suggested price (USD)</label>
+            <input class="form-input" type="number" id="skillPrice" min="0" max="50" step="1" placeholder="e.g. 8 — final pricing is set together during review" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="skillTemplate">SKILL.md template<span class="required-star" aria-hidden="true">*</span></label>
+            <textarea class="form-textarea" id="skillTemplate" rows="14" maxlength="20000" required
+              placeholder="The instructions your skill injects when it activates. Use {{VARIABLE}} placeholders for anything the user configures (e.g. {{TIMEZONE}}). Keep it tight — see the developer guide for the house style."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label style="display:flex; gap:0.6rem; align-items:flex-start; font-size:0.9rem; line-height:1.5;">
+              <input type="checkbox" id="licenseGranted" style="margin-top:0.25rem;" required />
+              <span>I wrote this template (or have the rights to it) and grant Otian AI a license to review,
+              adapt, and publish it on the Archie marketplace. I understand listing and pricing are
+              finalized together during review.<span class="required-star" aria-hidden="true">*</span></span>
+            </label>
+          </div>
+
+          <p id="formError" style="display:none; color:#b00020;"></p>
+
+          <button id="btnSubmit" class="btn btn-primary btn-lg" type="submit">Submit for review</button>
+        </form>
+
+        <div id="doneBanner" class="cta-banner fade-up" style="display:none;">
+          <h2>Submitted!</h2>
+          <p>Thanks — your skill is in the review queue. We'll email your Google account address once it's been reviewed.</p>
+          <a href="../browse/" class="btn btn-primary btn-lg">Back to the Marketplace</a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==============================
+       Footer
+       ============================== -->
+  <footer class="footer" aria-label="Site footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /></div>
+          <p class="footer-tagline">Guided AI assistants for real life</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Pages</h4>
+          <nav class="footer-nav-links" aria-label="Footer navigation">
+            <a href="../../">Home</a>
+            <a href="../../how-it-works/">How It Works</a>
+            <a href="../../skills-marketplace/browse/">Skills Marketplace</a>
+            <a href="../../individuals/">For Individuals</a>
+            <a href="../../business/">For Business</a>
+            <a href="../../about/">About</a>
+            <a href="../../faq/">FAQ</a>
+            <a href="../../contact/">Contact</a>
+          </nav>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Contact</h4>
+          <a href="mailto:questions@otianai.com" class="footer-contact-email">questions@otianai.com</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Otian AI. All rights reserved.</p>
+        <nav class="footer-legal-links" aria-label="Legal">
+          <a href="../../privacy-policy/">Privacy Policy</a>
+          <a href="../../terms-of-service/">Terms of Service</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../js/nav.js"></script>
+  <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import {
+    getAuth,
+    onAuthStateChanged,
+    signInWithPopup,
+    signOut,
+    GoogleAuthProvider,
+  } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  import {
+    getFirestore,
+    collection,
+    addDoc,
+    serverTimestamp,
+  } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyA46RqJV4tcJD8h4mdcSZ26dDoikA9L64M",
+    authDomain: "archie-77170.firebaseapp.com",
+    projectId: "archie-77170",
+    storageBucket: "archie-77170.firebasestorage.app",
+    messagingSenderId: "516396797258",
+    appId: "1:516396797258:web:362cf2815128f3c82345b3"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  const gate = document.getElementById("signinGate");
+  const form = document.getElementById("skillForm");
+  const done = document.getElementById("doneBanner");
+  const signinError = document.getElementById("signinError");
+  const formError = document.getElementById("formError");
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      gate.style.display = "none";
+      form.style.display = "";
+      document.getElementById("signedInAs").textContent = user.email || user.displayName || "your account";
+    } else {
+      gate.style.display = "";
+      form.style.display = "none";
+    }
+  });
+
+  document.getElementById("btnSignIn").addEventListener("click", async () => {
+    signinError.style.display = "none";
+    try {
+      await signInWithPopup(auth, new GoogleAuthProvider());
+    } catch (e) {
+      if (e.code !== "auth/popup-closed-by-user") {
+        signinError.textContent = e.message;
+        signinError.style.display = "";
+      }
+    }
+  });
+
+  document.getElementById("btnSignOut").addEventListener("click", (e) => {
+    e.preventDefault();
+    signOut(auth);
+  });
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    formError.style.display = "none";
+    const user = auth.currentUser;
+    if (!user) return;
+
+    const name = document.getElementById("skillName").value.trim();
+    const description = document.getElementById("skillDescription").value.trim();
+    const template_md = document.getElementById("skillTemplate").value.trim();
+    const license = document.getElementById("licenseGranted").checked;
+
+    if (!name || !description || !template_md || !license) {
+      formError.textContent = "Please fill in the required fields and confirm the license checkbox.";
+      formError.style.display = "";
+      return;
+    }
+
+    const btn = document.getElementById("btnSubmit");
+    btn.disabled = true;
+    btn.textContent = "Submitting…";
+    try {
+      // Field names and size limits mirror the Firestore rules for /submissions — keep in sync.
+      await addDoc(collection(db, "submissions"), {
+        submitter_uid: user.uid,
+        submitter_email: user.email || "",
+        name,
+        description,
+        category: document.getElementById("skillCategory").value,
+        triggers: document.getElementById("skillTriggers").value.split(",").map(t => t.trim()).filter(Boolean),
+        suggested_price_usd: Number(document.getElementById("skillPrice").value) || 0,
+        template_md,
+        license_granted: true,
+        submitted_at: serverTimestamp(),
+      });
+      form.style.display = "none";
+      done.style.display = "";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (err) {
+      formError.textContent = "Submission failed: " + (err.message || err);
+      formError.style.display = "";
+      btn.disabled = false;
+      btn.textContent = "Submit for review";
+    }
+  });
+  </script>
+</body>
+</html>
