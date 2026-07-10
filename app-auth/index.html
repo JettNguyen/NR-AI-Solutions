@@ -151,12 +151,12 @@
   <div class="card">
 
     <div class="logo">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" style="height:64px;width:auto;display:block;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2300 900" style="height:64px;width:auto;display:block;">
         <g transform="translate(-190,-35)">
-          <path fill="#E08A5E" fill-rule="evenodd" d="M512 85L200 850L824 850ZM512 300L400 600L624 600ZM200 850L824 850L512 725Z"/>
+          <path fill="#E08A5E" fill-rule="evenodd" d="M 512,85 L 200,850 L 824,850 Z M 512,300 L 400,600 L 624,600 Z M 200,850 L 824,850 L 512,725 Z"/>
           <polygon fill="#E08A5E" points="290,890 512,725 734,890"/>
         </g>
-        <text x="560" y="600" font-family="Georgia,serif" font-size="390" font-weight="bold" fill="#E08A5E" dominant-baseline="middle">rchie</text>
+        <text x="690" y="725" font-family="Georgia, serif" font-size="590" font-weight="bold" fill="#E08A5E" dominant-baseline="middle">rchie</text>
       </svg>
       <span class="byline">by Otian AI</span>
     </div>
@@ -220,6 +220,7 @@
 
   const params = new URLSearchParams(window.location.search);
   const callbackUrl = params.get("callback");
+  const appState = params.get("state") || "";
   const statusEl = document.getElementById("status");
 
   function setStatus(msg, type = "") {
@@ -235,7 +236,7 @@
     setStatus("Signing you in…");
     try {
       const idToken = await user.getIdToken(true);
-      const redirect = `${callbackUrl}?id_token=${encodeURIComponent(idToken)}&refresh_token=${encodeURIComponent(user.refreshToken)}&email=${encodeURIComponent(user.email || "")}&uid=${encodeURIComponent(user.uid)}`;
+      const redirect = `${callbackUrl}?id_token=${encodeURIComponent(idToken)}&refresh_token=${encodeURIComponent(user.refreshToken)}&email=${encodeURIComponent(user.email || "")}&uid=${encodeURIComponent(user.uid)}&state=${encodeURIComponent(appState)}`;
       setStatus("Returning to Archie…");
       window.location.href = redirect;
     } catch (e) {
