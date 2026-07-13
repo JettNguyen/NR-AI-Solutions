@@ -1,5 +1,19 @@
 [
   {
+    "title": "Your AI Should Not Disappear When Your Computer Does",
+    "summary": "When your computer breaks, your photos and files survive \u2014 but the context your AI has built about how you work usually doesn't. That accumulated history is becoming one of the most valuable parts of a personal AI, and it shouldn't be tied to one device. How Archie keeps your assistant's memory of you portable.",
+    "author": "Jack Raney",
+    "date": "2026-07-12",
+    "readTime": "2 min read",
+    "category": "Team Stories",
+    "tags": [
+      "AI Agents",
+      "Personal AI",
+      "Archie"
+    ],
+    "url": "your-ai-should-not-disappear-when-your-computer-does/"
+  },
+  {
     "title": "The AI Model Isn't the Product Anymore. You Are.",
     "summary": "A year ago the only question about AI was which model is smartest. That's becoming the wrong question. As every company gets access to capable models, raw intelligence stops being the differentiator \u2014 the useful AI is the one that actually knows you. Why the next phase of AI is personal, not just powerful.",
     "author": "Jack Raney",
