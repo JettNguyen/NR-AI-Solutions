@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI Explained | Otian AI</title>
-  <meta name="description" content="Plain-English AI terms to help you understand assistants, automation, and how modern AI tools work." />
+  <meta name="description" content="Plain-English AI terms to help you understand agents, automation, and how modern AI tools work." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -15,7 +15,7 @@
 
   <nav class="nav" id="nav" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="../" class="nav-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Guided AI Assistants</span></span></a>
+      <a href="../" class="nav-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Guided AI Agents</span></span></a>
       <div class="nav-links">
         <div class="nav-more" id="navMarketplace">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Archie</button>
@@ -106,11 +106,11 @@
       </div>
     </section>
 
-    <section class="section" aria-label="How an AI assistant works">
+    <section class="section" aria-label="How an AI agent works">
       <div class="container">
         <figure class="explain-figure fade-up delay-1">
           <svg class="explain-svg--desktop" viewBox="0 0 640 300" role="img" aria-labelledby="aip-t" xmlns="http://www.w3.org/2000/svg" style="max-width:660px;font-family:inherit">
-            <title id="aip-t">How an assistant turns a request into an action: you send a prompt to an AI assistant, which reads its context window, becomes an agent that takes an action in your tools, and returns through a human-in-the-loop check as an automation.</title>
+            <title id="aip-t">How an AI agent turns a request into an action: you send a prompt, the model reads its context window and answers, and as an agent it can also act — taking an action in your tools and returning through a human-in-the-loop check as an automation.</title>
             <style>
               .aip-tile{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.4}
               .aip-ring{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.5}
@@ -144,11 +144,11 @@
             <path class="aip-loop" d="M568 184 L568 244 Q568 254 558 254 L128 254 Q108 254 96 238 L74 176"/>
             <path class="aip-arrow" d="M68 184 L74 176 L80 184"/>
 
-            <!-- prompt wire: you -> assistant -->
+            <!-- prompt wire: you -> model -->
             <circle class="aip-port" cx="86" cy="150" r="3"/>
             <line class="aip-wire" x1="88" y1="150" x2="145" y2="150"/>
             <path class="aip-arrow" d="M141 146 L147 150 L141 154"/>
-            <!-- assistant -> agent -->
+            <!-- model -> agent -->
             <circle class="aip-port" cx="270" cy="150" r="3"/>
             <line class="aip-wire" x1="272" y1="150" x2="335" y2="150"/>
             <path class="aip-arrow" d="M331 146 L337 150 L331 154"/>
@@ -156,7 +156,7 @@
             <circle class="aip-port" cx="456" cy="150" r="3"/>
             <line class="aip-wire" x1="458" y1="150" x2="515" y2="150"/>
             <path class="aip-arrow" d="M511 146 L517 150 L511 154"/>
-            <!-- context feed: window -> assistant -->
+            <!-- context feed: window -> model -->
             <circle class="aip-port" cx="210" cy="86" r="3"/>
             <line class="aip-wire" x1="210" y1="88" x2="210" y2="103"/>
             <path class="aip-arrow" d="M205 99 L210 105 L215 99"/>
@@ -173,7 +173,7 @@
               <text class="aip-node" x="56" y="208">You</text>
             </g>
 
-            <!-- ===== stage 2: Context Window + AI Assistant ===== -->
+            <!-- ===== stage 2: Context Window + The Model ===== -->
             <g class="aip-stage as2">
               <text class="aip-cap" x="210" y="16">Context Window</text>
               <rect class="aip-panel" x="156" y="24" width="108" height="62" rx="10"/>
@@ -190,8 +190,8 @@
                 <path fill-rule="evenodd" d="M 512,85 L 200,850 L 824,850 Z M 512,300 L 400,600 L 624,600 Z M 200,850 L 824,850 L 512,725 Z"/>
               <polygon points="290,890 512,725 734,890"/>
               </g>
-              <text class="aip-name" x="210" y="176">AI Assistant</text>
-              <text class="aip-sub" x="210" y="188">the model</text>
+              <text class="aip-name" x="210" y="176">The Model</text>
+              <text class="aip-sub" x="210" y="188">it answers</text>
             </g>
 
             <!-- ===== stage 3: AI Agent ===== -->
@@ -205,7 +205,7 @@
               <circle class="aip-fill" cx="398" cy="148" r="2.6"/>
               <circle class="aip-fill" cx="415" cy="146" r="2.6"/>
               <text class="aip-name" x="398" y="176">AI Agent</text>
-              <text class="aip-sub" x="398" y="188">it can act</text>
+              <text class="aip-sub" x="398" y="188">it acts</text>
             </g>
 
             <!-- ===== stage 4: Tools, human-in-the-loop, automation ===== -->
@@ -227,7 +227,7 @@
             </g>
           </svg>
           <svg class="explain-svg--mobile" viewBox="0 0 340 488" role="img" aria-labelledby="aipm-t" xmlns="http://www.w3.org/2000/svg" style="max-width:340px;font-family:inherit">
-  <title id="aipm-t">How an assistant turns a request into an action: you send a prompt to an AI assistant, which reads its context window, becomes an agent that takes an action in your tools, and returns through a human-in-the-loop check as an automation.</title>
+  <title id="aipm-t">How an AI agent turns a request into an action: you send a prompt, the model reads its context window and answers, and as an agent it can also act — taking an action in your tools and returning through a human-in-the-loop check as an automation.</title>
   <style>
     .aipm-tile{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.4}
     .aipm-ring{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.5}
@@ -262,11 +262,11 @@
   <path class="aipm-loop" d="M102 436 L46 436 Q36 436 36 426 L36 58 Q36 48 46 48 L107 48"/>
   <path class="aipm-arrow" d="M106 42 L113 48 L106 54"/>
 
-  <!-- prompt wire: you -> assistant -->
+  <!-- prompt wire: you -> model -->
   <circle class="aipm-port" cx="150" cy="78" r="3"/>
   <line class="aipm-wire" x1="150" y1="80" x2="150" y2="118"/>
   <path class="aipm-arrow" d="M145 118 L150 124 L155 118"/>
-  <!-- assistant -> agent -->
+  <!-- model -> agent -->
   <circle class="aipm-port" cx="150" cy="218" r="3"/>
   <line class="aipm-wire" x1="150" y1="220" x2="150" y2="256"/>
   <path class="aipm-arrow" d="M145 256 L150 262 L155 256"/>
@@ -274,7 +274,7 @@
   <circle class="aipm-port" cx="150" cy="356" r="3"/>
   <line class="aipm-wire" x1="150" y1="358" x2="150" y2="394"/>
   <path class="aipm-arrow" d="M145 394 L150 400 L155 394"/>
-  <!-- context feed: window -> assistant -->
+  <!-- context feed: window -> model -->
   <circle class="aipm-port" cx="234" cy="172" r="3"/>
   <line class="aipm-wire" x1="232" y1="172" x2="216" y2="172"/>
   <path class="aipm-arrow" d="M218 167 L212 172 L218 177"/>
@@ -291,15 +291,15 @@
     <text class="aipm-node" x="212" y="52">You</text>
   </g>
 
-  <!-- ===== stage 2: AI Assistant + Context Window beside it ===== -->
+  <!-- ===== stage 2: The Model + Context Window beside it ===== -->
   <g class="aipm-stage aipm-s2">
     <rect class="aipm-tile" x="90" y="126" width="120" height="92" rx="16"/>
     <g class="aipm-a" transform="translate(119.3,132.8) scale(0.06)">
       <path fill-rule="evenodd" d="M 512,85 L 200,850 L 824,850 Z M 512,300 L 400,600 L 624,600 Z M 200,850 L 824,850 L 512,725 Z"/>
       <polygon points="290,890 512,725 734,890"/>
     </g>
-    <text class="aipm-name" x="150" y="198">AI Assistant</text>
-    <text class="aipm-sub" x="150" y="210">the model</text>
+    <text class="aipm-name" x="150" y="198">The Model</text>
+    <text class="aipm-sub" x="150" y="210">it answers</text>
 
     <text class="aipm-cap" x="286" y="135">Context Window</text>
     <rect class="aipm-panel" x="234" y="141" width="104" height="62" rx="10"/>
@@ -323,7 +323,7 @@
     <circle class="aipm-fill" cx="168" cy="282" r="2.6"/>
     <circle class="aipm-fill" cx="150" cy="278" r="2.6"/>
     <text class="aipm-name" x="150" y="336">AI Agent</text>
-    <text class="aipm-sub" x="150" y="348">it can act</text>
+    <text class="aipm-sub" x="150" y="348">it acts</text>
   </g>
 
   <!-- ===== stage 4: Tools, human-in-the-loop, automation ===== -->
@@ -366,7 +366,7 @@
         <aside class="glossary-side fade-up delay-1" aria-label="Curated sections">
           <div class="glossary-side-card">
             <h3>Start Here</h3>
-            <p>The core terms most relevant to using an AI assistant day to day.</p>
+            <p>The core terms most relevant to using an AI agent day to day.</p>
             <div id="startHereList" class="start-here-list"></div>
           </div>
 
@@ -385,7 +385,7 @@
       <div class="container">
         <div class="cta-banner fade-up">
           <h2>Want help applying this to your day-to-day?</h2>
-          <p>We can set up a personal AI assistant around your inbox, calendar, and workflows so you can delegate routine tasks with confidence.</p>
+          <p>We can set up a personal AI agent around your inbox, calendar, and workflows so you can delegate routine tasks with confidence.</p>
           <p>The discovery call is completely free, no commitment, no contracts.</p>
           <a href="../questionnaire/" class="btn btn-primary btn-lg">Start My Free Discovery Call</a>
         </div>
@@ -398,7 +398,7 @@
       <div class="footer-grid">
         <div>
           <div class="footer-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /></div>
-          <p class="footer-tagline">Guided AI assistants for real life</p>
+          <p class="footer-tagline">Guided AI agents for real life</p>
         </div>
         <div>
           <h4 class="footer-col-title">Pages</h4>

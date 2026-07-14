@@ -12,9 +12,9 @@ Example: When a headline asks whether AGI is near, it's discussing this future p
 
 Example: An AI agent could draft a reply to a client and send it once you've given the okay, instead of just suggesting wording.
 
-**AI Assistant** – Software that understands everyday requests and carries out tasks for you, such as answering emails, booking appointments, or sorting files.
+**AI Assistant** – Software that understands everyday requests and carries out tasks for you, such as answering emails, booking appointments, or sorting files. Often used interchangeably with "AI agent," though an agent is the more capable of the two: an assistant answers and does what it is told, while an agent works through multi-step tasks on its own. We say **agent** for the thing you build and own, and use "assistant" only to describe the job it does for you.
 
-Example: You could tell your AI assistant "remind me to call Dave at 2pm tomorrow," and it sets that reminder for you.
+Example: You could tell your AI agent "remind me to call Dave at 2pm tomorrow," and it sets that reminder for you.
 
 **AI Toxicity** – Harmful or offensive language an AI might produce, typically because it absorbed such language somewhere in its training data.
 
