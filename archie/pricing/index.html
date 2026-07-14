@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Archie Pricing | Otian AI</title>
+  <meta name="description" content="What Archie will cost: $20 a month for the app, free built-in add-ons, and pay-as-you-go AI billed straight to your own provider account. Guided setup is $100 an hour-long session." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="../../assets/icon-1024-dark.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../css/styles.css" />
+  <style>
+    /* Page-scoped: the running-cost grid is three items, not the two the shared
+       .price-grid assumes, and the honesty notes need room under it. */
+    .price-grid--three {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .price-note {
+      max-width: 680px;
+      margin: 0 auto 16px;
+      color: var(--text-secondary);
+    }
+
+    .price-note:last-child {
+      margin-bottom: 0;
+    }
+
+    .price-note strong {
+      color: var(--text-primary);
+    }
+
+    .compare-panel {
+      max-width: 720px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 32px;
+      text-align: center;
+    }
+
+    .compare-panel p {
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .compare-panel p:last-child {
+      margin-bottom: 0;
+    }
+
+    .compare-kicker {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-primary) !important;
+    }
+
+    @media (max-width: 900px) {
+      .price-grid--three {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" id="nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="../../" class="nav-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Secure AI Agents, Your Way</span></span></a>
+      <div class="nav-links">
+        <div class="nav-more" id="navArchie">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navArchieMenu" type="button">Archie</button>
+          <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
+            <a href="../../archie/" role="menuitem">What Is Archie?</a>
+            <a href="../../archie/see-it-work/" role="menuitem">See It Work</a>
+            <a href="../../archie/pricing/" role="menuitem">Pricing</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navAddons">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navAddonsMenu" type="button">Add-ons</button>
+          <div class="nav-more-menu" id="navAddonsMenu" role="menu" aria-label="Add-ons">
+            <a href="../../skills-marketplace/what-is-an-add-on/" role="menuitem">What's an Add-on?</a>
+            <a href="../../skills-marketplace/browse/" role="menuitem">Browse the Marketplace</a>
+            <a href="../../skills-marketplace/commission/" role="menuitem">Commission One</a>
+            <a href="../../skills-marketplace/for-developers/" role="menuitem">For Developers</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navWork">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navWorkMenu" type="button">Work With Us</button>
+          <div class="nav-more-menu" id="navWorkMenu" role="menu" aria-label="Work With Us">
+            <a href="../../individuals/" role="menuitem">Guided Setup</a>
+            <a href="../../business/" role="menuitem">For Business</a>
+            <a href="../../what-you-need/" role="menuitem">What You Need</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navLearn">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navLearnMenu" type="button">Learn</button>
+          <div class="nav-more-menu" id="navLearnMenu" role="menu" aria-label="Learn">
+            <a href="../../how-it-works/" role="menuitem">How It Works</a>
+            <a href="../../ai-explained/" role="menuitem">AI Explained</a>
+            <a href="../../blog/" role="menuitem">Blog</a>
+            <a href="../../faq/" role="menuitem">FAQ</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navCompany">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompanyMenu" type="button">Company</button>
+          <div class="nav-more-menu" id="navCompanyMenu" role="menu" aria-label="Company">
+            <a href="../../our-story/" role="menuitem">Our Story</a>
+            <a href="../../testimonials/" role="menuitem">Agent Successes</a>
+            <a href="../../contact/" role="menuitem">Contact</a>
+          </div>
+        </div>
+      </div>
+      <a href="../../questionnaire/" class="btn btn-primary btn-sm nav-cta">Get Started</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navDrawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutArchie" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutAddons" aria-expanded="false" aria-controls="navDrawerFlyout">Add-ons</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutWork" aria-expanded="false" aria-controls="navDrawerFlyout">Work With Us</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
+    <a href="../../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
+  </nav>
+
+  <div class="nav-drawer-flyout" id="navDrawerFlyout" aria-hidden="true">
+    <button class="nav-drawer-back" type="button">
+      <svg class="nav-drawer-back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      <span id="navDrawerFlyoutTitle">Archie</span>
+    </button>
+    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
+      <a href="../../archie/">What Is Archie?</a>
+      <a href="../../archie/see-it-work/">See It Work</a>
+      <a href="../../archie/pricing/">Pricing</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutAddons">
+      <a href="../../skills-marketplace/what-is-an-add-on/">What's an Add-on?</a>
+      <a href="../../skills-marketplace/browse/">Browse the Marketplace</a>
+      <a href="../../skills-marketplace/commission/">Commission One</a>
+      <a href="../../skills-marketplace/for-developers/">For Developers</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutWork">
+      <a href="../../individuals/">Guided Setup</a>
+      <a href="../../business/">For Business</a>
+      <a href="../../what-you-need/">What You Need</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutLearn">
+      <a href="../../how-it-works/">How It Works</a>
+      <a href="../../ai-explained/">AI Explained</a>
+      <a href="../../blog/">Blog</a>
+      <a href="../../faq/">FAQ</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompany">
+      <a href="../../our-story/">Our Story</a>
+      <a href="../../testimonials/">Agent Successes</a>
+      <a href="../../contact/">Contact</a>
+    </div>
+  </div>
+
+  <main>
+
+    <section class="page-hero" aria-label="Page introduction">
+      <div class="page-hero-inner">
+        <span class="section-label fade-up">Pricing</span>
+        <h1 class="fade-up delay-1">What Archie Costs</h1>
+        <p class="fade-up delay-2">Nothing here is for sale yet &mdash; these are the prices Archie will launch with, told to you now so there are no surprises later. <a href="../#status">Here&rsquo;s where it stands</a>.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="run-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">Running It Yourself</span>
+          <h2 id="run-heading" class="fade-up delay-1">Three Costs. That&rsquo;s the Whole List.</h2>
+          <p class="fade-up delay-2">One of them is ours. The other two are yours, paid straight to the people providing them &mdash; and we never take a cut of either.</p>
+        </div>
+
+        <div class="price-grid price-grid--three fade-up delay-1" style="margin-top: 48px;">
+          <article class="price-card">
+            <span class="price-card-label">The App</span>
+            <div class="price-card-amount">$20<span>/month</span></div>
+            <p>Archie itself, every update, and the marketplace. One subscription, paid to us.</p>
+          </article>
+          <article class="price-card">
+            <span class="price-card-label">Add-ons</span>
+            <div class="price-card-amount price-card-amount--words">Free<span>to start</span></div>
+            <p>Every kind &mdash; Skills, Workers, Routines, Personalities &mdash; ships with free built-ins. Premium ones are a one-time purchase, never a second subscription.</p>
+          </article>
+          <article class="price-card">
+            <span class="price-card-label">The AI Itself</span>
+            <div class="price-card-amount price-card-amount--words">Pay as you go</div>
+            <p>Your own account with Anthropic or OpenAI. It bills you directly, and the money never passes through us.</p>
+          </article>
+        </div>
+
+        <p class="price-note fade-up delay-2"><strong>What the AI costs is genuinely up to you</strong>, because it depends on how hard you work your agent. Ask it a handful of things a day and it&rsquo;s a few dollars a month. Lean on it constantly &mdash; long research, big documents, all-day back-and-forth &mdash; and it climbs into the tens of dollars. You can watch the meter in real time on the provider&rsquo;s own dashboard, because the account is yours, not ours.</p>
+        <p class="price-note fade-up delay-2">A few add-ons reach out to services that charge their own fees. When one does, <strong>it tells you before you install it</strong> &mdash; so the number you expect is the number you pay.</p>
+        <p class="price-note fade-up delay-2">And if Archie can&rsquo;t do something you need, <a href="../../skills-marketplace/commission/">we&rsquo;ll build the add-on</a>. That&rsquo;s quoted per job, scoped and priced before any work starts.</p>
+      </div>
+    </section>
+
+    <section class="section section-alt" aria-labelledby="guided-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">Rather Not Do It Alone?</span>
+          <h2 id="guided-heading" class="fade-up delay-1">Guided Setup</h2>
+          <p class="fade-up delay-2">We build your first agent with you, and teach you to run it. The first call is free.</p>
+        </div>
+
+        <div class="price-grid fade-up delay-1" style="margin-top: 48px;">
+          <article class="price-card">
+            <span class="price-card-label">Guided Session</span>
+            <div class="price-card-amount">$100<span>/session</span></div>
+            <p>Each session runs an hour. The rate never goes up because your setup is complicated &mdash; a bigger setup simply takes more sessions, and we tell you how many on the free first call.</p>
+          </article>
+          <article class="price-card">
+            <span class="price-card-label">Archie, While You&rsquo;re a Client</span>
+            <div class="price-card-amount price-card-amount--words">Included</div>
+            <p>Normally $20 a month &mdash; free for as long as you&rsquo;re an active client. You still pay the AI provider directly, because that account is yours either way.</p>
+          </article>
+        </div>
+
+        <p class="price-note fade-up delay-2" style="text-align: center;">
+          <a href="../../questionnaire/" class="btn btn-primary btn-lg">Book Your Free Call</a>
+        </p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="worth-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">What It&rsquo;s Worth</span>
+          <h2 id="worth-heading" class="fade-up delay-1">Put It Next to the Alternative</h2>
+        </div>
+
+        <div class="compare-panel fade-up delay-1">
+          <p>The job you&rsquo;re handing your agent &mdash; the inbox, the calendar, the follow-ups, the research, the small things that eat a week &mdash; is the job you&rsquo;d otherwise hand a person.</p>
+          <p><strong>A part-time personal assistant can run thousands of dollars a year.</strong> They also go home at five, take holidays, and have to be told the same thing twice.</p>
+          <p>Your agent doesn&rsquo;t. It&rsquo;s there at six in the morning when you want the day laid out, and at eleven at night when you remember the thing you forgot &mdash; for as long as your computer is on and Archie is running.</p>
+          <p class="compare-kicker">That&rsquo;s the trade: tens of dollars a month, for help that never clocks out.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" aria-label="Call to action">
+      <div class="container">
+        <div class="cta-banner fade-up">
+          <h2>No surprises, and nothing to pay yet.</h2>
+          <p>Archie is in development. Join the waitlist and you&rsquo;ll hear the day it lands &mdash; or book a free call and we&rsquo;ll build your first agent with you now.</p>
+          <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+            <a href="../../questionnaire/" class="btn btn-primary btn-lg">Join the Waitlist</a>
+            <a href="../see-it-work/" class="btn btn-secondary btn-lg">See It Work &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer" aria-label="Site footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /></div>
+          <p class="footer-tagline">Secure AI agents, your way.<br />Easy plug-and-play, fully in your control.</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Pages</h4>
+          <nav class="footer-nav-links" aria-label="Footer navigation">
+            <a href="../../">Home</a>
+            <a href="../../archie/">Archie</a>
+            <a href="../../archie/see-it-work/">See It Work</a>
+            <a href="../../archie/pricing/">Archie Pricing</a>
+            <a href="../../skills-marketplace/browse/">Browse the Marketplace</a>
+            <a href="../../skills-marketplace/commission/">Commission an Add-on</a>
+            <a href="../../individuals/">Guided Setup</a>
+            <a href="../../business/">For Business</a>
+            <a href="../../what-you-need/">What You Need</a>
+            <a href="../../how-it-works/">How It Works</a>
+            <a href="../../ai-explained/">AI Explained</a>
+            <a href="../../blog/">Blog</a>
+            <a href="../../faq/">FAQ</a>
+            <a href="../../our-story/">Our Story</a>
+            <a href="../../testimonials/">Agent Successes</a>
+            <a href="../../contact/">Contact</a>
+          </nav>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Contact</h4>
+          <a href="mailto:questions@otianai.com" class="footer-contact-email">questions@otianai.com</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Otian AI. All rights reserved.</p>
+        <nav class="footer-legal-links" aria-label="Legal">
+          <a href="../../privacy-policy/">Privacy Policy</a>
+          <a href="../../terms-of-service/">Terms of Service</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../js/nav.js"></script>
+  <script src="../../js/demo-player.js"></script>
+</body>
+</html>

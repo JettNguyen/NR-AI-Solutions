@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Install Archie | Otian AI</title>
-  <meta name="description" content="Download Archie for Mac or Windows, and what to expect the first time you open it." />
+  <meta name="description" content="How installing Archie will work when it ships, and an honest account of what to expect the first time you open it." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -18,22 +18,31 @@
        ============================== -->
   <nav class="nav" id="nav" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="../../" class="nav-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Guided AI Agents</span></span></a>
+      <a href="../../" class="nav-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Secure AI Agents, Your Way</span></span></a>
       <div class="nav-links">
-        <div class="nav-more" id="navMarketplace">
-          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Archie</button>
-          <div class="nav-more-menu" id="navMarketplaceMenu" role="menu" aria-label="Archie">
+        <div class="nav-more" id="navArchie">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navArchieMenu" type="button">Archie</button>
+          <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
             <a href="../../archie/" role="menuitem">What Is Archie?</a>
+            <a href="../../archie/see-it-work/" role="menuitem">See It Work</a>
+            <a href="../../archie/pricing/" role="menuitem">Pricing</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navAddons">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navAddonsMenu" type="button">Add-ons</button>
+          <div class="nav-more-menu" id="navAddonsMenu" role="menu" aria-label="Add-ons">
             <a href="../../skills-marketplace/what-is-an-add-on/" role="menuitem">What's an Add-on?</a>
-            <a href="../../skills-marketplace/browse/" role="menuitem">The Marketplace</a>
+            <a href="../../skills-marketplace/browse/" role="menuitem">Browse the Marketplace</a>
+            <a href="../../skills-marketplace/commission/" role="menuitem">Commission One</a>
             <a href="../../skills-marketplace/for-developers/" role="menuitem">For Developers</a>
           </div>
         </div>
-        <div class="nav-more" id="navServices">
-          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navServicesMenu" type="button">Services</button>
-          <div class="nav-more-menu" id="navServicesMenu" role="menu" aria-label="Services">
-            <a href="../../individuals/" role="menuitem">For Individuals</a>
+        <div class="nav-more" id="navWork">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navWorkMenu" type="button">Work With Us</button>
+          <div class="nav-more-menu" id="navWorkMenu" role="menu" aria-label="Work With Us">
+            <a href="../../individuals/" role="menuitem">Guided Setup</a>
             <a href="../../business/" role="menuitem">For Business</a>
+            <a href="../../what-you-need/" role="menuitem">What You Need</a>
           </div>
         </div>
         <div class="nav-more" id="navLearn">
@@ -42,14 +51,13 @@
             <a href="../../how-it-works/" role="menuitem">How It Works</a>
             <a href="../../ai-explained/" role="menuitem">AI Explained</a>
             <a href="../../blog/" role="menuitem">Blog</a>
-            <a href="../../equipment/" role="menuitem">Equipment Needed</a>
             <a href="../../faq/" role="menuitem">FAQ</a>
           </div>
         </div>
         <div class="nav-more" id="navCompany">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompanyMenu" type="button">Company</button>
           <div class="nav-more-menu" id="navCompanyMenu" role="menu" aria-label="Company">
-            <a href="../../about/" role="menuitem">About</a>
+            <a href="../../our-story/" role="menuitem">Our Story</a>
             <a href="../../testimonials/" role="menuitem">Agent Successes</a>
             <a href="../../contact/" role="menuitem">Contact</a>
           </div>
@@ -64,8 +72,9 @@
 
   <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
   <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
-    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutMarketplace" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
-    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutServices" aria-expanded="false" aria-controls="navDrawerFlyout">Services</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutArchie" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutAddons" aria-expanded="false" aria-controls="navDrawerFlyout">Add-ons</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutWork" aria-expanded="false" aria-controls="navDrawerFlyout">Work With Us</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
     <a href="../../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
@@ -77,9 +86,9 @@
   <section class="section section--top" aria-labelledby="install-heading">
     <div class="container">
       <div class="section-header">
-        <span class="section-label fade-up">Early-Access Beta</span>
+        <span class="section-label fade-up">The Desktop App</span>
         <h1 id="install-heading" class="fade-up delay-1">Install Archie</h1>
-        <p class="fade-up delay-2">Archie runs on your own computer &mdash; it isn&rsquo;t a website you log into. Download it, open it, and your agent lives on your machine. Below is the download for each platform, and an honest account of what you&rsquo;ll see the first time you open it.</p>
+        <p class="fade-up delay-2">Archie runs on your own computer &mdash; it isn&rsquo;t a website you log into. Download it, open it, and your agent lives on your machine. Archie hasn&rsquo;t shipped yet (<a href="../#status">here&rsquo;s where it stands</a>), so read this page as a preview: <a href="../../questionnaire/">join the waitlist</a> and this is where we&rsquo;ll send you on release day. Below is where each platform&rsquo;s download will live, and an honest account of what you&rsquo;ll see the first time you open it.</p>
       </div>
 
       <div class="two-col fade-up delay-1" style="margin-top: 40px;">
@@ -97,7 +106,7 @@
           <p style="margin-top: 20px;">
             <a class="btn btn-primary btn-lg" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/Archie-latest-setup.exe">Download for Windows</a>
           </p>
-          <p style="margin-top: 16px; font-size: 0.9rem;"><strong>Windows will try to stop you the first time.</strong> That&rsquo;s expected during the beta, and the next section explains exactly why &mdash; please read it before you install.</p>
+          <p style="margin-top: 16px; font-size: 0.9rem;"><strong>Windows will try to stop you the first time.</strong> That&rsquo;s expected with our first releases, and the next section explains exactly why &mdash; please read it before you install.</p>
         </div>
       </div>
     </div>
@@ -136,7 +145,7 @@
         <div class="two-col-card">
           <h3>Why Windows says that</h3>
           <p>Windows trusts an app when its maker has bought a code-signing certificate &mdash; and it charges for that trust. The warning isn&rsquo;t Windows detecting anything in Archie. It&rsquo;s Windows telling you, accurately, that it doesn&rsquo;t yet recognize who made it.</p>
-          <p style="margin-top: 12px;">We&rsquo;re a small team in early access, and that certificate is on the list for when we&rsquo;re further along. Until we buy it, every Windows build we ship shows this screen. We&rsquo;d rather tell you that plainly than dress it up.</p>
+          <p style="margin-top: 12px;">We&rsquo;re a small team, and that certificate is on the list for when we&rsquo;re further along. Until we buy it, every Windows build we ship shows this screen. We&rsquo;d rather tell you that plainly than dress it up.</p>
         </div>
         <div class="two-col-card">
           <h3>How to check us, not trust us</h3>
@@ -191,7 +200,7 @@
       <div class="section-header">
         <span class="section-label fade-up">Stuck?</span>
         <h2 id="help-heading" class="fade-up delay-1">We&rsquo;ll Walk You Through It</h2>
-        <p class="fade-up delay-2">You&rsquo;re an early tester and we&rsquo;d genuinely rather hear from you than have you give up quietly. If anything here doesn&rsquo;t match what you&rsquo;re seeing, tell us and we&rsquo;ll get on a call.</p>
+        <p class="fade-up delay-2">Whenever you install Archie, you&rsquo;ll be one of its first users &mdash; and we&rsquo;d genuinely rather hear from you than have you give up quietly. If anything here doesn&rsquo;t match what you&rsquo;re seeing, tell us and we&rsquo;ll get on a call.</p>
         <p class="fade-up delay-2" style="margin-top: 24px;">
           <a class="btn btn-primary btn-lg" href="mailto:questions@otianai.com">Email us</a>
           <a class="btn btn-secondary btn-lg" href="../../faq/">Read the FAQ</a>
@@ -208,22 +217,25 @@
       <div class="footer-grid">
         <div>
           <div class="footer-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /></div>
-          <p class="footer-tagline">Guided AI agents for real life</p>
+          <p class="footer-tagline">Secure AI agents, your way.<br />Easy plug-and-play, fully in your control.</p>
         </div>
         <div>
           <h4 class="footer-col-title">Pages</h4>
           <nav class="footer-nav-links" aria-label="Footer navigation">
             <a href="../../">Home</a>
-            <a href="../../how-it-works/">How It Works</a>
             <a href="../../archie/">Archie</a>
-            <a href="../../skills-marketplace/browse/">Marketplace</a>
-            <a href="../../individuals/">For Individuals</a>
+            <a href="../../archie/see-it-work/">See It Work</a>
+            <a href="../../archie/pricing/">Archie Pricing</a>
+            <a href="../../skills-marketplace/browse/">Browse the Marketplace</a>
+            <a href="../../skills-marketplace/commission/">Commission an Add-on</a>
+            <a href="../../individuals/">Guided Setup</a>
             <a href="../../business/">For Business</a>
-            <a href="../../about/">About</a>
-            <a href="../../faq/">FAQ</a>
+            <a href="../../what-you-need/">What You Need</a>
+            <a href="../../how-it-works/">How It Works</a>
             <a href="../../ai-explained/">AI Explained</a>
             <a href="../../blog/">Blog</a>
-            <a href="../../equipment/">Equipment Needed</a>
+            <a href="../../faq/">FAQ</a>
+            <a href="../../our-story/">Our Story</a>
             <a href="../../testimonials/">Agent Successes</a>
             <a href="../../contact/">Contact</a>
           </nav>

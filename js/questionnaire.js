@@ -1,24 +1,33 @@
 /* ========================================
    Otian AI | Questionnaire Form
    js/questionnaire.js
+
+   Two doors: join the Archie waitlist (short path)
+   or the guided-setup intake (full path). The fork
+   step decides which sequence of steps runs.
    ======================================== */
 
 (function () {
   'use strict';
 
-  const TOTAL_STEPS = 7;
+  /* ── Step sequences per path ── */
+  const PATHS = {
+    waitlist: ['step-intent', 'step-waitlist'],
+    guided:   ['step-intent', 'step-about', 'step-help', 'step-handson', 'step-comfort', 'step-closing']
+  };
 
-  const stepLabels = [
-    'Introduction',
-    'Welcome',
-    'About You',
-    'What You Want Help With',
-    'How Hands-On',
-    'Comfort Level',
-    'Closing'
-  ];
+  const stepLabels = {
+    'step-intent':   'Get Started',
+    'step-waitlist': 'Join the Waitlist',
+    'step-about':    'About You',
+    'step-help':     'What You Want Help With',
+    'step-handson':  'How Hands-On',
+    'step-comfort':  'Comfort Level',
+    'step-closing':  'Closing'
+  };
 
-  let currentStep = 0;
+  let activePath = 'guided'; // default until the fork is answered
+  let pathPos = 0;
 
   /* ── Element references ── */
   const steps        = document.querySelectorAll('.form-step');
@@ -29,20 +38,26 @@
   const thankyou     = document.getElementById('thankyouScreen');
   const progressWrap = document.getElementById('progressWrap');
 
-  /* ── Update progress bar ── */
-  function updateProgress() {
-    const pct = Math.round(((currentStep + 1) / TOTAL_STEPS) * 100);
-    if (progressFill)  progressFill.style.width = pct + '%';
-    if (progressLabel) progressLabel.textContent = stepLabels[currentStep];
-    if (progressCount) progressCount.textContent = 'Section ' + (currentStep + 1) + ' of ' + TOTAL_STEPS;
+  function currentStepId() {
+    return PATHS[activePath][pathPos];
   }
 
-  /* ── Show a specific step ── */
-  function showStep(index, skipScroll) {
-    steps.forEach(function (step, i) {
-      step.classList.toggle('active', i === index);
+  /* ── Update progress bar ── */
+  function updateProgress() {
+    const total = PATHS[activePath].length;
+    const pct = Math.round(((pathPos + 1) / total) * 100);
+    if (progressFill)  progressFill.style.width = pct + '%';
+    if (progressLabel) progressLabel.textContent = stepLabels[currentStepId()] || '';
+    if (progressCount) progressCount.textContent = 'Section ' + (pathPos + 1) + ' of ' + total;
+  }
+
+  /* ── Show the step at the current path position ── */
+  function showStep(pos, skipScroll) {
+    pathPos = pos;
+    const id = currentStepId();
+    steps.forEach(function (step) {
+      step.classList.toggle('active', step.id === id);
     });
-    currentStep = index;
     updateProgress();
 
     if (!skipScroll) {
@@ -79,8 +94,7 @@
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
   }
 
-  function scrollToFirstStepError(stepIndex) {
-    var stepEl = steps[stepIndex];
+  function scrollToFirstStepError(stepEl) {
     if (!stepEl) return;
 
     var firstFieldError = stepEl.querySelector('.field-error');
@@ -119,8 +133,9 @@
   }
 
   /* ── Validate the current step ── */
-  function validateStep(stepIndex) {
-    const stepEl = steps[stepIndex];
+  function validateStep(stepId) {
+    const stepEl = document.getElementById(stepId);
+    if (!stepEl) return true;
     clearAllErrors(stepEl);
     let valid = true;
 
@@ -133,27 +148,43 @@
       }
     }
 
-    switch (stepIndex) {
-      case 0: /* Introduction, no required fields */
-      case 1: /* Welcome, no required fields */
+    function requireEmail(id, msg) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (!el.value.trim()) {
+        showError(el, msg || 'Please enter your email address.');
+        valid = false;
+      } else if (!isValidEmail(el.value.trim())) {
+        showError(el, 'Please enter a valid email address.');
+        valid = false;
+      }
+    }
+
+    function requireChoice(name, errId) {
+      if (!document.querySelector('input[name="' + name + '"]:checked')) {
+        var errEl = document.getElementById(errId);
+        if (errEl) errEl.classList.add('visible');
+        valid = false;
+      }
+    }
+
+    switch (stepId) {
+      case 'step-intent':
+        requireChoice('intent', 'intentError');
         break;
 
-      case 2: /* About You */
+      case 'step-waitlist':
+        requireEmail('waitlistEmail');
+        requireChoice('platform', 'platformError');
+        break;
+
+      case 'step-about':
         requireInput('fullName', 'Please enter your name.');
-        var emailEl = document.getElementById('emailAddress');
-        if (emailEl) {
-          if (!emailEl.value.trim()) {
-            showError(emailEl, 'Please enter your email address.');
-            valid = false;
-          } else if (!isValidEmail(emailEl.value.trim())) {
-            showError(emailEl, 'Please enter a valid email address.');
-            valid = false;
-          }
-        }
+        requireEmail('emailAddress');
         requireInput('profession', 'Please tell us your profession or line of work.');
         break;
 
-      case 3: /* What You Want Help With */
+      case 'step-help':
         requireInput('handOffTask', 'Please describe the task you\'d like to hand off.');
         var checkboxes = document.querySelectorAll('input[name="helpOptions"]');
         var anyChecked = false;
@@ -163,60 +194,24 @@
           if (groupErr) groupErr.classList.add('visible');
           valid = false;
         }
-        if (!document.querySelector('input[name="timeSpent"]:checked')) {
-          var timeErr = document.getElementById('timeSpentError');
-          if (timeErr) timeErr.classList.add('visible');
-          valid = false;
-        }
-        if (!document.querySelector('input[name="messagingPref"]:checked')) {
-          var msgErr = document.getElementById('messagingPrefError');
-          if (msgErr) msgErr.classList.add('visible');
-          valid = false;
-        }
+        requireChoice('timeSpent', 'timeSpentError');
+        requireChoice('messagingPref', 'messagingPrefError');
         break;
 
-      case 4: /* How Hands-On */
-        if (!document.querySelector('input[name="taskApproval"]:checked')) {
-          var taErr = document.getElementById('taskApprovalError');
-          if (taErr) taErr.classList.add('visible');
-          valid = false;
-        }
-        if (!document.querySelector('input[name="urgentNotify"]:checked')) {
-          var unErr = document.getElementById('urgentNotifyError');
-          if (unErr) unErr.classList.add('visible');
-          valid = false;
-        }
-        if (!document.querySelector('input[name="summaryFreq"]:checked')) {
-          var sfErr = document.getElementById('summaryFreqError');
-          if (sfErr) sfErr.classList.add('visible');
-          valid = false;
-        }
+      case 'step-handson':
+        requireChoice('taskApproval', 'taskApprovalError');
+        requireChoice('urgentNotify', 'urgentNotifyError');
+        requireChoice('summaryFreq', 'summaryFreqError');
         break;
 
-      case 5: /* Comfort Level */
-        if (!document.querySelector('input[name="techRating"]:checked')) {
-          var trErr = document.getElementById('techRatingError');
-          if (trErr) trErr.classList.add('visible');
-          valid = false;
-        }
-        if (!document.querySelector('input[name="aiExperience"]:checked')) {
-          var aeErr = document.getElementById('aiExperienceError');
-          if (aeErr) aeErr.classList.add('visible');
-          valid = false;
-        }
-        if (!document.querySelector('input[name="aiAgentAwareness"]:checked')) {
-          var aaaErr = document.getElementById('aiAgentAwarenessError');
-          if (aaaErr) aaaErr.classList.add('visible');
-          valid = false;
-        }
-        if (!document.querySelector('input[name="managePref"]:checked')) {
-          var mpErr = document.getElementById('managePrefError');
-          if (mpErr) mpErr.classList.add('visible');
-          valid = false;
-        }
+      case 'step-comfort':
+        requireChoice('techRating', 'techRatingError');
+        requireChoice('aiExperience', 'aiExperienceError');
+        requireChoice('aiAgentAwareness', 'aiAgentAwarenessError');
+        requireChoice('managePref', 'managePrefError');
         break;
 
-      case 6: /* Closing */
+      case 'step-closing':
         var aiCBs = document.querySelectorAll('input[name="aiTools"]');
         var aiAny = false;
         aiCBs.forEach(function (cb) { if (cb.checked) aiAny = true; });
@@ -231,15 +226,36 @@
     return valid;
   }
 
+  /* ── Fork: intent choice sets the active path ── */
+  function selectedIntent() {
+    var checked = document.querySelector('input[name="intent"]:checked');
+    return checked ? checked.value : null;
+  }
+
+  document.querySelectorAll('input[name="intent"]').forEach(function (radio) {
+    radio.addEventListener('change', function () {
+      var intent = selectedIntent();
+      if (intent && PATHS[intent]) {
+        activePath = intent;
+        updateProgress();
+      }
+    });
+  });
+
   /* ── Next button handler ── */
   document.querySelectorAll('.btn-next').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      if (validateStep(currentStep)) {
-        if (currentStep < TOTAL_STEPS - 1) {
-          showStep(currentStep + 1);
+      var stepId = currentStepId();
+      if (validateStep(stepId)) {
+        if (stepId === 'step-intent') {
+          var intent = selectedIntent();
+          if (intent && PATHS[intent]) activePath = intent;
+        }
+        if (pathPos < PATHS[activePath].length - 1) {
+          showStep(pathPos + 1);
         }
       } else {
-        scrollToFirstStepError(currentStep);
+        scrollToFirstStepError(document.getElementById(stepId));
       }
     });
   });
@@ -247,8 +263,8 @@
   /* ── Back button handler ── */
   document.querySelectorAll('.btn-back').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      if (currentStep > 0) {
-        showStep(currentStep - 1);
+      if (pathPos > 0) {
+        showStep(pathPos - 1);
       }
     });
   });
@@ -314,29 +330,37 @@
   var FORMSPREE_ID = 'mgobddpy'; // ← replace with your 8-char Formspree ID
 
   function showThankyou() {
-    var fullName  = (document.getElementById('fullName') || {}).value || '';
-    var firstName = fullName.trim().split(' ')[0] || 'there';
-    if (formEl)       formEl.style.display = 'none';
-    if (progressWrap) progressWrap.style.display = 'none';
-    if (thankyou) {
-      thankyou.classList.add('visible');
+    var isWaitlist = selectedIntent() === 'waitlist';
+    var guidedBlock   = document.getElementById('thankyouGuided');
+    var waitlistBlock = document.getElementById('thankyouWaitlist');
+    if (guidedBlock)   guidedBlock.hidden = isWaitlist;
+    if (waitlistBlock) waitlistBlock.hidden = !isWaitlist;
+
+    if (!isWaitlist) {
+      var fullName  = (document.getElementById('fullName') || {}).value || '';
+      var firstName = fullName.trim().split(' ')[0] || 'there';
       var nameEl = document.getElementById('thankyouName');
       if (nameEl) nameEl.textContent = firstName;
     }
+
+    if (formEl)       formEl.style.display = 'none';
+    if (progressWrap) progressWrap.style.display = 'none';
+    if (thankyou)     thankyou.classList.add('visible');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  var submitBtn = document.getElementById('submitBtn');
-  if (submitBtn) {
+  document.querySelectorAll('.btn-submit').forEach(function (submitBtn) {
+    var idleLabel = submitBtn.textContent;
+
     submitBtn.addEventListener('click', function (e) {
       e.preventDefault();
-      if (!validateStep(currentStep)) {
-        scrollToFirstStepError(currentStep);
+      if (!validateStep(currentStepId())) {
+        scrollToFirstStepError(document.getElementById(currentStepId()));
         return;
       }
 
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending\u2026';
+      submitBtn.textContent = 'Sending…';
 
       fetch('https://formspree.io/f/' + FORMSPREE_ID, {
         method: 'POST',
@@ -354,11 +378,11 @@
       })
       .catch(function () {
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Submit';
+        submitBtn.textContent = idleLabel;
         alert('Something went wrong. Please try again or email us at questions@otianai.com');
       });
     });
-  }
+  });
 
   /* ── Init ── */
   showStep(0, true);

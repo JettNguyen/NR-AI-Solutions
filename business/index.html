@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>For Business | Otian AI</title>
-  <meta name="description" content="AI agents for small business owners and growing teams, handling customer inquiries, scheduling, and follow-ups, with guided setup and a completely free discovery call." />
+<title>Archie for Business | Otian AI</title>
+  <meta name="description" content="Inbox triage, scheduling, follow-ups, research, reports &mdash; agents built with Archie handle a small team&rsquo;s busywork on your own computers, and we never hold your data." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -18,22 +18,31 @@
        ============================== -->
   <nav class="nav" id="nav" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="../" class="nav-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Guided AI Agents</span></span></a>
+      <a href="../" class="nav-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Secure AI Agents, Your Way</span></span></a>
       <div class="nav-links">
-        <div class="nav-more" id="navMarketplace">
-          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Archie</button>
-          <div class="nav-more-menu" id="navMarketplaceMenu" role="menu" aria-label="Archie">
+        <div class="nav-more" id="navArchie">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navArchieMenu" type="button">Archie</button>
+          <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
             <a href="../archie/" role="menuitem">What Is Archie?</a>
+            <a href="../archie/see-it-work/" role="menuitem">See It Work</a>
+            <a href="../archie/pricing/" role="menuitem">Pricing</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navAddons">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navAddonsMenu" type="button">Add-ons</button>
+          <div class="nav-more-menu" id="navAddonsMenu" role="menu" aria-label="Add-ons">
             <a href="../skills-marketplace/what-is-an-add-on/" role="menuitem">What's an Add-on?</a>
-            <a href="../skills-marketplace/browse/" role="menuitem">The Marketplace</a>
+            <a href="../skills-marketplace/browse/" role="menuitem">Browse the Marketplace</a>
+            <a href="../skills-marketplace/commission/" role="menuitem">Commission One</a>
             <a href="../skills-marketplace/for-developers/" role="menuitem">For Developers</a>
           </div>
         </div>
-        <div class="nav-more" id="navServices">
-          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navServicesMenu" type="button">Services</button>
-          <div class="nav-more-menu" id="navServicesMenu" role="menu" aria-label="Services">
-            <a href="../individuals/" role="menuitem">For Individuals</a>
+        <div class="nav-more" id="navWork">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navWorkMenu" type="button">Work With Us</button>
+          <div class="nav-more-menu" id="navWorkMenu" role="menu" aria-label="Work With Us">
+            <a href="../individuals/" role="menuitem">Guided Setup</a>
             <a href="../business/" role="menuitem">For Business</a>
+            <a href="../what-you-need/" role="menuitem">What You Need</a>
           </div>
         </div>
         <div class="nav-more" id="navLearn">
@@ -42,14 +51,13 @@
             <a href="../how-it-works/" role="menuitem">How It Works</a>
             <a href="../ai-explained/" role="menuitem">AI Explained</a>
             <a href="../blog/" role="menuitem">Blog</a>
-            <a href="../equipment/" role="menuitem">Equipment Needed</a>
             <a href="../faq/" role="menuitem">FAQ</a>
           </div>
         </div>
         <div class="nav-more" id="navCompany">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompanyMenu" type="button">Company</button>
           <div class="nav-more-menu" id="navCompanyMenu" role="menu" aria-label="Company">
-            <a href="../about/" role="menuitem">About</a>
+            <a href="../our-story/" role="menuitem">Our Story</a>
             <a href="../testimonials/" role="menuitem">Agent Successes</a>
             <a href="../contact/" role="menuitem">Contact</a>
           </div>
@@ -64,8 +72,9 @@
 
   <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
   <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
-    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutMarketplace" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
-    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutServices" aria-expanded="false" aria-controls="navDrawerFlyout">Services</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutArchie" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutAddons" aria-expanded="false" aria-controls="navDrawerFlyout">Add-ons</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutWork" aria-expanded="false" aria-controls="navDrawerFlyout">Work With Us</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
     <a href="../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
@@ -74,27 +83,32 @@
   <div class="nav-drawer-flyout" id="navDrawerFlyout" aria-hidden="true">
     <button class="nav-drawer-back" type="button">
       <svg class="nav-drawer-back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-      <span id="navDrawerFlyoutTitle">Services</span>
+      <span id="navDrawerFlyoutTitle">Archie</span>
     </button>
-    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutMarketplace">
+    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
       <a href="../archie/">What Is Archie?</a>
+      <a href="../archie/see-it-work/">See It Work</a>
+      <a href="../archie/pricing/">Pricing</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutAddons">
       <a href="../skills-marketplace/what-is-an-add-on/">What's an Add-on?</a>
-      <a href="../skills-marketplace/browse/">The Marketplace</a>
+      <a href="../skills-marketplace/browse/">Browse the Marketplace</a>
+      <a href="../skills-marketplace/commission/">Commission One</a>
       <a href="../skills-marketplace/for-developers/">For Developers</a>
     </div>
-    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutServices">
-      <a href="../individuals/">For Individuals</a>
-      <a href="../business/" class="active">For Business</a>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutWork">
+      <a href="../individuals/">Guided Setup</a>
+      <a href="../business/">For Business</a>
+      <a href="../what-you-need/">What You Need</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutLearn">
       <a href="../how-it-works/">How It Works</a>
       <a href="../ai-explained/">AI Explained</a>
       <a href="../blog/">Blog</a>
-      <a href="../equipment/">Equipment Needed</a>
       <a href="../faq/">FAQ</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompany">
-      <a href="../about/">About</a>
+      <a href="../our-story/">Our Story</a>
       <a href="../testimonials/">Agent Successes</a>
       <a href="../contact/">Contact</a>
     </div>
@@ -108,20 +122,20 @@
     <section class="page-hero" aria-label="Page introduction">
       <div class="page-hero-inner">
         <span class="section-label fade-up">For Business</span>
-        <h1 class="fade-up delay-1">An AI Agent Built Around How Your Business Runs</h1>
-        <p class="fade-up delay-2">Customer inquiries, scheduling, follow-ups, and the busywork that slows down a small team, handled with the same guided, approval-gated setup we use for individuals.</p>
+        <h1 class="fade-up delay-1">Give the Busywork to an Agent</h1>
+        <p class="fade-up delay-2">Inbox triage, scheduling, follow-ups, research, and the ops work that eats a small team&rsquo;s week &mdash; handled by agents your team builds with Archie, each one running on its owner&rsquo;s computer.</p>
       </div>
     </section>
 
     <!-- ==============================
-         Who This Is For
+         Business Use Cases
          ============================== -->
-    <section class="section" aria-labelledby="who-heading">
+    <section class="section" aria-labelledby="uses-heading">
       <div class="container">
         <div class="section-header">
-          <span class="section-label fade-up">Who This Is For</span>
-          <h2 id="who-heading" class="fade-up delay-1">Built for Small Businesses and Growing Teams</h2>
-          <p class="fade-up delay-2">Solo operators and small business owners buried in customer questions, scheduling, and follow-ups - if more than one person needs access, we set up additional seats for your employees.</p>
+          <span class="section-label fade-up">What It Handles</span>
+          <h2 id="uses-heading" class="fade-up delay-1">The Work That Slows a Small Team Down</h2>
+          <p class="fade-up delay-2">None of it is hard. All of it takes time. An agent does the repetitive middle of each of these, and your team only touches the part that needs a person.</p>
         </div>
 
         <div class="use-cases-grid fade-up delay-1">
@@ -130,7 +144,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
             </svg>
-            <span class="use-case-text"><strong>Customer Replies</strong><span class="use-case-detail">Drafts fast, on-brand responses for common requests</span></span>
+            <span class="use-case-text"><strong>Inbox &amp; Customer Triage</strong><span class="use-case-detail">Sorts what needs you now and drafts on-brand replies for the rest</span></span>
           </div>
 
           <div class="use-case-item">
@@ -140,7 +154,7 @@
               <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
               <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
             </svg>
-            <span class="use-case-text"><strong>Following Up with Leads &amp; Contacts</strong><span class="use-case-detail">Prepares personalized check-ins using recent context</span></span>
+            <span class="use-case-text"><strong>Lead &amp; Client Follow-ups</strong><span class="use-case-detail">Prepares personalized check-ins so nobody slips through</span></span>
           </div>
 
           <div class="use-case-item">
@@ -158,7 +172,7 @@
               <circle cx="11" cy="11" r="8"/>
               <line x1="21" y1="21" x2="16.65" y2="16.65"/>
             </svg>
-            <span class="use-case-text"><strong>Research &amp; Lookups</strong><span class="use-case-detail">Builds ranked lists and summarizes options with next steps</span></span>
+            <span class="use-case-text"><strong>Research &amp; Vendor Lookups</strong><span class="use-case-detail">Compares options and builds ranked short lists with next steps</span></span>
           </div>
 
           <div class="use-case-item">
@@ -168,7 +182,7 @@
               <line x1="9" y1="12" x2="15" y2="12"/>
               <line x1="9" y1="16" x2="12" y2="16"/>
             </svg>
-            <span class="use-case-text"><strong>Meeting Recaps</strong><span class="use-case-detail">Captures key decisions and sends action items after every call</span></span>
+            <span class="use-case-text"><strong>Meeting Recaps</strong><span class="use-case-detail">Captures key decisions and drafts action items after every call</span></span>
           </div>
 
           <div class="use-case-item">
@@ -185,366 +199,100 @@
     </section>
 
     <!-- ==============================
-         What You Get
+         How It Works with Archie
          ============================== -->
-    <section class="section section-alt" aria-labelledby="get-heading">
+    <section class="section section-alt" aria-labelledby="how-heading">
       <div class="container">
         <div class="section-header">
-          <span class="section-label fade-up">The Process</span>
-          <h2 id="get-heading" class="fade-up delay-1">Guided From Start to Finish</h2>
-          <p class="fade-up delay-2">The same guided, approval-gated build as our individual setups, scoped to your business workflows.</p>
+          <span class="section-label fade-up">How It Works</span>
+          <h2 id="how-heading" class="fade-up delay-1">One Agent Per Teammate, on Their Own Machine</h2>
+          <p class="fade-up delay-2">Archie is our desktop app for building personal AI agents. In a business, that means each person gets an agent shaped to their role &mdash; not one shared bot in somebody else&rsquo;s cloud.</p>
         </div>
 
-        <div class="steps-row">
-          <div class="step-item fade-up delay-1">
-            <div class="step-number" aria-hidden="true">1</div>
-            <h3>Tell Us How Your Business Runs</h3>
-            <p>Fill out our short intake form and describe the workflows you'd love help with.</p>
-          </div>
-          <div class="step-item fade-up delay-2">
-            <div class="step-number" aria-hidden="true">2</div>
-            <h3>We Guide the Build, Including Any Team Seats</h3>
-            <p>We teach you and your team through every step over Zoom, with clear checkpoints, adding additional members if needed.</p>
-          </div>
-          <div class="step-item fade-up delay-3">
-            <div class="step-number" aria-hidden="true">3</div>
-            <h3>Your Agent Gets to Work</h3>
-            <p>Start delegating customer-facing and admin tasks, day after day. Nothing happens without your approval.</p>
-          </div>
-        </div>
-
-        <div class="text-center mt-48">
-          <a href="../how-it-works/" class="btn btn-secondary fade-up delay-4">See the Full Process &rarr;</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==============================
-         Pricing
-         ============================== -->
-    <section class="section" id="pricing" aria-labelledby="why-heading">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label fade-up">Investment</span>
-          <h2 id="why-heading" class="fade-up delay-1">Built Around Your Business, Priced the Same Way</h2>
-        </div>
-        <figure class="explain-figure fade-up delay-1">
-          <svg class="explain-svg--desktop" viewBox="0 0 520 262" role="img" aria-labelledby="bizq-t" xmlns="http://www.w3.org/2000/svg" style="max-width:620px;font-family:inherit">
-            <title id="bizq-t">Three inputs — workflow complexity, tools to connect, and team seats — flow into one custom quote, with the AI model subscription billed separately by the provider</title>
-            <style>
-              .biz-cap{font-size:10px;font-weight:700;letter-spacing:.09em;fill:currentColor;opacity:.5}
-              .biz-chip{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.4}
-              .biz-ico{fill:none;stroke:var(--accent);stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
-              .biz-name{fill:currentColor;font-size:11.5px;font-weight:700}
-              .biz-sub{fill:currentColor;opacity:.6;font-size:9.5px}
-              .biz-wire{fill:none;stroke:var(--accent);stroke-width:1.6;opacity:.55;stroke-linecap:round}
-              .biz-port{fill:var(--accent)}
-              .biz-quote{fill:var(--accent)}
-              .biz-qname{fill:var(--text-on-accent);font-size:13.5px;font-weight:700;text-anchor:middle}
-              .biz-qsub{fill:var(--text-on-accent);opacity:.78;font-size:10px;text-anchor:middle}
-              .biz-sepline{fill:none;stroke:var(--accent);stroke-width:1.5;opacity:.6;stroke-dasharray:3 5;stroke-linecap:round}
-              .biz-sepchip{fill:none;stroke:var(--accent);stroke-width:1.4;stroke-dasharray:4 4}
-              .biz-badge{fill:var(--accent)}
-              .biz-plus{fill:none;stroke:var(--text-on-accent);stroke-width:1.7;stroke-linecap:round}
-              .biz-mglyph{fill:none;stroke:var(--accent);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-              .biz-mname{fill:currentColor;font-size:11px;font-weight:700}
-              .biz-msub{fill:currentColor;opacity:.6;font-size:9.5px}
-              @media (prefers-reduced-motion:no-preference){
-                .biz-in{animation:bizIn .7s cubic-bezier(.22,1,.36,1) both}
-                .bi1{animation-delay:.05s}.bi2{animation-delay:.16s}.bi3{animation-delay:.27s}
-                .biz-wire{stroke-dasharray:1;stroke-dashoffset:1;animation:bizDraw 1.1s ease .4s forwards}
-                .biz-quoteG{animation:bizIn .7s cubic-bezier(.22,1,.36,1) .5s both}
-                .biz-sepG{animation:bizIn .7s cubic-bezier(.22,1,.36,1) .72s both}
-                @keyframes bizIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-                @keyframes bizDraw{to{stroke-dashoffset:0}}
-              }
-            </style>
-
-            <text class="biz-cap" x="14" y="15">WHAT SHAPES YOUR QUOTE</text>
-
-            <path class="biz-wire" pathLength="1" d="M202 51 C 286 51 300 90 338 107"/>
-            <path class="biz-wire" pathLength="1" d="M202 109 C 286 109 300 110 338 110"/>
-            <path class="biz-wire" pathLength="1" d="M202 167 C 286 167 300 132 338 113"/>
-
-            <g class="biz-in bi1">
-              <rect class="biz-chip" x="12" y="28" width="190" height="46" rx="12"/>
-              <g class="biz-ico" transform="translate(28.4,41.4) scale(0.8)">
-                <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
-                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
-              </g>
-              <text class="biz-name" x="64" y="49">Workflow complexity</text>
-              <text class="biz-sub" x="64" y="63">how much it handles</text>
-              <circle class="biz-port" cx="202" cy="51" r="2.6"/>
-            </g>
-
-            <g class="biz-in bi2">
-              <rect class="biz-chip" x="12" y="86" width="190" height="46" rx="12"/>
-              <g class="biz-ico" transform="translate(28.4,99.4) scale(0.8)">
-                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-              </g>
-              <text class="biz-name" x="64" y="107">Tools to connect</text>
-              <text class="biz-sub" x="64" y="121">the apps &amp; accounts</text>
-              <circle class="biz-port" cx="202" cy="109" r="2.6"/>
-            </g>
-
-            <g class="biz-in bi3">
-              <rect class="biz-chip" x="12" y="144" width="190" height="46" rx="12"/>
-              <g class="biz-ico" transform="translate(28.4,157.4) scale(0.8)">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                <circle cx="9" cy="7" r="4"/>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-              </g>
-              <text class="biz-name" x="64" y="165">Team seats</text>
-              <text class="biz-sub" x="64" y="179">who needs their own access</text>
-              <circle class="biz-port" cx="202" cy="167" r="2.6"/>
-            </g>
-
-            <g class="biz-quoteG">
-              <rect class="biz-quote" x="338" y="64" width="170" height="92" rx="20"/>
-              <text class="biz-qname" x="423" y="106">Your custom quote</text>
-              <text class="biz-qsub" x="423" y="124">tailored to your scope</text>
-              <circle class="biz-port" cx="338" cy="110" r="3.6"/>
-            </g>
-
-            <g class="biz-sepG">
-              <path class="biz-sepline" d="M423 156 L415 172"/>
-              <path class="biz-sepline" d="M415 190 L408 206"/>
-              <circle class="biz-badge" cx="415" cy="181" r="10"/>
-              <path class="biz-plus" d="M415 176 v10 M410 181 h10"/>
-              <rect class="biz-sepchip" x="308" y="206" width="200" height="46" rx="14"/>
-              <path class="biz-mglyph" d="M332 220 l2.6 6.4 6.4 2.6 -6.4 2.6 -2.6 6.4 -2.6 -6.4 -6.4 -2.6 6.4 -2.6 Z"/>
-              <text class="biz-mname" x="352" y="226">AI model subscription</text>
-              <text class="biz-msub" x="352" y="240">~$20/mo &#183; billed by the provider</text>
-            </g>
-          </svg>
-          <svg class="explain-svg--mobile" viewBox="0 0 340 452" role="img" aria-labelledby="bizm-t" xmlns="http://www.w3.org/2000/svg" style="max-width:340px;font-family:inherit">
-  <title id="bizm-t">Three inputs — workflow complexity, tools to connect, and team seats — flow down into one custom quote, with the AI model subscription billed separately by the provider</title>
-  <style>
-    .bizm-cap{font-size:10px;font-weight:700;letter-spacing:.09em;fill:currentColor;opacity:.5}
-    .bizm-chip{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.4}
-    .bizm-ico{fill:none;stroke:var(--accent);stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
-    .bizm-name{fill:currentColor;font-size:11.5px;font-weight:700}
-    .bizm-sub{fill:currentColor;opacity:.6;font-size:10px}
-    .bizm-wire{fill:none;stroke:var(--accent);stroke-width:1.6;opacity:.55;stroke-linecap:round}
-    .bizm-port{fill:var(--accent)}
-    .bizm-quote{fill:var(--accent)}
-    .bizm-qname{fill:var(--text-on-accent);font-size:13.5px;font-weight:700;text-anchor:middle}
-    .bizm-qsub{fill:var(--text-on-accent);opacity:.78;font-size:10px;text-anchor:middle}
-    .bizm-sepline{fill:none;stroke:var(--accent);stroke-width:1.5;opacity:.6;stroke-dasharray:3 5;stroke-linecap:round}
-    .bizm-sepchip{fill:none;stroke:var(--accent);stroke-width:1.4;stroke-dasharray:4 4}
-    .bizm-badge{fill:var(--accent)}
-    .bizm-plus{fill:none;stroke:var(--text-on-accent);stroke-width:1.7;stroke-linecap:round}
-    .bizm-mglyph{fill:none;stroke:var(--accent);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-    .bizm-mname{fill:currentColor;font-size:11px;font-weight:700}
-    .bizm-msub{fill:currentColor;opacity:.6;font-size:10px}
-    @media (prefers-reduced-motion:no-preference){
-      .bizm-in{animation:bizmIn .7s cubic-bezier(.22,1,.36,1) both}
-      .bizm-i1{animation-delay:.05s}.bizm-i2{animation-delay:.16s}.bizm-i3{animation-delay:.27s}
-      .bizm-wire{stroke-dasharray:1;stroke-dashoffset:1;animation:bizmDraw 1.1s ease .4s forwards}
-      .bizm-quoteG{animation:bizmIn .7s cubic-bezier(.22,1,.36,1) .5s both}
-      .bizm-sepG{animation:bizmIn .7s cubic-bezier(.22,1,.36,1) .72s both}
-      @keyframes bizmIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-      @keyframes bizmDraw{to{stroke-dashoffset:0}}
-    }
-  </style>
-
-  <text class="bizm-cap" x="14" y="15">WHAT SHAPES YOUR QUOTE</text>
-
-  <path class="bizm-wire" pathLength="1" d="M260 51 C 294 51 312 70 312 96 L312 200 C312 236 175 216 170 252"/>
-  <path class="bizm-wire" pathLength="1" d="M260 109 C 288 109 302 126 302 150 L302 196 C302 230 170 214 170 252"/>
-  <path class="bizm-wire" pathLength="1" d="M260 167 C 282 167 292 180 292 194 C292 224 165 212 170 252"/>
-
-  <g class="bizm-in bizm-i1">
-    <rect class="bizm-chip" x="16" y="28" width="244" height="46" rx="12"/>
-    <g class="bizm-ico" transform="translate(32.4,41.4) scale(0.8)">
-      <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
-      <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
-    </g>
-    <text class="bizm-name" x="68" y="49">Workflow complexity</text>
-    <text class="bizm-sub" x="68" y="63">how much it handles</text>
-    <circle class="bizm-port" cx="260" cy="51" r="2.6"/>
-  </g>
-
-  <g class="bizm-in bizm-i2">
-    <rect class="bizm-chip" x="16" y="86" width="244" height="46" rx="12"/>
-    <g class="bizm-ico" transform="translate(32.4,99.4) scale(0.8)">
-      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-    </g>
-    <text class="bizm-name" x="68" y="107">Tools to connect</text>
-    <text class="bizm-sub" x="68" y="121">the apps &amp; accounts</text>
-    <circle class="bizm-port" cx="260" cy="109" r="2.6"/>
-  </g>
-
-  <g class="bizm-in bizm-i3">
-    <rect class="bizm-chip" x="16" y="144" width="244" height="46" rx="12"/>
-    <g class="bizm-ico" transform="translate(32.4,157.4) scale(0.8)">
-      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-      <circle cx="9" cy="7" r="4"/>
-      <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-      <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-    </g>
-    <text class="bizm-name" x="68" y="165">Team seats</text>
-    <text class="bizm-sub" x="68" y="179">who needs their own access</text>
-    <circle class="bizm-port" cx="260" cy="167" r="2.6"/>
-  </g>
-
-  <g class="bizm-quoteG">
-    <rect class="bizm-quote" x="60" y="252" width="220" height="92" rx="20"/>
-    <text class="bizm-qname" x="170" y="294">Your custom quote</text>
-    <text class="bizm-qsub" x="170" y="312">tailored to your scope</text>
-    <circle class="bizm-port" cx="170" cy="252" r="3.6"/>
-  </g>
-
-  <g class="bizm-sepG">
-    <path class="bizm-sepline" d="M170 344 L170 358"/>
-    <path class="bizm-sepline" d="M170 378 L170 392"/>
-    <circle class="bizm-badge" cx="170" cy="368" r="10"/>
-    <path class="bizm-plus" d="M170 363 v10 M165 368 h10"/>
-    <rect class="bizm-sepchip" x="50" y="394" width="240" height="46" rx="14"/>
-    <path class="bizm-mglyph" d="M74 408 l2.6 6.4 6.4 2.6 -6.4 2.6 -2.6 6.4 -2.6 -6.4 -6.4 -2.6 6.4 -2.6 Z"/>
-    <text class="bizm-mname" x="94" y="414">AI model subscription</text>
-    <text class="bizm-msub" x="94" y="428">~$20/mo &#183; billed by the provider</text>
-  </g>
-</svg>
-          <figcaption>Three things shape your quote. The AI model runs on its own small subscription, billed directly by the provider.</figcaption>
-        </figure>
-
-
-        <div class="pricing-why fade-up delay-1">
-          <p>
-            No two businesses need the same thing - some owners want a simple agent for customer replies and scheduling, others need one that tracks leads, follows up with contacts, and integrates with multiple tools across several employees. A flat rate would leave one overpaying and the other underserved, so our quotes factor in workflow complexity, how many tools need connecting, and how many people on your team need their own access.
-          </p>
-          <p>
-            The AI model itself (Claude, ChatGPT, or Gemini) runs on its own small subscription, typically around $20 a month per active user billed directly by the provider, separate from our fee - we'll help you choose the right one and walk you through signing up.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section-alt" aria-labelledby="included-heading">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label fade-up">Every Plan</span>
-          <h2 id="included-heading" class="fade-up delay-1">What's Always Included</h2>
-          <p class="fade-up delay-2">Regardless of the scope, these are part of every setup we do.</p>
-        </div>
-
-        <div class="included-grid fade-up delay-1">
-
-          <div class="included-item">
-            <div class="included-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.68 3.4 2 2 0 0 1 3.64 1.24h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l1.09-1.09a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z"/>
-              </svg>
-            </div>
-            <span>Initial Discovery Call &mdash; Completely Free</span>
-          </div>
-
-          <div class="included-item">
-            <div class="included-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="3"/>
-                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
-              </svg>
-            </div>
-            <span>Guided Configuration Sessions</span>
-          </div>
-
-          <div class="included-item">
-            <div class="included-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"/>
-              </svg>
-            </div>
-            <span>Guided Setup &amp; Testing</span>
-          </div>
-
-          <div class="included-item">
-            <div class="included-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-              </svg>
-            </div>
-            <span>Account Connection (with your approval)</span>
-          </div>
-
-          <div class="included-item">
-            <div class="included-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="4" y1="21" x2="4" y2="14"/>
-                <line x1="4" y1="10" x2="4" y2="3"/>
-                <line x1="12" y1="21" x2="12" y2="12"/>
-                <line x1="12" y1="8" x2="12" y2="3"/>
-                <line x1="20" y1="21" x2="20" y2="16"/>
-                <line x1="20" y1="12" x2="20" y2="3"/>
-                <line x1="1" y1="14" x2="7" y2="14"/>
-                <line x1="9" y1="8" x2="15" y2="8"/>
-                <line x1="17" y1="16" x2="23" y2="16"/>
-              </svg>
-            </div>
-            <span>Fine-Tuning After Launch</span>
-          </div>
-
-          <div class="included-item">
-            <div class="included-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-              </svg>
-            </div>
-            <span>Ongoing Guidance</span>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="cost-breakdown-heading">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label fade-up">Simple Cost Breakdown</span>
-          <h2 id="cost-breakdown-heading" class="fade-up delay-1">What You Should Expect to Pay</h2>
-          <p class="fade-up delay-2">Clear buckets so there are no surprises.</p>
-        </div>
-
-        <div class="feature-grid feature-grid-4">
+        <div class="feature-grid">
           <article class="feature-card fade-up delay-1">
-            <h3>Our Service</h3>
-            <p>Quoted based on your scope and guidance level. Some businesses want close weekly guidance, others want light coaching after initial setup.</p>
+            <h3>Shaped to Each Role</h3>
+            <p>The person on support gets an agent that triages the inbox and drafts replies. The owner gets one that chases follow-ups and preps the weekly numbers. Same app, different agents &mdash; each running on its owner&rsquo;s computer.</p>
           </article>
 
           <article class="feature-card fade-up delay-2">
-            <h3>Model Access</h3>
-            <p>Most clients use a standard AI subscription around $20 per month, plus low API usage charges for agent tasks.</p>
+            <h3>We Never Hold Your Data</h3>
+            <p>Customer lists, invoices, inboxes &mdash; your business data stays on your machines, in your custody. Otian stores nothing. Your agents talk to the AI company directly on your own accounts, and the only thing our servers ever know is whether your subscription is active.</p>
           </article>
 
           <article class="feature-card fade-up delay-3">
-            <h3>Hardware</h3>
-            <p>A Mac mini is required for your always-on setup. If you already own one, this cost may be zero.</p>
+            <h3>A Person Approves Anything That Leaves</h3>
+            <p>Before an agent sends an email, places an order, or posts on your behalf, someone on your team clicks approve. The busywork gets faster; the sign-off stays human.</p>
           </article>
+        </div>
 
-          <article class="feature-card fade-up delay-4">
-            <h3>Additional Team Seats</h3>
-            <p>Pricing scales per employee who needs their own access to the agent. We'll quote each additional seat once we know your team size.</p>
-          </article>
+        <div class="pricing-why mt-48 fade-up delay-2">
+          <p class="text-center">
+            And if Archie can&rsquo;t do it yet &mdash; some tool we don&rsquo;t connect to, some workflow peculiar to your shop &mdash; tell us. We&rsquo;ll build the add-on. Every bespoke add-on becomes a marketplace listing, so the one we build for your business ends up helping the next one too.
+          </p>
+        </div>
+        <div class="text-center">
+          <a href="../skills-marketplace/commission/" class="btn btn-secondary fade-up delay-3">Commission an Add-on &rarr;</a>
         </div>
       </div>
     </section>
 
     <!-- ==============================
-         Request a Quote CTA
+         Guided Setup for Teams
          ============================== -->
-    <section class="section section-alt" aria-label="Get a quote">
+    <section class="section" id="pricing" aria-labelledby="guided-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">Guided Setup</span>
+          <h2 id="guided-heading" class="fade-up delay-1">Rather Have Us Walk Your Team Through It?</h2>
+        </div>
+
+        <div class="pricing-why fade-up delay-1">
+          <p>
+            You can set all of this up yourself &mdash; Archie is built for that. But plenty of owners would rather have someone alongside them the first time. That&rsquo;s our guided setup: we get on a call with you and your team, build the agents together on your machines, connect accounts with your approval, test everything, and fine-tune after launch. The full process is laid out on <a href="../how-it-works/">How It Works</a>.
+          </p>
+          <p>
+            No two businesses need the same thing. One owner wants a single agent for replies and scheduling; another has five teammates, a dozen tools, and ten years of process. A flat rate would leave one overpaying and the other underserved &mdash; so we price by the session instead. A session is $100 and runs an hour. The rate never goes up because a setup is complicated; a bigger setup simply takes more sessions, and we tell you how many on the free first call.
+          </p>
+          <p>
+            Archie is included free for as long as you&rsquo;re an active client. The AI thinking itself runs on each person&rsquo;s own pay-as-you-go account with Anthropic or OpenAI &mdash; typically a few dollars a month per person, billed directly by the provider &mdash; and we&rsquo;ll help each teammate get set up.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card fade-up delay-1">
+            <h3>Guided Sessions</h3>
+            <p>$100 a session, and each session runs an hour. A bigger setup takes more sessions, never a higher rate &mdash; we scope how many on the free first call.</p>
+          </article>
+
+          <article class="feature-card fade-up delay-2">
+            <h3>Archie</h3>
+            <p>Normally $20 a month per person &mdash; included free for as long as you&rsquo;re an active client. In development &mdash; <a href="../archie/#status">see where it stands</a>.</p>
+          </article>
+
+          <article class="feature-card fade-up delay-3">
+            <h3>The AI Model</h3>
+            <p>Each teammate&rsquo;s agent runs on their own pay-as-you-go account with the AI provider &mdash; typically a few dollars a month, billed directly by the provider.</p>
+          </article>
+        </div>
+
+        <div class="text-center mt-48">
+          <a href="../what-you-need/" class="btn btn-secondary fade-up delay-4">See What You&rsquo;ll Need to Start &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         Free Call CTA
+         ============================== -->
+    <section class="section section-alt" aria-label="Book the free first call">
       <div class="container">
         <div class="cta-banner fade-up">
-          <h2>Get Your Custom Quote</h2>
-          <p>Fill out our short intake form and we'll follow up with a tailored quote for your business and team size. No obligation, no pressure.</p>
-          <p>The discovery call is completely free, no commitment, no contracts.</p>
-          <a href="../questionnaire/" class="btn btn-primary btn-lg">Start My Free Discovery Call</a>
-          <p class="pricing-cta-note">Takes about five minutes. We typically respond within one business day.</p>
+          <h2>Start with the Free First Call</h2>
+          <p>Tell us how your business runs and what eats your team&rsquo;s week. We&rsquo;ll tell you which agents make sense, how many sessions the setup needs, and what it costs &mdash; before you spend a dollar.</p>
+          <p>No obligation, no contracts.</p>
+          <a href="../questionnaire/" class="btn btn-primary btn-lg">Book the Free First Call</a>
+          <p class="pricing-cta-note">The form takes about five minutes. We typically respond within one business day.</p>
         </div>
       </div>
     </section>
@@ -559,22 +307,25 @@
       <div class="footer-grid">
         <div>
           <div class="footer-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /></div>
-          <p class="footer-tagline">Guided AI agents for real life</p>
+          <p class="footer-tagline">Secure AI agents, your way.<br />Easy plug-and-play, fully in your control.</p>
         </div>
         <div>
           <h4 class="footer-col-title">Pages</h4>
           <nav class="footer-nav-links" aria-label="Footer navigation">
             <a href="../">Home</a>
-            <a href="../how-it-works/">How It Works</a>
             <a href="../archie/">Archie</a>
-            <a href="../skills-marketplace/browse/">Marketplace</a>
-            <a href="../individuals/">For Individuals</a>
+            <a href="../archie/see-it-work/">See It Work</a>
+            <a href="../archie/pricing/">Archie Pricing</a>
+            <a href="../skills-marketplace/browse/">Browse the Marketplace</a>
+            <a href="../skills-marketplace/commission/">Commission an Add-on</a>
+            <a href="../individuals/">Guided Setup</a>
             <a href="../business/">For Business</a>
-            <a href="../about/">About</a>
-            <a href="../faq/">FAQ</a>
+            <a href="../what-you-need/">What You Need</a>
+            <a href="../how-it-works/">How It Works</a>
             <a href="../ai-explained/">AI Explained</a>
             <a href="../blog/">Blog</a>
-            <a href="../equipment/">Equipment Needed</a>
+            <a href="../faq/">FAQ</a>
+            <a href="../our-story/">Our Story</a>
             <a href="../testimonials/">Agent Successes</a>
             <a href="../contact/">Contact</a>
           </nav>

@@ -46,10 +46,6 @@
       var isDark = nextTheme === 'dark';
       toggle.setAttribute('aria-pressed', String(isDark));
       toggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
-      var label = toggle.querySelector('.theme-toggle-label');
-      if (label) {
-        label.textContent = isDark ? 'Dark Mode' : 'Light Mode';
-      }
     });
 
     updateNavLogos(nextTheme);
@@ -67,7 +63,19 @@
     var button = document.createElement('button');
     button.type = 'button';
     button.className = extraClassName ? 'theme-toggle ' + extraClassName : 'theme-toggle';
-    button.innerHTML = '<span class="theme-toggle-label">Light Mode</span><span class="theme-toggle-track" aria-hidden="true"><span class="theme-toggle-thumb"></span></span>';
+    // The icon shows the theme that's ON: sun while light, moon while dark.
+    // Both icons live in the DOM; CSS swaps them on html[data-theme].
+    button.innerHTML =
+      '<svg class="theme-toggle-icon theme-toggle-icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+        '<circle cx="12" cy="12" r="4"/>' +
+        '<line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/>' +
+        '<line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/>' +
+        '<line x1="4.93" y1="4.93" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.07" y2="19.07"/>' +
+        '<line x1="4.93" y1="19.07" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.07" y2="4.93"/>' +
+      '</svg>' +
+      '<svg class="theme-toggle-icon theme-toggle-icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+        '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>' +
+      '</svg>';
     button.addEventListener('click', function () {
       var currentTheme = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
       applyTheme(currentTheme === 'dark' ? 'light' : 'dark', true);
@@ -76,6 +84,8 @@
   }
 
   function mountThemeToggles() {
+    // Main nav only — the toggle stays visible at every width, so the
+    // mobile drawer doesn't need (or get) its own copy.
     var navInner = document.querySelector('.nav-inner');
     if (navInner && !navInner.querySelector('.theme-toggle')) {
       var desktopToggle = createThemeToggle('theme-toggle--nav');
@@ -84,17 +94,6 @@
         navInner.insertBefore(desktopToggle, navCta);
       } else {
         navInner.appendChild(desktopToggle);
-      }
-    }
-
-    var drawer = document.getElementById('navDrawer');
-    if (drawer && !drawer.querySelector('.theme-toggle')) {
-      var drawerToggle = createThemeToggle('theme-toggle--drawer');
-      var drawerCta = drawer.querySelector('.nav-drawer-cta');
-      if (drawerCta) {
-        drawer.insertBefore(drawerToggle, drawerCta);
-      } else {
-        drawer.appendChild(drawerToggle);
       }
     }
   }

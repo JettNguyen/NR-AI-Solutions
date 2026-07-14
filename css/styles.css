@@ -362,14 +362,16 @@ p { color: var(--text-secondary); line-height: 1.8; }
   margin-top: 1px;
 }
 
+/* The wordmark keeps the company name on screen at phone widths. It has to: Google OAuth
+   verification requires the app name to be displayed on the home page, and below 850px the
+   hero eyebrow that used to carry it is hidden. Only the tagline underneath is dropped, for room. */
 @media (max-width: 480px) {
-  .nav-logo-divider,
-  .nav-logo-text {
+  .nav-logo-subtitle {
     display: none;
   }
 }
 
-@media (max-width: 1100px) and (min-width: 1000px) {
+@media (max-width: 1025px) and (min-width: 1000px) {
   .nav-logo-divider,
   .nav-logo-text {
     display: none;
@@ -502,23 +504,28 @@ p { color: var(--text-secondary); line-height: 1.8; }
   flex-shrink: 0;
 }
 
+/* An icon button, not a switch: the icon shows the theme that's ON —
+   sun while light, moon while dark. nav.js swaps aria-label per state. */
 .theme-toggle {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  width: 44px;
   min-height: 44px;
-  padding: 8px 12px;
+  padding: 0;
   border: 1px solid var(--border);
   border-radius: 999px;
   background: var(--bg-card);
   color: var(--text-primary);
-  transition: border-color var(--transition), background var(--transition), transform var(--transition);
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition), color var(--transition);
   flex-shrink: 0;
 }
 
 .theme-toggle:hover {
   background: var(--surface-hover);
   border-color: var(--field-border);
+  color: var(--accent-hover);
 }
 
 .theme-toggle:focus-visible {
@@ -526,47 +533,16 @@ p { color: var(--text-secondary); line-height: 1.8; }
   outline-offset: 2px;
 }
 
-.theme-toggle-track {
-  position: relative;
-  width: 44px;
-  height: 24px;
-  border-radius: 999px;
-  background: var(--surface-hover-strong);
-  transition: background var(--transition);
+.theme-toggle-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
 }
 
-.theme-toggle-thumb {
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--bg-card);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
-  transition: transform var(--transition), background var(--transition);
-}
-
-.theme-toggle-label {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-html[data-theme="dark"] .theme-toggle-track {
-  background: var(--accent-subtle);
-}
-
-html[data-theme="dark"] .theme-toggle-thumb {
-  transform: translateX(20px);
-}
-
-.theme-toggle--drawer {
-  width: 100%;
-  justify-content: space-between;
-  margin: 12px 0 4px;
-}
+/* Only the active theme's icon is present to the eye. */
+.theme-toggle-icon--moon { display: none; }
+html[data-theme="dark"] .theme-toggle-icon--sun { display: none; }
+html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 
 /* Hamburger button */
 .nav-hamburger {
@@ -1007,20 +983,56 @@ html[data-theme="dark"] .theme-toggle-thumb {
   width: 100%;
   position: relative;
   z-index: 1;
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
   align-items: center;
-  justify-content: space-between;
-  gap: 20px;
+  gap: 48px;
 }
 
 .hero-content {
   max-width: 620px;
 }
 
+/* The demo panel runs past the right edge of the centred container so it meets the edge
+   of the screen — the product reads as part of the page instead of a video in a box.
+   The bleed is exactly the distance to that edge (the gutter, or .hero's 24px padding
+   when there is no gutter), so the panel lands flush and nothing is cropped off it. */
 .hero-visual {
-  flex: 0 0 auto;
-  display: flex;
-  justify-content: center;
+  --hero-bleed: max(24px, calc((100vw - var(--max-width)) / 2));
+  margin-right: calc(-1 * var(--hero-bleed));
+  min-width: 0;
+  position: relative;
+}
+
+/* A warm bloom under the panel so the recording's dark desktop doesn't sit on the
+   cream ground with a hard edge. */
+.hero-visual::before {
+  content: "";
+  position: absolute;
+  inset: -14% -6% -20% -12%;
+  background: radial-gradient(ellipse at 50% 50%, rgba(224, 138, 91, 0.22) 0%, transparent 70%);
+  filter: blur(18px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-visual .demo-player {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: none;
+}
+
+/* Frameless: the recording already contains a Mac window. Only the left corners are
+   ever on screen, so only they are rounded. */
+.demo-player--hero .demo-player-frame {
+  border: 0;
+  border-radius: var(--radius) 0 0 var(--radius);
+  box-shadow: -28px 34px 74px -34px rgba(74, 66, 58, 0.42);
+}
+
+html[data-theme="dark"] .demo-player--hero .demo-player-frame {
+  box-shadow: -28px 34px 74px -34px rgba(0, 0, 0, 0.6);
 }
 
 .screenshot-gallery.hero-gallery {
@@ -2494,25 +2506,10 @@ html[data-theme="dark"] .availability-widget iframe {
   margin: 0;
 }
 
-.demo-video-wrap {
-  display: flex;
-  justify-content: center;
-}
-
-.demo-video {
-  max-width: 280px;
-  width: 100%;
-  height: auto;
-}
-
 @media (max-width: 768px) {
   .page-hero-inner--with-video {
     grid-template-columns: minmax(0, 1fr);
     text-align: center;
-  }
-
-  .demo-video {
-    max-width: 220px;
   }
 }
 
@@ -3446,45 +3443,154 @@ html[data-theme="dark"] .availability-widget iframe {
   /* .mp-* small-screen rules live in section 35 (must follow section 34). */
 }
 
-/* Tablet range only: shrink the hero video so both columns fit
-   while the hero is still side-by-side. */
-@media (min-width: 851px) and (max-width: 1000px) {
-  .hero .demo-video {
-    max-width: 240px;
-  }
-}
-
 /* ========================================
    25b. Home hero, max-width 850px
-   Below 850px the video leads: it sits first, its bottom third fades
-   into the page background, and the title overlays that fade.
+   Below 850px the demo leads: the landscape player stacks first as a
+   clean card, and the copy follows in normal flow.
    ======================================== */
 @media (max-width: 850px) {
   .hero {
-    padding-top: calc(var(--nav-height) + 16px);
+    padding-top: calc(var(--nav-height) + 0px);
   }
 
   .hero p {
     font-size: 1.05rem;
   }
 
+  /* No gap: the headline is meant to overlap the video, not sit under it. */
   .hero-inner {
-    flex-direction: column;
+    grid-template-columns: minmax(0, 1fr);
     text-align: center;
     gap: 0;
   }
 
+  /* Edge to edge on a phone: cancel .hero's 24px side padding so the recording
+     touches both edges of the screen. Nothing frames it, nothing lifts it —
+     it just is the top of the page. */
   .hero-visual {
     order: -1;
-    width: 100%;
+    --hero-bleed: 0px;
+    width: calc(100% + 48px);
+    max-width: none;
+    margin: 0 -24px;
   }
 
-  /* The hero eyebrow carries the app name ("Otian AI") and must stay visible at
-     every width — Google OAuth verification requires the app name to be
-     displayed on the home page. */
+  .hero-visual::before {
+    display: none;
+  }
+
+  /* Crop the bottom tenth of the recording away. This is the whole trick: the Archie window
+     ends at 96% of the frame with a hard edge — bright panel (luma 208) straight onto dark
+     wallpaper (luma 22) — and no alpha ramp can hide a contrast cliff that sharp; fading it
+     just leaves a faint sharp line. Cut it off and the fade instead dissolves the panel's own
+     interior, which is cream on a cream page and goes quietly.
+     1280/812 shows the top 90%; object-position pins the crop to the bottom. */
+  .demo-player--hero .demo-player-frame {
+    aspect-ratio: 1280 / 812;
+    border-radius: 0;
+    box-shadow: none;
+    /* The frame's dark backdrop would survive the video fading out above it, leaving a
+       rectangle behind. Nothing to show once the video is gone. */
+    background: transparent;
+  }
+
+  /* Crop the recording down to just the Archie window, on all four sides.
+     The bottom is the window's own border — a luma 208 -> 22 cliff at 96% of the frame that
+     no alpha ramp can hide. The sides are worse and less obvious: a 47px strip of dark desktop
+     wallpaper runs the full height down each flank (the window spans x=47..1232 of 1280). A
+     vertical fade cannot fix a horizontal problem — those near-black columns wash through grey
+     on their way to cream, and a grey band is exactly what a fade is not supposed to look like.
+     Scaled up 8%, the flanks fall outside the box and every column in the fade zone is window
+     interior: cream on a cream page, landing within ~4 levels of the background the whole way
+     down instead of 200. */
+  .demo-player--hero .demo-player-video {
+    object-position: top center;
+    transform: scale(1.08);
+    transform-origin: top center;
+  }
+
+  /* The recording dissolves downward into the page, and the headline rises into what it
+     leaves behind. Two things this gradient has to get right:
+
+     It holds its shape past the halfway mark — fade any earlier and the app is a smudge,
+     because the UI is cream-on-cream against this background.
+
+     And it eases to fully transparent exactly at the bottom edge (100%, not 96%). A plain
+     two-stop ramp lands on zero early and stops, and the eye reads that as an edge; the
+     extra stops bend it into a curve that arrives at nothing right as the frame ends.
+
+     The mask is on the video, not the frame, so the pause control stays solid — WCAG 2.2.2
+     still needs a way to stop motion that starts on its own. */
+  .demo-player--hero .demo-player-video {
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 52%,
+      rgba(0, 0, 0, 0.92) 62%,
+      rgba(0, 0, 0, 0.72) 72%,
+      rgba(0, 0, 0, 0.45) 82%,
+      rgba(0, 0, 0, 0.2) 91%,
+      rgba(0, 0, 0, 0.06) 97%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 52%,
+      rgba(0, 0, 0, 0.92) 62%,
+      rgba(0, 0, 0, 0.72) 72%,
+      rgba(0, 0, 0, 0.45) 82%,
+      rgba(0, 0, 0, 0.2) 91%,
+      rgba(0, 0, 0, 0.06) 97%,
+      transparent 100%
+    );
+  }
+
+  /* Alpha alone can't hide the bottom of the recording, because what's down there is a hard
+     line: the Archie window's own crisp bottom border and rounded corners. Fading a crisp
+     line just leaves a faint crisp line. So the tail gets blurred as well as faded — two
+     stacked backdrop layers ramp the blur up toward the edge, dissolving the window's border
+     into mush before the alpha above ever reaches zero. */
+  .demo-player--hero .demo-player-frame::before,
+  .demo-player--hero .demo-player-frame::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+  }
+
+  .demo-player--hero .demo-player-frame::before {
+    height: 52%;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 72%);
+    mask-image: linear-gradient(to bottom, transparent 0%, #000 72%);
+  }
+
+  .demo-player--hero .demo-player-frame::after {
+    height: 28%;
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 68%);
+    mask-image: linear-gradient(to bottom, transparent 0%, #000 68%);
+  }
+
+  /* Ride the headline up onto the faded tail of the video — just its first line, and only
+     into the part that has already mostly dissolved. Both the video's height and this pull
+     scale with the viewport, so the overlap looks the same at 360px and 850px. */
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 100%;
+    margin-top: -10vw;
+  }
+
+  /* Dropped here: the nav wordmark carries the company name at these widths instead
+     (see the OAuth note on .nav-logo-subtitle). */
   .hero .section-label {
-    display: inline-block;
-    margin-bottom: 8px;
+    display: none;
   }
 
   .hero-title-full {
@@ -3493,21 +3599,6 @@ html[data-theme="dark"] .availability-widget iframe {
 
   .hero-title-short {
     display: inline;
-  }
-
-  .hero .demo-video {
-    max-width: min(48vw, 240px);
-    -webkit-mask-image: linear-gradient(to bottom, #000 40%, transparent 68%);
-    mask-image: linear-gradient(to bottom, #000 40%, transparent 68%);
-  }
-
-  .hero-content {
-    max-width: 100%;
-    position: relative;
-    z-index: 1;
-    /* Pull the heading up over the video's faded bottom third
-       (video is 444x960, so height ≈ 2.16 × rendered width). */
-    margin-top: clamp(-170px, -34vw, -100px);
   }
 
   .hero-subtitle {
@@ -3542,22 +3633,6 @@ html[data-theme="dark"] .availability-widget iframe {
 
   .nav-hamburger {
     display: flex;
-  }
-
-  .theme-toggle {
-    padding: 8px;
-  }
-
-  .theme-toggle-label {
-    display: none;
-  }
-
-  .theme-toggle--drawer {
-    padding: 10px 12px;
-  }
-
-  .theme-toggle--drawer .theme-toggle-label {
-    display: inline;
   }
 
   .screenshot-gallery.hero-gallery {
@@ -5312,3 +5387,218 @@ html[data-theme="dark"] .booking-container iframe {
 
 
 
+
+/* ==========================================================================
+   Demo player — the Archie product recording
+   Plays itself, silently, on a loop. Lazy-loaded and pause-able; see js/demo-player.js.
+   ========================================================================== */
+.demo-player {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.demo-player-frame {
+  position: relative;
+  /* Hold the box before the poster lands so nothing below it jumps. */
+  aspect-ratio: 1280 / 902;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--panel-border-strong);
+  box-shadow: var(--shadow-lg);
+  background: #0d0b0a;
+}
+
+.demo-player-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* The only control. Invisible until you look for it — hover, focus, or the paused state —
+   so the demo reads as something happening rather than something to operate. */
+.demo-player-toggle {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #fff;
+  background: rgba(20, 14, 10, 0.5);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity var(--transition), transform var(--transition), background var(--transition);
+}
+
+.demo-player:hover .demo-player-toggle,
+.demo-player-toggle:focus-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.demo-player-toggle:hover {
+  background: rgba(20, 14, 10, 0.72);
+}
+
+.demo-player-toggle:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.demo-player-toggle svg {
+  width: 17px;
+  height: 17px;
+  fill: currentColor;
+}
+
+/* Paused: promote the toggle to a real invitation, centred and accented, since in that state
+   it is the only thing telling the visitor there is anything to see. */
+.demo-player.is-paused .demo-player-toggle {
+  right: 50%;
+  bottom: 50%;
+  width: 74px;
+  height: 74px;
+  transform: translate(50%, 50%);
+  opacity: 1;
+  background: var(--accent);
+  color: var(--text-on-accent);
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.34);
+}
+
+.demo-player.is-paused .demo-player-toggle:hover {
+  background: var(--accent-hover);
+}
+
+.demo-player.is-paused .demo-player-toggle svg {
+  width: 30px;
+  height: 30px;
+}
+
+/* Swap the glyph with the state: pause while running, play while stopped. */
+.demo-player .demo-player-icon-play,
+.demo-player.is-paused .demo-player-icon-pause {
+  display: none;
+}
+
+.demo-player.is-paused .demo-player-icon-play {
+  display: block;
+  margin-left: 4px; /* optical centring — a triangle's mass sits left of its bounding box */
+}
+
+.demo-player-caption {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+@media (max-width: 768px) {
+  /* No hover on touch, so the control has to be permanently visible or it may as well not exist. */
+  .demo-player-toggle {
+    opacity: 1;
+    transform: none;
+  }
+
+  .demo-player.is-paused .demo-player-toggle {
+    width: 58px;
+    height: 58px;
+  }
+
+  .demo-player.is-paused .demo-player-toggle svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-player-toggle {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   36. Home (product reframe)
+   Small pieces for the product-first homepage: the hero kicker line, the
+   no-ceiling promise under the add-on grid, word-based price amounts and
+   links on the four-doors cards, and the etymology grace note.
+   ========================================================================== */
+.hero-kicker {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+  margin-bottom: 44px;
+}
+
+.hero-kicker em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.addon-promise {
+  max-width: 620px;
+  margin: 48px auto 0;
+  text-align: center;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.addon-promise a {
+  color: var(--accent);
+}
+
+.addon-promise a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+.addon-promise-sub {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+/* Doors whose "amount" is a phrase, not a number. The fixed line-height
+   equals the $-figure line box (2.5rem x 1.6) so the four cards' body
+   text starts level across a row. */
+/* Word amounts ("Free or one-time", "Pay as you go") stand in for a "$20" figure, so they
+   reserve the same height and centre inside it — rather than faking it with a 4rem
+   line-height, which doubled the card's height the moment the words wrapped to two lines. */
+.price-card-amount--words {
+  font-size: 1.75rem;
+  line-height: 1.25;
+  min-height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.price-card-link {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.price-card-link:hover {
+  color: var(--accent-hover);
+}
+
+.why-grace {
+  margin-top: 18px;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}

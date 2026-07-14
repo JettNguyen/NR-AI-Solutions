@@ -4,12 +4,34 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Get Started | Otian AI</title>
-  <meta name="description" content="Tell us what you need. Fill out our short intake form and we'll guide you through building an AI agent around your life." />
+  <meta name="description" content="Two ways to start: join the Archie waitlist, or book a guided setup — your first call is free. Tell us what you need and we'll take it from there." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" href="../assets/icon-1024-dark.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    /* Page-scoped: two-door fork options on the intake form */
+    .fork-option {
+      align-items: flex-start;
+      padding-top: 14px;
+      padding-bottom: 14px;
+    }
+    .fork-option input[type="radio"] {
+      margin-top: 3px;
+    }
+    .fork-option .fork-option-title {
+      display: block;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .fork-option .fork-option-desc {
+      display: block;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+  </style>
 </head>
 <body>
 
@@ -29,22 +51,31 @@
        ============================== -->
   <nav class="nav" id="nav" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="../" class="nav-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Guided AI Agents</span></span></a>
+      <a href="../" class="nav-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Secure AI Agents, Your Way</span></span></a>
       <div class="nav-links">
-        <div class="nav-more" id="navMarketplace">
-          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Archie</button>
-          <div class="nav-more-menu" id="navMarketplaceMenu" role="menu" aria-label="Archie">
+        <div class="nav-more" id="navArchie">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navArchieMenu" type="button">Archie</button>
+          <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
             <a href="../archie/" role="menuitem">What Is Archie?</a>
+            <a href="../archie/see-it-work/" role="menuitem">See It Work</a>
+            <a href="../archie/pricing/" role="menuitem">Pricing</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navAddons">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navAddonsMenu" type="button">Add-ons</button>
+          <div class="nav-more-menu" id="navAddonsMenu" role="menu" aria-label="Add-ons">
             <a href="../skills-marketplace/what-is-an-add-on/" role="menuitem">What's an Add-on?</a>
-            <a href="../skills-marketplace/browse/" role="menuitem">The Marketplace</a>
+            <a href="../skills-marketplace/browse/" role="menuitem">Browse the Marketplace</a>
+            <a href="../skills-marketplace/commission/" role="menuitem">Commission One</a>
             <a href="../skills-marketplace/for-developers/" role="menuitem">For Developers</a>
           </div>
         </div>
-        <div class="nav-more" id="navServices">
-          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navServicesMenu" type="button">Services</button>
-          <div class="nav-more-menu" id="navServicesMenu" role="menu" aria-label="Services">
-            <a href="../individuals/" role="menuitem">For Individuals</a>
+        <div class="nav-more" id="navWork">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navWorkMenu" type="button">Work With Us</button>
+          <div class="nav-more-menu" id="navWorkMenu" role="menu" aria-label="Work With Us">
+            <a href="../individuals/" role="menuitem">Guided Setup</a>
             <a href="../business/" role="menuitem">For Business</a>
+            <a href="../what-you-need/" role="menuitem">What You Need</a>
           </div>
         </div>
         <div class="nav-more" id="navLearn">
@@ -53,20 +84,19 @@
             <a href="../how-it-works/" role="menuitem">How It Works</a>
             <a href="../ai-explained/" role="menuitem">AI Explained</a>
             <a href="../blog/" role="menuitem">Blog</a>
-            <a href="../equipment/" role="menuitem">Equipment Needed</a>
             <a href="../faq/" role="menuitem">FAQ</a>
           </div>
         </div>
         <div class="nav-more" id="navCompany">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompanyMenu" type="button">Company</button>
           <div class="nav-more-menu" id="navCompanyMenu" role="menu" aria-label="Company">
-            <a href="../about/" role="menuitem">About</a>
+            <a href="../our-story/" role="menuitem">Our Story</a>
             <a href="../testimonials/" role="menuitem">Agent Successes</a>
             <a href="../contact/" role="menuitem">Contact</a>
           </div>
         </div>
       </div>
-      <a href="../questionnaire/" class="btn btn-primary btn-sm nav-cta active">Get Started</a>
+      <a href="../questionnaire/" class="btn btn-primary btn-sm nav-cta">Get Started</a>
       <button class="nav-hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navDrawer">
         <span></span><span></span><span></span>
       </button>
@@ -75,37 +105,43 @@
 
   <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
   <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
-    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutMarketplace" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
-    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutServices" aria-expanded="false" aria-controls="navDrawerFlyout">Services</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutArchie" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutAddons" aria-expanded="false" aria-controls="navDrawerFlyout">Add-ons</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutWork" aria-expanded="false" aria-controls="navDrawerFlyout">Work With Us</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
-    <a href="../questionnaire/" class="btn btn-primary nav-drawer-cta active">Get Started</a>
+    <a href="../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
   </nav>
 
   <div class="nav-drawer-flyout" id="navDrawerFlyout" aria-hidden="true">
     <button class="nav-drawer-back" type="button">
       <svg class="nav-drawer-back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-      <span id="navDrawerFlyoutTitle">Services</span>
+      <span id="navDrawerFlyoutTitle">Archie</span>
     </button>
-    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutMarketplace">
+    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
       <a href="../archie/">What Is Archie?</a>
+      <a href="../archie/see-it-work/">See It Work</a>
+      <a href="../archie/pricing/">Pricing</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutAddons">
       <a href="../skills-marketplace/what-is-an-add-on/">What's an Add-on?</a>
-      <a href="../skills-marketplace/browse/">The Marketplace</a>
+      <a href="../skills-marketplace/browse/">Browse the Marketplace</a>
+      <a href="../skills-marketplace/commission/">Commission One</a>
       <a href="../skills-marketplace/for-developers/">For Developers</a>
     </div>
-    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutServices">
-      <a href="../individuals/">For Individuals</a>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutWork">
+      <a href="../individuals/">Guided Setup</a>
       <a href="../business/">For Business</a>
+      <a href="../what-you-need/">What You Need</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutLearn">
       <a href="../how-it-works/">How It Works</a>
       <a href="../ai-explained/">AI Explained</a>
       <a href="../blog/">Blog</a>
-      <a href="../equipment/">Equipment Needed</a>
       <a href="../faq/">FAQ</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompany">
-      <a href="../about/">About</a>
+      <a href="../our-story/">Our Story</a>
       <a href="../testimonials/">Agent Successes</a>
       <a href="../contact/">Contact</a>
     </div>
@@ -119,8 +155,8 @@
     <div class="progress-wrap" id="progressWrap" role="progressbar" aria-label="Form progress">
       <div class="progress-wrap-inner">
         <div class="progress-meta">
-          <span class="progress-step-label" id="progressLabel">Introduction</span>
-          <span class="progress-step-count" id="progressCount">Section 1 of 7</span>
+          <span class="progress-step-label" id="progressLabel">Get Started</span>
+          <span class="progress-step-count" id="progressCount">Section 1 of 6</span>
         </div>
         <div class="progress-track">
           <div class="progress-fill" id="progressFill"></div>
@@ -136,10 +172,33 @@
       <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
       <div class="form-container">
 
-        <!-- ── Section 1: Introduction ── -->
-        <div class="form-step active" id="step-1" aria-label="Section 1: Introduction">
-          <h2 class="step-heading">Otian AI Intake Questionnaire</h2>
-          <p class="step-subheading">A short form before we start your AI Agent journey with Otian AI!</p>
+        <!-- ── Step: Get Started (fork) ── -->
+        <div class="form-step active" id="step-intent" aria-label="Get started">
+          <h2 class="step-heading">Get Started</h2>
+          <p class="step-subheading">Two ways to start. Pick the one that fits and we&rsquo;ll keep this short.</p>
+
+          <div class="form-group">
+            <fieldset>
+              <legend class="form-label">What brings you here?<span class="required-star" aria-hidden="true">*</span></legend>
+              <div class="radio-group">
+                <label class="radio-option fork-option">
+                  <input type="radio" name="intent" value="waitlist" />
+                  <span>
+                    <span class="fork-option-title">Put me on the Archie waitlist</span>
+                    <span class="fork-option-desc">Archie is our desktop app for building personal AI agents that run on your own computer. The waitlist hears the moment it lands.</span>
+                  </span>
+                </label>
+                <label class="radio-option fork-option">
+                  <input type="radio" name="intent" value="guided" />
+                  <span>
+                    <span class="fork-option-title">I want help setting up an agent</span>
+                    <span class="fork-option-desc">Our guided setup &mdash; we build your agent with you, starting with a free call. A few questions here help us come prepared.</span>
+                  </span>
+                </label>
+              </div>
+              <span class="form-error-msg" id="intentError" role="alert">Please pick one to continue.</span>
+            </fieldset>
+          </div>
 
           <div class="step-nav">
             <div class="step-nav-left"></div>
@@ -149,23 +208,33 @@
           </div>
         </div>
 
-        <!-- ── Section 2: Welcome ── -->
-        <div class="form-step" id="step-2" aria-label="Section 2: Welcome">
-          <h2 class="step-heading">Welcome!</h2>
+        <!-- ── Step: Waitlist (short path) ── -->
+        <div class="form-step" id="step-waitlist" aria-label="Join the Archie waitlist">
+          <h2 class="step-heading">Join the Archie Waitlist</h2>
+          <p class="step-subheading">Two quick questions and you&rsquo;re on the list.</p>
 
-          <div class="welcome-content">
-            <h3>What is an AI Agent, and what is OpenClaw?</h3>
-            <p>Think of an AI agent as a personal agent that lives on a small computer and works for you around the clock. Instead of opening an app and asking it questions one at a time, you can message it, just like texting a friend, and it goes and does the task: checks your email, organizes files, sets reminders, looks things up online, and more.</p>
-            <p>OpenClaw is the technology that makes this possible. It is the "engine" that runs your AI agent and connects it to apps you already use, like WhatsApp, email, or Telegram. We set this up and run it for you on a small dedicated computer (a Mac Mini), so you do not have to install or manage anything yourself.</p>
+          <div class="form-group">
+            <label class="form-label" for="waitlistEmail">Email address<span class="required-star" aria-hidden="true">*</span></label>
+            <input class="form-input" type="email" id="waitlistEmail" name="waitlistEmail" placeholder="your@email.com" autocomplete="email" />
+            <span class="form-error-msg" id="waitlistEmailError" role="alert"></span>
+          </div>
 
-            <h3>A few things to know before we get started:</h3>
-            <ul>
-              <li>It is powered by AI models you may have heard of (like Claude or ChatGPT). These usually come with their own monthly subscription, separate from our setup service. We will help you figure out what fits your budget.</li>
-              <li>You are in control of what it can access. We will only connect it to the accounts and apps you approve, nothing more.</li>
-              <li>No tech experience needed. We handle the setup; you just tell us what you would like help with.</li>
-            </ul>
-
-            <p>The questions below will help us tailor your AI agent to exactly what you need.</p>
+          <div class="form-group">
+            <fieldset>
+              <legend class="form-label">Which computer would your agent run on?<span class="required-star" aria-hidden="true">*</span></legend>
+              <div class="radio-group">
+                <label class="radio-option">
+                  <input type="radio" name="platform" value="mac" />
+                  <span>Mac</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="platform" value="windows" />
+                  <span>Windows</span>
+                </label>
+              </div>
+              <span class="form-error-msg" id="platformError" role="alert">Please select an option.</span>
+              <span class="form-hint">Wondering where Archie stands today? <a href="../archie/#status">Check the current status</a>.</span>
+            </fieldset>
           </div>
 
           <div class="step-nav">
@@ -173,14 +242,18 @@
               <button type="button" class="btn btn-secondary btn-back">Back</button>
             </div>
             <div class="step-nav-right">
-              <button type="button" class="btn btn-primary btn-next">Next: About You</button>
+              <button type="button" class="btn btn-primary btn-submit" id="waitlistSubmitBtn">Join the Waitlist</button>
             </div>
           </div>
         </div>
 
-        <!-- ── Section 3: About You ── -->
-        <div class="form-step" id="step-3" aria-label="Section 3: About You">
+        <!-- ── Step: About You (guided path) ── -->
+        <div class="form-step" id="step-about" aria-label="About you">
           <h2 class="step-heading">About You</h2>
+
+          <div class="inline-note">
+            <strong>How pricing works:</strong> your first call is free. Guided setup is $100 a session, and each session runs an hour. The rate never goes up because a setup is complicated &mdash; a bigger setup can simply take more than one session, and we&rsquo;ll tell you which yours is on that free call. Archie is normally $20/month and free while you&rsquo;re an active client. The AI itself is pay-as-you-go on your own account, billed straight to you. <a href="../archie/pricing/">Every cost, in full</a>.
+          </div>
 
           <div class="form-group">
             <label class="form-label" for="fullName">First and last name<span class="required-star" aria-hidden="true">*</span></label>
@@ -216,8 +289,8 @@
           </div>
         </div>
 
-        <!-- ── Section 4: What You Want Help With ── -->
-        <div class="form-step" id="step-4" aria-label="Section 4: What You Want Help With">
+        <!-- ── Step: What You Want Help With (guided path) ── -->
+        <div class="form-step" id="step-help" aria-label="What you want help with">
           <h2 class="step-heading">What You Want Help With</h2>
 
           <div class="form-group">
@@ -301,16 +374,16 @@
               <legend class="form-label">How would you like to message your AI agent?<span class="required-star" aria-hidden="true">*</span></legend>
               <div class="radio-group">
                 <label class="radio-option">
-                  <input type="radio" name="messagingPref" value="whatsapp" />
-                  <span>WhatsApp</span>
-                </label>
-                <label class="radio-option">
                   <input type="radio" name="messagingPref" value="telegram" />
                   <span>Telegram</span>
                 </label>
                 <label class="radio-option">
-                  <input type="radio" name="messagingPref" value="email" />
-                  <span>Email</span>
+                  <input type="radio" name="messagingPref" value="discord" />
+                  <span>Discord</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="messagingPref" value="slack" />
+                  <span>Slack</span>
                 </label>
                 <label class="radio-option">
                   <input type="radio" name="messagingPref" value="recommend" />
@@ -331,8 +404,8 @@
           </div>
         </div>
 
-        <!-- ── Section 5: How Hands-On You Want To Be ── -->
-        <div class="form-step" id="step-5" aria-label="Section 5: How Hands-On You Want To Be">
+        <!-- ── Step: How Hands-On You Want To Be (guided path) ── -->
+        <div class="form-step" id="step-handson" aria-label="How hands-on you want to be">
           <h2 class="step-heading">How Hands-On You Want To Be</h2>
           <p class="step-subheading">We set up every agent with sensible defaults that protect you from day one. It will never send a message, make a purchase, or take an irreversible action without your approval first. These questions help us understand your preferences beyond those basics.</p>
 
@@ -427,8 +500,8 @@
           </div>
         </div>
 
-        <!-- ── Section 6: Your Comfort Level ── -->
-        <div class="form-step" id="step-6" aria-label="Section 6: Your Comfort Level">
+        <!-- ── Step: Your Comfort Level (guided path) ── -->
+        <div class="form-step" id="step-comfort" aria-label="Your comfort level">
           <h2 class="step-heading">Your Comfort Level</h2>
 
           <div class="form-group">
@@ -531,13 +604,13 @@
           </div>
         </div>
 
-        <!-- ── Section 7: Closing ── -->
-        <div class="form-step" id="step-7" aria-label="Section 7: Closing">
+        <!-- ── Step: Closing (guided path) ── -->
+        <div class="form-step" id="step-closing" aria-label="Closing">
           <h2 class="step-heading">Closing</h2>
 
           <div class="form-group">
             <fieldset>
-              <legend class="form-label">Your agent will run on an AI model (like ChatGPT, Claude, or Gemini) that has its own cost separate from our services. Do you already pay for any of these?<span class="required-star" aria-hidden="true">*</span></legend>
+              <legend class="form-label">Your agent runs on an AI model (like ChatGPT, Claude, or Gemini) on your own account, so it has its own cost separate from our services. Do you already pay for any of these?<span class="required-star" aria-hidden="true">*</span></legend>
               <div class="checkbox-group">
                 <label class="checkbox-option">
                   <input type="checkbox" name="aiTools" value="chatgpt" />
@@ -579,7 +652,7 @@
               <button type="button" class="btn btn-secondary btn-back">Back</button>
             </div>
             <div class="step-nav-right">
-              <button type="button" class="btn btn-primary" id="submitBtn">Submit</button>
+              <button type="button" class="btn btn-primary btn-submit" id="submitBtn">Submit</button>
             </div>
           </div>
         </div>
@@ -596,18 +669,25 @@
           <polyline points="20 6 9 17 4 12"/>
         </svg>
       </div>
-      <h2>Thanks, <span id="thankyouName">there</span>.</h2>
-      <p>We have received your answers and will be in touch shortly.</p>
-      
-      <div class="booking-section">
-        <h3>Next Step: Schedule Your Discovery Call &mdash; Completely Free</h3>
-        <p>Pick a time that works for you. This call is completely free, no commitment. We'll discuss your setup, timeline, and any questions you have.</p>
-        <div class="booking-container" id="bookingContainer">
-          <div class="booking-frame">
-            <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3J_UEhWgB7rc7sbaw7tn9eHOdcM2drCLefkU9aXnzft0BZz4Rlal6NMFQfTSH0JcXst_rQHMrp?gv=true" title="Book a time on our Google Calendar" loading="lazy"></iframe>
+      <div id="thankyouGuided">
+        <h2>Thanks, <span id="thankyouName">there</span>.</h2>
+        <p>We&rsquo;ve received your answers and will be in touch shortly.</p>
+
+        <div class="booking-section">
+          <h3>Next Step: Schedule Your First Call &mdash; Completely Free</h3>
+          <p>Pick a time that works for you. This call is completely free, no commitment. We&rsquo;ll discuss your setup, how many sessions it&rsquo;ll take, and any questions you have.</p>
+          <div class="booking-container" id="bookingContainer">
+            <div class="booking-frame">
+              <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3J_UEhWgB7rc7sbaw7tn9eHOdcM2drCLefkU9aXnzft0BZz4Rlal6NMFQfTSH0JcXst_rQHMrp?gv=true" title="Book a time on our Google Calendar" loading="lazy"></iframe>
+            </div>
+            <p class="booking-note">If the calendar isn&rsquo;t loading, you can also <a href="mailto:questions@otianai.com?subject=Schedule%20a%20Free%20First%20Call">email us to schedule</a>.</p>
           </div>
-          <p class="booking-note">If the calendar isn't loading, you can also <a href="mailto:questions@otianai.com?subject=Schedule%20a%20Discovery%20Call">email us to schedule</a>.</p>
         </div>
+      </div>
+
+      <div id="thankyouWaitlist" hidden>
+        <h2>You&rsquo;re on the list.</h2>
+        <p>We&rsquo;ll email you the moment Archie is ready for you. In the meantime, <a href="../archie/">see what Archie can do</a>.</p>
       </div>
 
       <a href="../" class="btn btn-secondary">Back to Home</a>
@@ -623,22 +703,25 @@
       <div class="footer-grid">
         <div>
           <div class="footer-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /></div>
-          <p class="footer-tagline">Guided AI agents for real life</p>
+          <p class="footer-tagline">Secure AI agents, your way.<br />Easy plug-and-play, fully in your control.</p>
         </div>
         <div>
           <h4 class="footer-col-title">Pages</h4>
           <nav class="footer-nav-links" aria-label="Footer navigation">
             <a href="../">Home</a>
-            <a href="../how-it-works/">How It Works</a>
             <a href="../archie/">Archie</a>
-            <a href="../skills-marketplace/browse/">Marketplace</a>
-            <a href="../individuals/">For Individuals</a>
+            <a href="../archie/see-it-work/">See It Work</a>
+            <a href="../archie/pricing/">Archie Pricing</a>
+            <a href="../skills-marketplace/browse/">Browse the Marketplace</a>
+            <a href="../skills-marketplace/commission/">Commission an Add-on</a>
+            <a href="../individuals/">Guided Setup</a>
             <a href="../business/">For Business</a>
-            <a href="../about/">About</a>
-            <a href="../faq/">FAQ</a>
+            <a href="../what-you-need/">What You Need</a>
+            <a href="../how-it-works/">How It Works</a>
             <a href="../ai-explained/">AI Explained</a>
             <a href="../blog/">Blog</a>
-            <a href="../equipment/">Equipment Needed</a>
+            <a href="../faq/">FAQ</a>
+            <a href="../our-story/">Our Story</a>
             <a href="../testimonials/">Agent Successes</a>
             <a href="../contact/">Contact</a>
           </nav>

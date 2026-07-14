@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>FAQ | Otian AI</title>
-  <meta name="description" content="Answers to the most common questions about AI agents and how Otian AI works." />
+  <meta name="description" content="Answers to the most common questions about personal AI agents, Archie, guided setup, pricing, and how Otian AI keeps everything in your control." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -18,22 +18,31 @@
        ============================== -->
   <nav class="nav" id="nav" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="../" class="nav-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Guided AI Agents</span></span></a>
+      <a href="../" class="nav-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Secure AI Agents, Your Way</span></span></a>
       <div class="nav-links">
-        <div class="nav-more" id="navMarketplace">
-          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Archie</button>
-          <div class="nav-more-menu" id="navMarketplaceMenu" role="menu" aria-label="Archie">
+        <div class="nav-more" id="navArchie">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navArchieMenu" type="button">Archie</button>
+          <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
             <a href="../archie/" role="menuitem">What Is Archie?</a>
+            <a href="../archie/see-it-work/" role="menuitem">See It Work</a>
+            <a href="../archie/pricing/" role="menuitem">Pricing</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navAddons">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navAddonsMenu" type="button">Add-ons</button>
+          <div class="nav-more-menu" id="navAddonsMenu" role="menu" aria-label="Add-ons">
             <a href="../skills-marketplace/what-is-an-add-on/" role="menuitem">What's an Add-on?</a>
-            <a href="../skills-marketplace/browse/" role="menuitem">The Marketplace</a>
+            <a href="../skills-marketplace/browse/" role="menuitem">Browse the Marketplace</a>
+            <a href="../skills-marketplace/commission/" role="menuitem">Commission One</a>
             <a href="../skills-marketplace/for-developers/" role="menuitem">For Developers</a>
           </div>
         </div>
-        <div class="nav-more" id="navServices">
-          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navServicesMenu" type="button">Services</button>
-          <div class="nav-more-menu" id="navServicesMenu" role="menu" aria-label="Services">
-            <a href="../individuals/" role="menuitem">For Individuals</a>
+        <div class="nav-more" id="navWork">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navWorkMenu" type="button">Work With Us</button>
+          <div class="nav-more-menu" id="navWorkMenu" role="menu" aria-label="Work With Us">
+            <a href="../individuals/" role="menuitem">Guided Setup</a>
             <a href="../business/" role="menuitem">For Business</a>
+            <a href="../what-you-need/" role="menuitem">What You Need</a>
           </div>
         </div>
         <div class="nav-more" id="navLearn">
@@ -42,14 +51,13 @@
             <a href="../how-it-works/" role="menuitem">How It Works</a>
             <a href="../ai-explained/" role="menuitem">AI Explained</a>
             <a href="../blog/" role="menuitem">Blog</a>
-            <a href="../equipment/" role="menuitem">Equipment Needed</a>
             <a href="../faq/" role="menuitem">FAQ</a>
           </div>
         </div>
         <div class="nav-more" id="navCompany">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompanyMenu" type="button">Company</button>
           <div class="nav-more-menu" id="navCompanyMenu" role="menu" aria-label="Company">
-            <a href="../about/" role="menuitem">About</a>
+            <a href="../our-story/" role="menuitem">Our Story</a>
             <a href="../testimonials/" role="menuitem">Agent Successes</a>
             <a href="../contact/" role="menuitem">Contact</a>
           </div>
@@ -64,8 +72,9 @@
 
   <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
   <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
-    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutMarketplace" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
-    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutServices" aria-expanded="false" aria-controls="navDrawerFlyout">Services</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutArchie" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutAddons" aria-expanded="false" aria-controls="navDrawerFlyout">Add-ons</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutWork" aria-expanded="false" aria-controls="navDrawerFlyout">Work With Us</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
     <a href="../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
@@ -74,27 +83,32 @@
   <div class="nav-drawer-flyout" id="navDrawerFlyout" aria-hidden="true">
     <button class="nav-drawer-back" type="button">
       <svg class="nav-drawer-back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-      <span id="navDrawerFlyoutTitle">Services</span>
+      <span id="navDrawerFlyoutTitle">Archie</span>
     </button>
-    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutMarketplace">
+    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
       <a href="../archie/">What Is Archie?</a>
+      <a href="../archie/see-it-work/">See It Work</a>
+      <a href="../archie/pricing/">Pricing</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutAddons">
       <a href="../skills-marketplace/what-is-an-add-on/">What's an Add-on?</a>
-      <a href="../skills-marketplace/browse/">The Marketplace</a>
+      <a href="../skills-marketplace/browse/">Browse the Marketplace</a>
+      <a href="../skills-marketplace/commission/">Commission One</a>
       <a href="../skills-marketplace/for-developers/">For Developers</a>
     </div>
-    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutServices">
-      <a href="../individuals/">For Individuals</a>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutWork">
+      <a href="../individuals/">Guided Setup</a>
       <a href="../business/">For Business</a>
+      <a href="../what-you-need/">What You Need</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutLearn">
       <a href="../how-it-works/">How It Works</a>
       <a href="../ai-explained/">AI Explained</a>
       <a href="../blog/">Blog</a>
-      <a href="../equipment/">Equipment Needed</a>
       <a href="../faq/">FAQ</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompany">
-      <a href="../about/">About</a>
+      <a href="../our-story/">Our Story</a>
       <a href="../testimonials/">Agent Successes</a>
       <a href="../contact/">Contact</a>
     </div>
@@ -158,7 +172,7 @@
               </button>
               <div class="accordion-body">
                 <div class="accordion-body-inner">
-                  This is something we lead with, not something that happens by accident. Setup isn't just us installing software and handing you a finished product - it's a real back-and-forth where we walk you through what the technology can and can't do, and why we're making each choice. You don't need to become technical, but you should walk away understanding your own agent, not just using it. The best results come when a client understands the tool well enough to keep imagining new things for it to do - so before we build anything, we sit down together and shape a vision for what your agent should become. The scope of work comes out of that conversation, not the other way around.
+                  This is something we lead with, not something that happens by accident. Setup isn&rsquo;t just us installing software and handing you a finished product &mdash; it&rsquo;s a real back-and-forth where we walk you through what the technology can and can&rsquo;t do, and why we&rsquo;re making each choice. You don&rsquo;t need to become technical, but you should walk away understanding your own agent, not just using it. The best results come when a client understands the tool well enough to keep imagining new things for it to do &mdash; so before we build anything, we sit down together and shape a vision for what your agent should become. The scope of work comes out of that conversation, not the other way around.
                 </div>
               </div>
             </div>
@@ -176,7 +190,20 @@
               </button>
               <div class="accordion-body">
                 <div class="accordion-body-inner">
-                  $100 per guided session. Your first one is a free 30-minute consultation - we'll talk through your goals, what your agent should look like, and a rough timeline. No cost, no obligation. If you decide to move forward, sessions from there are $100 each.
+                  Guided sessions are $100 each, and a session runs an hour. The rate never goes up because a setup is complicated &mdash; a bigger setup just takes more than one session, and we tell you which on the free first call. That first call is a 30-minute consultation: we&rsquo;ll talk through your goals, what your agent should look like, and a rough timeline. No cost, no obligation. The Archie app itself is $20/month &mdash; and free for active clients of the guided service.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item" role="listitem" id="faq-clients-archie">
+              <button class="accordion-trigger" aria-expanded="false">
+                Do clients pay for Archie?
+                <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+              </button>
+              <div class="accordion-body">
+                <div class="accordion-body-inner">
+                  No. Working with Otian on a guided setup? Archie is included free for as long as you&rsquo;re an active client. The $20/month subscription is only for people using the app on their own.
                 </div>
               </div>
             </div>
@@ -189,7 +216,7 @@
               </button>
               <div class="accordion-body">
                 <div class="accordion-body-inner">
-                  Yes, and it&rsquo;s small and separate from our service fee &mdash; though how it works depends on which path you&rsquo;re on. If we&rsquo;re setting up your agent together through our guided service, you&rsquo;ll want a standard AI subscription (like Claude Pro or ChatGPT Plus, usually around $20 per month) to work with during the build. If you&rsquo;re using the Archie app, it connects to the AI through your own API key instead &mdash; a pay-as-you-go account where you only pay for what your agent actually does. Each message costs anywhere from a fraction of a cent to a few cents, so a typical personal agent runs just a few dollars a month. You add a little credit up front (say $5&ndash;$20), it draws down slowly, and you can set a hard spending cap on the provider&rsquo;s website. Inside Archie you can also dial each agent between <strong>Economy, Balanced, and Best</strong> models, so you decide the balance of cost and quality.
+                  Yes, and it&rsquo;s small and separate from our service fee &mdash; though how it works depends on which path you&rsquo;re on. If we&rsquo;re setting up your agent together through our guided service, you&rsquo;ll want a standard AI subscription (like Claude Pro or ChatGPT Plus, usually around $20 per month) to work with during the build. If you&rsquo;re using the Archie app, it connects to the AI through your own API key instead &mdash; a pay-as-you-go account where you only pay for what your agent actually does. Each message costs anywhere from a fraction of a cent to a few cents, so a typical personal agent runs just a few dollars a month. Work it hard &mdash; long research, big documents, all-day back-and-forth &mdash; and it climbs into the tens of dollars, still a fraction of what a person doing the same job would cost. You add a little credit up front (say $5&ndash;$20), it draws down slowly, and you can set a hard spending cap on the provider&rsquo;s website. Inside Archie you can also dial each agent between <strong>Economy, Balanced, and Best</strong> models, so you decide the balance of cost and quality.
                 </div>
               </div>
             </div>
@@ -259,7 +286,7 @@
               </button>
               <div class="accordion-body">
                 <div class="accordion-body-inner">
-                  Nothing is permanent - if something goes wrong, we fix or undo it, then fine-tune based on your feedback. Early mistakes are a normal, expected part of the process; that's what the tuning period is for.
+                  Nothing is permanent &mdash; if something goes wrong, we fix or undo it, then fine-tune based on your feedback. Early mistakes are a normal, expected part of the process; that&rsquo;s what the tuning period is for.
                 </div>
               </div>
             </div>
@@ -272,7 +299,7 @@
               </button>
               <div class="accordion-body">
                 <div class="accordion-body-inner">
-                  No. Archie runs on your own computer, and your agent&rsquo;s instructions, uploaded files, chat history, and API key are all stored on your Mac &mdash; the key is kept in the Mac&rsquo;s built-in Keychain and never leaves your device. Everything lives in a secure folder just for Archie; if you remove the app, that data goes with it. Otian AI does not store, read, or have any access to it. When your agent needs to think, it sends that request to the AI company you chose &mdash; on your account, with your key, the same way you already use Claude or ChatGPT. We are never in the middle of it. The only thing our servers know is whether your subscription is active (your email and payment status) so we can let you into the app. Nothing else.
+                  No. Archie runs on your own computer, and your agent&rsquo;s instructions, uploaded files, chat history, and API key are all stored on your computer &mdash; the key is kept in your system&rsquo;s own keychain, where we can&rsquo;t read it. Everything lives in a secure folder just for Archie; if you remove the app, that data goes with it. Otian AI does not store, read, or have any access to it. When your agent needs to think, it sends that request to the AI company you chose &mdash; on your account, with your key, the same way you already use Claude or ChatGPT. We are never in the middle of it. The only thing our servers know is whether your subscription is active (your email and payment status) so we can let you into the app. Nothing else.
                 </div>
               </div>
             </div>
@@ -320,6 +347,19 @@
                 </div>
               </div>
             </div>
+            <div class="accordion-item" role="listitem" id="faq-no-ceiling">
+              <button class="accordion-trigger" aria-expanded="false">
+                What if Archie can&rsquo;t do what I need?
+                <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+              </button>
+              <div class="accordion-body">
+                <div class="accordion-body-inner">
+                  Tell us. We&rsquo;ll scope it, quote it, and build the add-on. It&rsquo;s yours, and it goes on the marketplace so the next person doesn&rsquo;t have to ask. <a href="../skills-marketplace/commission/">Commission an add-on</a> to get started.
+                </div>
+              </div>
+            </div>
             <div class="accordion-item" role="listitem">
               <button class="accordion-trigger" aria-expanded="false">
                 How much attention does it need, and are you still available after setup?
@@ -338,16 +378,16 @@
         <div class="faq-group fade-up">
           <h3 class="faq-group-title">Practical Details</h3>
           <div class="accordion" role="list">
-            <div class="accordion-item" role="listitem">
+            <div class="accordion-item" role="listitem" id="faq-mac-mini">
               <button class="accordion-trigger" aria-expanded="false">
-                Do I need any special hardware?
+                Do I need a Mac mini?
                 <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
                 </svg>
               </button>
               <div class="accordion-body">
                 <div class="accordion-body-inner">
-                  Your agent runs on a small dedicated computer &mdash; a Mac Mini &mdash; that sits in your home or office and stays on around the clock. We help you source one if you don't have it yet, walk you through the setup over Zoom, and handle everything from there.
+                  No. You need a computer you&rsquo;re happy to leave on; a Mac mini is the easy answer, never the requirement. Archie runs on Mac today, with Windows next &mdash; <a href="../archie/#status">here&rsquo;s where that stands</a>. The full list of what you&rsquo;ll want ready is at <a href="../what-you-need/">What You Need</a>.
                 </div>
               </div>
             </div>
@@ -392,22 +432,25 @@
       <div class="footer-grid">
         <div>
           <div class="footer-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /></div>
-          <p class="footer-tagline">Guided AI agents for real life</p>
+          <p class="footer-tagline">Secure AI agents, your way.<br />Easy plug-and-play, fully in your control.</p>
         </div>
         <div>
           <h4 class="footer-col-title">Pages</h4>
           <nav class="footer-nav-links" aria-label="Footer navigation">
             <a href="../">Home</a>
-            <a href="../how-it-works/">How It Works</a>
             <a href="../archie/">Archie</a>
-            <a href="../skills-marketplace/browse/">Marketplace</a>
-            <a href="../individuals/">For Individuals</a>
+            <a href="../archie/see-it-work/">See It Work</a>
+            <a href="../archie/pricing/">Archie Pricing</a>
+            <a href="../skills-marketplace/browse/">Browse the Marketplace</a>
+            <a href="../skills-marketplace/commission/">Commission an Add-on</a>
+            <a href="../individuals/">Guided Setup</a>
             <a href="../business/">For Business</a>
-            <a href="../about/">About</a>
-            <a href="../faq/">FAQ</a>
+            <a href="../what-you-need/">What You Need</a>
+            <a href="../how-it-works/">How It Works</a>
             <a href="../ai-explained/">AI Explained</a>
             <a href="../blog/">Blog</a>
-            <a href="../equipment/">Equipment Needed</a>
+            <a href="../faq/">FAQ</a>
+            <a href="../our-story/">Our Story</a>
             <a href="../testimonials/">Agent Successes</a>
             <a href="../contact/">Contact</a>
           </nav>

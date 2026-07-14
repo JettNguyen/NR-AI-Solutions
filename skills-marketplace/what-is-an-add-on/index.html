@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>What's an Add-on? | Otian AI</title>
-  <meta name="description" content="An add-on is anything you add to your Archie agent to make it more yours — a new skill, a friendlier voice, a task it handles on its own, or an extra helper. Archie is in beta." />
+  <meta name="description" content="An add-on is anything you add to your Archie agent to make it more yours — a new skill, a friendlier voice, a task it handles on its own, or an extra helper. Coming with Archie's launch." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -18,22 +18,31 @@
        ============================== -->
   <nav class="nav" id="nav" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="../../" class="nav-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Guided AI Agents</span></span></a>
+      <a href="../../" class="nav-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Secure AI Agents, Your Way</span></span></a>
       <div class="nav-links">
-        <div class="nav-more" id="navMarketplace">
-          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Archie</button>
-          <div class="nav-more-menu" id="navMarketplaceMenu" role="menu" aria-label="Archie">
+        <div class="nav-more" id="navArchie">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navArchieMenu" type="button">Archie</button>
+          <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
             <a href="../../archie/" role="menuitem">What Is Archie?</a>
+            <a href="../../archie/see-it-work/" role="menuitem">See It Work</a>
+            <a href="../../archie/pricing/" role="menuitem">Pricing</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navAddons">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navAddonsMenu" type="button">Add-ons</button>
+          <div class="nav-more-menu" id="navAddonsMenu" role="menu" aria-label="Add-ons">
             <a href="../../skills-marketplace/what-is-an-add-on/" role="menuitem">What's an Add-on?</a>
-            <a href="../../skills-marketplace/browse/" role="menuitem">The Marketplace</a>
+            <a href="../../skills-marketplace/browse/" role="menuitem">Browse the Marketplace</a>
+            <a href="../../skills-marketplace/commission/" role="menuitem">Commission One</a>
             <a href="../../skills-marketplace/for-developers/" role="menuitem">For Developers</a>
           </div>
         </div>
-        <div class="nav-more" id="navServices">
-          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navServicesMenu" type="button">Services</button>
-          <div class="nav-more-menu" id="navServicesMenu" role="menu" aria-label="Services">
-            <a href="../../individuals/" role="menuitem">For Individuals</a>
+        <div class="nav-more" id="navWork">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navWorkMenu" type="button">Work With Us</button>
+          <div class="nav-more-menu" id="navWorkMenu" role="menu" aria-label="Work With Us">
+            <a href="../../individuals/" role="menuitem">Guided Setup</a>
             <a href="../../business/" role="menuitem">For Business</a>
+            <a href="../../what-you-need/" role="menuitem">What You Need</a>
           </div>
         </div>
         <div class="nav-more" id="navLearn">
@@ -42,14 +51,13 @@
             <a href="../../how-it-works/" role="menuitem">How It Works</a>
             <a href="../../ai-explained/" role="menuitem">AI Explained</a>
             <a href="../../blog/" role="menuitem">Blog</a>
-            <a href="../../equipment/" role="menuitem">Equipment Needed</a>
             <a href="../../faq/" role="menuitem">FAQ</a>
           </div>
         </div>
         <div class="nav-more" id="navCompany">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompanyMenu" type="button">Company</button>
           <div class="nav-more-menu" id="navCompanyMenu" role="menu" aria-label="Company">
-            <a href="../../about/" role="menuitem">About</a>
+            <a href="../../our-story/" role="menuitem">Our Story</a>
             <a href="../../testimonials/" role="menuitem">Agent Successes</a>
             <a href="../../contact/" role="menuitem">Contact</a>
           </div>
@@ -64,8 +72,9 @@
 
   <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
   <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
-    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutMarketplace" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
-    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutServices" aria-expanded="false" aria-controls="navDrawerFlyout">Services</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutArchie" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutAddons" aria-expanded="false" aria-controls="navDrawerFlyout">Add-ons</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutWork" aria-expanded="false" aria-controls="navDrawerFlyout">Work With Us</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
     <a href="../../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
@@ -74,27 +83,32 @@
   <div class="nav-drawer-flyout" id="navDrawerFlyout" aria-hidden="true">
     <button class="nav-drawer-back" type="button">
       <svg class="nav-drawer-back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-      <span id="navDrawerFlyoutTitle">Services</span>
+      <span id="navDrawerFlyoutTitle">Archie</span>
     </button>
-    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutMarketplace">
+    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
       <a href="../../archie/">What Is Archie?</a>
+      <a href="../../archie/see-it-work/">See It Work</a>
+      <a href="../../archie/pricing/">Pricing</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutAddons">
       <a href="../../skills-marketplace/what-is-an-add-on/">What's an Add-on?</a>
-      <a href="../../skills-marketplace/browse/">The Marketplace</a>
+      <a href="../../skills-marketplace/browse/">Browse the Marketplace</a>
+      <a href="../../skills-marketplace/commission/">Commission One</a>
       <a href="../../skills-marketplace/for-developers/">For Developers</a>
     </div>
-    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutServices">
-      <a href="../../individuals/">For Individuals</a>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutWork">
+      <a href="../../individuals/">Guided Setup</a>
       <a href="../../business/">For Business</a>
+      <a href="../../what-you-need/">What You Need</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutLearn">
       <a href="../../how-it-works/">How It Works</a>
       <a href="../../ai-explained/">AI Explained</a>
       <a href="../../blog/">Blog</a>
-      <a href="../../equipment/">Equipment Needed</a>
       <a href="../../faq/">FAQ</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompany">
-      <a href="../../about/">About</a>
+      <a href="../../our-story/">Our Story</a>
       <a href="../../testimonials/">Agent Successes</a>
       <a href="../../contact/">Contact</a>
     </div>
@@ -107,7 +121,7 @@
          ============================== -->
     <section class="page-hero" aria-label="Page introduction">
       <div class="page-hero-inner">
-        <span class="marketplace-status-badge fade-up">In Beta</span>
+        <a class="marketplace-status-badge fade-up" href="../../archie/#status">In Development &mdash; See Status</a>
         <span class="section-label fade-up">The Basics</span>
         <h1 class="fade-up delay-1">What's an Add-on?</h1>
         <p class="fade-up delay-2">The short version: it's anything you add to your agent to make it more yours.</p>
@@ -710,7 +724,7 @@
             <line x1="12" y1="8" x2="12" y2="12"/>
             <line x1="12" y1="16" x2="12.01" y2="16"/>
           </svg>
-          <p><strong>The marketplace isn't open yet.</strong> Archie is in beta, and add-ons go live when it's publicly released. You can browse the marketplace to see what's coming, but nothing is purchasable today. <a href="../browse/#waitlist-heading">Join the waitlist</a> and we'll tell you the moment it opens.</p>
+          <p><strong>The marketplace isn&rsquo;t open yet.</strong> Add-ons go live with <a href="../../archie/#status">Archie&rsquo;s launch</a>. You can browse the marketplace to see what&rsquo;s coming, but nothing is purchasable today. <a href="../browse/#waitlist-heading">Join the waitlist</a> and we&rsquo;ll tell you the moment it opens.</p>
         </div>
       </div>
     </section>
@@ -727,6 +741,7 @@
             <a href="../browse/" class="btn btn-primary btn-lg">Browse the Marketplace</a>
             <a href="../for-developers/" class="btn btn-secondary btn-lg">For Developers</a>
           </div>
+          <p style="margin-top: 28px; margin-bottom: 0;">Don&rsquo;t see what you need? If Archie can&rsquo;t do it yet, tell us &mdash; we&rsquo;ll build the add-on. <a class="marketplace-text-link" href="../commission/">Commission an add-on &rarr;</a></p>
         </div>
       </div>
     </section>
@@ -740,22 +755,25 @@
       <div class="footer-grid">
         <div>
           <div class="footer-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /></div>
-          <p class="footer-tagline">Guided AI agents for real life</p>
+          <p class="footer-tagline">Secure AI agents, your way.<br />Easy plug-and-play, fully in your control.</p>
         </div>
         <div>
           <h4 class="footer-col-title">Pages</h4>
           <nav class="footer-nav-links" aria-label="Footer navigation">
             <a href="../../">Home</a>
-            <a href="../../how-it-works/">How It Works</a>
             <a href="../../archie/">Archie</a>
-            <a href="../../skills-marketplace/browse/">Marketplace</a>
-            <a href="../../individuals/">For Individuals</a>
+            <a href="../../archie/see-it-work/">See It Work</a>
+            <a href="../../archie/pricing/">Archie Pricing</a>
+            <a href="../../skills-marketplace/browse/">Browse the Marketplace</a>
+            <a href="../../skills-marketplace/commission/">Commission an Add-on</a>
+            <a href="../../individuals/">Guided Setup</a>
             <a href="../../business/">For Business</a>
-            <a href="../../about/">About</a>
-            <a href="../../faq/">FAQ</a>
+            <a href="../../what-you-need/">What You Need</a>
+            <a href="../../how-it-works/">How It Works</a>
             <a href="../../ai-explained/">AI Explained</a>
             <a href="../../blog/">Blog</a>
-            <a href="../../equipment/">Equipment Needed</a>
+            <a href="../../faq/">FAQ</a>
+            <a href="../../our-story/">Our Story</a>
             <a href="../../testimonials/">Agent Successes</a>
             <a href="../../contact/">Contact</a>
           </nav>

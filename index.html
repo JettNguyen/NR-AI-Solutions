@@ -1,14 +1,14 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Otian AI - Your Time, Automated</title>
-  <meta name="description" content="Otian AI teaches and guides clients through setting up personal AI agents on their own computer, tailored to their technical comfort level." />
+  <title>Otian AI &mdash; Secure AI Agents, Your Way</title>
+  <meta name="description" content="Archie is the Otian AI desktop app for building personal AI agents that run on your own computer &mdash; modular add-ons, sends and purchases wait for your approval, fully in your control." />
   <meta name="application-name" content="Otian AI" />
   <meta property="og:site_name" content="Otian AI" />
-  <meta property="og:title" content="Otian AI - Your Time, Automated" />
-  <meta property="og:description" content="Otian AI sets up personal AI agents that run on your own computer, tailored to your technical comfort level." />
+  <meta property="og:title" content="Otian AI &mdash; Secure AI Agents, Your Way" />
+  <meta property="og:description" content="Archie is the Otian AI desktop app for building personal AI agents that run on your own computer &mdash; modular add-ons, sends and purchases wait for your approval, fully in your control." />
   <meta property="og:url" content="https://otianai.com/" />
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -24,22 +24,31 @@
        ============================== -->
   <nav class="nav" id="nav" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="./" class="nav-logo"><img src="assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Guided AI Agents</span></span></a>
+      <a href="./" class="nav-logo"><img src="assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Secure AI Agents, Your Way</span></span></a>
       <div class="nav-links">
-        <div class="nav-more" id="navMarketplace">
-          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Archie</button>
-          <div class="nav-more-menu" id="navMarketplaceMenu" role="menu" aria-label="Archie">
+        <div class="nav-more" id="navArchie">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navArchieMenu" type="button">Archie</button>
+          <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
             <a href="archie/" role="menuitem">What Is Archie?</a>
+            <a href="archie/see-it-work/" role="menuitem">See It Work</a>
+            <a href="archie/pricing/" role="menuitem">Pricing</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navAddons">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navAddonsMenu" type="button">Add-ons</button>
+          <div class="nav-more-menu" id="navAddonsMenu" role="menu" aria-label="Add-ons">
             <a href="skills-marketplace/what-is-an-add-on/" role="menuitem">What's an Add-on?</a>
-            <a href="skills-marketplace/browse/" role="menuitem">The Marketplace</a>
+            <a href="skills-marketplace/browse/" role="menuitem">Browse the Marketplace</a>
+            <a href="skills-marketplace/commission/" role="menuitem">Commission One</a>
             <a href="skills-marketplace/for-developers/" role="menuitem">For Developers</a>
           </div>
         </div>
-        <div class="nav-more" id="navServices">
-          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navServicesMenu" type="button">Services</button>
-          <div class="nav-more-menu" id="navServicesMenu" role="menu" aria-label="Services">
-            <a href="individuals/" role="menuitem">For Individuals</a>
+        <div class="nav-more" id="navWork">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navWorkMenu" type="button">Work With Us</button>
+          <div class="nav-more-menu" id="navWorkMenu" role="menu" aria-label="Work With Us">
+            <a href="individuals/" role="menuitem">Guided Setup</a>
             <a href="business/" role="menuitem">For Business</a>
+            <a href="what-you-need/" role="menuitem">What You Need</a>
           </div>
         </div>
         <div class="nav-more" id="navLearn">
@@ -48,14 +57,13 @@
             <a href="how-it-works/" role="menuitem">How It Works</a>
             <a href="ai-explained/" role="menuitem">AI Explained</a>
             <a href="blog/" role="menuitem">Blog</a>
-            <a href="equipment/" role="menuitem">Equipment Needed</a>
             <a href="faq/" role="menuitem">FAQ</a>
           </div>
         </div>
         <div class="nav-more" id="navCompany">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompanyMenu" type="button">Company</button>
           <div class="nav-more-menu" id="navCompanyMenu" role="menu" aria-label="Company">
-            <a href="about/" role="menuitem">About</a>
+            <a href="our-story/" role="menuitem">Our Story</a>
             <a href="testimonials/" role="menuitem">Agent Successes</a>
             <a href="contact/" role="menuitem">Contact</a>
           </div>
@@ -70,8 +78,9 @@
 
   <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
   <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
-    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutMarketplace" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
-    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutServices" aria-expanded="false" aria-controls="navDrawerFlyout">Services</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutArchie" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutAddons" aria-expanded="false" aria-controls="navDrawerFlyout">Add-ons</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutWork" aria-expanded="false" aria-controls="navDrawerFlyout">Work With Us</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
     <a href="questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
@@ -80,27 +89,32 @@
   <div class="nav-drawer-flyout" id="navDrawerFlyout" aria-hidden="true">
     <button class="nav-drawer-back" type="button">
       <svg class="nav-drawer-back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-      <span id="navDrawerFlyoutTitle">Services</span>
+      <span id="navDrawerFlyoutTitle">Archie</span>
     </button>
-    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutMarketplace">
+    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
       <a href="archie/">What Is Archie?</a>
+      <a href="archie/see-it-work/">See It Work</a>
+      <a href="archie/pricing/">Pricing</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutAddons">
       <a href="skills-marketplace/what-is-an-add-on/">What's an Add-on?</a>
-      <a href="skills-marketplace/browse/">The Marketplace</a>
+      <a href="skills-marketplace/browse/">Browse the Marketplace</a>
+      <a href="skills-marketplace/commission/">Commission One</a>
       <a href="skills-marketplace/for-developers/">For Developers</a>
     </div>
-    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutServices">
-      <a href="individuals/">For Individuals</a>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutWork">
+      <a href="individuals/">Guided Setup</a>
       <a href="business/">For Business</a>
+      <a href="what-you-need/">What You Need</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutLearn">
       <a href="how-it-works/">How It Works</a>
       <a href="ai-explained/">AI Explained</a>
       <a href="blog/">Blog</a>
-      <a href="equipment/">Equipment Needed</a>
       <a href="faq/">FAQ</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompany">
-      <a href="about/">About</a>
+      <a href="our-story/">Our Story</a>
       <a href="testimonials/">Agent Successes</a>
       <a href="contact/">Contact</a>
     </div>
@@ -109,31 +123,46 @@
   <main>
 
     <!-- ==============================
-         Hero
+         Hero — the Archie demo leads
          ============================== -->
     <section class="hero" aria-label="Hero">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-inner">
         <div class="hero-content">
           <span class="section-label fade-up">Otian AI</span>
-          <h1 class="fade-up delay-1"><span class="hero-title-full">Your Personal AI&nbsp;Agent.<br><em>Set Up For&nbsp;You.</em></span><span class="hero-title-short">Your AI Agent.<br><em>Set Up For&nbsp;You.</em></span></h1>
+          <h1 class="fade-up delay-1"><span class="hero-title-full">An AI agent<br>that&rsquo;s <em>actually yours</em>.</span><span class="hero-title-short">An AI agent that&rsquo;s <em>actually yours</em>.</span></h1>
           <p class="hero-subtitle fade-up delay-2">
-            We'll build it with you, on your own computer - as hands-on or hands-off as you like.
+            Archie is our desktop app for building AI agents that live in your chat apps and run on your own computer &mdash; your inbox, your calendar, the busywork that eats your week. Shape it with add-ons until it works the way you do.
           </p>
-          <p class="hero-subtitle fade-up delay-2">
-            Otian <span class="hero-pronunciation">(oh-tee-uhn)</span> is drawn from the Latin otium - the ease that comes when someone trusted is quietly handling your affairs for you.
-          </p>
+          <p class="hero-kicker fade-up delay-2">No terminal. No code. No middleman. <em>No ceiling.</em></p>
           <div class="hero-actions fade-up delay-3">
             <a href="questionnaire/" class="btn btn-primary btn-lg">Get Started</a>
-            <a href="how-it-works/" class="btn btn-secondary btn-lg">See How It Works</a>
+            <a href="how-it-works/" class="btn btn-secondary btn-lg">How It Works</a>
           </div>
         </div>
         <div class="hero-visual fade-up delay-2">
-          <div class="demo-video-wrap">
-            <video class="demo-video" autoplay loop muted playsinline>
-              <source src="assets/nr-demo.webm" type="video/webm" />
-            </video>
-          </div>
+          <!-- No frame, no caption, and it runs off the right edge of the screen on purpose: the
+               recording already contains a Mac window, so wrapping it in a second border is what
+               makes a demo read as "an embedded video" rather than as the product itself. -->
+          <figure class="demo-player demo-player--hero">
+            <div class="demo-player-frame">
+              <!-- No autoplay/src attribute here on purpose. js/demo-player.js attaches the source and
+                   starts playback the moment the hero is on screen, so the recording plays by itself —
+                   except for visitors who asked the OS for reduced motion, who get the poster and a
+                   play button instead. data-src is the deferred source. -->
+              <video class="demo-player-video" poster="assets/archie-hero-poster.jpg"
+                     data-src="assets/archie-hero-loop.mp4" preload="none"
+                     muted loop playsinline disablepictureinpicture
+                     aria-label="A silent, looping screen recording of Archie: browsing the marketplace for a personality and a calendar skill, and installing them into an agent called Archibald.">
+                <p>Your browser can&rsquo;t play this video. <a href="archie/see-it-work/">Watch the full demo instead.</a></p>
+              </video>
+              <!-- No pause control here on purpose. This loop is ambient wallpaper, not something to
+                   operate, so it runs silently the whole time the hero is on screen. Anyone who has
+                   asked their OS for reduced motion still gets a still poster instead of movement
+                   (js/demo-player.js), and the full recording — which does have a pause control —
+                   lives on /archie/see-it-work/. -->
+            </div>
+          </figure>
         </div>
       </div>
     </section>
@@ -143,11 +172,11 @@
          ============================== -->
     <div class="proof-bar" aria-label="Key facts">
       <div class="proof-bar-inner">
-        <span class="proof-label">Fully remote. We work with clients across the US.</span>
+        <span class="proof-label">Runs on your own computer, under your own accounts.</span>
         <div class="proof-chips">
-          <span class="proof-chip"><span class="proof-chip-dot" aria-hidden="true"></span>Typically Saves 10+ Hours a Week</span>
-          <span class="proof-chip"><span class="proof-chip-dot" aria-hidden="true"></span>Setup in Days, Not Months</span>
+          <span class="proof-chip"><span class="proof-chip-dot" aria-hidden="true"></span>We Never Hold Your Data</span>
           <span class="proof-chip"><span class="proof-chip-dot" aria-hidden="true"></span>Approval Required for Sends and Purchases</span>
+          <span class="proof-chip"><span class="proof-chip-dot" aria-hidden="true"></span>Clients Report Hours Back Every Week</span>
         </div>
       </div>
     </div>
@@ -160,7 +189,7 @@
         <div class="section-header">
           <span class="section-label fade-up">What We Do</span>
           <h2 id="what-heading" class="fade-up delay-1">What is a Personal AI Agent?</h2>
-          <p class="fade-up delay-2">Think of it as a remote assistant powered by AI. Message it tasks - "reply to this client," "find me a flight," "sort these files" - and it gets to work, then checks in when needed.</p>
+          <p class="fade-up delay-2">Think of it as a remote assistant powered by AI. Message it tasks &mdash; &ldquo;reply to this client,&rdquo; &ldquo;find me a flight,&rdquo; &ldquo;sort these files&rdquo; &mdash; and it gets to work, then checks in when needed.</p>
         </div>
         <figure class="explain-figure fade-up delay-1">
           <svg class="explain-svg--desktop" viewBox="0 0 476 292" role="img" aria-labelledby="dl-t" xmlns="http://www.w3.org/2000/svg" style="max-width:560px;font-family:inherit">
@@ -363,7 +392,7 @@
               </svg>
             </div>
             <h3>Always in Your Control</h3>
-            <p>Nothing happens without your approval - you decide what it can do, and can change that anytime.</p>
+            <p>Anything that leaves &mdash; a send, a purchase &mdash; waits for your approval. You decide what it can do, and can change that anytime.</p>
           </article>
 
           <article class="feature-card fade-up delay-2">
@@ -374,7 +403,7 @@
               </svg>
             </div>
             <h3>Works Around the Clock</h3>
-            <p>Your agent never sleeps - it handles tasks in the background while you're busy or asleep, then fills you in.</p>
+            <p>Your agent never sleeps &mdash; it handles tasks in the background while you&rsquo;re busy or asleep, then fills you in.</p>
           </article>
 
           <article class="feature-card fade-up delay-3">
@@ -386,9 +415,105 @@
               </svg>
             </div>
             <h3>No Tech Experience Needed</h3>
-            <p>You don't need any tech background - we explain everything in plain language, at your pace.</p>
+            <p>No terminal, no code. If you can install an app and send a message, you can run an agent.</p>
           </article>
 
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         The Modular System + No Ceiling
+         ============================== -->
+    <section class="section section-alt" aria-labelledby="addons-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">The Modular System</span>
+          <h2 id="addons-heading" class="fade-up delay-1">One Agent, Shaped by Add-ons</h2>
+          <p class="fade-up delay-2">Every agent starts simple and grows with add-ons &mdash; pieces you browse and install from the built-in marketplace, in a click. They come in four kinds.</p>
+        </div>
+
+        <div class="feature-grid feature-grid-4 fade-up delay-1">
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>
+              </svg>
+            </div>
+            <h3>Skills</h3>
+            <p>The things your agent can do. Inbox triage, calendar management, file cleanup &mdash; each one a new ability.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <h3>Workers</h3>
+            <p>Specialists your agent hands work to &mdash; a researcher, a writer &mdash; each focused on doing one thing well.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+              </svg>
+            </div>
+            <h3>Routines</h3>
+            <p>Things it does on its own, on a schedule. A briefing every morning, a report every Friday &mdash; without being asked.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+              </svg>
+            </div>
+            <h3>Personalities</h3>
+            <p>How your agent talks to you. Warm and chatty or brief and to the point &mdash; you set the voice and the vibe.</p>
+          </article>
+
+        </div>
+
+        <p class="addon-promise fade-up delay-2">And if Archie can&rsquo;t do it yet, <a href="skills-marketplace/commission/">tell us &mdash; we&rsquo;ll build the add-on</a>.</p>
+        <p class="addon-promise-sub fade-up delay-3">Every add-on we build for one person joins the marketplace for everyone. That&rsquo;s what &ldquo;no ceiling&rdquo; means.</p>
+      </div>
+    </section>
+
+    <!-- ==============================
+         What You Need
+         ============================== -->
+    <section class="section" aria-labelledby="need-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">What You Need</span>
+          <h2 id="need-heading" class="fade-up delay-1">The Whole Shopping List</h2>
+          <p class="fade-up delay-2">No servers to rent, no special hardware to buy. If you&rsquo;re reading this, you probably have everything already.</p>
+        </div>
+
+        <div class="steps-row">
+          <div class="step-item fade-up delay-1">
+            <div class="step-number" aria-hidden="true">1</div>
+            <h3>A Computer You&rsquo;re Happy to Leave On</h3>
+            <p>Your agent lives there and works while you don&rsquo;t. A laptop that stays plugged in counts.</p>
+          </div>
+          <div class="step-item fade-up delay-2">
+            <div class="step-number" aria-hidden="true">2</div>
+            <h3>An AI Provider Account</h3>
+            <p>Pay-as-you-go, straight to the AI company &mdash; you only pay for what your agent actually does, and it never goes through us.</p>
+          </div>
+          <div class="step-item fade-up delay-3">
+            <div class="step-number" aria-hidden="true">3</div>
+            <h3>That&rsquo;s It</h3>
+            <p>Really. Everything else comes with Archie.</p>
+          </div>
+        </div>
+
+        <div class="text-center mt-48">
+          <a href="what-you-need/" class="btn btn-secondary fade-up delay-4">See the Full List &rarr;</a>
         </div>
       </div>
     </section>
@@ -410,11 +535,68 @@
             <p>You hand a company your accounts, your messages, and your files &mdash; and they keep them. That data sits on their servers indefinitely: a standing target for a breach, and an asset on someone else&rsquo;s balance sheet, no matter how careful they are.</p>
           </div>
           <div class="before-after-card is-after">
-            <span class="before-after-label">Your Otian Agent</span>
+            <span class="before-after-label">Your Archie Agent</span>
             <p>It runs on the computer in your home or office, under your accounts, with your keys. We store none of it &mdash; so there is no Otian archive of your life to be breached, subpoenaed, or sold. You decide what it can touch, and you can pull the plug anytime.</p>
           </div>
         </div>
         <p class="marketplace-split-note fade-up delay-2">The only thing our servers know about you is whether your subscription is active. Not your emails, not your calendar, not a single conversation.</p>
+      </div>
+    </section>
+
+    <!-- ==============================
+         Four Doors + Honest Pricing
+         ============================== -->
+    <section class="section" aria-labelledby="doors-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">Honest Pricing</span>
+          <h2 id="doors-heading" class="fade-up delay-1">Four Doors, No Hidden Layers</h2>
+          <p class="fade-up delay-2">Everything we sell, on one screen. Pick the door that fits &mdash; or start with a free call and we&rsquo;ll point you to it.</p>
+        </div>
+
+        <div class="price-grid fade-up delay-1">
+          <article class="price-card">
+            <span class="price-card-label">Archie</span>
+            <div class="price-card-amount">$20<span>/month</span></div>
+            <p>Our desktop app. Build personal AI agents that run on your own computer. In development &mdash; <a href="archie/#status">see where it stands</a>.</p>
+            <a href="archie/pricing/" class="price-card-link">See Archie pricing &rarr;</a>
+          </article>
+          <article class="price-card">
+            <span class="price-card-label">Add-ons</span>
+            <div class="price-card-amount price-card-amount--words">Free or one-time</div>
+            <p>Built-in add-ons cost nothing. Paid ones are a single purchase &mdash; not another subscription.</p>
+            <a href="skills-marketplace/browse/" class="price-card-link">Browse the Marketplace &rarr;</a>
+          </article>
+          <article class="price-card">
+            <span class="price-card-label">Commission an Add-on</span>
+            <div class="price-card-amount price-card-amount--words">Quoted per add-on</div>
+            <p>Need something the marketplace doesn&rsquo;t have? We build it, quote it up front, and it joins the marketplace when it&rsquo;s done.</p>
+            <a href="skills-marketplace/commission/" class="price-card-link">Commission one &rarr;</a>
+          </article>
+          <article class="price-card">
+            <span class="price-card-label">Guided Setup</span>
+            <div class="price-card-amount">$100<span>/session</span></div>
+            <p>We build your agent with you, an hour at a time. The rate never changes &mdash; a bigger setup just takes more sessions, and we tell you which on the free first call.</p>
+            <a href="individuals/" class="price-card-link">Learn about Guided Setup &rarr;</a>
+          </article>
+        </div>
+        <p class="marketplace-split-note fade-up delay-2">Working with us on a guided setup? Archie is included free for as long as you&rsquo;re an active client.</p>
+        <p class="marketplace-split-note fade-up delay-2">Two costs above aren&rsquo;t ours to charge. <strong>The AI itself bills you directly</strong>, pay-as-you-go on your own account &mdash; a few dollars a month if you ask it a handful of things a day, climbing into the tens of dollars if you lean on it constantly. And a few add-ons connect to services with their own fees, which they tell you about before you install them. <a href="archie/pricing/" class="marketplace-text-link">Every cost, in full &rarr;</a></p>
+        <p class="marketplace-split-note fade-up delay-3">Set that against the alternative: <strong>a part-time personal assistant can run thousands of dollars a year</strong> &mdash; and they go home at five. Your agent is there at six in the morning and eleven at night, for as long as your computer is on.</p>
+      </div>
+    </section>
+
+    <!-- ==============================
+         Why We Exist
+         ============================== -->
+    <section class="section section-alt" aria-labelledby="why-heading">
+      <div class="container">
+        <div class="section-header" style="margin-bottom: 0;">
+          <span class="section-label fade-up">Why We Exist</span>
+          <h2 id="why-heading" class="fade-up delay-1">We Did It by Hand First</h2>
+          <p class="fade-up delay-2">Jett set up an agent for Jack on OpenClaw &mdash; secure and endlessly customizable, and genuinely hard to set up. We kept building agents by hand for other people until we knew where every ounce of friction lived. Archie is what we learned, compiled. <a href="our-story/" class="marketplace-text-link">Read our story &rarr;</a></p>
+          <p class="why-grace fade-up delay-3">Otian <span class="hero-pronunciation">(oh-tee-uhn)</span> is drawn from the Latin <em>otium</em> &mdash; the ease that comes when someone trusted is quietly handling your affairs for you.</p>
+        </div>
       </div>
     </section>
 
@@ -424,7 +606,7 @@
     <section class="section" aria-labelledby="team-heading">
       <div class="container">
         <div class="section-header">
-          <span class="section-label fade-up">Who's Behind It</span>
+          <span class="section-label fade-up">Who&rsquo;s Behind It</span>
           <h2 id="team-heading" class="fade-up delay-1">A Two-Person Team</h2>
           <p class="fade-up delay-2">No account managers, no outsourced builders. Jett runs your technical sessions, and Jack joins your discovery call to help shape what your agent should do.</p>
         </div>
@@ -452,232 +634,7 @@
         </div>
 
         <div class="text-center mt-48">
-          <a href="about/" class="btn btn-secondary fade-up delay-2">Read Our Full Story &rarr;</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==============================
-         Cost & Why
-         ============================== -->
-    <section class="section section-alt cost-why" aria-labelledby="cost-why-heading">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label fade-up">Transparent Pricing</span>
-          <h2 id="cost-why-heading" class="fade-up delay-1">What You'll Actually Pay</h2>
-          <p class="fade-up delay-2">Two costs, no hidden layers: what you pay us to build and guide your agent, and the small monthly cost of the AI itself.</p>
-        </div>
-
-        <div class="price-grid fade-up delay-1">
-          <article class="price-card">
-            <span class="price-card-label">Our Fee</span>
-            <div class="price-card-amount">$100<span>/session</span></div>
-            <p>Your first session is a free 30-minute consultation - we'll talk through your goals, what your agent should look like, and a rough timeline. If you decide to move forward, guided sessions from there are $100 each.</p>
-          </article>
-          <article class="price-card">
-            <span class="price-card-label">Monthly AI Cost</span>
-            <div class="price-card-amount">~$20<span>/month</span></div>
-            <p>Paid directly to the AI provider (Claude, ChatGPT, etc.), not to us. This runs your agent day to day, and we configure everything to stay efficient.</p>
-          </article>
-        </div>
-
-        <div class="cost-why-inner">
-          <div class="cost-why-content">
-            <table class="cost-why-table fade-up delay-2">
-              <tbody>
-                <tr>
-                  <td class="cost-why-table-point">Hours back, almost instantly.</td>
-                  <td class="cost-why-table-desc">Most clients save 10+ hours a week starting in their very first week, not months down the line.</td>
-                </tr>
-                <tr>
-                  <td class="cost-why-table-point">A skill you keep, not a subscription you rent.</td>
-                  <td class="cost-why-table-desc">Every guided session teaches you how your agent works, so you understand and can adjust it yourself going forward.</td>
-                </tr>
-                <tr>
-                  <td class="cost-why-table-point">A fraction of a human agent's cost.</td>
-                  <td class="cost-why-table-desc">A part-time personal assistant can run thousands of dollars a year. The AI doing the same tasks costs around $20 a month - and works instantly, any time you need it.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="cost-why-visual fade-up delay-2">
-            <div class="cost-why-screenshot">
-              <img src="assets/api.png" alt="Claude API console showing one month of token usage costs totaling $14.47" />
-            </div>
-            <p class="cost-why-caption">Real billing from an active client's account &mdash; one full month of everyday agent use.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==============================
-         What It Can Help With
-         ============================== -->
-    <section class="section" aria-labelledby="help-heading">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label fade-up">Capabilities</span>
-          <h2 id="help-heading" class="fade-up delay-1">What It Can Help With</h2>
-          <p class="fade-up delay-2">Concrete workflows we set up most often, with examples of what the agent actually does.</p>
-        </div>
-
-        <div class="before-after-grid fade-up delay-1">
-          <div class="before-after-card">
-            <span class="before-after-label">A Typical Day, Before</span>
-            <div class="before-after-list">
-              <div class="before-after-item"><span class="before-after-time">6:45 AM</span><span>Wake up to 40 unread emails with no idea which ones actually matter.</span></div>
-              <div class="before-after-item"><span class="before-after-time">12:30 PM</span><span>Ten minutes lost hunting for a time slot that works for a client call.</span></div>
-              <div class="before-after-item"><span class="before-after-time">9:00 PM</span><span>Realize you never followed up with three leads from last week.</span></div>
-            </div>
-          </div>
-          <div class="before-after-card is-after">
-            <span class="before-after-label">A Typical Day, After</span>
-            <div class="before-after-list">
-              <div class="before-after-item"><span class="before-after-time">6:45 AM</span><span>A morning briefing is waiting: three things need you, the rest is already handled.</span></div>
-              <div class="before-after-item"><span class="before-after-time">12:30 PM</span><span>Your agent already proposed three times and drafted the confirmation.</span></div>
-              <div class="before-after-item"><span class="before-after-time">9:00 PM</span><span>Follow-ups were drafted hours ago - just waiting on your OK to send.</span></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="use-cases-grid fade-up delay-2">
-
-          <div class="use-case-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="2" y="4" width="20" height="16" rx="2"/>
-              <path d="M2 8h20"/>
-              <path d="M6 12h4"/>
-              <path d="M6 16h2"/>
-            </svg>
-            <span class="use-case-text"><strong>Email &amp; Inbox</strong><span class="use-case-detail">Flags priority messages and proposes ready-to-send replies</span></span>
-          </div>
-
-          <div class="use-case-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="3" y="4" width="18" height="18" rx="2"/>
-              <line x1="16" y1="2" x2="16" y2="6"/>
-              <line x1="8" y1="2" x2="8" y2="6"/>
-              <line x1="3" y1="10" x2="21" y2="10"/>
-            </svg>
-            <span class="use-case-text"><strong>Scheduling &amp; Reminders</strong><span class="use-case-detail">Suggests best slots and drafts confirmation messages</span></span>
-          </div>
-
-          <div class="use-case-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="11" cy="11" r="8"/>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-            </svg>
-            <span class="use-case-text"><strong>Research &amp; Lookups</strong><span class="use-case-detail">Builds ranked lists and summarizes options with next steps</span></span>
-          </div>
-
-          <div class="use-case-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
-            </svg>
-            <span class="use-case-text"><strong>File Organization</strong><span class="use-case-detail">Sorts downloads, renames files, and keeps folders clean</span></span>
-          </div>
-
-          <div class="use-case-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-            </svg>
-            <span class="use-case-text"><strong>Customer Replies</strong><span class="use-case-detail">Drafts fast, on-brand responses for common requests</span></span>
-          </div>
-
-          <div class="use-case-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-              <circle cx="9" cy="7" r="4"/>
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-            </svg>
-            <span class="use-case-text"><strong>Following Up with Contacts</strong><span class="use-case-detail">Prepares personalized check-ins using recent context</span></span>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ==============================
-         How It Works (Teaser)
-         ============================== -->
-    <section class="section" aria-labelledby="how-heading">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label fade-up">The Process</span>
-          <h2 id="how-heading" class="fade-up delay-1">Simple From Start to Finish</h2>
-          <p class="fade-up delay-2">We keep things straightforward: no jargon, no tech headaches, no lengthy onboarding.</p>
-        </div>
-
-        <div class="steps-row">
-          <div class="step-item fade-up delay-1">
-            <div class="step-number" aria-hidden="true">1</div>
-            <h3>Tell Us What You Need</h3>
-            <p>Fill out our short intake form and describe what you'd love help with.</p>
-          </div>
-          <div class="step-item fade-up delay-2">
-            <div class="step-number" aria-hidden="true">2</div>
-            <h3>We Build It With You</h3>
-            <p>We walk through it together on your own machine over Zoom, with clear checkpoints along the way.</p>
-          </div>
-          <div class="step-item fade-up delay-3">
-            <div class="step-number" aria-hidden="true">3</div>
-            <h3>Your Agent Gets to Work</h3>
-            <p>Start delegating tasks and getting your time back, day after day.</p>
-          </div>
-        </div>
-
-        <div class="text-center mt-48">
-          <a href="how-it-works/" class="btn btn-secondary fade-up delay-4">See the Full Process &rarr;</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==============================
-         What to Expect on the Call
-         ============================== -->
-    <section class="section" aria-labelledby="expect-heading">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label fade-up">Before You Reach Out</span>
-          <h2 id="expect-heading" class="fade-up delay-1">What Happens on Your Free Call</h2>
-          <p class="fade-up delay-2">30 minutes, no pitch. Here's exactly what to expect, so there's nothing to guess at.</p>
-        </div>
-
-        <div class="feature-grid">
-
-          <article class="feature-card fade-up delay-1">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-              </svg>
-            </div>
-            <h3>We Listen First</h3>
-            <p>We ask about your day-to-day and where your time is actually going. No pitch, just questions.</p>
-          </article>
-
-          <article class="feature-card fade-up delay-2">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
-              </svg>
-            </div>
-            <h3>We Map the Possibilities</h3>
-            <p>Together, we talk through what your agent could realistically take off your plate.</p>
-          </article>
-
-          <article class="feature-card fade-up delay-3">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M9 11l3 3L22 4"/>
-                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
-              </svg>
-            </div>
-            <h3>You Get a Plan, No Pressure</h3>
-            <p>You leave with a rough scope and timeline. Whether you move forward from there is entirely up to you.</p>
-          </article>
-
+          <a href="our-story/" class="btn btn-secondary fade-up delay-2">Read Our Full Story &rarr;</a>
         </div>
       </div>
     </section>
@@ -689,8 +646,8 @@
       <div class="container">
         <div class="cta-banner fade-up">
           <h2>Ready to get your time back?</h2>
-          <p>Fill out our short form and we'll set up your free 30-minute consultation - no commitment, no contracts.</p>
-          <a href="questionnaire/" class="btn btn-primary btn-lg">Start My Free Consultation</a>
+          <p>Tell us what your week looks like and we&rsquo;ll show you what an agent could take off your plate. The first call is free &mdash; no commitment, no contracts.</p>
+          <a href="questionnaire/" class="btn btn-primary btn-lg">Get Started</a>
         </div>
       </div>
     </section>
@@ -705,22 +662,25 @@
       <div class="footer-grid">
         <div>
           <div class="footer-logo"><img src="assets/icon-1024-dark.svg" alt="Otian AI" /></div>
-          <p class="footer-tagline">Guided AI agents for real life</p>
+          <p class="footer-tagline">Secure AI agents, your way.<br />Easy plug-and-play, fully in your control.</p>
         </div>
         <div>
           <h4 class="footer-col-title">Pages</h4>
           <nav class="footer-nav-links" aria-label="Footer navigation">
             <a href="./">Home</a>
-            <a href="how-it-works/">How It Works</a>
             <a href="archie/">Archie</a>
-            <a href="skills-marketplace/browse/">Marketplace</a>
-            <a href="individuals/">For Individuals</a>
+            <a href="archie/see-it-work/">See It Work</a>
+            <a href="archie/pricing/">Archie Pricing</a>
+            <a href="skills-marketplace/browse/">Browse the Marketplace</a>
+            <a href="skills-marketplace/commission/">Commission an Add-on</a>
+            <a href="individuals/">Guided Setup</a>
             <a href="business/">For Business</a>
-            <a href="about/">About</a>
-            <a href="faq/">FAQ</a>
+            <a href="what-you-need/">What You Need</a>
+            <a href="how-it-works/">How It Works</a>
             <a href="ai-explained/">AI Explained</a>
             <a href="blog/">Blog</a>
-            <a href="equipment/">Equipment Needed</a>
+            <a href="faq/">FAQ</a>
+            <a href="our-story/">Our Story</a>
             <a href="testimonials/">Agent Successes</a>
             <a href="contact/">Contact</a>
           </nav>
@@ -741,11 +701,6 @@
   </footer>
 
   <script src="js/nav.js"></script>
+  <script src="js/demo-player.js"></script>
 </body>
 </html>
-
-
-
-
-
-

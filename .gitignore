@@ -1,2 +1,4 @@
 clients/
 engineer-curriculum.md
+# Video masters — keep the full-res original on disk, ship only the optimized web encode.
+assets/*.master.mp4

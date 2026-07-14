@@ -3,13 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>What Is Archie? | Otian AI</title>
-  <meta name="description" content="Archie is a personal AI agent that runs on your own Mac, shaped by you and owned by you. Now in early-access beta." />
+<title>Archie: Build Personal AI Agents on Your Own Computer | Otian AI</title>
+  <meta name="description" content="Archie is Otian AI's desktop app for building personal AI agents that run on your own computer, shaped by you and owned by you. In development now." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" href="../assets/icon-1024-dark.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    /* Page-scoped: the #status block — the one place on the site where Archie's
+       availability and platform facts live. Other pages link here, never restate. */
+    .archie-status {
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px 20px;
+      margin-top: 28px;
+      padding: 14px 22px;
+      background: var(--accent-subtle);
+      border: 1px solid rgba(224, 138, 91, 0.45);
+      border-radius: var(--radius);
+      scroll-margin-top: 96px;
+    }
+    .archie-status p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+    }
+    .archie-status p strong { font-weight: 600; }
+  </style>
 </head>
 <body>
 
@@ -18,22 +41,31 @@
        ============================== -->
   <nav class="nav" id="nav" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="../" class="nav-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Guided AI Agents</span></span></a>
+      <a href="../" class="nav-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Secure AI Agents, Your Way</span></span></a>
       <div class="nav-links">
-        <div class="nav-more" id="navMarketplace">
-          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Archie</button>
-          <div class="nav-more-menu" id="navMarketplaceMenu" role="menu" aria-label="Archie">
+        <div class="nav-more" id="navArchie">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navArchieMenu" type="button">Archie</button>
+          <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
             <a href="../archie/" role="menuitem">What Is Archie?</a>
+            <a href="../archie/see-it-work/" role="menuitem">See It Work</a>
+            <a href="../archie/pricing/" role="menuitem">Pricing</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navAddons">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navAddonsMenu" type="button">Add-ons</button>
+          <div class="nav-more-menu" id="navAddonsMenu" role="menu" aria-label="Add-ons">
             <a href="../skills-marketplace/what-is-an-add-on/" role="menuitem">What's an Add-on?</a>
-            <a href="../skills-marketplace/browse/" role="menuitem">The Marketplace</a>
+            <a href="../skills-marketplace/browse/" role="menuitem">Browse the Marketplace</a>
+            <a href="../skills-marketplace/commission/" role="menuitem">Commission One</a>
             <a href="../skills-marketplace/for-developers/" role="menuitem">For Developers</a>
           </div>
         </div>
-        <div class="nav-more" id="navServices">
-          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navServicesMenu" type="button">Services</button>
-          <div class="nav-more-menu" id="navServicesMenu" role="menu" aria-label="Services">
-            <a href="../individuals/" role="menuitem">For Individuals</a>
+        <div class="nav-more" id="navWork">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navWorkMenu" type="button">Work With Us</button>
+          <div class="nav-more-menu" id="navWorkMenu" role="menu" aria-label="Work With Us">
+            <a href="../individuals/" role="menuitem">Guided Setup</a>
             <a href="../business/" role="menuitem">For Business</a>
+            <a href="../what-you-need/" role="menuitem">What You Need</a>
           </div>
         </div>
         <div class="nav-more" id="navLearn">
@@ -42,14 +74,13 @@
             <a href="../how-it-works/" role="menuitem">How It Works</a>
             <a href="../ai-explained/" role="menuitem">AI Explained</a>
             <a href="../blog/" role="menuitem">Blog</a>
-            <a href="../equipment/" role="menuitem">Equipment Needed</a>
             <a href="../faq/" role="menuitem">FAQ</a>
           </div>
         </div>
         <div class="nav-more" id="navCompany">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompanyMenu" type="button">Company</button>
           <div class="nav-more-menu" id="navCompanyMenu" role="menu" aria-label="Company">
-            <a href="../about/" role="menuitem">About</a>
+            <a href="../our-story/" role="menuitem">Our Story</a>
             <a href="../testimonials/" role="menuitem">Agent Successes</a>
             <a href="../contact/" role="menuitem">Contact</a>
           </div>
@@ -64,8 +95,9 @@
 
   <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
   <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
-    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutMarketplace" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
-    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutServices" aria-expanded="false" aria-controls="navDrawerFlyout">Services</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutArchie" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutAddons" aria-expanded="false" aria-controls="navDrawerFlyout">Add-ons</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutWork" aria-expanded="false" aria-controls="navDrawerFlyout">Work With Us</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
     <a href="../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
@@ -76,25 +108,30 @@
       <svg class="nav-drawer-back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
       <span id="navDrawerFlyoutTitle">Archie</span>
     </button>
-    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutMarketplace">
+    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
       <a href="../archie/">What Is Archie?</a>
+      <a href="../archie/see-it-work/">See It Work</a>
+      <a href="../archie/pricing/">Pricing</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutAddons">
       <a href="../skills-marketplace/what-is-an-add-on/">What's an Add-on?</a>
-      <a href="../skills-marketplace/browse/">The Marketplace</a>
+      <a href="../skills-marketplace/browse/">Browse the Marketplace</a>
+      <a href="../skills-marketplace/commission/">Commission One</a>
       <a href="../skills-marketplace/for-developers/">For Developers</a>
     </div>
-    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutServices">
-      <a href="../individuals/">For Individuals</a>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutWork">
+      <a href="../individuals/">Guided Setup</a>
       <a href="../business/">For Business</a>
+      <a href="../what-you-need/">What You Need</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutLearn">
       <a href="../how-it-works/">How It Works</a>
       <a href="../ai-explained/">AI Explained</a>
       <a href="../blog/">Blog</a>
-      <a href="../equipment/">Equipment Needed</a>
       <a href="../faq/">FAQ</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompany">
-      <a href="../about/">About</a>
+      <a href="../our-story/">Our Story</a>
       <a href="../testimonials/">Agent Successes</a>
       <a href="../contact/">Contact</a>
     </div>
@@ -108,9 +145,12 @@
     <section class="page-hero" aria-label="Page introduction">
       <div class="page-hero-inner">
         <img src="../assets/archie.svg" alt="Archie" class="fade-up" style="width: 84px; height: 84px; display: block; margin: 0 auto 22px;" />
-        <span class="section-label fade-up delay-1">Now in Beta</span>
         <h1 class="fade-up delay-1">Meet Archie</h1>
-        <p class="fade-up delay-2">The desktop app we&rsquo;re building to put a personal AI agent on your own computer &mdash; one you shape, name, and truly own. No terminals, no code, no middleman.</p>
+        <p class="fade-up delay-2">Build personal AI agents that run on your own computer &mdash; agents you shape, name, and truly own. No terminals, no code, no middleman.</p>
+        <div class="archie-status fade-up delay-3" id="status">
+          <p><strong>Archie is in development.</strong> Mac now, Windows next.</p>
+          <a href="../questionnaire/" class="btn btn-primary btn-sm">Join the waitlist</a>
+        </div>
       </div>
     </section>
 
@@ -121,9 +161,9 @@
       <div class="container">
         <div class="section-header">
           <span class="section-label fade-up">The Idea</span>
-          <h2 id="idea-heading" class="fade-up delay-1">Your Own Agent, Living on Your Mac</h2>
-          <p class="fade-up delay-2">Archie is a Mac app that runs your own AI agent, right on your computer. You talk to it the way you&rsquo;d text a friend, and it actually gets things done &mdash; keeping your calendar straight, staying on top of your inbox, running research, and handling the busywork you&rsquo;d rather not.</p>
-          <p class="fade-up delay-2">What makes it different is where it lives. Your agent, its memory, and everything it touches stay on your machine &mdash; not on someone else&rsquo;s servers. You&rsquo;re not renting a sliver of a company&rsquo;s cloud. You own the whole thing.</p>
+          <h2 id="idea-heading" class="fade-up delay-1">Your Own Agent, Living on Your Computer</h2>
+          <p class="fade-up delay-2">Archie is a desktop app that runs your own AI agent, right on your computer. You talk to it the way you&rsquo;d text a friend, and it actually gets things done &mdash; keeping your calendar straight, staying on top of your inbox, running research, and handling the busywork you&rsquo;d rather not.</p>
+          <p class="fade-up delay-2">What makes it different is where it lives. Your agent, its memory, and its keys live on your machine &mdash; not on someone else&rsquo;s servers. You&rsquo;re not renting a sliver of a company&rsquo;s cloud. You own the whole thing.</p>
         </div>
       </div>
     </section>
@@ -211,13 +251,13 @@
       <div class="container">
         <div class="section-header">
           <span class="section-label fade-up">Yours Alone</span>
-          <h2 id="security-heading" class="fade-up delay-1">Your Keys Never Leave Your Mac</h2>
-          <p class="fade-up delay-2">Your agent runs on your Mac. Its instructions, your files, its memory, and your keys are stored on your device &mdash; the keys in your Mac&rsquo;s Keychain, which we have no way to read. It talks to the AI through your own account, so your conversations never pass through us, and we keep no copy of them.</p>
+          <h2 id="security-heading" class="fade-up delay-1">Your Keys Never Leave Your Computer</h2>
+          <p class="fade-up delay-2">Your agent runs on your own computer. Its instructions, your files, its memory, and your keys are stored on your device &mdash; the keys in your system&rsquo;s own keychain, which we have no way to read. It talks to the AI through your own account, so your conversations never pass through us, and we keep no copy of them.</p>
         </div>
 
         <div class="two-col fade-up delay-1" style="margin-top: 40px;">
           <div class="two-col-card">
-            <h3>What lives on your Mac</h3>
+            <h3>What lives on your computer</h3>
             <ul class="two-col-card-list">
               <li>Your agent and everything it knows</li>
               <li>Your files, notes, and its memory</li>
@@ -252,17 +292,46 @@
     </section>
 
     <!-- ==============================
-         Coming Soon CTA
+         Pricing
          ============================== -->
-    <section class="section" aria-labelledby="coming-heading">
+    <section class="section" aria-labelledby="next-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">Keep Going</span>
+          <h2 id="next-heading" class="fade-up delay-1">Two Things Worth a Minute</h2>
+          <p class="fade-up delay-2">The recordings show you what it actually looks like. The pricing page shows you every cost before you&rsquo;re asked for a cent.</p>
+        </div>
+
+        <div class="price-grid fade-up delay-1" style="margin-top: 48px;">
+          <article class="price-card">
+            <span class="price-card-label">See It Work</span>
+            <div class="price-card-amount price-card-amount--words">Two<br />recordings</div>
+            <p>Building an agent from scratch in about a minute &mdash; then a morning briefing arriving on a phone, unprompted, the next day.</p>
+            <a href="see-it-work/" class="price-card-link">Watch it &rarr;</a>
+          </article>
+          <article class="price-card">
+            <span class="price-card-label">Pricing</span>
+            <div class="price-card-amount">$20<span>/month</span></div>
+            <p>Plus your own pay-as-you-go AI account, and premium add-ons only if you want them. Free while you&rsquo;re a guided-setup client.</p>
+            <a href="pricing/" class="price-card-link">See every cost &rarr;</a>
+          </article>
+        </div>
+
+        <p class="fade-up delay-2" style="text-align: center; max-width: 560px; margin: 0 auto; color: var(--text-secondary);">And if Archie can&rsquo;t do something yet, tell us &mdash; <a href="../skills-marketplace/commission/">we&rsquo;ll build the add-on</a>.</p>
+      </div>
+    </section>
+
+    <!-- ==============================
+         Closing CTA
+         ============================== -->
+    <section class="section section-alt" aria-labelledby="coming-heading">
       <div class="container">
         <div class="archie-lockup fade-up">
           <img src="../assets/archie-text.svg" alt="Archie" />
-          <span class="archie-lockup-note">In beta</span>
         </div>
         <div class="cta-banner fade-up delay-1" style="margin-top: 32px;">
-          <h2 id="coming-heading">Archie is in early access</h2>
-          <p>Archie is in early-access beta. Want a head start? Our guided service can set you up with the same kind of agent today &mdash; or request beta access and run Archie yourself.</p>
+          <h2 id="coming-heading">Don&rsquo;t want to wait?</h2>
+          <p>Archie is on its way &mdash; <a href="#status">here&rsquo;s where it stands</a>. In the meantime, our guided service can set you up with the same kind of agent today, and the waitlist means you&rsquo;ll hear the moment Archie is ready.</p>
           <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
             <a href="../questionnaire/" class="btn btn-primary btn-lg">Get Started</a>
             <a href="../skills-marketplace/browse/" class="btn btn-secondary btn-lg">Browse the Marketplace</a>
@@ -281,22 +350,25 @@
       <div class="footer-grid">
         <div>
           <div class="footer-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /></div>
-          <p class="footer-tagline">Guided AI agents for real life</p>
+          <p class="footer-tagline">Secure AI agents, your way.<br />Easy plug-and-play, fully in your control.</p>
         </div>
         <div>
           <h4 class="footer-col-title">Pages</h4>
           <nav class="footer-nav-links" aria-label="Footer navigation">
             <a href="../">Home</a>
-            <a href="../how-it-works/">How It Works</a>
             <a href="../archie/">Archie</a>
-            <a href="../skills-marketplace/browse/">Marketplace</a>
-            <a href="../individuals/">For Individuals</a>
+            <a href="../archie/see-it-work/">See It Work</a>
+            <a href="../archie/pricing/">Archie Pricing</a>
+            <a href="../skills-marketplace/browse/">Browse the Marketplace</a>
+            <a href="../skills-marketplace/commission/">Commission an Add-on</a>
+            <a href="../individuals/">Guided Setup</a>
             <a href="../business/">For Business</a>
-            <a href="../about/">About</a>
-            <a href="../faq/">FAQ</a>
+            <a href="../what-you-need/">What You Need</a>
+            <a href="../how-it-works/">How It Works</a>
             <a href="../ai-explained/">AI Explained</a>
             <a href="../blog/">Blog</a>
-            <a href="../equipment/">Equipment Needed</a>
+            <a href="../faq/">FAQ</a>
+            <a href="../our-story/">Our Story</a>
             <a href="../testimonials/">Agent Successes</a>
             <a href="../contact/">Contact</a>
           </nav>
@@ -317,5 +389,6 @@
   </footer>
 
   <script src="../js/nav.js"></script>
+  <script src="../js/demo-player.js"></script>
 </body>
 </html>

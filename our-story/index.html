@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Our Story | Otian AI</title>
+  <meta name="description" content="How setting up one AI agent by hand became Archie. The story behind Otian AI, and the two people who build every agent themselves." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="../assets/icon-1024-dark.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+  <!-- ==============================
+       Navigation
+       ============================== -->
+  <nav class="nav" id="nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="../" class="nav-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Secure AI Agents, Your Way</span></span></a>
+      <div class="nav-links">
+        <div class="nav-more" id="navArchie">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navArchieMenu" type="button">Archie</button>
+          <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
+            <a href="../archie/" role="menuitem">What Is Archie?</a>
+            <a href="../archie/see-it-work/" role="menuitem">See It Work</a>
+            <a href="../archie/pricing/" role="menuitem">Pricing</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navAddons">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navAddonsMenu" type="button">Add-ons</button>
+          <div class="nav-more-menu" id="navAddonsMenu" role="menu" aria-label="Add-ons">
+            <a href="../skills-marketplace/what-is-an-add-on/" role="menuitem">What's an Add-on?</a>
+            <a href="../skills-marketplace/browse/" role="menuitem">Browse the Marketplace</a>
+            <a href="../skills-marketplace/commission/" role="menuitem">Commission One</a>
+            <a href="../skills-marketplace/for-developers/" role="menuitem">For Developers</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navWork">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navWorkMenu" type="button">Work With Us</button>
+          <div class="nav-more-menu" id="navWorkMenu" role="menu" aria-label="Work With Us">
+            <a href="../individuals/" role="menuitem">Guided Setup</a>
+            <a href="../business/" role="menuitem">For Business</a>
+            <a href="../what-you-need/" role="menuitem">What You Need</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navLearn">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navLearnMenu" type="button">Learn</button>
+          <div class="nav-more-menu" id="navLearnMenu" role="menu" aria-label="Learn">
+            <a href="../how-it-works/" role="menuitem">How It Works</a>
+            <a href="../ai-explained/" role="menuitem">AI Explained</a>
+            <a href="../blog/" role="menuitem">Blog</a>
+            <a href="../faq/" role="menuitem">FAQ</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navCompany">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompanyMenu" type="button">Company</button>
+          <div class="nav-more-menu" id="navCompanyMenu" role="menu" aria-label="Company">
+            <a href="../our-story/" role="menuitem">Our Story</a>
+            <a href="../testimonials/" role="menuitem">Agent Successes</a>
+            <a href="../contact/" role="menuitem">Contact</a>
+          </div>
+        </div>
+      </div>
+      <a href="../questionnaire/" class="btn btn-primary btn-sm nav-cta">Get Started</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navDrawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+  <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutArchie" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutAddons" aria-expanded="false" aria-controls="navDrawerFlyout">Add-ons</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutWork" aria-expanded="false" aria-controls="navDrawerFlyout">Work With Us</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
+    <a href="../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
+  </nav>
+
+  <div class="nav-drawer-flyout" id="navDrawerFlyout" aria-hidden="true">
+    <button class="nav-drawer-back" type="button">
+      <svg class="nav-drawer-back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      <span id="navDrawerFlyoutTitle">Archie</span>
+    </button>
+    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
+      <a href="../archie/">What Is Archie?</a>
+      <a href="../archie/see-it-work/">See It Work</a>
+      <a href="../archie/pricing/">Pricing</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutAddons">
+      <a href="../skills-marketplace/what-is-an-add-on/">What's an Add-on?</a>
+      <a href="../skills-marketplace/browse/">Browse the Marketplace</a>
+      <a href="../skills-marketplace/commission/">Commission One</a>
+      <a href="../skills-marketplace/for-developers/">For Developers</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutWork">
+      <a href="../individuals/">Guided Setup</a>
+      <a href="../business/">For Business</a>
+      <a href="../what-you-need/">What You Need</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutLearn">
+      <a href="../how-it-works/">How It Works</a>
+      <a href="../ai-explained/">AI Explained</a>
+      <a href="../blog/">Blog</a>
+      <a href="../faq/">FAQ</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompany">
+      <a href="../our-story/">Our Story</a>
+      <a href="../testimonials/">Agent Successes</a>
+      <a href="../contact/">Contact</a>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ==============================
+         Page Hero
+         ============================== -->
+    <section class="page-hero" aria-label="Page introduction">
+      <div class="page-hero-inner">
+        <span class="section-label fade-up">Our Story</span>
+        <h1 class="fade-up delay-1">It Started With One Agent</h1>
+        <p class="fade-up delay-2">We did the hard part by hand, over and over, until we could do it in software. That method is the company.</p>
+        <p class="fade-up delay-2">Otian is drawn from the Latin otium &mdash; the ease that comes when someone trusted is quietly handling your affairs for you.</p>
+      </div>
+    </section>
+
+    <!-- ==============================
+         Our Story
+         ============================== -->
+    <section class="section" aria-labelledby="story-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">How We Got Here</span>
+          <h2 id="story-heading" class="fade-up delay-1">By Hand, One at a Time</h2>
+        </div>
+
+        <div class="story-text fade-up delay-1">
+          <p>
+            Jett set up an AI agent for Jack. We used OpenClaw, because it was secure and endlessly customizable &mdash; the two things we actually cared about. It was also miserable to set up.
+          </p>
+          <p>
+            So we started doing it for other people. By hand, one at a time. And doing it by hand, over and over, taught us exactly where the friction lived &mdash; which steps tripped people up, which ones needed an hour of explaining, and which ones nobody should ever have to see.
+          </p>
+          <p>
+            Archie is what we learned. Same principles &mdash; secure, yours, no ceiling &mdash; without the terminal. It&rsquo;s inspired by OpenClaw, not built on it.
+          </p>
+          <p>
+            Now we&rsquo;re about to do the same thing again, with add-ons. The method is deliberate: do the hard part by hand until you can do it in software. If Archie can&rsquo;t do it yet, tell us &mdash; we&rsquo;ll <a href="../skills-marketplace/commission/">build the add-on</a>. And every add-on we build for one person becomes a marketplace listing for everyone, so one-off work compounds into product.
+          </p>
+          <p>
+            Jett Nguyen and Jack Raney met as co-workers at MARA Holdings Inc. &mdash; Jett in Florida, Jack in Texas &mdash; and realized we made a strong team: one of us sees where AI can genuinely help people, the other builds and implements it. We work fully remotely with clients nationwide, over Zoom. When you work with Otian AI, you work with us &mdash; the same two people, start to finish.
+          </p>
+        </div>
+
+        <div class="team-grid fade-up delay-2">
+
+          <article class="team-card">
+            <div class="team-avatar team-avatar-photo-wrap" aria-hidden="true">
+              <img src="../assets/jett-portrait.png" alt="" class="team-avatar-photo" />
+            </div>
+            <h3>Jett Nguyen</h3>
+            <p class="team-role">Co-Founder &middot; Engineering &amp; Implementation</p>
+            <p>Leads the technical build &mdash; architecture, account integrations, testing, and ongoing maintenance &mdash; and walks every client through it along the way, so you understand what&rsquo;s happening, not just whether it works. Earned his Bachelor&rsquo;s in Computer Science with a minor in Public Relations from the University of Florida in 2026.</p>
+          </article>
+
+          <article class="team-card">
+            <div class="team-avatar team-avatar-photo-wrap" aria-hidden="true">
+              <img src="../assets/jack-portrait.PNG" alt="" class="team-avatar-photo" />
+            </div>
+            <h3>Jack Raney</h3>
+            <p class="team-role">Co-Founder &middot; Business Ops &amp; Client Vision</p>
+            <p>Identifies where AI can create real value for clients and steers the direction of each engagement. Leads the discovery process and makes sure every agent is built around what actually matters to the person using it.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         Our Approach
+         ============================== -->
+    <section class="section section-alt" aria-labelledby="approach-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">How We Work</span>
+          <h2 id="approach-heading" class="fade-up delay-1">Our Approach</h2>
+          <p class="fade-up delay-2">Three things we hold to with every client, every time.</p>
+        </div>
+
+        <div class="values-grid fade-up delay-1">
+
+          <article class="value-card">
+            <div class="value-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+            </div>
+            <h3>We Speak Human, Not Tech</h3>
+            <p>We explain things in plain language. You&rsquo;ll never get an email full of acronyms or jargon. If something technical comes up, we translate it.</p>
+          </article>
+
+          <article class="value-card">
+            <div class="value-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <polyline points="9 12 11 14 15 10"/>
+              </svg>
+            </div>
+            <h3>We Only Set Up What You&rsquo;ve Approved</h3>
+            <p>Nothing gets connected or configured without your explicit sign-off. We walk through every access request with you before making any changes.</p>
+          </article>
+
+          <article class="value-card">
+            <div class="value-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="23 4 23 10 17 10"/>
+                <polyline points="1 20 1 14 7 14"/>
+                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+              </svg>
+            </div>
+            <h3>We Stay With You After Launch</h3>
+            <p>Setup is not the end. It is the beginning. Ongoing support is included. If something needs adjusting or you want to add something new, just reach out.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         CTA
+         ============================== -->
+    <section class="section" aria-label="Call to action">
+      <div class="container">
+        <div class="cta-banner fade-up">
+          <h2>Curious?</h2>
+          <p>The first call is free. Tell us what you&rsquo;d want an agent to handle, and we&rsquo;ll tell you honestly what it would take.</p>
+          <a href="../questionnaire/" class="btn btn-primary btn-lg">Start With a Free Call</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==============================
+       Footer
+       ============================== -->
+  <footer class="footer" aria-label="Site footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /></div>
+          <p class="footer-tagline">Secure AI agents, your way.<br />Easy plug-and-play, fully in your control.</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Pages</h4>
+          <nav class="footer-nav-links" aria-label="Footer navigation">
+            <a href="../">Home</a>
+            <a href="../archie/">Archie</a>
+            <a href="../archie/see-it-work/">See It Work</a>
+            <a href="../archie/pricing/">Archie Pricing</a>
+            <a href="../skills-marketplace/browse/">Browse the Marketplace</a>
+            <a href="../skills-marketplace/commission/">Commission an Add-on</a>
+            <a href="../individuals/">Guided Setup</a>
+            <a href="../business/">For Business</a>
+            <a href="../what-you-need/">What You Need</a>
+            <a href="../how-it-works/">How It Works</a>
+            <a href="../ai-explained/">AI Explained</a>
+            <a href="../blog/">Blog</a>
+            <a href="../faq/">FAQ</a>
+            <a href="../our-story/">Our Story</a>
+            <a href="../testimonials/">Agent Successes</a>
+            <a href="../contact/">Contact</a>
+          </nav>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Contact</h4>
+          <a href="mailto:questions@otianai.com" class="footer-contact-email">questions@otianai.com</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Otian AI. All rights reserved.</p>
+        <nav class="footer-legal-links" aria-label="Legal">
+          <a href="../privacy-policy/">Privacy Policy</a>
+          <a href="../terms-of-service/">Terms of Service</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/nav.js"></script>
+</body>
+</html>

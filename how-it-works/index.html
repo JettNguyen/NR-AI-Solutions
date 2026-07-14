@@ -4,13 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>How It Works | Otian AI</title>
-  <meta name="description" content="From first call to live workflows, Otian AI teaches and guides you through building and understanding your AI agent on your own computer." />
+  <meta name="description" content="Install Archie on a computer you can leave on, build an agent from add-ons, connect it to Telegram, Discord, or Slack, and text it from anywhere. Here's how the pieces fit." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" href="../assets/icon-1024-dark.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    /* Page-scoped: generic always-on computer glyph in the diagram's hardware label */
+    .arch-computer-icon { width: 14px; height: 14px; color: var(--text-primary); flex-shrink: 0; }
+  </style>
 </head>
 <body>
 
@@ -19,22 +23,31 @@
        ============================== -->
   <nav class="nav" id="nav" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="../" class="nav-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Guided AI Agents</span></span></a>
+      <a href="../" class="nav-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Secure AI Agents, Your Way</span></span></a>
       <div class="nav-links">
-        <div class="nav-more" id="navMarketplace">
-          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Archie</button>
-          <div class="nav-more-menu" id="navMarketplaceMenu" role="menu" aria-label="Archie">
+        <div class="nav-more" id="navArchie">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navArchieMenu" type="button">Archie</button>
+          <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
             <a href="../archie/" role="menuitem">What Is Archie?</a>
+            <a href="../archie/see-it-work/" role="menuitem">See It Work</a>
+            <a href="../archie/pricing/" role="menuitem">Pricing</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navAddons">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navAddonsMenu" type="button">Add-ons</button>
+          <div class="nav-more-menu" id="navAddonsMenu" role="menu" aria-label="Add-ons">
             <a href="../skills-marketplace/what-is-an-add-on/" role="menuitem">What's an Add-on?</a>
-            <a href="../skills-marketplace/browse/" role="menuitem">The Marketplace</a>
+            <a href="../skills-marketplace/browse/" role="menuitem">Browse the Marketplace</a>
+            <a href="../skills-marketplace/commission/" role="menuitem">Commission One</a>
             <a href="../skills-marketplace/for-developers/" role="menuitem">For Developers</a>
           </div>
         </div>
-        <div class="nav-more" id="navServices">
-          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navServicesMenu" type="button">Services</button>
-          <div class="nav-more-menu" id="navServicesMenu" role="menu" aria-label="Services">
-            <a href="../individuals/" role="menuitem">For Individuals</a>
+        <div class="nav-more" id="navWork">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navWorkMenu" type="button">Work With Us</button>
+          <div class="nav-more-menu" id="navWorkMenu" role="menu" aria-label="Work With Us">
+            <a href="../individuals/" role="menuitem">Guided Setup</a>
             <a href="../business/" role="menuitem">For Business</a>
+            <a href="../what-you-need/" role="menuitem">What You Need</a>
           </div>
         </div>
         <div class="nav-more" id="navLearn">
@@ -43,14 +56,13 @@
             <a href="../how-it-works/" role="menuitem">How It Works</a>
             <a href="../ai-explained/" role="menuitem">AI Explained</a>
             <a href="../blog/" role="menuitem">Blog</a>
-            <a href="../equipment/" role="menuitem">Equipment Needed</a>
             <a href="../faq/" role="menuitem">FAQ</a>
           </div>
         </div>
         <div class="nav-more" id="navCompany">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompanyMenu" type="button">Company</button>
           <div class="nav-more-menu" id="navCompanyMenu" role="menu" aria-label="Company">
-            <a href="../about/" role="menuitem">About</a>
+            <a href="../our-story/" role="menuitem">Our Story</a>
             <a href="../testimonials/" role="menuitem">Agent Successes</a>
             <a href="../contact/" role="menuitem">Contact</a>
           </div>
@@ -65,8 +77,9 @@
 
   <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
   <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
-    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutMarketplace" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
-    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutServices" aria-expanded="false" aria-controls="navDrawerFlyout">Services</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutArchie" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutAddons" aria-expanded="false" aria-controls="navDrawerFlyout">Add-ons</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutWork" aria-expanded="false" aria-controls="navDrawerFlyout">Work With Us</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
     <a href="../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
@@ -75,27 +88,32 @@
   <div class="nav-drawer-flyout" id="navDrawerFlyout" aria-hidden="true">
     <button class="nav-drawer-back" type="button">
       <svg class="nav-drawer-back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-      <span id="navDrawerFlyoutTitle">Services</span>
+      <span id="navDrawerFlyoutTitle">Archie</span>
     </button>
-    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutMarketplace">
+    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
       <a href="../archie/">What Is Archie?</a>
+      <a href="../archie/see-it-work/">See It Work</a>
+      <a href="../archie/pricing/">Pricing</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutAddons">
       <a href="../skills-marketplace/what-is-an-add-on/">What's an Add-on?</a>
-      <a href="../skills-marketplace/browse/">The Marketplace</a>
+      <a href="../skills-marketplace/browse/">Browse the Marketplace</a>
+      <a href="../skills-marketplace/commission/">Commission One</a>
       <a href="../skills-marketplace/for-developers/">For Developers</a>
     </div>
-    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutServices">
-      <a href="../individuals/">For Individuals</a>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutWork">
+      <a href="../individuals/">Guided Setup</a>
       <a href="../business/">For Business</a>
+      <a href="../what-you-need/">What You Need</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutLearn">
       <a href="../how-it-works/">How It Works</a>
       <a href="../ai-explained/">AI Explained</a>
       <a href="../blog/">Blog</a>
-      <a href="../equipment/">Equipment Needed</a>
       <a href="../faq/">FAQ</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompany">
-      <a href="../about/">About</a>
+      <a href="../our-story/">Our Story</a>
       <a href="../testimonials/">Agent Successes</a>
       <a href="../contact/">Contact</a>
     </div>
@@ -111,7 +129,7 @@
         <div class="page-hero-text fade-up">
           <span class="section-label">The Process</span>
           <h1>How It Works</h1>
-          <p>From first question to live workflows on your own computer, with guidance matched to your comfort level.</p>
+          <p>You install Archie, build an agent, and text it from anywhere. Here&rsquo;s the whole picture, one step at a time.</p>
         </div>
         <div class="screenshot-gallery hero-gallery fade-up delay-1" aria-label="Screenshots of the agent in everyday use">
           <div class="screenshot-gallery-track" id="heroGalleryTrack">
@@ -140,7 +158,7 @@
         <div class="section-header">
           <span class="section-label fade-up">No Coding Required</span>
           <h2 id="no-coding-heading" class="fade-up delay-1">You Do Not Need to Be Technical</h2>
-          <p class="fade-up delay-2">No need to learn programming, APIs, or system setup. We teach and guide every decision in plain language as we build together on your own machine, so you truly understand what your agent does and why.</p>
+          <p class="fade-up delay-2">Archie is a desktop app, not a programming project. You build your agent by naming it and picking its add-ons &mdash; no code, no config files, no terminal. And if you&rsquo;d rather have a person beside you for the first pass, that&rsquo;s exactly what <a href="../individuals/">guided setup</a> is for.</p>
         </div>
       </div>
     </section>
@@ -156,28 +174,16 @@
           <p class="fade-up delay-2">A few components working together behind the scenes. You just send a message.</p>
         </div>
 
-        <div class="arch-diagram fade-up delay-1" role="img" aria-label="Diagram: you send a message to a Mac Mini running OpenClaw and an AI model, which takes actions on your apps and replies to you">
+        <div class="arch-diagram fade-up delay-1" role="img" aria-label="Diagram: you message your agent from Telegram, Discord, or Slack; Archie, running on your always-on computer, works with an AI model on your own account, takes action in your apps, and replies to you">
 
           <!-- Panel 1: You -->
           <div class="arch-panel arch-panel--you">
             <strong class="arch-panel-title">You</strong>
-            <p class="arch-panel-desc">Message your agent from any of these</p>
+            <p class="arch-panel-desc">Message your agent from the chat app you already use</p>
             <div class="arch-logo-grid">
-              <div class="arch-logo-item">
-                <i class="fa-brands fa-whatsapp" style="color:#25D366" aria-hidden="true"></i>
-                <span>WhatsApp</span>
-              </div>
               <div class="arch-logo-item">
                 <i class="fa-brands fa-telegram" style="color:#26A5E4" aria-hidden="true"></i>
                 <span>Telegram</span>
-              </div>
-              <div class="arch-logo-item">
-                <i class="fa-regular fa-envelope" style="color:#EA4335" aria-hidden="true"></i>
-                <span>Email</span>
-              </div>
-              <div class="arch-logo-item">
-                <i class="fa-solid fa-comment-sms" style="color:#34C759" aria-hidden="true"></i>
-                <span>Text</span>
               </div>
               <div class="arch-logo-item">
                 <i class="fa-brands fa-discord" style="color:#5865F2" aria-hidden="true"></i>
@@ -190,7 +196,7 @@
             </div>
           </div>
 
-          <!-- Connector 1: You <-> Mac Mini -->
+          <!-- Connector 1: You <-> your computer -->
           <div class="arch-flow" aria-hidden="true">
             <span class="arch-flow-label">message</span>
             <div class="arch-flow-track">
@@ -204,11 +210,11 @@
             <span class="arch-flow-label">response</span>
           </div>
 
-          <!-- Panel 2: Mac Mini (hardware container) -->
+          <!-- Panel 2: your always-on computer (hardware container) -->
           <div class="arch-hardware">
             <div class="arch-hardware-label" aria-hidden="true">
-              <i class="fa-brands fa-apple arch-apple-icon" aria-hidden="true"></i>
-              Mac Mini, always on
+              <svg class="arch-computer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+              Your computer, always on
             </div>
 
             <div class="arch-panel arch-panel--agent">
@@ -218,8 +224,8 @@
                   <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
                 </svg>
               </div>
-              <strong class="arch-panel-title arch-panel-title--accent">OpenClaw Agent</strong>
-              <p class="arch-panel-desc">Receives your message, decides what to do, and executes it</p>
+              <strong class="arch-panel-title arch-panel-title--accent">Your Agent in Archie</strong>
+              <p class="arch-panel-desc">Lives in the Archie desktop app. It reads your message, decides what to do, and does the work right here on your machine.</p>
             </div>
 
             <div class="arch-internal-flow" aria-hidden="true">
@@ -239,7 +245,7 @@
 
             <div class="arch-panel arch-panel--model">
               <strong class="arch-panel-title">AI Model</strong>
-              <p class="arch-panel-desc">The reasoning engine. Understands language and figures out what to do.</p>
+              <p class="arch-panel-desc">The reasoning engine. Archie talks to the AI company directly on your own account &mdash; we&rsquo;re never in the middle.</p>
               <div class="arch-logo-grid">
                 <div class="arch-logo-item">
                   <img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=64" alt="Claude" />
@@ -249,15 +255,11 @@
                   <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=64" alt="ChatGPT" />
                   <span>ChatGPT</span>
                 </div>
-                <div class="arch-logo-item">
-                  <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=64" alt="Gemini" style="padding: 5px;" />
-                  <span>Gemini</span>
-                </div>
               </div>
             </div>
           </div>
 
-          <!-- Connector 2: Mac Mini <-> Your Apps -->
+          <!-- Connector 2: your computer <-> Your Apps -->
           <div class="arch-flow arch-flow--accent" aria-hidden="true">
             <span class="arch-flow-label">action</span>
             <div class="arch-flow-track">
@@ -274,7 +276,7 @@
           <!-- Panel 3: Your Apps -->
           <div class="arch-panel arch-panel--apps">
             <strong class="arch-panel-title">Your Apps</strong>
-            <p class="arch-panel-desc">What gets done on your behalf</p>
+            <p class="arch-panel-desc">What gets done on your behalf &mdash; sends and purchases wait for your approval</p>
             <ul class="arch-apps-list">
               <li>
                 <i class="fa-regular fa-envelope" style="color:#EA4335" aria-hidden="true"></i>
@@ -311,7 +313,7 @@
         <div class="section-header">
           <span class="section-label fade-up">Step by Step</span>
           <h2 id="timeline-heading" class="fade-up delay-1">Your Path to a Running Agent</h2>
-          <p class="fade-up delay-2">Six straightforward steps to learn and build your agent, with the level of guidance that fits you.</p>
+          <p class="fade-up delay-2">Five steps from a quiet computer to an agent you can text from anywhere &mdash; and one promise for whatever comes after.</p>
         </div>
 
         <div class="timeline" role="list">
@@ -321,16 +323,16 @@
             <div class="timeline-side left empty" aria-hidden="true"></div>
             <div class="timeline-dot" aria-hidden="true">01</div>
             <div class="timeline-side right">
-              <h3>Fill Out Our Short Intake Form</h3>
-              <p>Takes about five minutes, no tech jargon required. Tell us about your day-to-day tasks, your comfort level, and how hands-on you'd like to be.</p>
+              <h3>Pick a Computer It Can Live On</h3>
+              <p>The only real requirement is a computer you can leave on. A Mac mini makes an ideal home, but it&rsquo;s never mandatory &mdash; the machine you already own probably qualifies. Here&rsquo;s <a href="../what-you-need/">what you need</a>.</p>
             </div>
           </div>
 
           <!-- Step 2 -->
           <div class="timeline-item fade-up" role="listitem">
             <div class="timeline-side left">
-              <h3>We Review Your Submission</h3>
-              <p>We review your answers carefully, and if it's a good fit, reach out within one business day to move forward - making sure we can genuinely help before either of us invests more time.</p>
+              <h3>Install Archie</h3>
+              <p>Download the desktop app and open it. Archie is in development &mdash; see <a href="../archie/#status">where it stands today</a>.</p>
             </div>
             <div class="timeline-dot" aria-hidden="true">02</div>
             <div class="timeline-side right empty" aria-hidden="true"></div>
@@ -341,16 +343,16 @@
             <div class="timeline-side left empty" aria-hidden="true"></div>
             <div class="timeline-dot" aria-hidden="true">03</div>
             <div class="timeline-side right">
-              <h3>Discovery Call on Zoom &mdash; Completely Free</h3>
-              <p>A completely free Zoom call to talk through your needs, answer questions, and agree on how we'll work together - meeting frequency, check-in times, all over screen share so you see exactly what's happening.</p>
+              <h3>Build Your Agent</h3>
+              <p>Name it, then shape it with add-ons: Skills, Workers, Routines, and Personalities. Start with the free built-ins, and <a href="../skills-marketplace/browse/">browse the marketplace</a> when you want more.</p>
             </div>
           </div>
 
           <!-- Step 4 -->
           <div class="timeline-item fade-up" role="listitem">
             <div class="timeline-side left">
-              <h3>We Guide the Build and Configuration</h3>
-              <p>We teach you through every step as we build on your computer together - explaining each choice, connecting only the accounts you approve, at your pace.</p>
+              <h3>Connect Your Chat App</h3>
+              <p>Link your agent to Telegram, Discord, or Slack &mdash; whichever you already use. From then on, talking to it is just texting.</p>
             </div>
             <div class="timeline-dot" aria-hidden="true">04</div>
             <div class="timeline-side right empty" aria-hidden="true"></div>
@@ -361,16 +363,16 @@
             <div class="timeline-side left empty" aria-hidden="true"></div>
             <div class="timeline-dot" aria-hidden="true">05</div>
             <div class="timeline-side right">
-              <h3>You Try It. We Fine-Tune.</h3>
-              <p>You use your agent for real tasks and give us feedback - completely normal. Every setup gets a tuning period where we adjust the details until it works exactly how you want.</p>
+              <h3>Text It From Anywhere</h3>
+              <p>Your agent does the work on your machine and replies in your chat. Anything that leaves &mdash; an email going out, a purchase &mdash; waits for your approval first.</p>
             </div>
           </div>
 
           <!-- Step 6 -->
           <div class="timeline-item fade-up" role="listitem">
             <div class="timeline-side left">
-              <h3>Your Agent Runs From Here On</h3>
-              <p>Once you're happy, it runs from your machine - ongoing support stays available, from light check-ins to hands-on help as you expand capabilities.</p>
+              <h3>Hit a Ceiling? Tell Us</h3>
+              <p>If Archie can&rsquo;t do it yet, tell us &mdash; we&rsquo;ll build the add-on. Every <a href="../skills-marketplace/commission/">commissioned add-on</a> becomes a marketplace listing, so your one-off request becomes everyone&rsquo;s feature.</p>
             </div>
             <div class="timeline-dot" aria-hidden="true">06</div>
             <div class="timeline-side right empty" aria-hidden="true"></div>
@@ -386,32 +388,29 @@
     <section class="section section-alt" aria-labelledby="expect-heading">
       <div class="container">
         <div class="section-header">
-          <span class="section-label fade-up">Roles</span>
-          <h2 id="expect-heading" class="fade-up delay-1">What to Expect</h2>
-          <p class="fade-up delay-2">We've designed the process so you can choose your level of involvement without getting overwhelmed.</p>
+          <span class="section-label fade-up">Two Ways In</span>
+          <h2 id="expect-heading" class="fade-up delay-1">On Your Own, or With Us Beside You</h2>
+          <p class="fade-up delay-2">Archie is the product, and it&rsquo;s built so you can do all of this yourself. Guided setup is the door for everyone who&rsquo;d rather not walk through it alone.</p>
         </div>
 
         <div class="two-col fade-up delay-1">
           <div class="two-col-card">
-            <h3>What You'll Need to Do</h3>
+            <h3>Do It Yourself</h3>
             <ul class="two-col-card-list">
-              <li>Fill out our intake form (about 5 minutes)</li>
-              <li>Join a completely free Zoom discovery call once we've reviewed your submission</li>
-              <li>Choose your preferred guidance level (hands-on, hands-off, or hybrid)</li>
-              <li>Give feedback during the fine-tuning period</li>
-              <li>Message your agent when you need something</li>
+              <li>Install Archie and build your agent at your own pace</li>
+              <li>Start with the free built-in add-ons; paid ones are a one-time purchase</li>
+              <li>Connect only the accounts you choose &mdash; your keys stay on your machine, where we can&rsquo;t read them</li>
+              <li>When you hit something Archie can&rsquo;t do yet, tell us &mdash; we&rsquo;ll build the add-on</li>
             </ul>
           </div>
           <div class="two-col-card">
-            <h3>How We Support You</h3>
+            <h3>Take the Guided Path</h3>
             <ul class="two-col-card-list">
-              <li>Reviewing your intake and confirming it's a good fit</li>
-              <li>Guided setup and configuration on your own computer</li>
-              <li>Choosing and configuring the right AI model</li>
-              <li>Walking through every account connection over Zoom</li>
-              <li>Testing and quality-checking before launch</li>
-              <li>Fine-tuning based on your early feedback</li>
-              <li>Ongoing coaching and troubleshooting after launch</li>
+              <li>A completely free first call to map out what you want</li>
+              <li>We build with you over screen share, teaching every step in plain language</li>
+              <li>Bigger setups can take more than one session &mdash; we tell you which on that free call</li>
+              <li>Archie is free while you&rsquo;re an active client</li>
+              <li>Read more about <a href="../individuals/">guided setup</a></li>
             </ul>
           </div>
         </div>
@@ -425,7 +424,7 @@
       <div class="container">
         <div class="cta-banner fade-up">
           <h2>Ready to get started?</h2>
-          <p>Fill out our short intake form and we'll be in touch within one business day.</p>
+          <p>Tell us what you&rsquo;d hand off first. The intake form takes about five minutes, and we&rsquo;ll be in touch within one business day.</p>
           <a href="../questionnaire/" class="btn btn-primary btn-lg">Get Started</a>
         </div>
       </div>
@@ -441,22 +440,25 @@
       <div class="footer-grid">
         <div>
           <div class="footer-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /></div>
-          <p class="footer-tagline">Guided AI agents for real life</p>
+          <p class="footer-tagline">Secure AI agents, your way.<br />Easy plug-and-play, fully in your control.</p>
         </div>
         <div>
           <h4 class="footer-col-title">Pages</h4>
           <nav class="footer-nav-links" aria-label="Footer navigation">
             <a href="../">Home</a>
-            <a href="../how-it-works/">How It Works</a>
             <a href="../archie/">Archie</a>
-            <a href="../skills-marketplace/browse/">Marketplace</a>
-            <a href="../individuals/">For Individuals</a>
+            <a href="../archie/see-it-work/">See It Work</a>
+            <a href="../archie/pricing/">Archie Pricing</a>
+            <a href="../skills-marketplace/browse/">Browse the Marketplace</a>
+            <a href="../skills-marketplace/commission/">Commission an Add-on</a>
+            <a href="../individuals/">Guided Setup</a>
             <a href="../business/">For Business</a>
-            <a href="../about/">About</a>
-            <a href="../faq/">FAQ</a>
+            <a href="../what-you-need/">What You Need</a>
+            <a href="../how-it-works/">How It Works</a>
             <a href="../ai-explained/">AI Explained</a>
             <a href="../blog/">Blog</a>
-            <a href="../equipment/">Equipment Needed</a>
+            <a href="../faq/">FAQ</a>
+            <a href="../our-story/">Our Story</a>
             <a href="../testimonials/">Agent Successes</a>
             <a href="../contact/">Contact</a>
           </nav>

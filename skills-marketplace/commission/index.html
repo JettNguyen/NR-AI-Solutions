@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Commission an Add-on | Otian AI</title>
+  <meta name="description" content="If Archie can't do it yet, tell us what you need. Otian AI scopes it, quotes it per add-on, and builds it — it's yours, and it joins the marketplace so the next person who needs it doesn't have to ask." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="../../assets/icon-1024-dark.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../css/styles.css" />
+</head>
+<body>
+
+  <!-- ==============================
+       Navigation
+       ============================== -->
+  <nav class="nav" id="nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="../../" class="nav-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Secure AI Agents, Your Way</span></span></a>
+      <div class="nav-links">
+        <div class="nav-more" id="navArchie">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navArchieMenu" type="button">Archie</button>
+          <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
+            <a href="../../archie/" role="menuitem">What Is Archie?</a>
+            <a href="../../archie/see-it-work/" role="menuitem">See It Work</a>
+            <a href="../../archie/pricing/" role="menuitem">Pricing</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navAddons">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navAddonsMenu" type="button">Add-ons</button>
+          <div class="nav-more-menu" id="navAddonsMenu" role="menu" aria-label="Add-ons">
+            <a href="../../skills-marketplace/what-is-an-add-on/" role="menuitem">What's an Add-on?</a>
+            <a href="../../skills-marketplace/browse/" role="menuitem">Browse the Marketplace</a>
+            <a href="../../skills-marketplace/commission/" role="menuitem">Commission One</a>
+            <a href="../../skills-marketplace/for-developers/" role="menuitem">For Developers</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navWork">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navWorkMenu" type="button">Work With Us</button>
+          <div class="nav-more-menu" id="navWorkMenu" role="menu" aria-label="Work With Us">
+            <a href="../../individuals/" role="menuitem">Guided Setup</a>
+            <a href="../../business/" role="menuitem">For Business</a>
+            <a href="../../what-you-need/" role="menuitem">What You Need</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navLearn">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navLearnMenu" type="button">Learn</button>
+          <div class="nav-more-menu" id="navLearnMenu" role="menu" aria-label="Learn">
+            <a href="../../how-it-works/" role="menuitem">How It Works</a>
+            <a href="../../ai-explained/" role="menuitem">AI Explained</a>
+            <a href="../../blog/" role="menuitem">Blog</a>
+            <a href="../../faq/" role="menuitem">FAQ</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navCompany">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompanyMenu" type="button">Company</button>
+          <div class="nav-more-menu" id="navCompanyMenu" role="menu" aria-label="Company">
+            <a href="../../our-story/" role="menuitem">Our Story</a>
+            <a href="../../testimonials/" role="menuitem">Agent Successes</a>
+            <a href="../../contact/" role="menuitem">Contact</a>
+          </div>
+        </div>
+      </div>
+      <a href="../../questionnaire/" class="btn btn-primary btn-sm nav-cta">Get Started</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navDrawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+  <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutArchie" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutAddons" aria-expanded="false" aria-controls="navDrawerFlyout">Add-ons</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutWork" aria-expanded="false" aria-controls="navDrawerFlyout">Work With Us</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
+    <a href="../../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
+  </nav>
+
+  <div class="nav-drawer-flyout" id="navDrawerFlyout" aria-hidden="true">
+    <button class="nav-drawer-back" type="button">
+      <svg class="nav-drawer-back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      <span id="navDrawerFlyoutTitle">Archie</span>
+    </button>
+    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
+      <a href="../../archie/">What Is Archie?</a>
+      <a href="../../archie/see-it-work/">See It Work</a>
+      <a href="../../archie/pricing/">Pricing</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutAddons">
+      <a href="../../skills-marketplace/what-is-an-add-on/">What's an Add-on?</a>
+      <a href="../../skills-marketplace/browse/">Browse the Marketplace</a>
+      <a href="../../skills-marketplace/commission/">Commission One</a>
+      <a href="../../skills-marketplace/for-developers/">For Developers</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutWork">
+      <a href="../../individuals/">Guided Setup</a>
+      <a href="../../business/">For Business</a>
+      <a href="../../what-you-need/">What You Need</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutLearn">
+      <a href="../../how-it-works/">How It Works</a>
+      <a href="../../ai-explained/">AI Explained</a>
+      <a href="../../blog/">Blog</a>
+      <a href="../../faq/">FAQ</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompany">
+      <a href="../../our-story/">Our Story</a>
+      <a href="../../testimonials/">Agent Successes</a>
+      <a href="../../contact/">Contact</a>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ==============================
+         Page Hero
+         ============================== -->
+    <section class="page-hero" aria-label="Page introduction">
+      <div class="page-hero-inner">
+        <span class="section-label fade-up">Commission an Add-on</span>
+        <h1 class="fade-up delay-1">If Archie can&rsquo;t do it yet, we&rsquo;ll build it.</h1>
+        <p class="fade-up delay-2">Every &ldquo;easy&rdquo; AI tool is easy because it&rsquo;s limited. Archie is easy because we did the hard part first &mdash; and when you reach the edge of what it can do, that edge moves. Tell us what you need. We&rsquo;ll scope it, build it, and it&rsquo;s yours &mdash; and it goes on the marketplace, so the next person who needs it doesn&rsquo;t have to ask.</p>
+        <div class="fade-up delay-3" style="margin-top: 28px;">
+          <a href="../../contact/" class="btn btn-primary btn-lg">Tell us what you need</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         How It Works
+         ============================== -->
+    <section class="section" aria-labelledby="how-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">How It Works</span>
+          <h2 id="how-heading" class="fade-up delay-1">Three Steps, and Only the First Is Yours</h2>
+          <p class="fade-up delay-2">A commission starts as a conversation, not a project plan. You bring the need &mdash; we do the rest.</p>
+        </div>
+
+        <div class="steps-row">
+          <div class="step-item fade-up delay-1">
+            <div class="step-number" aria-hidden="true">1</div>
+            <h3>Tell Us What You Need</h3>
+            <p>Describe it in plain language &mdash; the thing you keep doing by hand, the app your agent doesn&rsquo;t know yet. No spec required.</p>
+          </div>
+          <div class="step-item fade-up delay-2">
+            <div class="step-number" aria-hidden="true">2</div>
+            <h3>We Scope It and Quote It</h3>
+            <p>We work out exactly what it takes and put a price on it. You know the cost before we write a line of it.</p>
+          </div>
+          <div class="step-item fade-up delay-3">
+            <div class="step-number" aria-hidden="true">3</div>
+            <h3>We Build It &mdash; and It&rsquo;s Yours</h3>
+            <p>Your agent picks up the new ability, and the add-on joins the marketplace for everyone who needs it after you.</p>
+          </div>
+        </div>
+
+        <p class="marketplace-split-note fade-up delay-3" style="margin-top: 40px;">Quoted per add-on &mdash; scope first, price before any work starts.</p>
+      </div>
+    </section>
+
+    <!-- ==============================
+         What It Can Be
+         ============================== -->
+    <section class="section section-alt" aria-labelledby="kinds-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">What It Can Be</span>
+          <h2 id="kinds-heading" class="fade-up delay-1">Any of the Four Kinds</h2>
+          <p class="fade-up delay-2">A commission can take the shape of any kind of add-on. If you&rsquo;re not sure which one fits, don&rsquo;t worry &mdash; that&rsquo;s what scoping is for. New to add-ons? <a href="../what-is-an-add-on/">Start with the basics</a>.</p>
+        </div>
+
+        <div class="feature-grid feature-grid-4 fade-up delay-1">
+          <article class="feature-card">
+            <h3>A Skill</h3>
+            <p>Something new your agent can <em>do</em> &mdash; the app or tool it doesn&rsquo;t know how to work with yet.</p>
+          </article>
+          <article class="feature-card">
+            <h3>A Worker</h3>
+            <p>A specialist your agent can <em>hand work to</em> &mdash; a researcher, a bookkeeper, a writer.</p>
+          </article>
+          <article class="feature-card">
+            <h3>A Routine</h3>
+            <p>Something it does <em>on its own</em>, on your schedule &mdash; the report you wish landed every Monday.</p>
+          </article>
+          <article class="feature-card">
+            <h3>A Personality</h3>
+            <p>How your agent <em>talks</em> to you &mdash; a voice and tone shaped around how you like to work.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         Why We Work This Way
+         ============================== -->
+    <section class="section" aria-labelledby="compounds-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">Why We Work This Way</span>
+          <h2 id="compounds-heading" class="fade-up delay-1">Your One-Off Makes the Whole Thing Better</h2>
+          <p class="fade-up delay-2">Every commissioned add-on becomes a marketplace listing. That means the marketplace grows with real demand &mdash; things people actually needed, not things we guessed they might.</p>
+          <p class="fade-up delay-3">It&rsquo;s the same move that built Archie in the first place: we kept hand-building the same setups for clients until we turned them into a product. <a href="../../our-story/">That&rsquo;s our whole story</a> &mdash; commissions are the next chapter of it.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         CTA
+         ============================== -->
+    <section class="section section-alt" aria-label="Call to action">
+      <div class="container">
+        <div class="cta-banner fade-up">
+          <h2>What&rsquo;s the thing Archie can&rsquo;t do yet?</h2>
+          <p>Tell us. We&rsquo;ll scope it, quote it, and build it &mdash; and the edge moves for everyone.</p>
+          <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+            <a href="../../contact/" class="btn btn-primary btn-lg">Tell us what you need</a>
+            <a href="../browse/" class="btn btn-secondary btn-lg">Browse the Marketplace</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <!-- ==============================
+       Footer
+       ============================== -->
+  <footer class="footer" aria-label="Site footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /></div>
+          <p class="footer-tagline">Secure AI agents, your way.<br />Easy plug-and-play, fully in your control.</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Pages</h4>
+          <nav class="footer-nav-links" aria-label="Footer navigation">
+            <a href="../../">Home</a>
+            <a href="../../archie/">Archie</a>
+            <a href="../../archie/see-it-work/">See It Work</a>
+            <a href="../../archie/pricing/">Archie Pricing</a>
+            <a href="../../skills-marketplace/browse/">Browse the Marketplace</a>
+            <a href="../../skills-marketplace/commission/">Commission an Add-on</a>
+            <a href="../../individuals/">Guided Setup</a>
+            <a href="../../business/">For Business</a>
+            <a href="../../what-you-need/">What You Need</a>
+            <a href="../../how-it-works/">How It Works</a>
+            <a href="../../ai-explained/">AI Explained</a>
+            <a href="../../blog/">Blog</a>
+            <a href="../../faq/">FAQ</a>
+            <a href="../../our-story/">Our Story</a>
+            <a href="../../testimonials/">Agent Successes</a>
+            <a href="../../contact/">Contact</a>
+          </nav>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Contact</h4>
+          <a href="mailto:questions@otianai.com" class="footer-contact-email">questions@otianai.com</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Otian AI. All rights reserved.</p>
+        <nav class="footer-legal-links" aria-label="Legal">
+          <a href="../../privacy-policy/">Privacy Policy</a>
+          <a href="../../terms-of-service/">Terms of Service</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../js/nav.js"></script>
+</body>
+</html>
