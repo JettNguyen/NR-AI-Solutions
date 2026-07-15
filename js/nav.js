@@ -247,6 +247,9 @@
     resetDrawerPanels = function () {
       drawerFlyout.classList.remove('open');
       drawerFlyout.setAttribute('aria-hidden', 'true');
+      linkGroups.forEach(function (group) {
+        group.classList.remove('is-active');
+      });
       catButtons.forEach(function (btn) {
         btn.setAttribute('aria-expanded', 'false');
         btn.classList.remove('open');

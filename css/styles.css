@@ -706,7 +706,14 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   gap: 4px;
   overflow-y: auto;
   visibility: hidden;
-  transform: translateX(100%);
+  /* Closed = fully off the right edge, not just shifted. The panel sits at right: 220px (just left
+     of the 220px drawer), so a plain translateX(100%) only moves it 160px — its own width — and
+     leaves it ON screen, relying on visibility: hidden alone to hide it. On mobile Safari that
+     visibility transition intermittently fails to repaint, and the submenu is left sitting there
+     after the drawer closes. Translating a full 100% + 220px carries it past the viewport edge
+     (tucked behind the drawer, which is z-index 999 to this panel's 998), so it is gone even if
+     visibility lags. */
+  transform: translateX(calc(100% + 220px));
   transition: transform 0.3s ease, visibility 0.3s ease;
 }
 
