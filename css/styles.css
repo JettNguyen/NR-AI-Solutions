@@ -3514,30 +3514,16 @@ html[data-theme="dark"] .availability-widget iframe {
     object-position: center;
   }
 
-  /* The recording dissolves into the page at the bottom, and the headline rises into what it
-     leaves behind. It holds full opacity into the last tenth of the frame and then ramps hard —
-     a soft bottom edge on the picture, not a chunk dissolved away — easing to fully transparent
-     right at the frame's edge so the eye never catches a line. During the app portions the bottom
-     of the frame is the strip below the window, so the ramp also carries the window's own bottom
-     border quietly out; on the closing card it is just empty cream (or near-black) doing the same.
-     Plain frame percentages, since nothing is transformed. */
+  /* The recording dissolves into the page across its whole bottom third, and the headline rises
+     into what it leaves behind. A long, even ramp — solid to ~62% of the frame, then a gradual
+     slope to fully transparent right at the edge — so the picture melts out instead of ending on
+     a line. This matters most in dark mode: the app's footer bar and the desktop strip below the
+     window are bright against a near-black page, and a short ramp left a visible seam there; the
+     long ramp carries them all the way to nothing. On the closing card it is just empty cream (or
+     near-black) doing the same. Plain frame percentages, since nothing is transformed. */
   .demo-player--hero .demo-player-video {
-    -webkit-mask-image: linear-gradient(
-      to bottom,
-      #000 0%,
-      #000 90%,
-      rgba(0, 0, 0, 0.55) 94.5%,
-      rgba(0, 0, 0, 0.15) 98%,
-      transparent 100%
-    );
-    mask-image: linear-gradient(
-      to bottom,
-      #000 0%,
-      #000 90%,
-      rgba(0, 0, 0, 0.55) 94.5%,
-      rgba(0, 0, 0, 0.15) 98%,
-      transparent 100%
-    );
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 100%);
   }
 
   /* No backdrop-filter blur down here, deliberately — it was tried and it made things worse.
@@ -3551,15 +3537,16 @@ html[data-theme="dark"] .availability-widget iframe {
      is what makes it smooth. */
 
   /* Ride the headline up onto the faded tail of the video — just the cap-line of its first row,
-     and only into the part that has already dissolved to nothing. Since the fade now holds solid
-     into the last sixth of the frame, the pull has to stay below that: any deeper and the headline
-     sits on live app text instead of on the empty, faded-out tail. In vw, not px, so the overlap
-     holds its proportions from 360px up to 850px. */
+     into the part that has already dissolved toward nothing. The fade now begins at ~62% of the
+     frame, so the whole bottom third is a soft ramp; the headline sits low in that ramp, covering
+     little of the live picture and resting on pixels that are mostly gone. A small pull, so the
+     line kisses the fade rather than climbing into the app. In vw, not px, so the overlap holds
+     its proportions from 360px up to 850px. */
   .hero-content {
     position: relative;
     z-index: 2;
     max-width: 100%;
-    margin-top: -3.5vw;
+    margin-top: -7vw;
   }
 
   /* Dropped here: the nav wordmark carries the company name at these widths instead
@@ -3574,6 +3561,10 @@ html[data-theme="dark"] .availability-widget iframe {
 
   .hero-title-short {
     display: inline;
+  }
+
+  .hero-title-short {
+    font-size: clamp(2rem, 9vw, 5rem);
   }
 
   .hero-subtitle {
