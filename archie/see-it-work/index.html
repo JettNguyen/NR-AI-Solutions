@@ -207,10 +207,9 @@
               <source data-theme="dark"  data-src="../../assets/archie-demo-dark-1280.h264.mp4"  type='video/mp4; codecs="avc1.640028"'      data-w="1280" data-h="902" />
               <p>Your browser can&rsquo;t play this video. <a href="../../assets/archie-demo-light-1280.h264.mp4">Download it instead.</a></p>
             </video>
-            <button class="demo-player-toggle" type="button" aria-label="Pause the demo">
-              <svg class="demo-player-icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
-              <svg class="demo-player-icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-            </button>
+            <!-- No pause control: the recording runs on its own as ambient motion. Anyone who has
+                 asked their OS for reduced motion still gets a static poster and no autoplay
+                 (js/demo-player.js), which is the substantive accessibility protection. -->
           </div>
           <figcaption class="demo-player-caption">Recorded in Archie, July 2026.</figcaption>
         </figure>
@@ -241,10 +240,8 @@
                      aria-label="A silent screen recording of a phone: an AI agent sends its owner a morning briefing over Telegram, listing the day's priorities, the calendar, and a market summary.">
                 <p>Your browser can&rsquo;t play this video. <a href="../../assets/nr-demo.webm">Download it instead.</a></p>
               </video>
-              <button class="demo-player-toggle" type="button" aria-label="Pause the demo">
-                <svg class="demo-player-icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
-                <svg class="demo-player-icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-              </button>
+              <!-- No pause control, as above: ambient motion, with the reduced-motion poster
+                   fallback doing the real accessibility work. -->
             </div>
           </figure>
         </div>

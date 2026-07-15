@@ -3479,14 +3479,17 @@ html[data-theme="dark"] .availability-widget iframe {
     display: none;
   }
 
-  /* Crop the bottom tenth of the recording away. This is the whole trick: the Archie window
-     ends at 96% of the frame with a hard edge — bright panel (luma 208) straight onto dark
-     wallpaper (luma 22) — and no alpha ramp can hide a contrast cliff that sharp; fading it
-     just leaves a faint sharp line. Cut it off and the fade instead dissolves the panel's own
-     interior, which is cream on a cream page and goes quietly.
-     1280/812 shows the top 90%; object-position pins the crop to the bottom. */
+  /* Crop the recording to the Archie window by SHAPE, not by transform. The frame is set a touch
+     narrower than the recording's own 1.42 aspect, so object-fit: cover trims a sliver off each
+     side — enough to carry the dark desktop wallpaper that flanks the window off the screen edges,
+     keeping the bleed clean — while showing the FULL height. Full height is the whole point: it
+     leaves the top strip of desktop above the window in view (that's intended), and it stops
+     cropping the bottom, which is what used to shove the closing logo card's tagline down under
+     the fade. Nothing vertical is cropped, so the card sits exactly as it does in the recording,
+     with real air beneath the tagline. No transform, so the mask is plain frame percentages and
+     the two vendor gradients can't drift apart. */
   .demo-player--hero .demo-player-frame {
-    aspect-ratio: 1280 / 812;
+    aspect-ratio: 1280 / 985;
     border-radius: 0;
     box-shadow: none;
     /* The frame's dark backdrop would survive the video fading out above it, leaving a
@@ -3494,62 +3497,33 @@ html[data-theme="dark"] .availability-widget iframe {
     background: transparent;
   }
 
-  /* Crop the recording down to just the Archie window, on all four sides.
-     The bottom is the window's own border — a luma 208 -> 22 cliff at 96% of the frame that
-     no alpha ramp can hide. The sides are worse and less obvious: a 47px strip of dark desktop
-     wallpaper runs the full height down each flank (the window spans x=47..1232 of 1280). A
-     vertical fade cannot fix a horizontal problem — those near-black columns wash through grey
-     on their way to cream, and a grey band is exactly what a fade is not supposed to look like.
-     Scaled up 8%, the flanks fall outside the box and every column in the fade zone is window
-     interior: cream on a cream page, landing within ~4 levels of the background the whole way
-     down instead of 200. */
   .demo-player--hero .demo-player-video {
-    --hero-zoom: 1.08;
-    object-position: top center;
-    transform: scale(var(--hero-zoom));
-    transform-origin: top center;
+    object-position: center;
   }
 
-  /* The recording dissolves downward into the page, and the headline rises into what it
-     leaves behind. Two things this gradient has to get right:
-
-     It holds full opacity to two-thirds down — fade any earlier and the app is a smudge, because
-     the UI is cream-on-cream against this background, and the whole point of leading with the
-     recording is that you can see it.
-
-     And it eases to fully transparent exactly at the bottom edge (100%, not 96%). A plain
-     two-stop ramp lands on zero early and stops, and the eye reads that as an edge; the
-     extra stops bend it into a curve that arrives at nothing right as the frame ends.
-
-     Every stop is divided by --hero-zoom because the mask rides along with the transform above:
-     it is painted in the video's own box, which the scale then blows up past the frame. Left at
-     plain percentages, the "transparent 100%" stop lands 8% below the frame's bottom edge, where
-     overflow clips it — so the video gets cut off while still ~40% opaque. Cream-on-cream that
-     hides; on the dark theme it is a bright band guillotined against a dark page. Dividing pulls
-     each stop back into frame coordinates, so the ramp still arrives at nothing exactly at the
-     edge you can see. */
+  /* The recording dissolves into the page at the bottom, and the headline rises into what it
+     leaves behind. It holds full opacity into the last tenth of the frame and then ramps hard —
+     a soft bottom edge on the picture, not a chunk dissolved away — easing to fully transparent
+     right at the frame's edge so the eye never catches a line. During the app portions the bottom
+     of the frame is the strip below the window, so the ramp also carries the window's own bottom
+     border quietly out; on the closing card it is just empty cream (or near-black) doing the same.
+     Plain frame percentages, since nothing is transformed. */
   .demo-player--hero .demo-player-video {
     -webkit-mask-image: linear-gradient(
       to bottom,
       #000 0%,
-      #000 calc(68% / var(--hero-zoom)),
-      rgba(0, 0, 0, 0.9) calc(76% / var(--hero-zoom)),
-      rgba(0, 0, 0, 0.68) calc(84% / var(--hero-zoom)),
-      rgba(0, 0, 0, 0.4) calc(90% / var(--hero-zoom)),
-      rgba(0, 0, 0, 0.18) calc(95% / var(--hero-zoom)),
-      rgba(0, 0, 0, 0.05) calc(98% / var(--hero-zoom)),
-      transparent calc(100% / var(--hero-zoom))
+      #000 90%,
+      rgba(0, 0, 0, 0.55) 94.5%,
+      rgba(0, 0, 0, 0.15) 98%,
+      transparent 100%
     );
     mask-image: linear-gradient(
       to bottom,
       #000 0%,
-      #000 calc(68% / var(--hero-zoom)),
-      rgba(0, 0, 0, 0.9) calc(76% / var(--hero-zoom)),
-      rgba(0, 0, 0, 0.68) calc(84% / var(--hero-zoom)),
-      rgba(0, 0, 0, 0.4) calc(90% / var(--hero-zoom)),
-      rgba(0, 0, 0, 0.18) calc(95% / var(--hero-zoom)),
-      rgba(0, 0, 0, 0.05) calc(98% / var(--hero-zoom)),
-      transparent calc(100% / var(--hero-zoom))
+      #000 90%,
+      rgba(0, 0, 0, 0.55) 94.5%,
+      rgba(0, 0, 0, 0.15) 98%,
+      transparent 100%
     );
   }
 
@@ -3564,14 +3538,15 @@ html[data-theme="dark"] .availability-widget iframe {
      is what makes it smooth. */
 
   /* Ride the headline up onto the faded tail of the video — just the cap-line of its first row,
-     and only into the part that has already mostly dissolved. Kept shallow on purpose: the
-     recording is the pitch, so the copy leans on it rather than sitting over it. In vw, not px,
-     so the overlap holds its proportions from 360px up to 850px. */
+     and only into the part that has already dissolved to nothing. Since the fade now holds solid
+     into the last sixth of the frame, the pull has to stay below that: any deeper and the headline
+     sits on live app text instead of on the empty, faded-out tail. In vw, not px, so the overlap
+     holds its proportions from 360px up to 850px. */
   .hero-content {
     position: relative;
     z-index: 2;
     max-width: 100%;
-    margin-top: -5vw;
+    margin-top: -3.5vw;
   }
 
   /* Dropped here: the nav wordmark carries the company name at these widths instead
