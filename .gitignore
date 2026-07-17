@@ -4,3 +4,5 @@ engineer-curriculum.md
 PRICING-ONETIME-MIGRATION.md
 # Video masters — keep the full-res original on disk, ship only the optimized web encode.
 assets/*.master.mp4
+# macOS folder metadata — never track.
+.DS_Store
