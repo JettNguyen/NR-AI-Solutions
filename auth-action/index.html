@@ -323,11 +323,16 @@
         showResult({ ok: false, title: "Link problem", body: "This link is missing information. Request a new email and try again.", ctaText: "Go to sign in", ctaHref: "/login/" });
         return;
       }
+      // Safety net: never leave the user staring at "One moment" if a network call stalls.
+      const watchdog = setTimeout(() => {
+        showResult({ ok: true, title: "Almost there", body: "This is taking longer than usual. If your email isn't confirmed yet, head to your account and use &ldquo;I&rsquo;ve verified,&rdquo; or request a fresh link.", ctaText: "Go to your account", ctaHref: "/account/" });
+      }, 12000);
       try {
         if (mode === "verifyEmail" || mode === "verifyAndChangeEmail") {
           await applyActionCode(auth, oobCode);
-          // If this browser is already signed in, refresh so emailVerified updates immediately.
-          if (auth.currentUser) { try { await auth.currentUser.reload(); } catch (e) {} }
+          // If this browser is already signed in, refresh so emailVerified updates in that tab —
+          // fire-and-forget: never block showing the result on this network call.
+          if (auth.currentUser) { auth.currentUser.reload().catch(() => {}); }
           showResult({
             ok: true,
             title: mode === "verifyAndChangeEmail" ? "Email updated" : "Email confirmed",
@@ -366,6 +371,8 @@
           ctaText: "Go to sign in",
           ctaHref: "/login/",
         });
+      } finally {
+        clearTimeout(watchdog);
       }
     }
 
