@@ -66,6 +66,12 @@
         </div>
       </div>
       <a href="../questionnaire/" class="btn btn-primary btn-sm nav-cta">Get Started</a>
+      <div class="nav-account" id="navAccount">
+        <button class="nav-account-btn" id="navAccountBtn" type="button" aria-expanded="false" aria-haspopup="true" aria-label="Account">
+          <span class="nav-account-avatar" id="navAccountAvatar" aria-hidden="true"></span>
+        </button>
+        <div class="nav-account-menu" id="navAccountMenu" role="menu" aria-label="Account"></div>
+      </div>
       <button class="nav-hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navDrawer">
         <span></span><span></span><span></span>
       </button>
@@ -255,7 +261,7 @@
             You can set all of this up yourself &mdash; Archie is built for that. But plenty of owners would rather have someone alongside them the first time. That&rsquo;s our guided setup: we get on a call with you and your team, build the agents together on your machines, connect accounts with your approval, test everything, and fine-tune after launch. The full process is laid out on <a href="../how-it-works/">How It Works</a>.
           </p>
           <p>
-            No two businesses need the same thing. One owner wants a single agent for replies and scheduling; another has five teammates, a dozen tools, and ten years of process. A flat rate would leave one overpaying and the other underserved &mdash; so we price by the session instead. A session is $100 and runs an hour. The rate never goes up because a setup is complicated; a bigger setup simply takes more sessions, and we tell you how many on the free first call.
+            No two businesses need the same thing. One owner wants a single agent for replies and scheduling; another has five teammates, a dozen tools, and ten years of process. A flat rate would leave one overpaying and the other underserved &mdash; so we price by the session instead. A session is $100 and runs an hour. The rate never goes up because a setup is complicated; a bigger setup simply takes more sessions, and we tell you how many on the free discovery call.
           </p>
           <p>
             Archie is a one-time $149 license per person when it ships &mdash; a separate cost from guided setup, not a subscription. The AI thinking itself runs on each person&rsquo;s own pay-as-you-go account with Anthropic or OpenAI &mdash; typically a few dollars a month per person, billed directly by the provider &mdash; and we&rsquo;ll help each teammate get set up.
@@ -265,7 +271,7 @@
         <div class="feature-grid">
           <article class="feature-card fade-up delay-1">
             <h3>Guided Sessions</h3>
-            <p>$100 a session, and each session runs an hour. A bigger setup takes more sessions, never a higher rate &mdash; we scope how many on the free first call.</p>
+            <p>$100 a session, and each session runs an hour. A bigger setup takes more sessions, never a higher rate &mdash; we scope how many on the free discovery call.</p>
           </article>
 
           <article class="feature-card fade-up delay-2">
@@ -288,13 +294,13 @@
     <!-- ==============================
          Free Call CTA
          ============================== -->
-    <section class="section section-alt" aria-label="Book the free first call">
+    <section class="section section-alt" aria-label="Book the free discovery call">
       <div class="container">
         <div class="cta-banner fade-up">
-          <h2>Start with the Free First Call</h2>
+          <h2>Start with the Free Discovery Call</h2>
           <p>Tell us how your business runs and what eats your team&rsquo;s week. We&rsquo;ll tell you which agents make sense, how many sessions the setup needs, and what it costs &mdash; before you spend a dollar.</p>
           <p>No obligation, no contracts.</p>
-          <a href="../questionnaire/" class="btn btn-primary btn-lg">Book the Free First Call</a>
+          <a href="../questionnaire/" class="btn btn-primary btn-lg">Book the Free Discovery Call</a>
           <p class="pricing-cta-note">The form takes about five minutes. We typically respond within one business day.</p>
         </div>
       </div>
@@ -332,6 +338,7 @@
             <a href="../our-story/">Our Story</a>
             <a href="../testimonials/">Agent Successes</a>
             <a href="../contact/">Contact</a>
+            <a href="../account/">Account</a>
           </nav>
         </div>
         <div>
@@ -355,5 +362,6 @@
   </footer>
 
   <script src="../js/nav.js"></script>
+  <script type="module" src="../js/account-nav.js"></script>
 </body>
 </html>

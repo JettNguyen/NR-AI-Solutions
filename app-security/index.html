@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign-in & security — Archie</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #FBF8F4;
+      font-family: 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
+      color: #4A423A;
+      padding: 2rem 1rem;
+    }
+    .glow {
+      position: fixed; top: 20%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 480px; height: 480px; border-radius: 50%;
+      background: #E08A5B; opacity: 0.06; filter: blur(140px); pointer-events: none;
+    }
+    .card {
+      position: relative; width: 420px; max-width: 100%;
+      display: flex; flex-direction: column; gap: 20px;
+      background: rgba(255,255,255,0.94);
+      border: 1px solid rgba(74,66,58,0.14);
+      border-radius: 24px; padding: 2rem;
+      box-shadow: 0 16px 36px rgba(74,66,58,0.10);
+    }
+    .head { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
+    .byline { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #A09489; }
+    h1 { font-size: 16px; font-weight: 600; }
+    .sub { font-size: 13px; color: #8C8177; line-height: 1.5; }
+    .divider { width: 100%; height: 1px; background: rgba(74,66,58,0.12); }
+    .btn {
+      width: 100%; padding: 0.7rem 1rem; border-radius: 12px; border: none;
+      font-size: 0.875rem; font-weight: 600; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+      transition: opacity 0.15s, transform 0.15s; font-family: inherit;
+    }
+    .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .btn-primary { background: #E08A5B; color: #2A2521; }
+    .btn-secondary { background: rgba(74,66,58,0.07); color: #4A423A; }
+    input {
+      width: 100%; padding: 0.6rem 0.8rem; border-radius: 10px;
+      border: 1px solid rgba(74,66,58,0.18); background: #fff; color: #4A423A;
+      font-size: 0.875rem; font-family: inherit; outline: none;
+    }
+    input:focus { border-color: #E08A5B; box-shadow: 0 0 0 3px rgba(224,138,91,0.15); }
+    .fields { display: flex; flex-direction: column; gap: 8px; }
+    .section { border: 1px solid rgba(74,66,58,0.12); border-radius: 14px; padding: 1rem; }
+    .section-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .section-title { font-size: 13px; font-weight: 600; }
+    .section-body { font-size: 12px; color: #8C8177; line-height: 1.5; margin-top: 6px; }
+    .pill { font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 999px; white-space: nowrap; }
+    .pill-on { background: rgba(74,140,90,0.14); color: #3f7a4f; }
+    .pill-off { background: rgba(74,66,58,0.08); color: #8C8177; }
+    .pill-soon { background: rgba(224,138,91,0.14); color: #b56a3c; }
+    .link { background: none; border: none; padding: 0; font-family: inherit; font-size: 12px; color: #8C8177; cursor: pointer; }
+    .link:hover { text-decoration: underline; }
+    .mini { padding: 0.45rem 0.8rem; width: auto; font-size: 12px; border-radius: 10px; }
+    .code {
+      font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 13px; letter-spacing: 0.08em;
+      background: rgba(74,66,58,0.06); border-radius: 8px; padding: 8px 10px; word-break: break-all; user-select: all;
+    }
+    #status { font-size: 12px; min-height: 1.1em; color: #8C8177; text-align: center; }
+    #status.error { color: #c0392b; }
+    #status.ok { color: #3f7a4f; }
+    .hidden { display: none !important; }
+    .stack { display: flex; flex-direction: column; gap: 8px; }
+    .row { display: flex; gap: 8px; }
+    .grow { flex: 1; }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+  <div class="card">
+    <div class="head">
+      <span class="byline">Archie · by Otian AI</span>
+      <h1>Sign-in &amp; security</h1>
+    </div>
+    <div class="divider"></div>
+
+    <!-- SIGN-IN VIEW (shown until authenticated) -->
+    <div id="signin-view" class="stack hidden">
+      <p class="sub">Sign in to manage your security settings.</p>
+      <button class="btn btn-primary" id="btn-google">Continue with Google</button>
+      <div class="fields">
+        <input type="email" id="email" placeholder="Email address" autocomplete="email" />
+        <input type="password" id="password" placeholder="Password" autocomplete="current-password" />
+      </div>
+      <button class="btn btn-secondary" id="btn-signin">Sign in</button>
+    </div>
+
+    <!-- DASHBOARD VIEW (shown once authenticated) -->
+    <div id="dash-view" class="stack hidden">
+      <div class="section">
+        <div class="section-head">
+          <div>
+            <div class="section-title">Signed in</div>
+            <div class="section-body" id="acct-email">—</div>
+          </div>
+          <button class="btn btn-secondary mini" id="btn-signout">Sign out</button>
+        </div>
+      </div>
+
+      <!-- Email verification (native, works today) -->
+      <div class="section">
+        <div class="section-head">
+          <div class="section-title">Email verification</div>
+          <span class="pill" id="verify-pill">—</span>
+        </div>
+        <div class="section-body" id="verify-body">Checking…</div>
+        <div class="row" id="verify-actions" style="margin-top:10px;">
+          <button class="btn btn-secondary mini" id="btn-resend">Resend link</button>
+          <button class="btn btn-secondary mini" id="btn-recheck">I&rsquo;ve verified</button>
+        </div>
+      </div>
+
+      <!-- Authenticator app / TOTP (native MFA; activates once Identity Platform is enabled) -->
+      <div class="section">
+        <div class="section-head">
+          <div class="section-title">Authenticator app</div>
+          <span class="pill" id="totp-pill">—</span>
+        </div>
+        <div class="section-body" id="totp-body">A 6-digit code from an app like Google Authenticator or 1Password, asked for at sign-in.</div>
+        <div class="stack" id="totp-actions" style="margin-top:10px;">
+          <button class="btn btn-secondary mini" id="btn-totp-start">Set up</button>
+          <button class="btn btn-secondary mini hidden" id="btn-totp-remove">Turn off</button>
+        </div>
+        <!-- Enrollment sub-flow -->
+        <div class="stack hidden" id="totp-enroll" style="margin-top:12px;">
+          <div class="section-body">In your authenticator app, add an account by <b>entering a setup key</b>, paste this key, then type the 6-digit code it shows:</div>
+          <div class="code" id="totp-secret">—</div>
+          <input type="text" id="totp-code" inputmode="numeric" autocomplete="one-time-code" placeholder="6-digit code" />
+          <div class="row">
+            <button class="btn btn-primary mini grow" id="btn-totp-confirm">Confirm</button>
+            <button class="btn btn-secondary mini" id="btn-totp-cancel">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Email login code (custom; activates with Phase 2 email delivery) -->
+      <div class="section">
+        <div class="section-head">
+          <div class="section-title">Email a code at login</div>
+          <span class="pill" id="emailcode-pill">—</span>
+        </div>
+        <div class="section-body">A 6-digit code emailed to confirm each sign-in — a simpler second step than an app.</div>
+        <div class="stack" id="emailcode-actions" style="margin-top:10px;">
+          <button class="btn btn-secondary mini" id="btn-emailcode-start">Turn on</button>
+          <button class="btn btn-secondary mini hidden" id="btn-emailcode-off">Turn off</button>
+        </div>
+        <div class="stack hidden" id="emailcode-enroll" style="margin-top:12px;">
+          <div class="section-body">We emailed a code to your address. Enter it to turn this on:</div>
+          <input type="text" id="emailcode-code" inputmode="numeric" autocomplete="one-time-code" placeholder="6-digit code" />
+          <div class="row">
+            <button class="btn btn-primary mini grow" id="btn-emailcode-confirm">Confirm</button>
+            <button class="btn btn-secondary mini" id="btn-emailcode-cancel">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="status"></div>
+    <p style="font-size:11px;color:#A09489;text-align:center;line-height:1.5;">&copy; 2026 Otian AI LLC</p>
+  </div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import {
+    getAuth, onAuthStateChanged, signOut,
+    GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, signInWithCustomToken,
+    sendEmailVerification,
+    multiFactor, TotpMultiFactorGenerator,
+  } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyA46RqJV4tcJD8h4mdcSZ26dDoikA9L64M",
+    authDomain: "archie-77170.firebaseapp.com",
+    projectId: "archie-77170",
+    storageBucket: "archie-77170.firebasestorage.app",
+    messagingSenderId: "516396797258",
+    appId: "1:516396797258:web:362cf2815128f3c82345b3"
+  };
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // The Render service that sends/verifies email login codes (email 2FA isn't native to Firebase).
+  const MFA_API = "https://archie-4f35.onrender.com";
+  async function mfaCall(path, idToken, extra) {
+    const r = await fetch(MFA_API + path, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id_token: idToken, ...(extra || {}) }),
+    });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(j.error || ("request failed (" + r.status + ")"));
+    return j;
+  }
+
+  const $ = (id) => document.getElementById(id);
+  const statusEl = $("status");
+  function setStatus(msg, type = "") { statusEl.textContent = msg || ""; statusEl.className = type; }
+  function show(id, on) { $(id).classList.toggle("hidden", !on); }
+
+  let totpSecret = null; // held between "Set up" and "Confirm"
+
+  // A one-time custom token can be passed by the desktop app (?token=…) so the page opens already
+  // signed in as the same account — same mechanism the marketplace submit pages use.
+  const tokenParam = new URLSearchParams(window.location.search).get("token");
+  if (tokenParam) {
+    signInWithCustomToken(auth, tokenParam).catch((e) => setStatus(e.message, "error"));
+  }
+
+  // ── Auth state → swap views ────────────────────────────────────────────────
+  onAuthStateChanged(auth, (user) => {
+    show("signin-view", !user);
+    show("dash-view", !!user);
+    if (user) renderDashboard(user);
+  });
+
+  function renderDashboard(user) {
+    $("acct-email").textContent = user.email || user.uid;
+
+    // Email verification
+    const verified = !!user.emailVerified;
+    $("verify-pill").textContent = verified ? "Verified" : "Not verified";
+    $("verify-pill").className = "pill " + (verified ? "pill-on" : "pill-off");
+    $("verify-body").textContent = verified
+      ? "Your email address is confirmed."
+      : "Confirm your email so you can always recover this account.";
+    show("verify-actions", !verified);
+
+    // Authenticator app (TOTP)
+    let enrolledTotp = null;
+    try {
+      enrolledTotp = (multiFactor(user).enrolledFactors || []).find((f) => f.factorId === "totp") || null;
+    } catch { enrolledTotp = null; }
+    const on = !!enrolledTotp;
+    $("totp-pill").textContent = on ? "On" : "Off";
+    $("totp-pill").className = "pill " + (on ? "pill-on" : "pill-off");
+    show("btn-totp-start", !on);
+    show("btn-totp-remove", on);
+    show("totp-enroll", false);
+    $("btn-totp-remove").dataset.uid = enrolledTotp ? enrolledTotp.uid : "";
+
+    // Email login code (state comes from the Render service).
+    renderEmailCode(user);
+  }
+
+  async function renderEmailCode(user) {
+    show("emailcode-enroll", false);
+    try {
+      const { email_enabled } = await mfaCall("/mfa/status", await user.getIdToken());
+      $("emailcode-pill").textContent = email_enabled ? "On" : "Off";
+      $("emailcode-pill").className = "pill " + (email_enabled ? "pill-on" : "pill-off");
+      show("btn-emailcode-start", !email_enabled);
+      show("btn-emailcode-off", email_enabled);
+    } catch {
+      // Service unreachable (not deployed yet, say) — leave the card inert rather than erroring.
+      $("emailcode-pill").textContent = "—";
+      $("emailcode-pill").className = "pill pill-off";
+    }
+  }
+
+  // ── Sign-in (standalone) ───────────────────────────────────────────────────
+  $("btn-google").addEventListener("click", async () => {
+    try { await signInWithPopup(auth, new GoogleAuthProvider()); }
+    catch (e) { if (e.code !== "auth/popup-closed-by-user") setStatus(e.message, "error"); }
+  });
+  $("btn-signin").addEventListener("click", async () => {
+    const email = $("email").value.trim(), password = $("password").value;
+    if (!email || !password) { setStatus("Enter your email and password.", "error"); return; }
+    setStatus("Signing in…");
+    try { await signInWithEmailAndPassword(auth, email, password); setStatus(""); }
+    catch (e) { setStatus(e.message, "error"); }
+  });
+  $("btn-signout").addEventListener("click", () => signOut(auth));
+
+  // ── Email login code ─────────────────────────────────────────────────────────
+  $("btn-emailcode-start").addEventListener("click", async () => {
+    const user = auth.currentUser; if (!user) return;
+    setStatus("Emailing a code…");
+    try {
+      await mfaCall("/mfa/send-code", await user.getIdToken());
+      show("emailcode-enroll", true);
+      $("emailcode-code").focus();
+      setStatus("");
+    } catch (e) { setStatus(e.message, "error"); }
+  });
+  $("btn-emailcode-confirm").addEventListener("click", async () => {
+    const user = auth.currentUser; if (!user) return;
+    const code = $("emailcode-code").value.trim();
+    if (!/^\d{6}$/.test(code)) { setStatus("Enter the 6-digit code.", "error"); return; }
+    setStatus("Turning on…");
+    try {
+      await mfaCall("/mfa/email/enable", await user.getIdToken(), { code });
+      $("emailcode-code").value = "";
+      await renderEmailCode(user);
+      setStatus("Email code turned on.", "ok");
+    } catch (e) { setStatus(e.message, "error"); }
+  });
+  $("btn-emailcode-cancel").addEventListener("click", () => { show("emailcode-enroll", false); setStatus(""); });
+  $("btn-emailcode-off").addEventListener("click", async () => {
+    const user = auth.currentUser; if (!user) return;
+    setStatus("Turning off…");
+    try { await mfaCall("/mfa/email/disable", await user.getIdToken()); await renderEmailCode(user); setStatus("Email code turned off.", "ok"); }
+    catch (e) { setStatus(e.message, "error"); }
+  });
+
+  // ── Email verification ──────────────────────────────────────────────────────
+  $("btn-resend").addEventListener("click", async () => {
+    const user = auth.currentUser; if (!user) return;
+    setStatus("Sending…");
+    try { await sendEmailVerification(user); setStatus("Sent — check your inbox (and spam).", "ok"); }
+    catch (e) { setStatus(e.message, "error"); }
+  });
+  $("btn-recheck").addEventListener("click", async () => {
+    const user = auth.currentUser; if (!user) return;
+    setStatus("Checking…");
+    try { await user.reload(); renderDashboard(auth.currentUser); setStatus(auth.currentUser.emailVerified ? "Verified." : "Not verified yet.", auth.currentUser.emailVerified ? "ok" : "error"); }
+    catch (e) { setStatus(e.message, "error"); }
+  });
+
+  // ── Authenticator app (TOTP) ────────────────────────────────────────────────
+  $("btn-totp-start").addEventListener("click", async () => {
+    const user = auth.currentUser; if (!user) return;
+    setStatus("Preparing…");
+    try {
+      const session = await multiFactor(user).getSession();
+      totpSecret = await TotpMultiFactorGenerator.generateSecret(session);
+      $("totp-secret").textContent = totpSecret.secretKey;
+      show("totp-enroll", true);
+      $("totp-code").focus();
+      setStatus("");
+    } catch (e) {
+      // Most likely cause before the project is upgraded: MFA isn't enabled yet.
+      if (e.code === "auth/operation-not-allowed" || /identity|mfa|multi-factor|not.*enabled/i.test(e.message || "")) {
+        setStatus("Authenticator 2-step isn't enabled on this project yet. Turn on Multi-factor Authentication (Identity Platform) in Firebase, then reload.", "error");
+      } else if (e.code === "auth/requires-recent-login") {
+        setStatus("For security, sign out and back in, then try again.", "error");
+      } else {
+        setStatus(e.message, "error");
+      }
+    }
+  });
+  $("btn-totp-confirm").addEventListener("click", async () => {
+    const user = auth.currentUser; if (!user || !totpSecret) return;
+    const code = $("totp-code").value.trim();
+    if (!/^\d{6}$/.test(code)) { setStatus("Enter the 6-digit code from your app.", "error"); return; }
+    setStatus("Verifying…");
+    try {
+      const assertion = TotpMultiFactorGenerator.assertionForEnrollment(totpSecret, code);
+      await multiFactor(user).enroll(assertion, "Authenticator app");
+      totpSecret = null;
+      renderDashboard(auth.currentUser);
+      setStatus("Authenticator app turned on.", "ok");
+    } catch (e) { setStatus(e.code === "auth/invalid-verification-code" ? "That code didn't match — try the current one." : e.message, "error"); }
+  });
+  $("btn-totp-cancel").addEventListener("click", () => { totpSecret = null; show("totp-enroll", false); setStatus(""); });
+  $("btn-totp-remove").addEventListener("click", async (ev) => {
+    const user = auth.currentUser; const uid = ev.currentTarget.dataset.uid;
+    if (!user || !uid) return;
+    setStatus("Removing…");
+    try { await multiFactor(user).unenroll(uid); renderDashboard(auth.currentUser); setStatus("Authenticator app turned off.", "ok"); }
+    catch (e) { setStatus(e.code === "auth/requires-recent-login" ? "Sign out and back in, then try again." : e.message, "error"); }
+  });
+
+  $("password").addEventListener("keydown", (e) => { if (e.key === "Enter") $("btn-signin").click(); });
+</script>
+</body>
+</html>

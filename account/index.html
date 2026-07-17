@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Account | Otian AI</title>
+  <meta name="description" content="Manage your Otian AI account — secure it with an authenticator app and buy Archie. One account for the app and the marketplace." />
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="../assets/icon-1024-dark.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="../assets/icon-1024.png" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    /* ── Account page (page-scoped) — reuses global tokens so it themes light/dark ── */
+    .acct-wrap { max-width: 460px; margin: 0 auto; }
+    .acct-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow-sm); padding: 28px;
+    }
+    .acct-lead { text-align: center; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.55; margin: 0; }
+    .acct-fields { display: flex; flex-direction: column; gap: 10px; }
+    .acct-fields input {
+      width: 100%; padding: 12px 14px; border-radius: var(--radius-sm);
+      border: 1px solid var(--field-border); background: var(--bg-secondary);
+      color: var(--text-primary); font-family: inherit; font-size: 0.9rem; outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .acct-fields input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-subtle); }
+
+    /* Dashboard sections */
+    .acct-section {
+      border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 18px 20px; background: var(--surface-soft);
+    }
+    .acct-section + .acct-section { margin-top: 14px; }
+    .acct-section-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+    .acct-section-title { font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
+    .acct-section-body { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.55; margin-top: 6px; }
+    .acct-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+    .acct-row .btn { flex: 0 0 auto; }
+    .acct-email { font-size: 0.82rem; color: var(--text-secondary); word-break: break-all; }
+
+    .pill { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.02em; padding: 4px 10px; border-radius: 999px; white-space: nowrap; }
+    .pill-on { background: rgba(62, 154, 146, 0.16); color: var(--c-teal); }
+    .pill-off { background: var(--surface-hover-strong); color: var(--text-muted); }
+
+    .code {
+      font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.85rem; letter-spacing: 0.06em;
+      background: var(--surface-soft-strong); border-radius: var(--radius-sm);
+      padding: 10px 12px; word-break: break-all; user-select: all; color: var(--text-primary);
+    }
+    /* QR stays dark-on-white in both themes so authenticator apps scan it reliably. */
+    .qr-box { width: max-content; margin: 10px auto 0; padding: 14px; background: #ffffff; border-radius: var(--radius); box-shadow: var(--shadow-sm); }
+    .qr-box svg { display: block; width: auto; height: auto; max-width: 100%; }
+    .totp-manual { margin-top: 12px; }
+    .totp-manual > summary { font-size: 0.8rem; color: var(--text-secondary); cursor: pointer; list-style: revert; }
+    .totp-manual > summary:hover { color: var(--accent); }
+    .btn.btn-mini { padding: 8px 14px; font-size: 0.8rem; }
+
+    #acct-status { text-align: center; font-size: 0.82rem; min-height: 1.2em; margin-top: 18px; color: var(--text-secondary); }
+    #acct-status.error { color: #c0392b; }
+    [data-theme="dark"] #acct-status.error { color: #e77; }
+    #acct-status.ok { color: var(--c-teal); }
+
+    .acct-hidden { display: none !important; }
+    .acct-spinner {
+      width: 26px; height: 26px; margin: 8px auto; border-radius: 50%;
+      border: 2.5px solid var(--surface-hover-strong); border-top-color: var(--accent);
+      animation: acctspin 0.7s linear infinite;
+    }
+    @keyframes acctspin { to { transform: rotate(360deg); } }
+    .acct-foot-note { text-align: center; font-size: 0.78rem; color: var(--text-muted); margin-top: 22px; line-height: 1.55; }
+    .acct-foot-note a { color: var(--text-secondary); }
+  </style>
+</head>
+<body>
+
+  <!-- ==============================
+       Navigation
+       ============================== -->
+  <nav class="nav" id="nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="../" class="nav-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Secure AI Agents, Your Way</span></span></a>
+      <div class="nav-links">
+        <div class="nav-more" id="navArchie">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navArchieMenu" type="button">Archie</button>
+          <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
+            <a href="../archie/" role="menuitem">What Is Archie?</a>
+            <a href="../archie/see-it-work/" role="menuitem">See It Work</a>
+            <a href="../archie/pricing/" role="menuitem">Pricing</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navAddons">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navAddonsMenu" type="button">Add-ons</button>
+          <div class="nav-more-menu" id="navAddonsMenu" role="menu" aria-label="Add-ons">
+            <a href="../skills-marketplace/what-is-an-add-on/" role="menuitem">What's an Add-on?</a>
+            <a href="../skills-marketplace/browse/" role="menuitem">Browse the Marketplace</a>
+            <a href="../skills-marketplace/commission/" role="menuitem">Commission One</a>
+            <a href="../skills-marketplace/for-developers/" role="menuitem">For Developers</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navWork">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navWorkMenu" type="button">Work With Us</button>
+          <div class="nav-more-menu" id="navWorkMenu" role="menu" aria-label="Work With Us">
+            <a href="../individuals/" role="menuitem">Guided Setup</a>
+            <a href="../business/" role="menuitem">For Business</a>
+            <a href="../what-you-need/" role="menuitem">What You Need</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navLearn">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navLearnMenu" type="button">Learn</button>
+          <div class="nav-more-menu" id="navLearnMenu" role="menu" aria-label="Learn">
+            <a href="../how-it-works/" role="menuitem">How It Works</a>
+            <a href="../ai-explained/" role="menuitem">AI Explained</a>
+            <a href="../blog/" role="menuitem">Blog</a>
+            <a href="../faq/" role="menuitem">FAQ</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navCompany">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompanyMenu" type="button">Company</button>
+          <div class="nav-more-menu" id="navCompanyMenu" role="menu" aria-label="Company">
+            <a href="../our-story/" role="menuitem">Our Story</a>
+            <a href="../testimonials/" role="menuitem">Agent Successes</a>
+            <a href="../contact/" role="menuitem">Contact</a>
+            <a href="../trust/" role="menuitem">Trust</a>
+          </div>
+        </div>
+      </div>
+      <a href="../questionnaire/" class="btn btn-primary btn-sm nav-cta">Get Started</a>
+      <div class="nav-account" id="navAccount">
+        <button class="nav-account-btn" id="navAccountBtn" type="button" aria-expanded="false" aria-haspopup="true" aria-label="Account — sign in">
+          <span class="nav-account-avatar" id="navAccountAvatar" aria-hidden="true"></span>
+        </button>
+        <div class="nav-account-menu" id="navAccountMenu" role="menu" aria-label="Account"></div>
+      </div>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navDrawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+  <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutArchie" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutAddons" aria-expanded="false" aria-controls="navDrawerFlyout">Add-ons</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutWork" aria-expanded="false" aria-controls="navDrawerFlyout">Work With Us</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
+    <a href="../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
+  </nav>
+
+  <div class="nav-drawer-flyout" id="navDrawerFlyout" aria-hidden="true">
+    <button class="nav-drawer-back" type="button">
+      <svg class="nav-drawer-back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      <span id="navDrawerFlyoutTitle">Archie</span>
+    </button>
+    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
+      <a href="../archie/">What Is Archie?</a>
+      <a href="../archie/see-it-work/">See It Work</a>
+      <a href="../archie/pricing/">Pricing</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutAddons">
+      <a href="../skills-marketplace/what-is-an-add-on/">What's an Add-on?</a>
+      <a href="../skills-marketplace/browse/">Browse the Marketplace</a>
+      <a href="../skills-marketplace/commission/">Commission One</a>
+      <a href="../skills-marketplace/for-developers/">For Developers</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutWork">
+      <a href="../individuals/">Guided Setup</a>
+      <a href="../business/">For Business</a>
+      <a href="../what-you-need/">What You Need</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutLearn">
+      <a href="../how-it-works/">How It Works</a>
+      <a href="../ai-explained/">AI Explained</a>
+      <a href="../blog/">Blog</a>
+      <a href="../faq/">FAQ</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompany">
+      <a href="../our-story/">Our Story</a>
+      <a href="../testimonials/">Agent Successes</a>
+      <a href="../contact/">Contact</a>
+      <a href="../trust/">Trust</a>
+    </div>
+  </div>
+
+  <main>
+
+    <section class="page-hero" aria-label="Page introduction">
+      <div class="page-hero-inner">
+        <span class="section-label fade-up">Your Account</span>
+        <h1 class="fade-up delay-1">Manage Your Account</h1>
+        <p class="fade-up delay-2">Secure your sign-in and get Archie. One account for the app and the marketplace.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Account">
+      <div class="container">
+        <div class="acct-wrap">
+
+          <!-- Loading / redirecting -->
+          <div id="acct-loading" class="acct-card">
+            <div class="acct-spinner" aria-hidden="true"></div>
+            <p class="acct-lead">Checking your session&hellip;</p>
+          </div>
+
+          <!-- Dashboard -->
+          <div id="acct-signedin" class="acct-hidden">
+
+            <!-- Identity -->
+            <div class="acct-section">
+              <div class="acct-section-head">
+                <div>
+                  <div class="acct-section-title" id="acct-name">Signed in</div>
+                  <div class="acct-email" id="acct-who">&mdash;</div>
+                </div>
+                <button class="btn btn-secondary btn-mini" id="btn-signout">Sign out</button>
+              </div>
+            </div>
+
+            <!-- Email verification -->
+            <div class="acct-section" id="sec-verify">
+              <div class="acct-section-head">
+                <div class="acct-section-title">Email verification</div>
+                <span class="pill" id="verify-pill">&mdash;</span>
+              </div>
+              <div class="acct-section-body" id="verify-body">Checking&hellip;</div>
+              <div class="acct-row acct-hidden" id="verify-actions">
+                <button class="btn btn-secondary btn-mini" id="btn-resend">Resend link</button>
+                <button class="btn btn-secondary btn-mini" id="btn-recheck">I&rsquo;ve verified</button>
+              </div>
+            </div>
+
+            <!-- Authenticator app (TOTP MFA) -->
+            <div class="acct-section" id="sec-totp">
+              <div class="acct-section-head">
+                <div class="acct-section-title">Authenticator app</div>
+                <span class="pill" id="totp-pill">&mdash;</span>
+              </div>
+              <div class="acct-section-body" id="totp-body">Add a 6-digit code from an app like Google Authenticator or 1Password, asked for when you sign in.</div>
+              <div class="acct-row" id="totp-actions">
+                <button class="btn btn-primary btn-mini" id="btn-totp-start">Set up</button>
+                <button class="btn btn-secondary btn-mini acct-hidden" id="btn-totp-remove">Turn off</button>
+              </div>
+              <!-- Enrollment sub-flow -->
+              <div class="acct-hidden" id="totp-enroll" style="margin-top:14px;">
+                <!-- Desktop: scan a QR with your phone's authenticator app -->
+                <div class="acct-hidden" id="totp-qr-wrap">
+                  <div class="acct-section-body">Open an authenticator app on your phone &mdash; Google Authenticator, 1Password, Authy &mdash; and scan this:</div>
+                  <div class="qr-box" id="totp-qr" aria-hidden="false"></div>
+                </div>
+                <!-- Mobile: open the authenticator app directly -->
+                <div class="acct-hidden" id="totp-open-wrap">
+                  <div class="acct-section-body">Add this to your authenticator app in one tap:</div>
+                  <div class="acct-row">
+                    <a class="btn btn-primary btn-mini" id="btn-totp-open" href="#" rel="noopener">Open in authenticator app</a>
+                  </div>
+                </div>
+                <!-- Manual fallback for either -->
+                <details class="totp-manual">
+                  <summary>Can&rsquo;t scan? Enter a setup key instead</summary>
+                  <div class="code" id="totp-secret" style="margin-top:8px;">&mdash;</div>
+                </details>
+                <!-- Code entry -->
+                <div class="acct-section-body" style="margin-top:14px;">Then type the 6-digit code it shows:</div>
+                <div class="acct-fields" style="margin-top:8px;">
+                  <input type="text" id="totp-code" inputmode="numeric" autocomplete="one-time-code" placeholder="6-digit code" />
+                </div>
+                <div class="acct-row">
+                  <button class="btn btn-primary btn-mini" id="btn-totp-confirm">Confirm</button>
+                  <button class="btn btn-secondary btn-mini" id="btn-totp-cancel">Cancel</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Archie app: buy / ownership -->
+            <div class="acct-section" id="sec-archie">
+              <div class="acct-section-head">
+                <div class="acct-section-title">Archie app</div>
+                <span class="pill" id="archie-pill">&mdash;</span>
+              </div>
+              <div class="acct-section-body" id="archie-body">Checking your purchases&hellip;</div>
+              <div class="acct-row acct-hidden" id="archie-actions">
+                <button class="btn btn-primary btn-mini" id="btn-buy-archie">Buy Archie &mdash; $149</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="acct-status" role="status" aria-live="polite"></div>
+
+          <p class="acct-foot-note">
+            Your sign-in is the same account the Archie app uses.
+            <a href="../trust/">See what we store</a> &mdash; and what we don&rsquo;t.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==============================
+       Footer
+       ============================== -->
+  <footer class="footer" aria-label="Site footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /></div>
+          <p class="footer-tagline">Secure AI agents, your way.<br />Easy plug-and-play, fully in your control.</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Pages</h4>
+          <nav class="footer-nav-links" aria-label="Footer navigation">
+            <a href="../">Home</a>
+            <a href="../archie/">Archie</a>
+            <a href="../archie/see-it-work/">See It Work</a>
+            <a href="../archie/pricing/">Archie Pricing</a>
+            <a href="../skills-marketplace/browse/">Browse the Marketplace</a>
+            <a href="../skills-marketplace/commission/">Commission an Add-on</a>
+            <a href="../individuals/">Guided Setup</a>
+            <a href="../business/">For Business</a>
+            <a href="../what-you-need/">What You Need</a>
+            <a href="../how-it-works/">How It Works</a>
+            <a href="../ai-explained/">AI Explained</a>
+            <a href="../blog/">Blog</a>
+            <a href="../faq/">FAQ</a>
+            <a href="../trust/">Trust</a>
+            <a href="../our-story/">Our Story</a>
+            <a href="../testimonials/">Agent Successes</a>
+            <a href="../contact/">Contact</a>
+            <a href="../account/">Account</a>
+          </nav>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Contact</h4>
+          <a href="mailto:questions@otianai.com" class="footer-contact-email">questions@otianai.com</a>
+          <div class="social-links" aria-label="Otian AI on social media">
+            <a href="https://x.com/OtianAI" class="social-link" target="_blank" rel="noopener" aria-label="Otian AI on X (Twitter)" title="X (Twitter)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="https://www.linkedin.com/company/otian-ai/" class="social-link" target="_blank" rel="noopener" aria-label="Otian AI on LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></a>
+            <a href="https://www.instagram.com/otian.ai/" class="social-link" target="_blank" rel="noopener" aria-label="Otian AI on Instagram" title="Instagram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Otian AI LLC. All rights reserved. Otian&trade; and Archie&trade; are trademarks of Otian AI LLC.</p>
+        <nav class="footer-legal-links" aria-label="Legal">
+          <a href="../privacy-policy/">Privacy Policy</a>
+          <a href="../terms-of-service/">Terms of Service</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/nav.js"></script>
+  <script type="module" src="../js/account-nav.js"></script>
+  <!-- Vendored QR generator (MIT, Kazuhiko Arase) — renders the TOTP setup QR entirely in-browser
+       so the authenticator secret is never sent to any third-party QR service. -->
+  <script src="../js/qrcode.min.js"></script>
+
+  <script type="module">
+    import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import {
+      getAuth, onAuthStateChanged, signOut,
+      sendEmailVerification, multiFactor, TotpMultiFactorGenerator,
+    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    // Same Firebase project as the Archie desktop app and the marketplace pages. (archie-77170)
+    const firebaseConfig = {
+      apiKey: "AIzaSyA46RqJV4tcJD8h4mdcSZ26dDoikA9L64M",
+      authDomain: "archie-77170.firebaseapp.com",
+      projectId: "archie-77170",
+      storageBucket: "archie-77170.firebasestorage.app",
+      messagingSenderId: "516396797258",
+      appId: "1:516396797258:web:362cf2815128f3c82345b3",
+    };
+
+    // The Archie desktop app opens Stripe Checkout with the buyer's Firebase UID as
+    // client_reference_id; the billing webhook turns a completed session with no item_id into a
+    // permanent "lifetime" grant on users/{uid}. We do exactly the same from here.
+    const STRIPE_CHECKOUT_URL = "https://buy.stripe.com/6oU4gydNle4I8151xlaR200";
+
+    const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const $ = (id) => document.getElementById(id);
+    const statusEl = $("acct-status");
+    function setStatus(msg, type = "") { statusEl.textContent = msg || ""; statusEl.className = type; }
+    function show(el, on) { (typeof el === "string" ? $(el) : el).classList.toggle("acct-hidden", !on); }
+
+    let totpSecret = null; // held between "Set up" and "Confirm"
+
+    // ── This page is signed-in only. No session → go to /login/ and come back here. ──
+    onAuthStateChanged(auth, (user) => {
+      if (!user) { window.location.replace("/login/?next=/account/"); return; }
+      show("acct-loading", false);
+      show("acct-signedin", true);
+      setStatus("");
+      renderDashboard(user);
+    });
+
+    function renderDashboard(user) {
+      const name = (user.displayName || "").trim();
+      $("acct-name").textContent = name || "Signed in";
+      $("acct-who").textContent = user.email || user.uid;
+
+      // Email verification. Google sign-ins arrive already verified.
+      const verified = !!user.emailVerified;
+      setPill("verify-pill", verified ? "Verified" : "Not verified", verified);
+      $("verify-body").textContent = verified
+        ? "Your email address is confirmed."
+        : "Confirm your email so you can always recover this account.";
+      show("verify-actions", !verified);
+
+      // Authenticator app (TOTP MFA).
+      let enrolled = null;
+      try { enrolled = (multiFactor(user).enrolledFactors || []).find((f) => f.factorId === "totp") || null; }
+      catch { enrolled = null; }
+      const on = !!enrolled;
+      setPill("totp-pill", on ? "On" : "Off", on);
+      $("totp-body").textContent = on
+        ? "Two-step verification is on. You'll enter a 6-digit code from your authenticator app when you sign in."
+        : "Add a 6-digit code from an app like Google Authenticator or 1Password, asked for when you sign in.";
+      show("btn-totp-start", !on);
+      show("btn-totp-remove", on);
+      show("totp-enroll", false);
+      $("btn-totp-remove").dataset.uid = enrolled ? enrolled.uid : "";
+
+      renderArchie(user);
+    }
+
+    function setPill(id, text, on) {
+      const el = $(id);
+      el.textContent = text;
+      el.className = "pill " + (on ? "pill-on" : "pill-off");
+    }
+
+    async function renderArchie(user) {
+      const pill = $("archie-pill");
+      const body = $("archie-body");
+      pill.textContent = "—"; pill.className = "pill pill-off";
+      show("archie-actions", false);
+      body.textContent = "Checking your purchases…";
+      let tier = "none", subStatus = "";
+      try {
+        // A user may read their own users/{uid} doc (Firestore rules). A brand-new web account may
+        // not have a doc yet — that's fine, it just means nothing bought yet.
+        const snap = await getDoc(doc(db, "users", user.uid));
+        if (snap.exists()) {
+          const d = snap.data() || {};
+          tier = d.access_tier || "none";
+          subStatus = d.subscription_status || "";
+        }
+      } catch (e) {
+        body.textContent = "Couldn't check your purchases right now. Reload to try again.";
+        return;
+      }
+      const owned = tier === "admin" || tier === "client" || tier === "lifetime"
+        || (tier === "subscriber" && subStatus === "active");
+      if (owned) {
+        setPill("archie-pill", "Owned", true);
+        body.innerHTML = "You own Archie. <a href=\"../archie/install/\">Download and install it</a> on your Mac, then sign in with this account.";
+        show("archie-actions", false);
+      } else {
+        setPill("archie-pill", "Not yet", false);
+        body.textContent = "Buy Archie once and own it — $149, one-time, no subscription. The version you buy is yours to keep.";
+        show("archie-actions", true);
+      }
+    }
+
+    $("btn-buy-archie").addEventListener("click", () => {
+      const user = auth.currentUser;
+      if (!user) return;
+      // client_reference_id ties the payment to this account so the webhook grants it access.
+      const url = STRIPE_CHECKOUT_URL
+        + (STRIPE_CHECKOUT_URL.includes("?") ? "&" : "?")
+        + "client_reference_id=" + encodeURIComponent(user.uid);
+      window.location.href = url;
+    });
+
+    $("btn-signout").addEventListener("click", async () => {
+      try { await signOut(auth); } catch (e) {}
+      window.location.href = "/login/";
+    });
+
+    // Email verification
+    $("btn-resend").addEventListener("click", async () => {
+      const user = auth.currentUser; if (!user) return;
+      setStatus("Sending…");
+      try { await sendEmailVerification(user, { url: window.location.origin + "/account/", handleCodeInApp: false }); setStatus("Sent — check your inbox (and spam).", "ok"); }
+      catch (e) { setStatus(prettyAuthError(e), "error"); }
+    });
+    $("btn-recheck").addEventListener("click", async () => {
+      const user = auth.currentUser; if (!user) return;
+      setStatus("Checking…");
+      try {
+        await user.reload();
+        renderDashboard(auth.currentUser);
+        setStatus(auth.currentUser.emailVerified ? "Verified." : "Not verified yet.", auth.currentUser.emailVerified ? "ok" : "error");
+      } catch (e) { setStatus(prettyAuthError(e), "error"); }
+    });
+
+    // Authenticator app (TOTP)
+    // Render an otpauth:// string to a QR code as inline SVG — dark modules on a forced-white
+    // background so authenticator apps scan it in either site theme. Nothing leaves the browser.
+    function renderQrSvg(text) {
+      const qr = window.qrcode(0, "M");   // type 0 = auto-size, "M" = ~15% error correction
+      qr.addData(text);
+      qr.make();
+      const n = qr.getModuleCount();
+      const cell = 4, margin = 4;
+      const size = (n + margin * 2) * cell;
+      let rects = "";
+      for (let r = 0; r < n; r++) {
+        for (let c = 0; c < n; c++) {
+          if (qr.isDark(r, c)) rects += `<rect x="${(c + margin) * cell}" y="${(r + margin) * cell}" width="${cell}" height="${cell}"/>`;
+        }
+      }
+      // crispEdges removes anti-aliased seams between modules; 1:1 sizing keeps them on whole pixels.
+      return `<svg viewBox="0 0 ${size} ${size}" width="${size}" height="${size}" role="img" aria-label="Authenticator setup QR code" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect width="${size}" height="${size}" fill="#ffffff"/><g fill="#2A2521">${rects}</g></svg>`;
+    }
+
+    // On a phone, scanning a QR shown on that same phone is awkward — offer a one-tap deep link
+    // into the authenticator app instead. On desktop, show the QR to scan with a phone.
+    const isTouchDevice = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+
+    $("btn-totp-start").addEventListener("click", async () => {
+      const user = auth.currentUser; if (!user) return;
+      setStatus("Preparing…");
+      try {
+        const session = await multiFactor(user).getSession();
+        totpSecret = await TotpMultiFactorGenerator.generateSecret(session);
+        $("totp-secret").textContent = totpSecret.secretKey;
+
+        const otpUrl = totpSecret.generateQrCodeUrl(user.email || "Archie account", "Otian AI");
+        if (isTouchDevice) {
+          $("btn-totp-open").setAttribute("href", otpUrl);
+          show("totp-open-wrap", true);
+          show("totp-qr-wrap", false);
+        } else {
+          $("totp-qr").innerHTML = renderQrSvg(otpUrl);
+          show("totp-qr-wrap", true);
+          show("totp-open-wrap", false);
+        }
+
+        show("totp-enroll", true);
+        $("totp-code").focus();
+        setStatus("");
+      } catch (e) {
+        if (e.code === "auth/operation-not-allowed" || /identity|mfa|multi-factor|not.*enabled/i.test(e.message || "")) {
+          setStatus("Authenticator two-step isn't enabled on this project yet. It turns on once Multi-factor Authentication is enabled in Firebase.", "error");
+        } else if (e.code === "auth/requires-recent-login") {
+          setStatus("For security, sign out and back in, then try again.", "error");
+        } else { setStatus(prettyAuthError(e), "error"); }
+      }
+    });
+    $("btn-totp-confirm").addEventListener("click", async () => {
+      const user = auth.currentUser; if (!user || !totpSecret) return;
+      const code = $("totp-code").value.trim();
+      if (!/^\d{6}$/.test(code)) { setStatus("Enter the 6-digit code from your app.", "error"); return; }
+      setStatus("Verifying…");
+      try {
+        const assertion = TotpMultiFactorGenerator.assertionForEnrollment(totpSecret, code);
+        await multiFactor(user).enroll(assertion, "Authenticator app");
+        totpSecret = null;
+        $("totp-code").value = "";
+        renderDashboard(auth.currentUser);
+        setStatus("Authenticator app turned on.", "ok");
+      } catch (e) {
+        setStatus(e.code === "auth/invalid-verification-code" ? "That code didn't match — try the current one." : prettyAuthError(e), "error");
+      }
+    });
+    $("btn-totp-cancel").addEventListener("click", () => { totpSecret = null; show("totp-enroll", false); setStatus(""); });
+    $("btn-totp-remove").addEventListener("click", async (ev) => {
+      const user = auth.currentUser; const uid = ev.currentTarget.dataset.uid;
+      if (!user || !uid) return;
+      setStatus("Removing…");
+      try { await multiFactor(user).unenroll(uid); renderDashboard(auth.currentUser); setStatus("Authenticator app turned off.", "ok"); }
+      catch (e) { setStatus(e.code === "auth/requires-recent-login" ? "Sign out and back in, then try again." : prettyAuthError(e), "error"); }
+    });
+
+    function prettyAuthError(e) {
+      const map = {
+        "auth/requires-recent-login": "For security, sign out and back in, then try again.",
+        "auth/too-many-requests": "Too many attempts. Wait a moment, then try again.",
+      };
+      return map[e && e.code] || (e && e.message) || "Something went wrong.";
+    }
+
+    // The verify link opens in another tab; when the user returns here, re-check so the status
+    // flips to "Verified" on its own without them clicking "I've verified".
+    async function recheckVerification() {
+      const user = auth.currentUser;
+      if (!user || user.emailVerified) return;
+      try { await user.reload(); renderDashboard(auth.currentUser); } catch (e) { /* ignore */ }
+    }
+    document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") recheckVerification(); });
+    window.addEventListener("focus", recheckVerification);
+  </script>
+</body>
+</html>

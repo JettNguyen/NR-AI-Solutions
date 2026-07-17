@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In | Otian AI</title>
+  <meta name="description" content="Sign in or create your Otian AI account — one account for the Archie app and the marketplace." />
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="../assets/icon-1024-dark.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="../assets/icon-1024.png" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    /* ── Auth card (page-scoped) — reuses global tokens so it themes light/dark ── */
+    .auth-wrap { max-width: 420px; margin: 0 auto; }
+    .auth-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow-sm); padding: 28px;
+    }
+    .auth-lead { text-align: center; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.55; margin-bottom: 20px; }
+    .auth-fields { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+    .auth-fields input {
+      width: 100%; padding: 12px 14px; border-radius: var(--radius-sm);
+      border: 1px solid var(--field-border); background: var(--bg-secondary);
+      color: var(--text-primary); font-family: inherit; font-size: 0.9rem; outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .auth-fields input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-subtle); }
+    .auth-btns { display: flex; flex-direction: column; gap: 10px; }
+    .auth-btns .btn { width: 100%; }
+    .auth-or { display: flex; align-items: center; gap: 0.75rem; color: var(--text-muted); font-size: 0.8rem; margin: 16px 0; }
+    .auth-or::before, .auth-or::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+    .auth-textlink {
+      background: none; border: none; padding: 0; font-family: inherit; font-size: 0.8rem;
+      color: var(--text-secondary); cursor: pointer; text-align: center;
+    }
+    .auth-textlink:hover { color: var(--accent); text-decoration: underline; }
+    .auth-textrow { display: flex; justify-content: center; gap: 18px; margin-top: 14px; flex-wrap: wrap; }
+    .auth-section { border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; background: var(--surface-soft); }
+    .auth-section-title { font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
+    .auth-section-body { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.55; margin-top: 6px; }
+    .auth-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+    .btn.btn-mini { padding: 8px 14px; font-size: 0.8rem; }
+    .auth-email { font-weight: 600; color: var(--text-primary); word-break: break-all; }
+    #auth-status { text-align: center; font-size: 0.82rem; min-height: 1.2em; margin-top: 18px; color: var(--text-secondary); }
+    #auth-status.error { color: #c0392b; }
+    [data-theme="dark"] #auth-status.error { color: #e77; }
+    #auth-status.ok { color: var(--c-teal); }
+    .auth-hidden { display: none !important; }
+    .auth-spinner {
+      width: 26px; height: 26px; margin: 8px auto; border-radius: 50%;
+      border: 2.5px solid var(--surface-hover-strong); border-top-color: var(--accent);
+      animation: authspin 0.7s linear infinite;
+    }
+    @keyframes authspin { to { transform: rotate(360deg); } }
+    .auth-foot-note { text-align: center; font-size: 0.78rem; color: var(--text-muted); margin-top: 22px; line-height: 1.55; }
+    .auth-foot-note a { color: var(--text-secondary); }
+  </style>
+</head>
+<body>
+
+  <!-- ==============================
+       Navigation
+       ============================== -->
+  <nav class="nav" id="nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="../" class="nav-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Secure AI Agents, Your Way</span></span></a>
+      <div class="nav-links">
+        <div class="nav-more" id="navArchie">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navArchieMenu" type="button">Archie</button>
+          <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
+            <a href="../archie/" role="menuitem">What Is Archie?</a>
+            <a href="../archie/see-it-work/" role="menuitem">See It Work</a>
+            <a href="../archie/pricing/" role="menuitem">Pricing</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navAddons">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navAddonsMenu" type="button">Add-ons</button>
+          <div class="nav-more-menu" id="navAddonsMenu" role="menu" aria-label="Add-ons">
+            <a href="../skills-marketplace/what-is-an-add-on/" role="menuitem">What's an Add-on?</a>
+            <a href="../skills-marketplace/browse/" role="menuitem">Browse the Marketplace</a>
+            <a href="../skills-marketplace/commission/" role="menuitem">Commission One</a>
+            <a href="../skills-marketplace/for-developers/" role="menuitem">For Developers</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navWork">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navWorkMenu" type="button">Work With Us</button>
+          <div class="nav-more-menu" id="navWorkMenu" role="menu" aria-label="Work With Us">
+            <a href="../individuals/" role="menuitem">Guided Setup</a>
+            <a href="../business/" role="menuitem">For Business</a>
+            <a href="../what-you-need/" role="menuitem">What You Need</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navLearn">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navLearnMenu" type="button">Learn</button>
+          <div class="nav-more-menu" id="navLearnMenu" role="menu" aria-label="Learn">
+            <a href="../how-it-works/" role="menuitem">How It Works</a>
+            <a href="../ai-explained/" role="menuitem">AI Explained</a>
+            <a href="../blog/" role="menuitem">Blog</a>
+            <a href="../faq/" role="menuitem">FAQ</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navCompany">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompanyMenu" type="button">Company</button>
+          <div class="nav-more-menu" id="navCompanyMenu" role="menu" aria-label="Company">
+            <a href="../our-story/" role="menuitem">Our Story</a>
+            <a href="../testimonials/" role="menuitem">Agent Successes</a>
+            <a href="../contact/" role="menuitem">Contact</a>
+            <a href="../trust/" role="menuitem">Trust</a>
+          </div>
+        </div>
+      </div>
+      <a href="../questionnaire/" class="btn btn-primary btn-sm nav-cta">Get Started</a>
+      <div class="nav-account" id="navAccount">
+        <button class="nav-account-btn" id="navAccountBtn" type="button" aria-expanded="false" aria-haspopup="true" aria-label="Account — sign in">
+          <span class="nav-account-avatar" id="navAccountAvatar" aria-hidden="true"></span>
+        </button>
+        <div class="nav-account-menu" id="navAccountMenu" role="menu" aria-label="Account"></div>
+      </div>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navDrawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+  <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutArchie" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutAddons" aria-expanded="false" aria-controls="navDrawerFlyout">Add-ons</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutWork" aria-expanded="false" aria-controls="navDrawerFlyout">Work With Us</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
+    <a href="../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
+  </nav>
+
+  <div class="nav-drawer-flyout" id="navDrawerFlyout" aria-hidden="true">
+    <button class="nav-drawer-back" type="button">
+      <svg class="nav-drawer-back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      <span id="navDrawerFlyoutTitle">Archie</span>
+    </button>
+    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
+      <a href="../archie/">What Is Archie?</a>
+      <a href="../archie/see-it-work/">See It Work</a>
+      <a href="../archie/pricing/">Pricing</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutAddons">
+      <a href="../skills-marketplace/what-is-an-add-on/">What's an Add-on?</a>
+      <a href="../skills-marketplace/browse/">Browse the Marketplace</a>
+      <a href="../skills-marketplace/commission/">Commission One</a>
+      <a href="../skills-marketplace/for-developers/">For Developers</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutWork">
+      <a href="../individuals/">Guided Setup</a>
+      <a href="../business/">For Business</a>
+      <a href="../what-you-need/">What You Need</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutLearn">
+      <a href="../how-it-works/">How It Works</a>
+      <a href="../ai-explained/">AI Explained</a>
+      <a href="../blog/">Blog</a>
+      <a href="../faq/">FAQ</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompany">
+      <a href="../our-story/">Our Story</a>
+      <a href="../testimonials/">Agent Successes</a>
+      <a href="../contact/">Contact</a>
+      <a href="../trust/">Trust</a>
+    </div>
+  </div>
+
+  <main>
+
+    <section class="page-hero" aria-label="Page introduction">
+      <div class="page-hero-inner">
+        <span class="section-label fade-up">Account</span>
+        <h1 class="fade-up delay-1" id="auth-heading">Sign In</h1>
+        <p class="fade-up delay-2" id="auth-subhead">One account for the Archie app and the marketplace.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Sign in">
+      <div class="container">
+        <div class="auth-wrap">
+
+          <!-- Loading -->
+          <div id="auth-loading" class="auth-card">
+            <div class="auth-spinner" aria-hidden="true"></div>
+            <p class="auth-lead" style="margin:0;">Checking your session&hellip;</p>
+          </div>
+
+          <!-- Sign in / create account -->
+          <div id="auth-card" class="auth-card auth-hidden">
+            <p class="auth-lead" id="auth-card-lead">Sign in or create an account to manage it, secure it, and get Archie.</p>
+
+            <div class="auth-btns">
+              <button class="btn btn-primary" id="btn-google">
+                <svg width="17" height="17" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615Z" fill="currentColor"/>
+                  <path d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18Z" fill="currentColor"/>
+                  <path d="M3.964 10.707A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.707V4.961H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.039l3.007-2.332Z" fill="currentColor"/>
+                  <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.961L3.964 7.293C4.672 5.163 6.656 3.58 9 3.58Z" fill="currentColor"/>
+                </svg>
+                Continue with Google
+              </button>
+            </div>
+
+            <div class="auth-or">or</div>
+
+            <div class="auth-fields">
+              <input type="text" id="auth-name" class="auth-hidden" placeholder="Full name" autocomplete="name" />
+              <input type="email" id="auth-email" placeholder="Email address" autocomplete="email" />
+              <input type="password" id="auth-pass" placeholder="Password" autocomplete="current-password" />
+            </div>
+            <div class="auth-btns">
+              <button class="btn btn-primary" id="btn-primary-auth">Sign in</button>
+              <button class="btn btn-secondary" id="btn-toggle-mode">Create an account instead</button>
+            </div>
+            <div class="auth-textrow">
+              <button class="auth-textlink" id="btn-link">Email me a sign-in link</button>
+              <button class="auth-textlink" id="btn-forgot">Forgot password?</button>
+            </div>
+          </div>
+
+          <!-- Email verification gate (after sign-up, or a new account in the app flow) -->
+          <div id="auth-verify" class="auth-card auth-hidden">
+            <div class="auth-section">
+              <div class="auth-section-title">Confirm your email</div>
+              <div class="auth-section-body">We sent a link to <span class="auth-email" id="auth-verify-email">your inbox</span>. Click it &mdash; this page signs you in automatically the moment you do.</div>
+              <div class="auth-row">
+                <button class="btn btn-primary btn-mini" id="btn-verified">I&rsquo;ve verified &mdash; continue</button>
+                <button class="btn btn-secondary btn-mini" id="btn-resend">Resend link</button>
+              </div>
+              <div class="auth-row">
+                <button class="auth-textlink" id="btn-verify-back">Use a different account</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Two-step challenge (shown when the account has an authenticator app enrolled) -->
+          <div id="auth-mfa" class="auth-card auth-hidden">
+            <p class="auth-lead">Enter the 6-digit code from your authenticator app to finish signing in.</p>
+            <div class="auth-fields">
+              <input type="text" id="mfa-code" inputmode="numeric" autocomplete="one-time-code" placeholder="6-digit code" />
+            </div>
+            <div class="auth-btns">
+              <button class="btn btn-primary" id="btn-mfa-verify">Verify</button>
+              <button class="btn btn-secondary" id="btn-mfa-cancel">Back</button>
+            </div>
+          </div>
+
+          <!-- Already signed in (only shown in the desktop-app flow) -->
+          <div id="auth-continue" class="auth-card auth-hidden">
+            <p class="auth-lead">You&rsquo;re signed in as <span class="auth-email" id="auth-continue-email">&mdash;</span>.</p>
+            <div class="auth-btns">
+              <button class="btn btn-primary" id="btn-continue">Continue to Archie</button>
+              <button class="btn btn-secondary" id="btn-switch">Use a different account</button>
+            </div>
+          </div>
+
+          <div id="auth-status" role="status" aria-live="polite"></div>
+
+          <p class="auth-foot-note">
+            Your sign-in is the same account the Archie app uses.
+            <a href="../trust/">See what we store</a> &mdash; and what we don&rsquo;t.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==============================
+       Footer
+       ============================== -->
+  <footer class="footer" aria-label="Site footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /></div>
+          <p class="footer-tagline">Secure AI agents, your way.<br />Easy plug-and-play, fully in your control.</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Pages</h4>
+          <nav class="footer-nav-links" aria-label="Footer navigation">
+            <a href="../">Home</a>
+            <a href="../archie/">Archie</a>
+            <a href="../archie/see-it-work/">See It Work</a>
+            <a href="../archie/pricing/">Archie Pricing</a>
+            <a href="../skills-marketplace/browse/">Browse the Marketplace</a>
+            <a href="../skills-marketplace/commission/">Commission an Add-on</a>
+            <a href="../individuals/">Guided Setup</a>
+            <a href="../business/">For Business</a>
+            <a href="../what-you-need/">What You Need</a>
+            <a href="../how-it-works/">How It Works</a>
+            <a href="../ai-explained/">AI Explained</a>
+            <a href="../blog/">Blog</a>
+            <a href="../faq/">FAQ</a>
+            <a href="../trust/">Trust</a>
+            <a href="../our-story/">Our Story</a>
+            <a href="../testimonials/">Agent Successes</a>
+            <a href="../contact/">Contact</a>
+            <a href="../account/">Account</a>
+          </nav>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Contact</h4>
+          <a href="mailto:questions@otianai.com" class="footer-contact-email">questions@otianai.com</a>
+          <div class="social-links" aria-label="Otian AI on social media">
+            <a href="https://x.com/OtianAI" class="social-link" target="_blank" rel="noopener" aria-label="Otian AI on X (Twitter)" title="X (Twitter)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="https://www.linkedin.com/company/otian-ai/" class="social-link" target="_blank" rel="noopener" aria-label="Otian AI on LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></a>
+            <a href="https://www.instagram.com/otian.ai/" class="social-link" target="_blank" rel="noopener" aria-label="Otian AI on Instagram" title="Instagram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Otian AI LLC. All rights reserved. Otian&trade; and Archie&trade; are trademarks of Otian AI LLC.</p>
+        <nav class="footer-legal-links" aria-label="Legal">
+          <a href="../privacy-policy/">Privacy Policy</a>
+          <a href="../terms-of-service/">Terms of Service</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/nav.js"></script>
+  <script type="module" src="../js/account-nav.js"></script>
+
+  <script type="module">
+    import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import {
+      getAuth, onAuthStateChanged, signOut, updateProfile,
+      GoogleAuthProvider, signInWithPopup,
+      signInWithEmailAndPassword, createUserWithEmailAndPassword,
+      sendPasswordResetEmail, sendEmailVerification,
+      sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink,
+      getMultiFactorResolver, TotpMultiFactorGenerator,
+    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA46RqJV4tcJD8h4mdcSZ26dDoikA9L64M",
+      authDomain: "archie-77170.firebaseapp.com",
+      projectId: "archie-77170",
+      storageBucket: "archie-77170.firebasestorage.app",
+      messagingSenderId: "516396797258",
+      appId: "1:516396797258:web:362cf2815128f3c82345b3",
+    };
+    const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const params = new URLSearchParams(window.location.search);
+    const callbackUrl = params.get("callback");     // present only when the desktop app opens this page
+    const appState = params.get("state") || "";
+    let mode = params.get("mode") === "signup" ? "signup" : "signin";
+
+    // Where the emailed verify/reset links send the user back to on this site. Firebase appends
+    // these as continueUrl; our /auth-action/ handler reads it. handleCodeInApp:false = web handler.
+    const verifyContinue = { url: window.location.origin + "/account/", handleCodeInApp: false };
+    const resetContinue = { url: window.location.origin + "/login/", handleCodeInApp: false };
+
+    const $ = (id) => document.getElementById(id);
+    const statusEl = $("auth-status");
+    function setStatus(msg, type = "") { statusEl.textContent = msg || ""; statusEl.className = type; }
+    function show(id, on) { $(id).classList.toggle("auth-hidden", !on); }
+    function onlyCard(id) {
+      ["auth-loading", "auth-card", "auth-verify", "auth-mfa", "auth-continue"].forEach((c) => show(c, c === id));
+    }
+
+    // A new account created on/after this date must confirm its email before the app flow hands
+    // tokens back. Older accounts and Google sign-ins are already verified and pass straight through.
+    const VERIFY_CUTOFF_MS = Date.parse("2026-07-17T00:00:00Z");
+    function accountIsNew(user) {
+      const created = Date.parse((user.metadata && user.metadata.creationTime) || "");
+      return Number.isNaN(created) ? true : created >= VERIFY_CUTOFF_MS;
+    }
+
+    // Same-origin path to return to after a website sign-in (defends against open-redirect).
+    function nextDest() {
+      const n = params.get("next");
+      return n && n.startsWith("/") && !n.startsWith("//") ? n : "/account/";
+    }
+
+    let pendingVerifyUser = null;
+    let initialResolved = false;
+
+    // ── What happens after a successful sign-in ──────────────────────────────
+    async function handleUser(user) {
+      if (callbackUrl) {
+        if (!user.emailVerified && accountIsNew(user)) { showVerifyGate(user); return; }
+        await deliverToApp(user);
+        return;
+      }
+      window.location.href = nextDest();
+    }
+
+    // Deliver tokens to Archie's loopback by POSTing a form — never a GET redirect. A GET would put
+    // the long-lived refresh token in the URL (and browser history); a POST keeps it in the body.
+    async function deliverToApp(user) {
+      setStatus("Returning to Archie…");
+      const idToken = await user.getIdToken(true);
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = callbackUrl;
+      const fields = { id_token: idToken, refresh_token: user.refreshToken, email: user.email || "", uid: user.uid, state: appState };
+      for (const [name, value] of Object.entries(fields)) {
+        const input = document.createElement("input");
+        input.type = "hidden"; input.name = name; input.value = value;
+        form.appendChild(input);
+      }
+      document.body.appendChild(form);
+      form.submit();
+    }
+
+    function showAuthCard() {
+      stopVerifyPolling();
+      onlyCard("auth-card");
+      applyMode();
+    }
+    function showVerifyGate(user) {
+      pendingVerifyUser = user;
+      $("auth-verify-email").textContent = user.email || "your inbox";
+      onlyCard("auth-verify");
+      startVerifyPolling();
+    }
+    function showContinue(user) {
+      stopVerifyPolling();
+      $("auth-continue-email").textContent = user.email || user.uid;
+      onlyCard("auth-continue");
+    }
+
+    // Firebase caches emailVerified in this tab and only updates on reload(), and the verify link
+    // opens elsewhere — so we poll while the gate is showing (and re-check the instant the user
+    // switches back to this tab) and let them through the moment it flips to verified.
+    let verifyPoll = null;
+    async function verifyCheck() {
+      if (!pendingVerifyUser) return;
+      try {
+        await pendingVerifyUser.reload();
+        if (pendingVerifyUser.emailVerified) {
+          stopVerifyPolling();
+          setStatus("Email confirmed — signing you in…", "ok");
+          await handleUser(pendingVerifyUser);
+        }
+      } catch (e) { /* transient network/error — keep polling */ }
+    }
+    function verifyOnVisible() { if (document.visibilityState === "visible") verifyCheck(); }
+    function startVerifyPolling() {
+      stopVerifyPolling();
+      verifyPoll = setInterval(verifyCheck, 3500);
+      window.addEventListener("focus", verifyCheck);
+      document.addEventListener("visibilitychange", verifyOnVisible);
+    }
+    function stopVerifyPolling() {
+      if (verifyPoll) { clearInterval(verifyPoll); verifyPoll = null; }
+      window.removeEventListener("focus", verifyCheck);
+      document.removeEventListener("visibilitychange", verifyOnVisible);
+    }
+
+    // ── Initial state ────────────────────────────────────────────────────────
+    onAuthStateChanged(auth, (user) => {
+      if (!initialResolved) {
+        initialResolved = true;
+        $("auth-heading").textContent = mode === "signup" ? "Create Account" : "Sign In";
+        if (user) {
+          // Already signed in: in the app flow, offer to continue; otherwise go to the dashboard.
+          if (callbackUrl) { showContinue(user); }
+          else { window.location.href = nextDest(); }
+        } else {
+          showAuthCard();
+        }
+        return;
+      }
+      // Later changes only matter when the user signs out from a continue/verify card.
+      if (!user) { pendingVerifyUser = null; showAuthCard(); }
+    });
+
+    // ── Mode (sign in / create account) ──────────────────────────────────────
+    function applyMode() {
+      const signup = mode === "signup";
+      $("auth-heading").textContent = signup ? "Create Account" : "Sign In";
+      $("btn-primary-auth").textContent = signup ? "Create account" : "Sign in";
+      $("btn-toggle-mode").textContent = signup ? "I already have an account" : "Create an account instead";
+      $("auth-pass").setAttribute("autocomplete", signup ? "new-password" : "current-password");
+      show("auth-name", signup); // only collect a name when creating an account
+      show("btn-forgot", !signup);
+    }
+    $("btn-toggle-mode").addEventListener("click", () => {
+      mode = mode === "signup" ? "signin" : "signup";
+      applyMode();
+      setStatus("");
+    });
+
+    // ── Two-step (MFA) challenge ─────────────────────────────────────────────
+    // Firebase throws auth/multi-factor-auth-required when the account has an authenticator app
+    // enrolled (which users can now turn on from /account/). We resolve the TOTP factor here so
+    // enabling 2-step never locks anyone out of web — or, via the same page, the desktop app.
+    let mfaResolver = null;
+    let mfaTotpHint = null;
+
+    function startMfaChallenge(error) {
+      try {
+        mfaResolver = getMultiFactorResolver(auth, error);
+        mfaTotpHint = (mfaResolver.hints || []).find((h) => h.factorId === "totp") || null;
+      } catch (e) { setStatus(prettyAuthError(e), "error"); return; }
+      if (!mfaTotpHint) {
+        setStatus("This account needs a second factor we don't support here yet.", "error");
+        return;
+      }
+      onlyCard("auth-mfa");
+      setStatus("");
+      $("mfa-code").value = "";
+      $("mfa-code").focus();
+    }
+
+    // Returns true if it handled an MFA-required error (and started the challenge).
+    function handleMaybeMfa(e) {
+      if (e && e.code === "auth/multi-factor-auth-required") { startMfaChallenge(e); return true; }
+      return false;
+    }
+
+    $("btn-mfa-verify").addEventListener("click", async () => {
+      if (!mfaResolver || !mfaTotpHint) return;
+      const code = $("mfa-code").value.trim();
+      if (!/^\d{6}$/.test(code)) { setStatus("Enter the 6-digit code from your app.", "error"); return; }
+      setStatus("Verifying…");
+      try {
+        const assertion = TotpMultiFactorGenerator.assertionForSignIn(mfaTotpHint.uid, code);
+        const cred = await mfaResolver.resolveSignIn(assertion);
+        mfaResolver = null; mfaTotpHint = null;
+        setStatus("");
+        await handleUser(cred.user);
+      } catch (e) {
+        setStatus(e.code === "auth/invalid-verification-code" ? "That code didn't match — try the current one." : prettyAuthError(e), "error");
+      }
+    });
+    $("mfa-code").addEventListener("keydown", (e) => { if (e.key === "Enter") $("btn-mfa-verify").click(); });
+    $("btn-mfa-cancel").addEventListener("click", () => { mfaResolver = null; mfaTotpHint = null; setStatus(""); showAuthCard(); });
+
+    // ── Google ───────────────────────────────────────────────────────────────
+    $("btn-google").addEventListener("click", async () => {
+      setStatus("Opening Google…");
+      try {
+        const result = await signInWithPopup(auth, new GoogleAuthProvider());
+        setStatus("");
+        await handleUser(result.user);
+      } catch (e) {
+        if (handleMaybeMfa(e)) return;
+        if (e.code !== "auth/popup-closed-by-user") setStatus(prettyAuthError(e), "error");
+      }
+    });
+
+    // ── Email + password ─────────────────────────────────────────────────────
+    $("btn-primary-auth").addEventListener("click", async () => {
+      const email = $("auth-email").value.trim();
+      const password = $("auth-pass").value;
+      if (!email || !password) { setStatus("Enter your email and password.", "error"); return; }
+      if (mode === "signup") {
+        const name = $("auth-name").value.trim();
+        if (!name) { setStatus("Enter your name.", "error"); $("auth-name").focus(); return; }
+        setStatus("Creating your account…");
+        try {
+          const cred = await createUserWithEmailAndPassword(auth, email, password);
+          // Name lives in two places: the Firebase Auth profile (rides in the ID token's `name`
+          // claim, which the desktop app reads) and the user's Firestore doc.
+          await updateProfile(cred.user, { displayName: name });
+          // firestore.rules allow a user to self-create users/{uid} with access_tier "none". The
+          // app's verify_access only creates this doc when it's MISSING (404), so pre-creating it
+          // here won't collide. Mirror the app's field shape and add `name`. Non-blocking.
+          try {
+            await setDoc(doc(db, "users", cred.user.uid), {
+              email,
+              name,
+              access_tier: "none",
+              subscription_status: null,
+              stripe_customer_id: null,
+            });
+          } catch (dbErr) { /* the app will create the doc later if this didn't land */ }
+          await sendEmailVerification(cred.user, verifyContinue);
+          showVerifyGate(cred.user);
+          setStatus("Account created — confirm your email to finish.", "ok");
+        } catch (e) { setStatus(prettyAuthError(e), "error"); }
+      } else {
+        setStatus("Signing in…");
+        try {
+          const cred = await signInWithEmailAndPassword(auth, email, password);
+          setStatus("");
+          await handleUser(cred.user);
+        } catch (e) { if (!handleMaybeMfa(e)) setStatus(prettyAuthError(e), "error"); }
+      }
+    });
+    $("auth-pass").addEventListener("keydown", (e) => { if (e.key === "Enter") $("btn-primary-auth").click(); });
+
+    // ── Forgot password ──────────────────────────────────────────────────────
+    $("btn-forgot").addEventListener("click", async () => {
+      const email = $("auth-email").value.trim();
+      if (!email) { setStatus("Enter your email above first, then tap Forgot password.", "error"); return; }
+      setStatus("Sending reset email…");
+      try { await sendPasswordResetEmail(auth, email, resetContinue); setStatus("Reset email sent — check your inbox, then sign in.", "ok"); }
+      catch (e) { setStatus(prettyAuthError(e), "error"); }
+    });
+
+    // ── Passwordless email sign-in link ──────────────────────────────────────
+    $("btn-link").addEventListener("click", async () => {
+      const email = $("auth-email").value.trim();
+      if (!email) { setStatus("Enter your email above first.", "error"); return; }
+      setStatus("Sending sign-in link…");
+      try {
+        // Carry the current query (callback/state/next/mode) so the link resumes the same flow.
+        const url = window.location.origin + window.location.pathname + window.location.search;
+        await sendSignInLinkToEmail(auth, email, { url, handleCodeInApp: true });
+        window.localStorage.setItem("otianEmailForSignIn", email);
+        setStatus("Sign-in link sent — open it in this browser to finish.", "ok");
+      } catch (e) { setStatus(prettyAuthError(e), "error"); }
+    });
+
+    // ── Verify gate ──────────────────────────────────────────────────────────
+    $("btn-verified").addEventListener("click", async () => {
+      if (!pendingVerifyUser) return;
+      setStatus("Checking…");
+      try {
+        await pendingVerifyUser.reload();
+        if (pendingVerifyUser.emailVerified) { setStatus(""); await handleUser(pendingVerifyUser); }
+        else { setStatus("Not verified yet — click the link in your email, then try again.", "error"); }
+      } catch (e) { setStatus(prettyAuthError(e), "error"); }
+    });
+    $("btn-resend").addEventListener("click", async () => {
+      if (!pendingVerifyUser) return;
+      setStatus("Resending…");
+      try { await sendEmailVerification(pendingVerifyUser, verifyContinue); setStatus("Sent — check your inbox (and spam).", "ok"); }
+      catch (e) { setStatus(prettyAuthError(e), "error"); }
+    });
+    $("btn-verify-back").addEventListener("click", async () => { try { await signOut(auth); } catch (e) {} setStatus(""); });
+
+    // ── Continue card (already signed in, app flow) ──────────────────────────
+    $("btn-continue").addEventListener("click", () => { const u = auth.currentUser; if (u) handleUser(u); });
+    $("btn-switch").addEventListener("click", async () => { try { await signOut(auth); } catch (e) {} setStatus(""); });
+
+    // ── Finish an email-link sign-in if we arrived via one ───────────────────
+    if (isSignInWithEmailLink(auth, window.location.href)) {
+      let linkEmail = window.localStorage.getItem("otianEmailForSignIn");
+      if (!linkEmail) linkEmail = window.prompt("Confirm your email to finish signing in") || "";
+      if (linkEmail) {
+        setStatus("Finishing sign-in…");
+        signInWithEmailLink(auth, linkEmail, window.location.href)
+          .then((result) => { window.localStorage.removeItem("otianEmailForSignIn"); return handleUser(result.user); })
+          .catch((e) => setStatus(prettyAuthError(e), "error"));
+      }
+    }
+
+    function prettyAuthError(e) {
+      const map = {
+        "auth/invalid-email": "That doesn't look like a valid email address.",
+        "auth/invalid-credential": "Email or password is incorrect.",
+        "auth/wrong-password": "Email or password is incorrect.",
+        "auth/user-not-found": "No account with that email. Create one instead.",
+        "auth/email-already-in-use": "An account already exists for that email. Sign in instead.",
+        "auth/weak-password": "Choose a password of at least 6 characters.",
+        "auth/too-many-requests": "Too many attempts. Wait a moment, then try again.",
+        "auth/popup-blocked": "Your browser blocked the Google popup. Allow popups and try again.",
+      };
+      return map[e && e.code] || (e && e.message) || "Something went wrong.";
+    }
+  </script>
+</body>
+</html>

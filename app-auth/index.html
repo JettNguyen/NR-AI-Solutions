@@ -202,7 +202,38 @@
       </div>
       <button class="btn btn-primary" id="btn-signin">Sign in</button>
       <button class="btn btn-secondary" id="btn-signup">Create account</button>
+      <button class="forgot-link" id="btn-link">Email me a sign-in link instead</button>
       <button class="forgot-link" id="btn-forgot">Forgot password?</button>
+    </div>
+
+    <div class="email-section" id="verify-section">
+      <p style="font-size:13px;color:#8C8177;line-height:1.55;text-align:center;">
+        Verify your email to continue. We sent a link to your inbox &mdash; click it, then return here.
+      </p>
+      <button class="btn btn-primary" id="btn-verified">I&rsquo;ve verified &mdash; continue</button>
+      <button class="btn btn-secondary" id="btn-resend">Resend verification email</button>
+      <button class="forgot-link" id="btn-back">Back to sign in</button>
+    </div>
+
+    <div class="email-section" id="challenge-section">
+      <p id="challenge-prompt" style="font-size:13px;color:#8C8177;line-height:1.55;text-align:center;">Enter your code.</p>
+      <input type="text" id="challenge-code" inputmode="numeric" autocomplete="one-time-code" placeholder="6-digit code" />
+      <button class="btn btn-primary" id="btn-challenge">Verify</button>
+      <button class="forgot-link" id="btn-challenge-resend" style="display:none;">Resend code</button>
+    </div>
+
+    <div class="email-section" id="setup-section">
+      <p style="font-size:13px;color:#8C8177;line-height:1.55;text-align:center;">
+        Set up 2-step verification to protect your account &mdash; pick one:
+      </p>
+      <button class="btn btn-primary" id="btn-setup-totp">Use an authenticator app</button>
+      <button class="btn btn-secondary" id="btn-setup-email">Email me a code each time</button>
+      <div id="setup-detail" style="display:none;flex-direction:column;gap:8px;width:100%;">
+        <p id="setup-detail-text" style="font-size:12px;color:#8C8177;line-height:1.5;text-align:center;"></p>
+        <div id="setup-secret" style="display:none;font-family:ui-monospace,monospace;font-size:13px;letter-spacing:0.08em;background:rgba(74,66,58,0.06);border-radius:8px;padding:8px 10px;word-break:break-all;text-align:center;user-select:all;"></div>
+        <input type="text" id="setup-code" inputmode="numeric" autocomplete="one-time-code" placeholder="6-digit code" />
+        <button class="btn btn-primary" id="btn-setup-confirm">Confirm</button>
+      </div>
     </div>
 
     <div id="status"></div>
@@ -219,6 +250,11 @@
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
     sendPasswordResetEmail,
+    sendEmailVerification,
+    sendSignInLinkToEmail,
+    isSignInWithEmailLink,
+    signInWithEmailLink,
+    multiFactor, TotpMultiFactorGenerator, getMultiFactorResolver,
   } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
   const firebaseConfig = {
@@ -243,20 +279,89 @@
     statusEl.className = type;
   }
 
+  // Email verification is required for accounts created on or after this date; accounts created
+  // before it are grandfathered so existing users are never locked out. Google sign-ins carry an
+  // already-verified email and pass straight through regardless.
+  const VERIFY_CUTOFF_MS = Date.parse("2026-07-17T00:00:00Z");
+  let pendingVerifyUser = null;
+
+  // 2FA (second factor). The email login code runs through the Render service (Firebase has no
+  // native email factor); TOTP is native Firebase MFA. These hold the in-flight sign-in while the
+  // second factor / mandatory setup happens, before any tokens reach the app.
+  const MFA_API = "https://archie-4f35.onrender.com";
+  let pendingUser = null;        // authenticated user awaiting the 2FA gate
+  let pendingResolver = null;    // native MFA resolver (TOTP challenge at sign-in)
+  let pendingTotpHint = null;
+  let pendingSetupSecret = null; // TOTP secret during mandatory enrollment
+  let setupMode = null;          // "totp" | "email"  (mandatory-setup choice)
+  let challengeMode = null;      // "totp" | "email"  (which challenge is showing)
+
+  async function mfaCall(path, idToken, extra) {
+    const r = await fetch(MFA_API + path, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id_token: idToken, ...(extra || {}) }),
+    });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(j.error || ("request failed (" + r.status + ")"));
+    return j;
+  }
+
+  function hideAuthPanels() {
+    document.getElementById("btn-show-email").style.display = "none";
+    ["email-section", "verify-section", "challenge-section", "setup-section"]
+      .forEach((id) => document.getElementById(id).classList.remove("visible"));
+  }
+
+  function accountIsNew(user) {
+    const created = Date.parse((user.metadata && user.metadata.creationTime) || "");
+    return Number.isNaN(created) ? true : created >= VERIFY_CUTOFF_MS;
+  }
+
+  function showVerifyNeeded(user) {
+    pendingVerifyUser = user;
+    document.getElementById("btn-show-email").style.display = "none";
+    document.getElementById("email-section").classList.remove("visible");
+    document.getElementById("verify-section").classList.add("visible");
+    setStatus("Almost there — verify " + (user.email || "your email") + " to continue.");
+  }
+
   async function handleUser(user) {
     if (!callbackUrl) {
       setStatus("No callback URL — open this page from the Archie app.", "error");
       return;
     }
+    // A new account must confirm its email before we hand tokens to the app. Existing accounts and
+    // Google sign-ins are already verified and pass through.
+    if (!user.emailVerified && accountIsNew(user)) {
+      showVerifyNeeded(user);
+      return;
+    }
+
+    // 2FA gate. A TOTP factor was already completed during sign-in (native Firebase MFA throws
+    // before we get here and is resolved in the challenge below), so it passes straight through.
+    // Email-code accounts get challenged here; anyone with no factor at all must set one up before
+    // the app receives any tokens.
+    pendingUser = user;
+    let hasTotp = false;
+    try { hasTotp = (multiFactor(user).enrolledFactors || []).some((f) => f.factorId === "totp"); } catch {}
+    if (hasTotp) { deliverTokens(user); return; }
+
+    let emailEnabled = false;
+    try { emailEnabled = (await mfaCall("/mfa/status", await user.getIdToken())).email_enabled; } catch {}
+    if (emailEnabled) { startEmailChallenge(user); return; }
+
+    showMfaSetup(user);
+  }
+
+  // Hand the tokens to Archie's loopback by POSTing a form — NOT a GET redirect. A GET would put the
+  // long-lived refresh token in the URL, where it is written to the browser's history and
+  // recoverable long after. A form POST carries the tokens in the request body instead, so nothing
+  // sensitive appears in the address bar or history.
+  function deliverTokens(user) {
     setStatus("Signing you in…");
-    try {
-      const idToken = await user.getIdToken(true);
+    user.getIdToken(true).then((idToken) => {
       setStatus("Returning to Archie…");
-      // Deliver the tokens to Archie's loopback by POSTing a form — NOT a GET redirect. A GET would
-      // put the long-lived refresh token in the URL, where it is written to the browser's history
-      // and recoverable long after. A form POST carries the tokens in the request body instead, so
-      // nothing sensitive appears in the address bar or history. Values are set raw; the browser
-      // form-encodes them once on submit and Archie decodes them once.
       const form = document.createElement("form");
       form.method = "POST";
       form.action = callbackUrl;
@@ -276,9 +381,7 @@
       }
       document.body.appendChild(form);
       form.submit();
-    } catch (e) {
-      setStatus("Error: " + e.message, "error");
-    }
+    }).catch((e) => setStatus("Error: " + e.message, "error"));
   }
 
   document.getElementById("btn-google").addEventListener("click", async () => {
@@ -286,7 +389,8 @@
       const result = await signInWithPopup(auth, new GoogleAuthProvider());
       await handleUser(result.user);
     } catch (e) {
-      if (e.code !== "auth/popup-closed-by-user") setStatus(e.message, "error");
+      if (e.code === "auth/multi-factor-auth-required") startTotpSignInChallenge(e);
+      else if (e.code !== "auth/popup-closed-by-user") setStatus(e.message, "error");
     }
   });
 
@@ -304,7 +408,10 @@
     try {
       const result = await signInWithEmailAndPassword(auth, email, password);
       await handleUser(result.user);
-    } catch (e) { setStatus(e.message, "error"); }
+    } catch (e) {
+      if (e.code === "auth/multi-factor-auth-required") startTotpSignInChallenge(e);
+      else setStatus(e.message, "error");
+    }
   });
 
   document.getElementById("btn-signup").addEventListener("click", async () => {
@@ -314,7 +421,8 @@
     setStatus("Creating account…");
     try {
       const result = await createUserWithEmailAndPassword(auth, email, password);
-      await handleUser(result.user);
+      await sendEmailVerification(result.user);
+      showVerifyNeeded(result.user);
     } catch (e) { setStatus(e.message, "error"); }
   });
 
@@ -328,9 +436,191 @@
     } catch (e) { setStatus(e.message, "error"); }
   });
 
+  document.getElementById("btn-verified").addEventListener("click", async () => {
+    if (!pendingVerifyUser) return;
+    setStatus("Checking…");
+    try {
+      await pendingVerifyUser.reload();
+      if (pendingVerifyUser.emailVerified) {
+        await handleUser(pendingVerifyUser);
+      } else {
+        setStatus("Not verified yet — click the link in your email, then try again.", "error");
+      }
+    } catch (e) { setStatus(e.message, "error"); }
+  });
+
+  document.getElementById("btn-resend").addEventListener("click", async () => {
+    if (!pendingVerifyUser) return;
+    setStatus("Resending…");
+    try {
+      await sendEmailVerification(pendingVerifyUser);
+      setStatus("Sent — check your inbox (and spam).");
+    } catch (e) { setStatus(e.message, "error"); }
+  });
+
+  document.getElementById("btn-back").addEventListener("click", () => {
+    document.getElementById("verify-section").classList.remove("visible");
+    document.getElementById("email-section").classList.add("visible");
+    setStatus("");
+  });
+
+  document.getElementById("btn-link").addEventListener("click", async () => {
+    const email = document.getElementById("email").value.trim();
+    if (!email) { setStatus("Enter your email above first.", "error"); return; }
+    if (!callbackUrl) { setStatus("Open this page from the Archie app.", "error"); return; }
+    setStatus("Sending sign-in link…");
+    try {
+      // Carry the app's loopback callback + state on the continue URL so the page the email link
+      // opens can finish the hand-off. (otianai.com must be an Authorized domain in Firebase Auth.)
+      const url = window.location.origin + window.location.pathname
+        + "?callback=" + encodeURIComponent(callbackUrl)
+        + "&state=" + encodeURIComponent(appState);
+      await sendSignInLinkToEmail(auth, email, { url, handleCodeInApp: true });
+      window.localStorage.setItem("archieEmailForSignIn", email);
+      setStatus("Sign-in link sent — open it in this browser within 5 minutes to finish.");
+    } catch (e) { setStatus(e.message, "error"); }
+  });
+
+  // ── 2FA: native TOTP challenge at sign-in ────────────────────────────────────
+  function startTotpSignInChallenge(error) {
+    pendingResolver = getMultiFactorResolver(auth, error);
+    pendingTotpHint = pendingResolver.hints.find((h) => h.factorId === "totp");
+    if (!pendingTotpHint) { setStatus("This account's second factor can't be completed here.", "error"); return; }
+    challengeMode = "totp";
+    showChallenge("Enter the 6-digit code from your authenticator app.", false);
+  }
+
+  // ── 2FA: email code challenge (accounts with email codes turned on) ──────────
+  async function startEmailChallenge(user) {
+    pendingUser = user;
+    challengeMode = "email";
+    showChallenge("We emailed a 6-digit code to " + (user.email || "your address") + ". Enter it to continue.", true);
+    try { await mfaCall("/mfa/send-code", await user.getIdToken()); }
+    catch (e) { setStatus(e.message, "error"); }
+  }
+
+  function showChallenge(prompt, showResend) {
+    hideAuthPanels();
+    document.getElementById("challenge-section").classList.add("visible");
+    document.getElementById("challenge-prompt").textContent = prompt;
+    document.getElementById("btn-challenge-resend").style.display = showResend ? "" : "none";
+    const input = document.getElementById("challenge-code");
+    input.value = ""; input.focus();
+    setStatus("");
+  }
+
+  document.getElementById("btn-challenge").addEventListener("click", async () => {
+    const code = document.getElementById("challenge-code").value.trim();
+    if (!/^\d{6}$/.test(code)) { setStatus("Enter the 6-digit code.", "error"); return; }
+    setStatus("Verifying…");
+    try {
+      if (challengeMode === "totp") {
+        const assertion = TotpMultiFactorGenerator.assertionForSignIn(pendingTotpHint.uid, code);
+        const cred = await pendingResolver.resolveSignIn(assertion);
+        await handleUser(cred.user);
+      } else {
+        await mfaCall("/mfa/verify-code", await pendingUser.getIdToken(), { code });
+        deliverTokens(pendingUser);
+      }
+    } catch (e) {
+      setStatus(e.code === "auth/invalid-verification-code" ? "That code didn't match — try the current one." : e.message, "error");
+    }
+  });
+
+  document.getElementById("btn-challenge-resend").addEventListener("click", async () => {
+    if (!pendingUser) return;
+    setStatus("Resending…");
+    try { await mfaCall("/mfa/send-code", await pendingUser.getIdToken()); setStatus("Sent — check your inbox (and spam)."); }
+    catch (e) { setStatus(e.message, "error"); }
+  });
+
+  document.getElementById("challenge-code").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") document.getElementById("btn-challenge").click();
+  });
+
+  // ── 2FA: mandatory setup (account has no factor yet) ─────────────────────────
+  function showMfaSetup(user) {
+    pendingUser = user;
+    hideAuthPanels();
+    document.getElementById("setup-section").classList.add("visible");
+    document.getElementById("setup-detail").style.display = "none";
+    setStatus("2-step verification is required to continue.");
+  }
+
+  document.getElementById("btn-setup-totp").addEventListener("click", async () => {
+    if (!pendingUser) return;
+    setupMode = "totp";
+    setStatus("Preparing…");
+    try {
+      const session = await multiFactor(pendingUser).getSession();
+      pendingSetupSecret = await TotpMultiFactorGenerator.generateSecret(session);
+      document.getElementById("setup-detail-text").textContent =
+        "In your authenticator app, add an account using this setup key, then enter the 6-digit code it shows:";
+      const secretEl = document.getElementById("setup-secret");
+      secretEl.textContent = pendingSetupSecret.secretKey;
+      secretEl.style.display = "";
+      document.getElementById("setup-detail").style.display = "flex";
+      document.getElementById("setup-code").focus();
+      setStatus("");
+    } catch (e) {
+      setStatus(e.code === "auth/operation-not-allowed"
+        ? "Authenticator 2-step isn't enabled on this project yet — use the email code, or enable TOTP in Firebase."
+        : e.message, "error");
+    }
+  });
+
+  document.getElementById("btn-setup-email").addEventListener("click", async () => {
+    if (!pendingUser) return;
+    setupMode = "email";
+    setStatus("Emailing a code…");
+    try {
+      await mfaCall("/mfa/send-code", await pendingUser.getIdToken());
+      document.getElementById("setup-detail-text").textContent =
+        "We emailed a 6-digit code to " + (pendingUser.email || "your address") + ". Enter it to turn on email codes:";
+      document.getElementById("setup-secret").style.display = "none";
+      document.getElementById("setup-detail").style.display = "flex";
+      document.getElementById("setup-code").focus();
+      setStatus("");
+    } catch (e) { setStatus(e.message, "error"); }
+  });
+
+  document.getElementById("btn-setup-confirm").addEventListener("click", async () => {
+    if (!pendingUser) return;
+    const code = document.getElementById("setup-code").value.trim();
+    if (!/^\d{6}$/.test(code)) { setStatus("Enter the 6-digit code.", "error"); return; }
+    setStatus("Setting up…");
+    try {
+      if (setupMode === "totp") {
+        const assertion = TotpMultiFactorGenerator.assertionForEnrollment(pendingSetupSecret, code);
+        await multiFactor(pendingUser).enroll(assertion, "Authenticator app");
+      } else {
+        await mfaCall("/mfa/email/enable", await pendingUser.getIdToken(), { code });
+      }
+      deliverTokens(pendingUser);
+    } catch (e) {
+      setStatus(e.code === "auth/invalid-verification-code" ? "That code didn't match — try the current one." : e.message, "error");
+    }
+  });
+
   document.getElementById("password").addEventListener("keydown", (e) => {
     if (e.key === "Enter") document.getElementById("btn-signin").click();
   });
+
+  // If the app opened this page via an email sign-in link, finish the sign-in now. Email-link
+  // sign-in also marks the address verified, so it clears the verification gate on its own.
+  if (isSignInWithEmailLink(auth, window.location.href)) {
+    let linkEmail = window.localStorage.getItem("archieEmailForSignIn");
+    if (!linkEmail) linkEmail = window.prompt("Confirm your email to finish signing in") || "";
+    if (linkEmail) {
+      setStatus("Finishing sign-in…");
+      signInWithEmailLink(auth, linkEmail, window.location.href)
+        .then((result) => {
+          window.localStorage.removeItem("archieEmailForSignIn");
+          return handleUser(result.user);
+        })
+        .catch((e) => setStatus(e.message, "error"));
+    }
+  }
 </script>
 </body>
 </html>

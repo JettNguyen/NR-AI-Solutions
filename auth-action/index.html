@@ -3,27 +3,52 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Contact | Otian AI</title>
-  <meta name="description" content="Questions before getting started, or an add-on you need built? Get in touch with Otian AI." />
+  <title>Account Action | Otian AI</title>
+  <meta name="description" content="Confirm your email or reset your password for your Otian AI account." />
+  <meta name="robots" content="noindex" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" href="../assets/icon-1024-dark.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="../assets/icon-1024.png" />
   <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    .auth-wrap { max-width: 420px; margin: 0 auto; }
+    .auth-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow-sm); padding: 28px; text-align: center;
+    }
+    .auth-icon { width: 52px; height: 52px; margin: 0 auto 14px; display: block; }
+    .auth-title { font-size: 1.1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
+    .auth-lead { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.55; margin: 0 auto 18px; max-width: 340px; }
+    .auth-email { font-weight: 600; color: var(--text-primary); word-break: break-all; }
+    .auth-fields { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; text-align: left; }
+    .auth-fields input {
+      width: 100%; padding: 12px 14px; border-radius: var(--radius-sm);
+      border: 1px solid var(--field-border); background: var(--bg-secondary);
+      color: var(--text-primary); font-family: inherit; font-size: 0.9rem; outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .auth-fields input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-subtle); }
+    .auth-btns { display: flex; flex-direction: column; gap: 10px; }
+    .auth-btns .btn { width: 100%; }
+    #action-status { font-size: 0.82rem; min-height: 1.2em; margin-top: 14px; color: var(--text-secondary); }
+    #action-status.error { color: #c0392b; }
+    [data-theme="dark"] #action-status.error { color: #e77; }
+    #action-status.ok { color: var(--c-teal); }
+    .auth-hidden { display: none !important; }
+    .auth-spinner {
+      width: 26px; height: 26px; margin: 8px auto; border-radius: 50%;
+      border: 2.5px solid var(--surface-hover-strong); border-top-color: var(--accent);
+      animation: authspin 0.7s linear infinite;
+    }
+    @keyframes authspin { to { transform: rotate(360deg); } }
+    .icon-ok { color: var(--c-teal); }
+    .icon-err { color: #c0392b; }
+    [data-theme="dark"] .icon-err { color: #e77; }
+  </style>
 </head>
 <body>
-
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <defs>
-      <filter id="calendarCreamTintSoft" color-interpolation-filters="sRGB" x="0" y="0" width="100%" height="100%">
-        <feFlood class="cf-cream" result="cream" />
-        <feBlend in="SourceGraphic" in2="cream" mode="multiply" result="creamy" />
-        <feFlood class="cf-soft-strong" result="soft" />
-        <feComposite in="soft" in2="creamy" operator="over" />
-      </filter>
-    </defs>
-  </svg>
 
   <!-- ==============================
        Navigation
@@ -136,157 +161,48 @@
 
   <main>
 
-    <!-- ==============================
-         Page Hero
-         ============================== -->
     <section class="page-hero" aria-label="Page introduction">
       <div class="page-hero-inner">
-        <span class="section-label fade-up">Reach Out</span>
-        <h1 class="fade-up delay-1">Get in Touch</h1>
-        <p class="fade-up delay-2">Have a question before filling out the intake form? Need an add-on Archie doesn&rsquo;t have yet? Tell us what you need &mdash; we&rsquo;re happy to help.</p>
+        <span class="section-label fade-up">Account</span>
+        <h1 class="fade-up delay-1">Confirming&hellip;</h1>
       </div>
     </section>
 
-    <!-- ==============================
-         Contact Layout
-         ============================== -->
-    <section class="section" aria-labelledby="contact-heading">
+    <section class="section" aria-label="Account action">
       <div class="container">
-        <h2 class="sr-only" id="contact-heading">Contact Information and Form</h2>
+        <div class="auth-wrap">
 
-        <div class="contact-layout">
-
-          <!-- Left: Contact Info -->
-          <div class="contact-info fade-up delay-1">
-
-            <div class="contact-info-item">
-              <div class="contact-info-icon contact-info-photo" aria-hidden="true">
-                <img src="../assets/jett-portrait.png" alt="" />
-              </div>
-              <div>
-                <p class="contact-info-label">Primary Contact</p>
-                <p class="contact-info-value">Jett Nguyen<span class="contact-info-subvalue">Co-Founder &middot; Engineering &amp; Implementation</span></p>
-              </div>
-            </div>
-
-            <div class="contact-info-item">
-              <div class="contact-info-icon contact-info-photo" aria-hidden="true">
-                <img src="../assets/jack-portrait.PNG" alt="" />
-              </div>
-              <div>
-                <p class="contact-info-label">Primary Contact</p>
-                <p class="contact-info-value">Jack Raney<span class="contact-info-subvalue">Co-Founder &middot; Discovery &amp; Client Strategy</span></p>
-              </div>
-            </div>
-
-            <div class="contact-info-item">
-              <div class="contact-info-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="2" y="4" width="20" height="16" rx="2"/>
-                  <path d="M2 8l10 7 10-7"/>
-                </svg>
-              </div>
-              <div>
-                <p class="contact-info-label">Email</p>
-                <p class="contact-info-value"><a href="mailto:questions@otianai.com">questions@otianai.com</a></p>
-                <p class="contact-info-value"><a href="mailto:jett@otianai.com">jett@otianai.com</a></p>
-                <p class="contact-info-value"><a href="mailto:jack@otianai.com">jack@otianai.com</a></p>
-              </div>
-            </div>
-
-            <div class="contact-info-item">
-              <div class="contact-info-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                  <circle cx="12" cy="10" r="3"/>
-                </svg>
-              </div>
-              <div>
-                <p class="contact-info-label">Location</p>
-                <p class="contact-info-value">FL and TX (Remote)</p>
-              </div>
-            </div>
-
-            <div class="contact-info-item">
-              <div class="contact-info-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="18" cy="5" r="3"/>
-                  <circle cx="6" cy="12" r="3"/>
-                  <circle cx="18" cy="19" r="3"/>
-                  <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
-                  <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
-                </svg>
-              </div>
-              <div>
-                <p class="contact-info-label">Follow Us</p>
-                <div class="social-links" style="margin-top: 6px;" aria-label="Otian AI on social media">
-                  <a href="https://x.com/OtianAI" class="social-link" target="_blank" rel="noopener" aria-label="Otian AI on X (Twitter)" title="X (Twitter)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-                  <a href="https://www.linkedin.com/company/otian-ai/" class="social-link" target="_blank" rel="noopener" aria-label="Otian AI on LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></a>
-                  <a href="https://www.instagram.com/otian.ai/" class="social-link" target="_blank" rel="noopener" aria-label="Otian AI on Instagram" title="Instagram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
-                </div>
-              </div>
-            </div>
-
+          <!-- Working -->
+          <div id="action-loading" class="auth-card">
+            <div class="auth-spinner" aria-hidden="true"></div>
+            <p class="auth-lead" style="margin:0;">One moment&hellip;</p>
           </div>
 
-          <!-- Right: Contact Form -->
-          <div class="fade-up delay-2">
-            <div class="contact-form-card">
-              <h2 class="contact-form-heading">Send Us a Message</h2>
-
-              <form id="contactForm" novalidate aria-label="Contact form">
-
-                <div class="form-group">
-                  <label class="form-label" for="contactName">Name<span class="required-star" aria-hidden="true">*</span></label>
-                  <input class="form-input" type="text" id="contactName" name="contactName" placeholder="Your name" autocomplete="name" required />
-                  <span class="form-error-msg" role="alert"></span>
-                </div>
-
-                <div class="form-group">
-                  <label class="form-label" for="contactEmail">Email Address<span class="required-star" aria-hidden="true">*</span></label>
-                  <input class="form-input" type="email" id="contactEmail" name="contactEmail" placeholder="your@email.com" autocomplete="email" required />
-                  <span class="form-error-msg" role="alert"></span>
-                </div>
-
-                <div class="form-group">
-                  <label class="form-label" for="contactMessage">Message<span class="required-star" aria-hidden="true">*</span></label>
-                  <textarea class="form-textarea" id="contactMessage" name="contactMessage" rows="5"
-                    placeholder="What's on your mind? No question is too simple." required></textarea>
-                  <span class="form-error-msg" role="alert"></span>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Send Message</button>
-
-              </form>
-
-              <!-- Confirmation message (shown after submit) -->
-              <div class="confirmation-message" id="confirmationMessage" role="status" aria-live="polite">
-                <div class="confirm-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="20 6 9 17 4 12"/>
-                  </svg>
-                </div>
-                <h3>Message received.</h3>
-                <p>Thanks for reaching out. We'll get back to you within one business day.</p>
-              </div>
-
+          <!-- Result (verify / recover / change) -->
+          <div id="action-result" class="auth-card auth-hidden">
+            <svg id="result-icon" class="auth-icon icon-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.5 2.5 5-5"/></svg>
+            <div class="auth-title" id="result-title">Done</div>
+            <p class="auth-lead" id="result-body">&nbsp;</p>
+            <div class="auth-btns">
+              <a class="btn btn-primary" id="result-cta" href="/account/">Continue</a>
             </div>
           </div>
 
+          <!-- Password reset form -->
+          <div id="action-reset" class="auth-card auth-hidden">
+            <div class="auth-title">Choose a new password</div>
+            <p class="auth-lead">for <span class="auth-email" id="reset-email">your account</span></p>
+            <div class="auth-fields">
+              <input type="password" id="reset-pass" placeholder="New password" autocomplete="new-password" />
+              <input type="password" id="reset-pass2" placeholder="Confirm new password" autocomplete="new-password" />
+            </div>
+            <div class="auth-btns">
+              <button class="btn btn-primary" id="btn-reset">Set new password</button>
+            </div>
+          </div>
+
+          <div id="action-status" role="status" aria-live="polite"></div>
         </div>
-
-        <!-- Availability: full-width row -->
-        <div class="availability-card fade-up delay-3" aria-label="Current availability">
-          <p class="contact-info-label">Current Availability</p>
-          <p class="availability-note">Live open times synced from our Google Calendar.</p>
-
-          <div class="availability-widget">
-            <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3J_UEhWgB7rc7sbaw7tn9eHOdcM2drCLefkU9aXnzft0BZz4Rlal6NMFQfTSH0JcXst_rQHMrp?gv=true" title="Book a time on our Google Calendar" loading="lazy"></iframe>
-          </div>
-
-          <p class="contact-response-note">We typically respond within one business day.</p>
-        </div>
-
       </div>
     </section>
 
@@ -347,12 +263,129 @@
 
   <script src="../js/nav.js"></script>
   <script type="module" src="../js/account-nav.js"></script>
-  <script src="../js/contact.js"></script>
+
+  <script type="module">
+    import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import {
+      getAuth, applyActionCode, checkActionCode,
+      verifyPasswordResetCode, confirmPasswordReset,
+    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA46RqJV4tcJD8h4mdcSZ26dDoikA9L64M",
+      authDomain: "archie-77170.firebaseapp.com",
+      projectId: "archie-77170",
+      storageBucket: "archie-77170.firebasestorage.app",
+      messagingSenderId: "516396797258",
+      appId: "1:516396797258:web:362cf2815128f3c82345b3",
+    };
+    const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const $ = (id) => document.getElementById(id);
+    const statusEl = $("action-status");
+    function setStatus(msg, type = "") { statusEl.textContent = msg || ""; statusEl.className = type; }
+    function onlyCard(id) { ["action-loading", "action-result", "action-reset"].forEach((c) => $(c).classList.toggle("auth-hidden", c !== id)); }
+
+    const params = new URLSearchParams(window.location.search);
+    const mode = params.get("mode");
+    const oobCode = params.get("oobCode");
+    const continueUrl = params.get("continueUrl") || "";
+
+    // Only follow a continue link back to our own site (defends against open-redirect).
+    function safeContinue(fallback) {
+      if (continueUrl) {
+        try {
+          const u = new URL(continueUrl, window.location.origin);
+          if (u.origin === window.location.origin) return u.pathname + u.search + u.hash;
+        } catch (e) { /* fall through */ }
+      }
+      return fallback;
+    }
+
+    const OK_ICON = '<circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.5 2.5 5-5"/>';
+    const ERR_ICON = '<circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/>';
+
+    function showResult({ ok, title, body, ctaText, ctaHref }) {
+      $("result-icon").innerHTML = ok ? OK_ICON : ERR_ICON;
+      $("result-icon").className = "auth-icon " + (ok ? "icon-ok" : "icon-err");
+      $("result-title").textContent = title;
+      $("result-body").innerHTML = body;
+      const cta = $("result-cta");
+      cta.textContent = ctaText;
+      cta.setAttribute("href", ctaHref);
+      document.querySelector(".page-hero h1").textContent = title;
+      onlyCard("action-result");
+    }
+
+    async function run() {
+      if (!mode || !oobCode) {
+        showResult({ ok: false, title: "Link problem", body: "This link is missing information. Request a new email and try again.", ctaText: "Go to sign in", ctaHref: "/login/" });
+        return;
+      }
+      try {
+        if (mode === "verifyEmail" || mode === "verifyAndChangeEmail") {
+          await applyActionCode(auth, oobCode);
+          // If this browser is already signed in, refresh so emailVerified updates immediately.
+          if (auth.currentUser) { try { await auth.currentUser.reload(); } catch (e) {} }
+          showResult({
+            ok: true,
+            title: mode === "verifyAndChangeEmail" ? "Email updated" : "Email confirmed",
+            body: "You&rsquo;re all set. You can head to your account, or return to the tab where you started.",
+            ctaText: "Go to your account",
+            ctaHref: safeContinue("/account/"),
+          });
+        } else if (mode === "recoverEmail") {
+          const info = await checkActionCode(auth, oobCode);
+          const restored = (info.data && info.data.email) || "your original email";
+          await applyActionCode(auth, oobCode);
+          showResult({
+            ok: true,
+            title: "Sign-in email restored",
+            body: "Your account&rsquo;s email was changed back to <span class=\"auth-email\">" + restored + "</span>. If this wasn&rsquo;t expected, reset your password now.",
+            ctaText: "Reset your password",
+            ctaHref: "/login/",
+          });
+        } else if (mode === "resetPassword") {
+          const email = await verifyPasswordResetCode(auth, oobCode); // throws if the code is bad/expired
+          $("reset-email").textContent = email;
+          document.querySelector(".page-hero h1").textContent = "Reset password";
+          onlyCard("action-reset");
+          $("reset-pass").focus();
+        } else {
+          showResult({ ok: false, title: "Unsupported link", body: "We couldn&rsquo;t recognise this request.", ctaText: "Go to sign in", ctaHref: "/login/" });
+        }
+      } catch (e) {
+        const expired = e && (e.code === "auth/expired-action-code" || e.code === "auth/invalid-action-code");
+        showResult({
+          ok: false,
+          title: expired ? "Link expired" : "Something went wrong",
+          body: expired
+            ? "This link has already been used or has expired. Request a fresh one and try again."
+            : (prettyErr(e)),
+          ctaText: "Go to sign in",
+          ctaHref: "/login/",
+        });
+      }
+    }
+
+    $("btn-reset").addEventListener("click", async () => {
+      const p1 = $("reset-pass").value, p2 = $("reset-pass2").value;
+      if (p1.length < 6) { setStatus("Choose a password of at least 6 characters.", "error"); return; }
+      if (p1 !== p2) { setStatus("Those passwords don't match.", "error"); return; }
+      setStatus("Saving…");
+      try {
+        await confirmPasswordReset(auth, oobCode, p1);
+        showResult({ ok: true, title: "Password changed", body: "Your new password is set. Sign in with it now.", ctaText: "Go to sign in", ctaHref: "/login/" });
+      } catch (e) {
+        setStatus(e.code === "auth/weak-password" ? "Choose a stronger password (at least 6 characters)." : prettyErr(e), "error");
+      }
+    });
+    $("reset-pass2").addEventListener("keydown", (e) => { if (e.key === "Enter") $("btn-reset").click(); });
+
+    function prettyErr(e) { return (e && e.message) || "Something went wrong."; }
+
+    run();
+  </script>
 </body>
 </html>
-
-
-
-
-
-
