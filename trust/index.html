@@ -144,7 +144,7 @@
         </div>
 
         <div class="trust-prose fade-up delay-2">
-          <p><strong>Partly, yes &mdash; and we&rsquo;d rather say it than have you find it.</strong> When your agent reads an email so it can summarise it, the text of that email goes to an AI model. That is what an AI agent <em>is</em>. Anyone who tells you their agent thinks without sending anything anywhere is selling you something that does not work.</p>
+          <p><strong>Partly, yes &mdash; and we&rsquo;d rather say it than have you find it.</strong> When your agent reads an email so it can summarize it, the text of that email goes to an AI model. That is what an AI agent <em>is</em>. Anyone who tells you their agent thinks without sending anything anywhere is selling you something that does not work.</p>
 
           <p>So the honest question isn&rsquo;t <em>does anything leave</em>. It&rsquo;s <strong>whose account it goes under, and who is standing in the middle.</strong> Three answers:</p>
         </div>
@@ -217,9 +217,9 @@
                 <td data-label="Your content?"><span class="trust-flag trust-flag--no">No</span></td>
               </tr>
               <tr>
-                <td data-label="What">Subscription check</td>
+                <td data-label="What">License check</td>
                 <td data-label="Where it goes">Google Firebase</td>
-                <td data-label="What's actually in it">Your account ID and a sign-in token. Returns one thing: whether you&rsquo;re paid up.</td>
+                <td data-label="What's actually in it">Your account ID and a sign-in token. Returns one thing: whether you own Archie.</td>
                 <td data-label="Your content?"><span class="trust-flag trust-flag--no">No</span></td>
               </tr>
               <tr>
@@ -293,7 +293,7 @@
             <h3>What we hold</h3>
             <ul class="two-col-card-list">
               <li>Your email address, so you can sign in</li>
-              <li>Whether your subscription is active</li>
+              <li>Whether you own Archie</li>
               <li>Which <em>paid</em> add-ons you&rsquo;ve bought</li>
             </ul>
           </div>
@@ -343,9 +343,9 @@
           </div>
 
           <div class="trust-limit">
-            <h3>Archie stops if you stop paying.</h3>
-            <p>We&rsquo;re a subscription, and the app checks whether yours is active. Cancel, and it stops working. <strong>We hold that switch</strong>, and we&rsquo;re not going to dress it up as freedom.</p>
-            <p>But it&rsquo;s worth being precise about what that switch is attached to, because there are two very different scenarios and companies love to blur them. <strong>If <em>you</em> leave, the app stops. If <em>we</em> disappear, it doesn&rsquo;t.</strong> We&rsquo;ve written it into our <a href="../terms-of-service/">Terms</a>: if Otian ever ceases operations, we publish a final version that needs no subscription check at all, within 30 days. It&rsquo;s a term of the agreement, not a promise on a blog, so you don&rsquo;t have to trust us for it.</p>
+            <h3>Archie checks your license &mdash; but you own what you bought.</h3>
+            <p>Archie is a one-time purchase, not a subscription. You buy it once and it&rsquo;s yours &mdash; there&rsquo;s nothing to cancel and nothing that lapses. The app does verify your license when you sign in, so it isn&rsquo;t a fully offline product, and we&rsquo;re not going to dress that up: our servers see that your account owns a license, and nothing more.</p>
+            <p>It&rsquo;s worth being precise, because there are two scenarios companies love to blur. <strong>If <em>you</em> stop paying us, nothing happens to Archie &mdash; you already own it. If <em>we</em> disappear, it still keeps working.</strong> We&rsquo;ve written it into our <a href="../terms-of-service/">Terms</a>: if Otian ever ceases operations, we publish a final version that needs no license check at all, within 30 days. It&rsquo;s a term of the agreement, not a promise on a blog, so you don&rsquo;t have to trust us for it.</p>
             <p>What you&rsquo;d lose if we vanished is updates, the marketplace, and support &mdash; the things a living company provides. You would not lose the agent you built. It&rsquo;s on your disk, and it was never ours.</p>
           </div>
 
@@ -398,7 +398,7 @@
               <p>If you see anything <em>else</em> carrying your content, we have either lied to you or made a serious mistake, and we want to hear about it either way.</p>
               <ul class="trust-hosts">
                 <li><code>api.anthropic.com</code> <span>&mdash; or <code>api.openai.com</code>. Your agent thinking, on your key.</span></li>
-                <li><code>firestore.googleapis.com</code><br /><code>securetoken.googleapis.com</code> <span>&mdash; our sign-in and subscription check. Carries your account ID, nothing else.</span></li>
+                <li><code>firestore.googleapis.com</code><br /><code>securetoken.googleapis.com</code> <span>&mdash; our sign-in and license check. Carries your account ID, nothing else.</span></li>
                 <li><code>otianai.com</code> <span>&mdash; <strong>once</strong>, checking for an update. Carries nothing about you.</span></li>
                 <li><code>github.com</code> <span>&mdash; only if an update is downloading.</span></li>
                 <li><span class="trust-hosts-plus">Plus whichever accounts <em>you</em> connected</span> <span>&mdash; Google, Slack, Telegram, Discord, Fireflies. Directly, on your tokens.</span></li>
