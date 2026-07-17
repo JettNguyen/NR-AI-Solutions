@@ -381,10 +381,23 @@
     // client_reference_id; the billing webhook turns a completed session with no item_id into a
     // permanent "lifetime" grant on users/{uid}. We do exactly the same from here.
     const STRIPE_CHECKOUT_URL = "https://buy.stripe.com/6oU4gydNle4I8151xlaR200";
+    const BILLING_API = "https://archie-4f35.onrender.com";
 
     const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
+
+    // Branded verification email via the Render mailer; fall back to Firebase's own if it's down.
+    async function sendVerificationEmail(user) {
+      try {
+        const idToken = await user.getIdToken();
+        const r = await fetch(BILLING_API + "/email/send-verification", {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id_token: idToken }),
+        });
+        if (!r.ok) throw new Error("mailer " + r.status);
+      } catch (e) { await sendEmailVerification(user); }
+    }
 
     const $ = (id) => document.getElementById(id);
     const statusEl = $("acct-status");
@@ -490,7 +503,7 @@
     $("btn-resend").addEventListener("click", async () => {
       const user = auth.currentUser; if (!user) return;
       setStatus("Sending…");
-      try { await sendEmailVerification(user, { url: window.location.origin + "/account/", handleCodeInApp: false }); setStatus("Sent — check your inbox (and spam).", "ok"); }
+      try { await sendVerificationEmail(user); setStatus("Sent — check your inbox (and spam).", "ok"); }
       catch (e) { setStatus(prettyAuthError(e), "error"); }
     });
     $("btn-recheck").addEventListener("click", async () => {

@@ -351,15 +351,39 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
+    // Render billing/mailer service — sends the branded verification/reset emails from
+    // noreply@otianai.com via Resend. If it's unreachable we fall back to Firebase's built-in
+    // email so a user is never left without one.
+    const BILLING_API = "https://archie-4f35.onrender.com";
+
+    async function sendVerificationEmail(user) {
+      try {
+        const idToken = await user.getIdToken();
+        const r = await fetch(BILLING_API + "/email/send-verification", {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id_token: idToken }),
+        });
+        if (!r.ok) throw new Error("mailer " + r.status);
+      } catch (e) {
+        await sendEmailVerification(user); // fallback: Firebase's own email (no continue url = always allowed)
+      }
+    }
+    async function sendResetEmail(email) {
+      try {
+        const r = await fetch(BILLING_API + "/email/send-password-reset", {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        });
+        if (!r.ok) throw new Error("mailer " + r.status);
+      } catch (e) {
+        await sendPasswordResetEmail(auth, email); // fallback: Firebase's own email
+      }
+    }
+
     const params = new URLSearchParams(window.location.search);
     const callbackUrl = params.get("callback");     // present only when the desktop app opens this page
     const appState = params.get("state") || "";
     let mode = params.get("mode") === "signup" ? "signup" : "signin";
-
-    // Where the emailed verify/reset links send the user back to on this site. Firebase appends
-    // these as continueUrl; our /auth-action/ handler reads it. handleCodeInApp:false = web handler.
-    const verifyContinue = { url: window.location.origin + "/account/", handleCodeInApp: false };
-    const resetContinue = { url: window.location.origin + "/login/", handleCodeInApp: false };
 
     const $ = (id) => document.getElementById(id);
     const statusEl = $("auth-status");
@@ -578,7 +602,7 @@
               stripe_customer_id: null,
             });
           } catch (dbErr) { /* the app will create the doc later if this didn't land */ }
-          await sendEmailVerification(cred.user, verifyContinue);
+          await sendVerificationEmail(cred.user);
           showVerifyGate(cred.user);
           setStatus("Account created — confirm your email to finish.", "ok");
         } catch (e) { setStatus(prettyAuthError(e), "error"); }
@@ -598,7 +622,7 @@
       const email = $("auth-email").value.trim();
       if (!email) { setStatus("Enter your email above first, then tap Forgot password.", "error"); return; }
       setStatus("Sending reset email…");
-      try { await sendPasswordResetEmail(auth, email, resetContinue); setStatus("Reset email sent — check your inbox, then sign in.", "ok"); }
+      try { await sendResetEmail(email); setStatus("Reset email sent — check your inbox, then sign in.", "ok"); }
       catch (e) { setStatus(prettyAuthError(e), "error"); }
     });
 
@@ -629,7 +653,7 @@
     $("btn-resend").addEventListener("click", async () => {
       if (!pendingVerifyUser) return;
       setStatus("Resending…");
-      try { await sendEmailVerification(pendingVerifyUser, verifyContinue); setStatus("Sent — check your inbox (and spam).", "ok"); }
+      try { await sendVerificationEmail(pendingVerifyUser); setStatus("Sent — check your inbox (and spam).", "ok"); }
       catch (e) { setStatus(prettyAuthError(e), "error"); }
     });
     $("btn-verify-back").addEventListener("click", async () => { try { await signOut(auth); } catch (e) {} setStatus(""); });
