@@ -689,13 +689,23 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 }
 
 /* ── Nav responsive ──────────────────────────────────────────────────────────
-   One clean switch, no in-between cramping. Above 1100px the whole row (logo +
-   links + theme toggle + Get Started + avatar) fits comfortably. At/below 1100px
-   the links and CTA move into the drawer, the hamburger appears, and the right-
-   hand controls (theme toggle + avatar + hamburger) group into one tidy cluster
-   instead of floating apart. Elements only ever disappear as the screen narrows —
-   never disappear-then-reappear. */
-@media (max-width: 1100px) {
+   Three tiers, sized to what actually fits:
+   • > 1100px          full row — logo (icon + wordmark + tagline), all menus,
+                       theme toggle, Get Started, avatar.
+   • 901–1100px        drop the wordmark + tagline to their icon so the full set
+                       of menus keeps fitting on one line; controls stay put.
+   • ≤ 900px           menus + Get Started move into the drawer, hamburger appears,
+                       and the wordmark returns (there's room again — and it keeps
+                       the company name on screen at phone widths, which Google
+                       OAuth verification requires on the home page). */
+@media (max-width: 1100px) and (min-width: 901px) {
+  .nav-logo-divider,
+  .nav-logo-text { display: none; }   /* icon-only logo buys room for the menus */
+  .nav-inner { gap: 14px; }
+  .nav-links { gap: 2px; }
+}
+
+@media (max-width: 900px) {
   /* Qualified with .nav so display:none beats the base .btn rule on .nav-cta
      regardless of source order. */
   .nav .nav-links,
