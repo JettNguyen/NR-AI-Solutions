@@ -220,16 +220,28 @@
               </div>
             </div>
 
-            <!-- Email verification -->
-            <div class="acct-section" id="sec-verify">
+            <!-- Email a code at sign-in (custom email MFA via the Render mailer) -->
+            <div class="acct-section" id="sec-emfa">
               <div class="acct-section-head">
-                <div class="acct-section-title">Email verification</div>
-                <span class="pill" id="verify-pill">&mdash;</span>
+                <div class="acct-section-title">Email a code at sign-in</div>
+                <span class="pill" id="emfa-pill">&mdash;</span>
               </div>
-              <div class="acct-section-body" id="verify-body">Checking&hellip;</div>
-              <div class="acct-row acct-hidden" id="verify-actions">
-                <button class="btn btn-secondary btn-mini" id="btn-resend">Resend link</button>
-                <button class="btn btn-secondary btn-mini" id="btn-recheck">I&rsquo;ve verified</button>
+              <div class="acct-section-body" id="emfa-body">We&rsquo;ll email a 6-digit code to confirm each new sign-in.</div>
+              <div class="acct-row" id="emfa-actions">
+                <button class="btn btn-primary btn-mini" id="btn-emfa-start">Set up</button>
+                <button class="btn btn-secondary btn-mini acct-hidden" id="btn-emfa-off">Turn off</button>
+              </div>
+              <!-- Enable sub-flow: prove you can receive a code before it's turned on -->
+              <div class="acct-hidden" id="emfa-enroll" style="margin-top:14px;">
+                <div class="acct-section-body">We emailed a 6-digit code to <span id="emfa-email">your inbox</span>. Enter it to turn this on:</div>
+                <div class="acct-fields" style="margin-top:8px;">
+                  <input type="text" id="emfa-code" inputmode="numeric" autocomplete="one-time-code" placeholder="6-digit code" />
+                </div>
+                <div class="acct-row">
+                  <button class="btn btn-primary btn-mini" id="btn-emfa-confirm">Confirm</button>
+                  <button class="btn btn-secondary btn-mini" id="btn-emfa-resend">Resend</button>
+                  <button class="btn btn-secondary btn-mini" id="btn-emfa-cancel">Cancel</button>
+                </div>
               </div>
             </div>
 
@@ -363,7 +375,7 @@
     import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import {
       getAuth, onAuthStateChanged, signOut,
-      sendEmailVerification, multiFactor, TotpMultiFactorGenerator,
+      multiFactor, TotpMultiFactorGenerator,
     } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
     import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
@@ -387,19 +399,17 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
-    // Branded verification email via the Render mailer; fall back to Firebase's own if it's down.
-    async function sendVerificationEmail(user) {
-      try {
-        const idToken = await user.getIdToken();
-        const payload = { id_token: idToken };
-        const who = (user.displayName || "").trim();
-        if (who) payload.name = who;
-        const r = await fetch(BILLING_API + "/email/send-verification", {
-          method: "POST", headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-        if (!r.ok) throw new Error("mailer " + r.status);
-      } catch (e) { await sendEmailVerification(user); }
+    // Email-code MFA talks to the Render service (/mfa/*), which owns the codes (hashed, TTL'd) and
+    // the on/off flag on the user doc. Identity always comes from the verified ID token.
+    async function mfaApi(path, extra) {
+      const idToken = await auth.currentUser.getIdToken();
+      const r = await fetch(BILLING_API + path, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(Object.assign({ id_token: idToken }, extra || {})),
+      });
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(data.error || ("HTTP " + r.status));
+      return data;
     }
 
     const $ = (id) => document.getElementById(id);
@@ -423,13 +433,8 @@
       $("acct-name").textContent = name || "Signed in";
       $("acct-who").textContent = user.email || user.uid;
 
-      // Email verification. Google sign-ins arrive already verified.
-      const verified = !!user.emailVerified;
-      setPill("verify-pill", verified ? "Verified" : "Not verified", verified);
-      $("verify-body").textContent = verified
-        ? "Your email address is confirmed."
-        : "Confirm your email so you can always recover this account.";
-      show("verify-actions", !verified);
+      // Email-code MFA status (from the Render service).
+      refreshEmailMfa();
 
       // Authenticator app (TOTP MFA).
       let enrolled = null;
@@ -502,22 +507,61 @@
       window.location.href = "/login/";
     });
 
-    // Email verification
-    $("btn-resend").addEventListener("click", async () => {
-      const user = auth.currentUser; if (!user) return;
-      setStatus("Sending…");
-      try { await sendVerificationEmail(user); setStatus("Sent — check your inbox (and spam).", "ok"); }
-      catch (e) { setStatus(prettyAuthError(e), "error"); }
-    });
-    $("btn-recheck").addEventListener("click", async () => {
-      const user = auth.currentUser; if (!user) return;
-      setStatus("Checking…");
+    // ── Email a code at sign-in (custom email MFA) ──
+    async function refreshEmailMfa() {
       try {
-        await user.reload();
-        renderDashboard(auth.currentUser);
-        setStatus(auth.currentUser.emailVerified ? "Verified." : "Not verified yet.", auth.currentUser.emailVerified ? "ok" : "error");
-      } catch (e) { setStatus(prettyAuthError(e), "error"); }
+        const d = await mfaApi("/mfa/status");
+        const on = !!d.email_enabled;
+        setPill("emfa-pill", on ? "On" : "Off", on);
+        $("emfa-body").textContent = on
+          ? "On. We'll email a 6-digit code to confirm each new sign-in."
+          : "We'll email a 6-digit code to confirm each new sign-in.";
+        show("btn-emfa-start", !on);
+        show("btn-emfa-off", on);
+        show("emfa-enroll", false);
+      } catch (e) {
+        setPill("emfa-pill", "—", false);
+        $("emfa-body").textContent = "Couldn't check this right now — reload to try again.";
+      }
+    }
+    $("btn-emfa-start").addEventListener("click", async () => {
+      setStatus("Emailing a code…");
+      try {
+        await mfaApi("/mfa/send-code");
+        $("emfa-email").textContent = auth.currentUser.email || "your inbox";
+        show("emfa-enroll", true);
+        $("emfa-code").focus();
+        setStatus("Code sent — check your inbox (and spam).", "ok");
+      } catch (e) { setStatus(prettyMfaError(e), "error"); }
     });
+    $("btn-emfa-resend").addEventListener("click", async () => {
+      setStatus("Resending…");
+      try { await mfaApi("/mfa/send-code"); setStatus("Sent — check your inbox.", "ok"); }
+      catch (e) { setStatus(prettyMfaError(e), "error"); }
+    });
+    $("btn-emfa-confirm").addEventListener("click", async () => {
+      const code = $("emfa-code").value.trim();
+      if (!/^\d{6}$/.test(code)) { setStatus("Enter the 6-digit code we emailed you.", "error"); return; }
+      setStatus("Turning on…");
+      try {
+        await mfaApi("/mfa/email/enable", { code });
+        $("emfa-code").value = "";
+        await refreshEmailMfa();
+        setStatus("Email codes turned on.", "ok");
+      } catch (e) { setStatus(prettyMfaError(e), "error"); }
+    });
+    $("btn-emfa-cancel").addEventListener("click", () => { show("emfa-enroll", false); setStatus(""); });
+    $("btn-emfa-off").addEventListener("click", async () => {
+      setStatus("Turning off…");
+      try { await mfaApi("/mfa/email/disable"); await refreshEmailMfa(); setStatus("Email codes turned off.", "ok"); }
+      catch (e) { setStatus(prettyMfaError(e), "error"); }
+    });
+    function prettyMfaError(e) {
+      const m = (e && e.message) || "";
+      if (/not configured/.test(m)) return "Email codes aren't available right now.";
+      return m || "Something went wrong.";
+    }
+    $("emfa-code").addEventListener("keydown", (e) => { if (e.key === "Enter") $("btn-emfa-confirm").click(); });
 
     // Authenticator app (TOTP)
     // Render an otpauth:// string to a QR code as inline SVG — dark modules on a forced-white
@@ -606,15 +650,6 @@
       return map[e && e.code] || (e && e.message) || "Something went wrong.";
     }
 
-    // The verify link opens in another tab; when the user returns here, re-check so the status
-    // flips to "Verified" on its own without them clicking "I've verified".
-    async function recheckVerification() {
-      const user = auth.currentUser;
-      if (!user || user.emailVerified) return;
-      try { await user.reload(); renderDashboard(auth.currentUser); } catch (e) { /* ignore */ }
-    }
-    document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") recheckVerification(); });
-    window.addEventListener("focus", recheckVerification);
   </script>
 </body>
 </html>

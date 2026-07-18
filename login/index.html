@@ -172,15 +172,7 @@
 
   <main>
 
-    <section class="page-hero" aria-label="Page introduction">
-      <div class="page-hero-inner">
-        <span class="section-label fade-up">Account</span>
-        <h1 class="fade-up delay-1" id="auth-heading">Sign In</h1>
-        <p class="fade-up delay-2" id="auth-subhead">One account for the Archie app and the marketplace.</p>
-      </div>
-    </section>
-
-    <section class="section" aria-label="Sign in">
+    <section class="section" aria-label="Sign in" style="padding-top: calc(var(--nav-height) + 48px);">
       <div class="container">
         <div class="auth-wrap">
 
@@ -192,6 +184,7 @@
 
           <!-- Sign in / create account -->
           <div id="auth-card" class="auth-card auth-hidden">
+            <h1 id="auth-heading" style="text-align:center;font-size:1.35rem;font-weight:700;color:var(--text-primary);margin-bottom:8px;">Sign In</h1>
             <p class="auth-lead" id="auth-card-lead">Sign in or create an account to manage it, secure it, and get Archie.</p>
 
             <div class="auth-btns">
@@ -256,6 +249,21 @@
             <div class="auth-btns">
               <button class="btn btn-primary" id="btn-continue">Continue to Archie</button>
               <button class="btn btn-secondary" id="btn-switch">Use a different account</button>
+            </div>
+          </div>
+
+          <!-- Emailed-code challenge (accounts with "Email a code at sign-in" turned on) -->
+          <div id="auth-emfa" class="auth-card auth-hidden">
+            <p class="auth-lead">We emailed a 6-digit code to <span class="auth-email" id="auth-emfa-email">your inbox</span> to confirm this sign-in. Enter it below.</p>
+            <div class="auth-fields">
+              <input type="text" id="emfa-code" inputmode="numeric" autocomplete="one-time-code" placeholder="6-digit code" />
+            </div>
+            <div class="auth-btns">
+              <button class="btn btn-primary" id="btn-emfa-verify">Verify</button>
+              <button class="btn btn-secondary" id="btn-emfa-resend">Resend code</button>
+            </div>
+            <div class="auth-textrow">
+              <button class="auth-textlink" id="btn-emfa-back">Use a different account</button>
             </div>
           </div>
 
@@ -393,7 +401,7 @@
     function setStatus(msg, type = "") { statusEl.textContent = msg || ""; statusEl.className = type; }
     function show(id, on) { $(id).classList.toggle("auth-hidden", !on); }
     function onlyCard(id) {
-      ["auth-loading", "auth-card", "auth-verify", "auth-mfa", "auth-continue"].forEach((c) => show(c, c === id));
+      ["auth-loading", "auth-card", "auth-verify", "auth-mfa", "auth-emfa", "auth-continue"].forEach((c) => show(c, c === id));
     }
 
     // A new account created on/after this date must confirm its email before the app flow hands
@@ -412,9 +420,45 @@
 
     let pendingVerifyUser = null;
     let initialResolved = false;
+    let emailMfaPassed = false; // set once the emailed-code challenge is cleared this session
+
+    // ── Emailed-code 2FA (custom, via the Render service) ────────────────────
+    // Accounts can turn on "Email a code at sign-in" from /account/. When on, a code must be
+    // entered before a sign-in completes. If the status check fails we don't lock the user out.
+    async function emailMfaRequired(user) {
+      if (emailMfaPassed) return false;
+      try {
+        const idToken = await user.getIdToken();
+        const r = await fetch(BILLING_API + "/mfa/status", {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id_token: idToken }),
+        });
+        if (!r.ok) return false;
+        const d = await r.json();
+        return !!d.email_enabled;
+      } catch (e) { return false; }
+    }
+    async function startEmailMfa(user) {
+      setStatus("Emailing a code…");
+      try {
+        const idToken = await user.getIdToken();
+        const r = await fetch(BILLING_API + "/mfa/send-code", {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id_token: idToken }),
+        });
+        if (!r.ok) throw new Error("send failed");
+        $("auth-emfa-email").textContent = user.email || "your inbox";
+        onlyCard("auth-emfa");
+        setStatus("");
+        $("emfa-code").value = "";
+        $("emfa-code").focus();
+      } catch (e) { setStatus("Couldn't email a code. Try again in a moment.", "error"); }
+    }
 
     // ── What happens after a successful sign-in ──────────────────────────────
     async function handleUser(user) {
+      // Emailed-code 2FA gate first (if the account has it on).
+      if (await emailMfaRequired(user)) { await startEmailMfa(user); return; }
       if (callbackUrl) {
         if (!user.emailVerified && accountIsNew(user)) { showVerifyGate(user); return; }
         await deliverToApp(user);
@@ -664,6 +708,36 @@
     // ── Continue card (already signed in, app flow) ──────────────────────────
     $("btn-continue").addEventListener("click", () => { const u = auth.currentUser; if (u) handleUser(u); });
     $("btn-switch").addEventListener("click", async () => { try { await signOut(auth); } catch (e) {} setStatus(""); });
+
+    // ── Emailed-code challenge card ──────────────────────────────────────────
+    $("btn-emfa-verify").addEventListener("click", async () => {
+      const user = auth.currentUser; if (!user) return;
+      const code = $("emfa-code").value.trim();
+      if (!/^\d{6}$/.test(code)) { setStatus("Enter the 6-digit code we emailed you.", "error"); return; }
+      setStatus("Verifying…");
+      try {
+        const idToken = await user.getIdToken();
+        const r = await fetch(BILLING_API + "/mfa/verify-code", {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id_token: idToken, code }),
+        });
+        if (!r.ok) { const d = await r.json().catch(() => ({})); throw new Error(d.error || "That code didn't match."); }
+        emailMfaPassed = true;
+        setStatus("");
+        await handleUser(user); // now clears the gate and proceeds
+      } catch (e) { setStatus((e && e.message) || "That code didn't match.", "error"); }
+    });
+    $("btn-emfa-resend").addEventListener("click", async () => {
+      const user = auth.currentUser; if (!user) return;
+      setStatus("Resending…");
+      try {
+        const idToken = await user.getIdToken();
+        await fetch(BILLING_API + "/mfa/send-code", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id_token: idToken }) });
+        setStatus("Sent — check your inbox.", "ok");
+      } catch (e) { setStatus("Couldn't resend. Try again.", "error"); }
+    });
+    $("emfa-code").addEventListener("keydown", (e) => { if (e.key === "Enter") $("btn-emfa-verify").click(); });
+    $("btn-emfa-back").addEventListener("click", async () => { emailMfaPassed = false; try { await signOut(auth); } catch (e) {} setStatus(""); });
 
     // ── Finish an email-link sign-in if we arrived via one ───────────────────
     if (isSignInWithEmailLink(auth, window.location.href)) {

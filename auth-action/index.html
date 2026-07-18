@@ -282,22 +282,19 @@
   </script>
 
   <script type="module">
-    import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import {
-      getAuth, applyActionCode, checkActionCode,
-      verifyPasswordResetCode, confirmPasswordReset,
-    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyA46RqJV4tcJD8h4mdcSZ26dDoikA9L64M",
-      authDomain: "archie-77170.firebaseapp.com",
-      projectId: "archie-77170",
-      storageBucket: "archie-77170.firebasestorage.app",
-      messagingSenderId: "516396797258",
-      appId: "1:516396797258:web:362cf2815128f3c82345b3",
-    };
-    const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+    // No Firebase SDK here. Applying an email action code is a single Identity Toolkit REST call,
+    // so this page never waits on SDK auth/persistence init — which was the thing stalling this
+    // popup (the code applied server-side, but the SDK's promise never resolved). The apiKey is the
+    // public web key: it identifies the project for the API, it is not a secret.
+    const API_KEY = "AIzaSyA46RqJV4tcJD8h4mdcSZ26dDoikA9L64M";
+    async function itk(method, body) {
+      const r = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:" + method + "?key=" + API_KEY, {
+        method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body),
+      });
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok) { const msg = (data.error && data.error.message) || ("HTTP " + r.status); const e = new Error(msg); e.itk = msg; throw e; }
+      return data;
+    }
 
     const $ = (id) => document.getElementById(id);
     const statusEl = $("action-status");
@@ -340,27 +337,19 @@
         showResult({ ok: false, title: "Link problem", body: "This link is missing information. Request a new email and try again.", ctaText: "Go to sign in", ctaHref: "/login/" });
         return;
       }
-      // Safety net: never leave the user staring at "One moment" if a network call stalls.
-      const watchdog = setTimeout(() => {
-        showResult({ ok: true, title: "Almost there", body: "This is taking longer than usual. If your email isn't confirmed yet, head to your account and use &ldquo;I&rsquo;ve verified,&rdquo; or request a fresh link.", ctaText: "Go to your account", ctaHref: "/account/" });
-      }, 12000);
       try {
         if (mode === "verifyEmail" || mode === "verifyAndChangeEmail") {
-          await applyActionCode(auth, oobCode);
-          // If this browser is already signed in, refresh so emailVerified updates in that tab —
-          // fire-and-forget: never block showing the result on this network call.
-          if (auth.currentUser) { auth.currentUser.reload().catch(() => {}); }
+          await itk("update", { oobCode }); // applies the verification server-side
           showResult({
             ok: true,
             title: mode === "verifyAndChangeEmail" ? "Email updated" : "Email confirmed",
-            body: "You&rsquo;re all set. You can head to your account, or return to the tab where you started.",
+            body: "You&rsquo;re all set &mdash; your email is confirmed. You can head to your account, or return to the tab where you started.",
             ctaText: "Go to your account",
             ctaHref: safeContinue("/account/"),
           });
         } else if (mode === "recoverEmail") {
-          const info = await checkActionCode(auth, oobCode);
-          const restored = (info.data && info.data.email) || "your original email";
-          await applyActionCode(auth, oobCode);
+          const d = await itk("update", { oobCode });
+          const restored = d.email || "your original email";
           showResult({
             ok: true,
             title: "Sign-in email restored",
@@ -369,8 +358,8 @@
             ctaHref: "/login/",
           });
         } else if (mode === "resetPassword") {
-          const email = await verifyPasswordResetCode(auth, oobCode); // throws if the code is bad/expired
-          $("reset-email").textContent = email;
+          const d = await itk("resetPassword", { oobCode }); // verifies the code, returns the email
+          $("reset-email").textContent = d.email || "your account";
           document.querySelector(".page-hero h1").textContent = "Reset password";
           onlyCard("action-reset");
           $("reset-pass").focus();
@@ -378,18 +367,16 @@
           showResult({ ok: false, title: "Unsupported link", body: "We couldn&rsquo;t recognise this request.", ctaText: "Go to sign in", ctaHref: "/login/" });
         }
       } catch (e) {
-        const expired = e && (e.code === "auth/expired-action-code" || e.code === "auth/invalid-action-code");
+        const bad = /OOB_CODE|EXPIRED/.test(e.itk || "");
         showResult({
           ok: false,
-          title: expired ? "Link expired" : "Something went wrong",
-          body: expired
+          title: bad ? "Link expired" : "Something went wrong",
+          body: bad
             ? "This link has already been used or has expired. Request a fresh one and try again."
-            : (prettyErr(e)),
+            : prettyErr(e),
           ctaText: "Go to sign in",
           ctaHref: "/login/",
         });
-      } finally {
-        clearTimeout(watchdog);
       }
     }
 
@@ -399,10 +386,10 @@
       if (p1 !== p2) { setStatus("Those passwords don't match.", "error"); return; }
       setStatus("Saving…");
       try {
-        await confirmPasswordReset(auth, oobCode, p1);
+        await itk("resetPassword", { oobCode, newPassword: p1 });
         showResult({ ok: true, title: "Password changed", body: "Your new password is set. Sign in with it now.", ctaText: "Go to sign in", ctaHref: "/login/" });
       } catch (e) {
-        setStatus(e.code === "auth/weak-password" ? "Choose a stronger password (at least 6 characters)." : prettyErr(e), "error");
+        setStatus(/WEAK_PASSWORD/.test(e.itk || "") ? "Choose a stronger password (at least 6 characters)." : prettyErr(e), "error");
       }
     });
     $("reset-pass2").addEventListener("keydown", (e) => { if (e.key === "Enter") $("btn-reset").click(); });
