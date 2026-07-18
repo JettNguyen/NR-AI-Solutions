@@ -242,6 +242,7 @@
               <div class="acct-row" id="emfa-actions">
                 <button class="btn btn-primary btn-mini" id="btn-emfa-start">Set up</button>
                 <button class="btn btn-secondary btn-mini acct-hidden" id="btn-emfa-off">Turn off</button>
+                <button class="btn btn-secondary btn-mini acct-hidden" id="btn-emfa-retry">Try again</button>
               </div>
               <!-- Enable sub-flow: prove you can receive a code before it's turned on -->
               <div class="acct-hidden" id="emfa-enroll" style="margin-top:14px;">
@@ -413,14 +414,27 @@
 
     // Email-code MFA talks to the Render service (/mfa/*), which owns the codes (hashed, TTL'd) and
     // the on/off flag on the user doc. Identity always comes from the verified ID token.
-    async function mfaApi(path, extra) {
+    // The mailer/MFA service runs on Render's free tier, which sleeps after inactivity — the first
+    // request can take up to ~a minute to wake it. We bound each attempt (so it never hangs forever)
+    // and tag network/timeout failures as `kind:"network"` so callers can retry through a cold start
+    // rather than give up instantly.
+    async function mfaApi(path, extra, timeoutMs = 30000) {
       const idToken = await auth.currentUser.getIdToken();
-      const r = await fetch(BILLING_API + path, {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(Object.assign({ id_token: idToken }, extra || {})),
-      });
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), timeoutMs);
+      let r;
+      try {
+        r = await fetch(BILLING_API + path, {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(Object.assign({ id_token: idToken }, extra || {})),
+          signal: ctrl.signal,
+        });
+      } catch (err) {
+        const e = new Error(err && err.name === "AbortError" ? "timed out reaching the service" : "couldn't reach the service");
+        e.kind = "network"; throw e;
+      } finally { clearTimeout(timer); }
       const data = await r.json().catch(() => ({}));
-      if (!r.ok) throw new Error(data.error || ("HTTP " + r.status));
+      if (!r.ok) { const e = new Error(data.error || ("HTTP " + r.status)); e.kind = "http"; e.status = r.status; throw e; }
       return data;
     }
 
@@ -538,7 +552,7 @@
     }));
 
     // ── Email a code at sign-in (custom email MFA) ──
-    async function refreshEmailMfa() {
+    async function refreshEmailMfa(attempt = 0) {
       try {
         const d = await mfaApi("/mfa/status");
         const on = !!d.email_enabled;
@@ -549,9 +563,23 @@
         show("btn-emfa-start", !on);
         show("btn-emfa-off", on);
         show("emfa-enroll", false);
+        show("btn-emfa-retry", false);
       } catch (e) {
+        // Cold start / transient network: keep waiting through the wake (up to 3 tries) instead of
+        // failing on the first stalled request.
+        if (e.kind === "network" && attempt < 2) {
+          setPill("emfa-pill", "…", false);
+          $("emfa-body").textContent = "Waking the security service — this can take up to a minute on the first load…";
+          show("btn-emfa-start", false); show("btn-emfa-off", false); show("btn-emfa-retry", false);
+          await new Promise((r) => setTimeout(r, 2500));
+          return refreshEmailMfa(attempt + 1);
+        }
         setPill("emfa-pill", "—", false);
-        $("emfa-body").textContent = "Couldn't check this right now — reload to try again.";
+        $("emfa-body").textContent = e.kind === "network"
+          ? "Couldn't reach the security service — it may still be waking up. Give it a moment, then try again."
+          : "Couldn't check this right now: " + ((e && e.message) || "unknown error") + ".";
+        show("btn-emfa-start", false); show("btn-emfa-off", false);
+        show("btn-emfa-retry", true);
       }
     }
     $("btn-emfa-start").addEventListener("click", () => busy($("btn-emfa-start"), async () => {
@@ -581,6 +609,7 @@
       } catch (e) { setStatus(prettyMfaError(e), "error"); }
     }));
     $("btn-emfa-cancel").addEventListener("click", () => { show("emfa-enroll", false); setStatus(""); });
+    $("btn-emfa-retry").addEventListener("click", () => busy($("btn-emfa-retry"), () => refreshEmailMfa(0)));
     $("btn-emfa-off").addEventListener("click", () => busy($("btn-emfa-off"), async () => {
       setStatus("Turning off…");
       try { await mfaApi("/mfa/email/disable"); await refreshEmailMfa(); setStatus("Email codes turned off.", "ok"); }

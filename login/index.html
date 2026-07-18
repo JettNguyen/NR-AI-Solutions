@@ -452,18 +452,38 @@
     // ── Emailed-code 2FA (custom, via the Render service) ────────────────────
     // Accounts can turn on "Email a code at sign-in" from /account/. When on, a code must be
     // entered before a sign-in completes. If the status check fails we don't lock the user out.
+    // POST to the Render mailer/MFA service with a bounded timeout (its free tier sleeps and can take
+    // ~a minute to wake). Throws with kind:"network" on timeout/connection failure so callers can
+    // retry through a cold start.
+    async function billingPost(path, body, timeoutMs = 30000) {
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), timeoutMs);
+      try {
+        return await fetch(BILLING_API + path, {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body), signal: ctrl.signal,
+        });
+      } catch (err) {
+        const e = new Error("network"); e.kind = "network"; throw e;
+      } finally { clearTimeout(timer); }
+    }
+
     async function emailMfaRequired(user) {
       if (emailMfaPassed) return false;
-      try {
-        const idToken = await user.getIdToken();
-        const r = await fetch(BILLING_API + "/mfa/status", {
-          method: "POST", headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id_token: idToken }),
-        });
-        if (!r.ok) return false;
-        const d = await r.json();
-        return !!d.email_enabled;
-      } catch (e) { return false; }
+      const idToken = await user.getIdToken();
+      // Retry through a cold start so email-2FA is never skipped just because the service was asleep.
+      for (let attempt = 0; attempt < 3; attempt++) {
+        try {
+          const r = await billingPost("/mfa/status", { id_token: idToken });
+          if (!r.ok) return false; // a real answer (e.g. 401) — don't block sign-in
+          const d = await r.json();
+          return !!d.email_enabled;
+        } catch (e) {
+          if (e.kind === "network" && attempt < 2) { setStatus("Checking your security settings…"); await new Promise((r) => setTimeout(r, 2000)); continue; }
+          return false; // give up → fail open so a person is never locked out by an outage
+        }
+      }
+      return false;
     }
     async function startEmailMfa(user) {
       setStatus("Emailing a code…");
