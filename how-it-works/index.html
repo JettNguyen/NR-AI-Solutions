@@ -13,8 +13,143 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="stylesheet" href="../css/styles.css" />
   <style>
-    /* Page-scoped: generic always-on computer glyph in the diagram's hardware label */
-    .arch-computer-icon { width: 14px; height: 14px; color: var(--text-primary); flex-shrink: 0; }
+    /* ── Page-scoped: the "What Archie is" anatomy figure ──────────────
+       One picture — you message your agent; it runs on your computer,
+       built from parts, and reaches out to an AI model on your own
+       account plus your apps. Reflows to a single column and never
+       scrolls sideways. Part colours mirror the Archie app's add-on
+       types: Skills = brand accent, Workers = blue, Routines = teal,
+       Personality = plum; Knowledge Base and Connections stay neutral
+       because they aren't add-on kinds. */
+    .anat {
+      max-width: 760px;
+      margin: 48px auto 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .anat-you {
+      align-self: center;
+      text-align: center;
+      max-width: 440px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 26px;
+      box-shadow: var(--shadow-sm);
+    }
+    .anat-you strong { display: block; font-size: 1.05rem; }
+    .anat-node-kind {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .anat-node-sub { display: block; color: var(--text-secondary); font-size: 0.9rem; margin-top: 3px; }
+
+    .anat-link {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 46px;
+      position: relative;
+    }
+    .anat-link::before {
+      content: "";
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 2px;
+      background: repeating-linear-gradient(var(--line-muted) 0 5px, transparent 5px 10px);
+    }
+    .anat-link-label {
+      position: relative;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      background: var(--bg-secondary);
+      padding: 3px 10px;
+    }
+
+    .anat-machine {
+      position: relative;
+      border: 1.5px dashed var(--dashed-border);
+      border-radius: 16px;
+      background: var(--surface-soft);
+      padding: 30px 18px 20px;
+    }
+    .anat-machine-label {
+      position: absolute;
+      top: 0; left: 22px;
+      transform: translateY(-50%);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--text-secondary);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 3px 12px;
+    }
+    .anat-agent {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow-sm);
+    }
+    .anat-agent-head strong { font-size: 1.05rem; }
+    .anat-agent-head span { display: block; color: var(--text-secondary); font-size: 0.9rem; margin-top: 4px; }
+    .anat-parts {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(196px, 1fr));
+      gap: 10px;
+    }
+    .anat-part {
+      --dot: var(--text-muted);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--dot);
+      border-radius: var(--radius-sm);
+      background: var(--bg-primary);
+      padding: 10px 12px;
+    }
+    .anat-part strong { font-size: 0.95rem; }
+    .anat-part span { display: block; color: var(--text-secondary); font-size: 0.85rem; margin-top: 2px; }
+    .anat-part--skill { --dot: var(--accent); }
+    .anat-part--worker { --dot: var(--c-blue); }
+    .anat-part--routine { --dot: var(--c-teal); }
+    .anat-part--personality { --dot: var(--c-plum); }
+
+    .anat-out {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .anat-out-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      box-shadow: var(--shadow-sm);
+    }
+    .anat-out-card strong { font-size: 1rem; }
+    .anat-out-card span { display: block; color: var(--text-secondary); font-size: 0.88rem; margin-top: 4px; }
+
+    .anat-trust {
+      max-width: 620px;
+      margin: 22px auto 0;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 620px) {
+      .anat-out { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -180,137 +315,52 @@
         <div class="section-header">
           <span class="section-label fade-up">Under the Hood</span>
           <h2 id="arch-heading" class="fade-up delay-1">How It All Connects</h2>
-          <p class="fade-up delay-2">A few components working together behind the scenes. You just send a message.</p>
+          <p class="fade-up delay-2">Your agent runs on your own computer, built from a handful of parts you choose. Here&rsquo;s the whole thing &mdash; and everywhere it reaches.</p>
         </div>
 
-        <div class="arch-diagram fade-up delay-1" role="img" aria-label="Diagram: you message your agent from Telegram, Discord, or Slack; Archie, running on your always-on computer, works with an AI model on your own account, takes action in your apps, and replies to you">
+        <div class="anat fade-up delay-1" role="img" aria-label="Diagram: you message your agent from your chat app. Your agent runs on your computer and is built from parts — Personality, Skills, Workers, Routines, Knowledge Base, and Connections. It thinks with an AI model on your own account and acts in your apps only with your approval.">
 
-          <!-- Panel 1: You -->
-          <div class="arch-panel arch-panel--you">
-            <strong class="arch-panel-title">You</strong>
-            <p class="arch-panel-desc">Message your agent from the chat app you already use</p>
-            <div class="arch-logo-grid">
-              <div class="arch-logo-item">
-                <i class="fa-brands fa-telegram" style="color:#26A5E4" aria-hidden="true"></i>
-                <span>Telegram</span>
+          <div class="anat-you">
+            <span class="anat-node-kind">You</span>
+            <strong>Your chat app</strong>
+            <span class="anat-node-sub">Telegram, Discord, or Slack &mdash; you just text it</span>
+          </div>
+
+          <div class="anat-link" aria-hidden="true"><span class="anat-link-label">you text it &middot; it replies</span></div>
+
+          <div class="anat-machine">
+            <span class="anat-machine-label">Your computer</span>
+            <div class="anat-agent">
+              <div class="anat-agent-head">
+                <strong>Your agent</strong>
+                <span>A blank agent you shape with parts &mdash; add, swap, or remove any of them anytime.</span>
               </div>
-              <div class="arch-logo-item">
-                <i class="fa-brands fa-discord" style="color:#5865F2" aria-hidden="true"></i>
-                <span>Discord</span>
-              </div>
-              <div class="arch-logo-item">
-                <i class="fa-brands fa-slack" style="color:#E01E5A" aria-hidden="true"></i>
-                <span>Slack</span>
+              <div class="anat-parts">
+                <div class="anat-part anat-part--personality"><strong>Personality</strong><span>How it talks to you.</span></div>
+                <div class="anat-part anat-part--skill"><strong>Skills</strong><span>The things it can do.</span></div>
+                <div class="anat-part anat-part--worker"><strong>Workers</strong><span>Specialists it hands work to.</span></div>
+                <div class="anat-part anat-part--routine"><strong>Routines</strong><span>What it does on a schedule.</span></div>
+                <div class="anat-part"><strong>Knowledge Base</strong><span>Your files, so it knows what you know.</span></div>
+                <div class="anat-part"><strong>Connections</strong><span>The apps you plug in.</span></div>
               </div>
             </div>
           </div>
 
-          <!-- Connector 1: You <-> your computer -->
-          <div class="arch-flow" aria-hidden="true">
-            <span class="arch-flow-label">message</span>
-            <div class="arch-flow-track">
-              <div class="arch-flow-line"></div>
-              <svg class="arch-flow-head" viewBox="0 0 7 10" fill="currentColor"><path d="M0 0l7 5-7 5z"/></svg>
-            </div>
-            <div class="arch-flow-track arch-flow-track--rev">
-              <svg class="arch-flow-head" viewBox="0 0 7 10" fill="currentColor"><path d="M7 0L0 5l7 5z"/></svg>
-              <div class="arch-flow-line"></div>
-            </div>
-            <span class="arch-flow-label">response</span>
-          </div>
+          <div class="anat-link" aria-hidden="true"><span class="anat-link-label">reaches out to</span></div>
 
-          <!-- Panel 2: your always-on computer (hardware container) -->
-          <div class="arch-hardware">
-            <div class="arch-hardware-label" aria-hidden="true">
-              <svg class="arch-computer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-              Your computer, always on
+          <div class="anat-out">
+            <div class="anat-out-card">
+              <strong>An AI model</strong>
+              <span>Claude or ChatGPT, on your own account. Archie talks to the AI company directly &mdash; we&rsquo;re never in the middle.</span>
             </div>
-
-            <div class="arch-panel arch-panel--agent">
-              <div class="arch-panel-icon arch-panel-icon--accent">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <circle cx="12" cy="12" r="3"/>
-                  <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
-                </svg>
-              </div>
-              <strong class="arch-panel-title arch-panel-title--accent">Your Agent in Archie</strong>
-              <p class="arch-panel-desc">Lives in the Archie desktop app. It reads your message, decides what to do, and does the work right here on your machine.</p>
-            </div>
-
-            <div class="arch-internal-flow" aria-hidden="true">
-              <span class="arch-internal-label">API call</span>
-              <div class="arch-internal-tracks">
-                <div class="arch-flow-track arch-flow-track--down">
-                  <div class="arch-flow-line arch-flow-line--v"></div>
-                  <svg class="arch-flow-head" viewBox="0 0 10 7" fill="currentColor"><path d="M0 0l5 7 5-7z"/></svg>
-                </div>
-                <div class="arch-flow-track arch-flow-track--up">
-                  <svg class="arch-flow-head" viewBox="0 0 10 7" fill="currentColor"><path d="M0 7l5-7 5 7z"/></svg>
-                  <div class="arch-flow-line arch-flow-line--v"></div>
-                </div>
-              </div>
-              <span class="arch-internal-label">decision</span>
-            </div>
-
-            <div class="arch-panel arch-panel--model">
-              <strong class="arch-panel-title">AI Model</strong>
-              <p class="arch-panel-desc">The reasoning engine. Archie talks to the AI company directly on your own account &mdash; we&rsquo;re never in the middle.</p>
-              <div class="arch-logo-grid">
-                <div class="arch-logo-item">
-                  <img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=64" alt="Claude" />
-                  <span>Claude</span>
-                </div>
-                <div class="arch-logo-item">
-                  <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=64" alt="ChatGPT" />
-                  <span>ChatGPT</span>
-                </div>
-              </div>
+            <div class="anat-out-card">
+              <strong>Your apps</strong>
+              <span>Email, calendar, and more. Nothing is sent or changed without your approval, and it can&rsquo;t spend money.</span>
             </div>
           </div>
+        </div><!-- /.anat -->
 
-          <!-- Connector 2: your computer <-> Your Apps -->
-          <div class="arch-flow arch-flow--accent" aria-hidden="true">
-            <span class="arch-flow-label">action</span>
-            <div class="arch-flow-track">
-              <div class="arch-flow-line"></div>
-              <svg class="arch-flow-head" viewBox="0 0 7 10" fill="currentColor"><path d="M0 0l7 5-7 5z"/></svg>
-            </div>
-            <div class="arch-flow-track arch-flow-track--rev">
-              <svg class="arch-flow-head" viewBox="0 0 7 10" fill="currentColor"><path d="M7 0L0 5l7 5z"/></svg>
-              <div class="arch-flow-line"></div>
-            </div>
-            <span class="arch-flow-label">result</span>
-          </div>
-
-          <!-- Panel 3: Your Apps -->
-          <div class="arch-panel arch-panel--apps">
-            <strong class="arch-panel-title">Your Apps</strong>
-            <p class="arch-panel-desc">What gets done on your behalf &mdash; nothing sent or changed without your approval, and it can&rsquo;t spend money</p>
-            <ul class="arch-apps-list">
-              <li>
-                <i class="fa-regular fa-envelope" style="color:#EA4335" aria-hidden="true"></i>
-                Email
-              </li>
-              <li>
-                <i class="fa-regular fa-calendar" style="color:#4285F4" aria-hidden="true"></i>
-                Calendar
-              </li>
-              <li>
-                <i class="fa-brands fa-google" style="color:#FBBC04" aria-hidden="true"></i>
-                Web Search
-              </li>
-              <li>
-                <i class="fa-brands fa-google-drive" style="color:#34A853" aria-hidden="true"></i>
-                Files
-              </li>
-              <li>
-                <img src="https://www.google.com/s2/favicons?domain=notion.so&sz=64" alt="" />
-                Notes
-              </li>
-            </ul>
-          </div>
-
-        </div><!-- /.arch-diagram -->
+        <p class="anat-trust fade-up">Your keys, your files, and its memory stay on your machine &mdash; the keys in your system&rsquo;s own keychain, which we have no way to read. <a href="../trust/">See how we prove it &rarr;</a></p>
       </div>
     </section>
 
