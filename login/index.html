@@ -267,14 +267,21 @@
             </div>
           </div>
 
-          <!-- Two-step challenge: emailed code (the always-on baseline for every account) -->
+          <!-- Two-step challenge: emailed code (baseline + the authenticator fallback) -->
           <div id="auth-emfa" class="auth-card auth-hidden">
             <h1 style="text-align:center;font-size:1.2rem;font-weight:700;color:var(--text-primary);margin-bottom:6px;">Confirm it&rsquo;s you</h1>
-            <p class="auth-lead">We emailed a 6-digit code to <span class="auth-email" id="auth-emfa-email">your inbox</span> to confirm this sign-in. Enter it below.</p>
-            <div class="auth-fields">
+            <p class="auth-lead auth-hidden" id="emfa-ask-lead">Enter your account email and we&rsquo;ll send you a sign-in code.</p>
+            <p class="auth-lead" id="emfa-code-lead">We emailed a 6-digit code to <span class="auth-email" id="auth-emfa-email">your inbox</span> to confirm this sign-in. Enter it below.</p>
+            <div class="auth-fields auth-hidden" id="emfa-email-row">
+              <input type="email" id="emfa-email" autocomplete="email" placeholder="Email address" />
+            </div>
+            <div class="auth-btns auth-hidden" id="emfa-send-btns">
+              <button class="btn btn-primary" id="btn-emfa-send">Send code</button>
+            </div>
+            <div class="auth-fields" id="emfa-code-row">
               <input type="text" id="emfa-code" inputmode="numeric" autocomplete="one-time-code" placeholder="6-digit code" />
             </div>
-            <div class="auth-btns">
+            <div class="auth-btns" id="emfa-code-btns">
               <button class="btn btn-primary" id="btn-emfa-verify">Verify</button>
               <button class="btn btn-secondary" id="btn-emfa-resend">Resend code</button>
             </div>
@@ -531,6 +538,7 @@
     }
     async function sendEmailChallenge(user) {
       emfaMode = "session";
+      setEmfaView("enter-code");
       setStatus("Emailing a code…");
       $("auth-emfa-email").textContent = user.email || "your inbox";
       try {
@@ -549,17 +557,34 @@
 
     // Native-MFA email fallback: re-verify the password server-side, then email a code. Unlike the
     // legacy path there is no Firebase session yet — /mfa/email-fallback/verify returns a custom token.
+    // Toggle the emailed-code card between asking for the account email and entering the code.
+    function setEmfaView(view) {
+      const asking = view === "ask-email";
+      show("emfa-ask-lead", asking);
+      show("emfa-code-lead", !asking);
+      show("emfa-email-row", asking);
+      show("emfa-send-btns", asking);
+      show("emfa-code-row", !asking);
+      show("emfa-code-btns", !asking);
+    }
+
+    // Start the authenticator fallback. If we already know the email (password sign-in) send a code
+    // straight away; otherwise show an inline email field on the card — no browser prompt.
     async function startEmailFallback() {
-      // We need the account email to send a code to. Password sign-ins already have it; Google sign-ins
-      // usually don't, so ask (the same prompt this page uses to finish an email-link sign-in).
-      if (!fallbackEmail) {
-        const typed = window.prompt("Enter your account email and we’ll send you a sign-in code:");
-        if (typed === null) return; // cancelled
-        fallbackEmail = String(typed).trim();
-      }
-      if (!fallbackEmail) { setStatus("Enter your email to get a code.", "error"); return; }
+      emfaMode = "fallback";
+      if (fallbackEmail) { await doSendFallbackCode(); return; }
+      setEmfaView("ask-email");
+      show("btn-emfa-use-app", true);
+      onlyCard("auth-emfa");
+      setStatus("");
+      $("emfa-email").value = "";
+      $("emfa-email").focus();
+    }
+
+    // Ask the service for a code (to the account email), then switch the card to code entry.
+    async function doSendFallbackCode() {
+      if (!fallbackEmail) { setStatus("Enter your account email to get a code.", "error"); return; }
       setStatus(fallbackPass ? "Checking your password and emailing a code…" : "Emailing a code…");
-      $("auth-emfa-email").textContent = fallbackEmail;
       try {
         const payload = fallbackPass ? { email: fallbackEmail, password: fallbackPass } : { email: fallbackEmail };
         const r = await billingPost("/mfa/email-fallback/start", payload);
@@ -568,6 +593,7 @@
         if (d.email) fallbackEmail = d.email;
         emfaMode = "fallback";
         $("auth-emfa-email").textContent = fallbackEmail;
+        setEmfaView("enter-code");
         show("btn-emfa-use-app", true); // let them jump back to the authenticator
         onlyCard("auth-emfa");
         setStatus("");
@@ -921,7 +947,8 @@
       setStatus("Resending…");
       if (emfaMode === "fallback") {
         try {
-          const r = await billingPost("/mfa/email-fallback/start", { email: fallbackEmail, password: fallbackPass });
+          const payload = fallbackPass ? { email: fallbackEmail, password: fallbackPass } : { email: fallbackEmail };
+          const r = await billingPost("/mfa/email-fallback/start", payload);
           if (!r.ok) { const d = await r.json().catch(() => ({})); throw new Error(d.error || "couldn't resend"); }
           setStatus("Sent — check your inbox (and spam).", "ok");
         } catch (e) { setStatus(e.kind === "network" ? "Couldn't reach the security service — try again." : ((e && e.message) || "Couldn't resend."), "error"); }
@@ -936,6 +963,14 @@
       } catch (e) { setStatus(e.kind === "network" ? "Couldn't reach the security service — try again." : "Couldn't resend. Try again.", "error"); }
     }));
     $("emfa-code").addEventListener("keydown", (e) => { if (e.key === "Enter") $("btn-emfa-verify").click(); });
+    // Inline "enter your email" step (Google fallback) → send the code.
+    $("btn-emfa-send").addEventListener("click", () => busy($("btn-emfa-send"), async () => {
+      const em = $("emfa-email").value.trim();
+      if (!em) { setStatus("Enter your account email.", "error"); $("emfa-email").focus(); return; }
+      fallbackEmail = em;
+      await doSendFallbackCode();
+    }));
+    $("emfa-email").addEventListener("keydown", (e) => { if (e.key === "Enter") $("btn-emfa-send").click(); });
     // Switch from the emailed code back to the authenticator app.
     $("btn-emfa-use-app").addEventListener("click", () => {
       setStatus(""); emfaMode = null;
