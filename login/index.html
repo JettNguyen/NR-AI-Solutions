@@ -550,18 +550,24 @@
     // Native-MFA email fallback: re-verify the password server-side, then email a code. Unlike the
     // legacy path there is no Firebase session yet — /mfa/email-fallback/verify returns a custom token.
     async function startEmailFallback() {
-      setStatus(fallbackGoogle ? "Verifying your Google sign-in and emailing a code…" : "Checking your password and emailing a code…");
-      $("auth-emfa-email").textContent = fallbackEmail || "your inbox";
+      // We need the account email to send a code to. Password sign-ins already have it; Google sign-ins
+      // usually don't, so ask (the same prompt this page uses to finish an email-link sign-in).
+      if (!fallbackEmail) {
+        const typed = window.prompt("Enter your account email and we’ll send you a sign-in code:");
+        if (typed === null) return; // cancelled
+        fallbackEmail = String(typed).trim();
+      }
+      if (!fallbackEmail) { setStatus("Enter your email to get a code.", "error"); return; }
+      setStatus(fallbackPass ? "Checking your password and emailing a code…" : "Emailing a code…");
+      $("auth-emfa-email").textContent = fallbackEmail;
       try {
-        const payload = fallbackGoogle
-          ? { google_id_token: fallbackGoogle.idToken, google_access_token: fallbackGoogle.accessToken }
-          : { email: fallbackEmail, password: fallbackPass };
+        const payload = fallbackPass ? { email: fallbackEmail, password: fallbackPass } : { email: fallbackEmail };
         const r = await billingPost("/mfa/email-fallback/start", payload);
         if (!r.ok) { const d = await r.json().catch(() => ({})); throw new Error(d.error || "couldn't send a code"); }
         const d = await r.json().catch(() => ({}));
-        if (d.email) fallbackEmail = d.email; // identifies the account at /verify (needed for Google)
+        if (d.email) fallbackEmail = d.email;
         emfaMode = "fallback";
-        $("auth-emfa-email").textContent = fallbackEmail || "your inbox";
+        $("auth-emfa-email").textContent = fallbackEmail;
         show("btn-emfa-use-app", true); // let them jump back to the authenticator
         onlyCard("auth-emfa");
         setStatus("");
@@ -715,28 +721,14 @@
         return;
       }
       mfaMode = "native";
-      // Capture whatever proves the first factor so we can offer an emailed-code fallback if the user
-      // can't reach their authenticator: the typed password, or the Google credential from the popup.
+      // Capture what we can to email a code if the user can't reach their authenticator: the account
+      // email (from the field, or from the error), and the password if this was a password sign-in.
+      // Google sign-ins have neither in hand — we ask for the email and confirm it server-side by provider.
       fallbackEmail = $("auth-email").value.trim();
       fallbackPass = $("auth-pass").value;
       fallbackGoogle = null;
-      try {
-        const gcred = GoogleAuthProvider.credentialFromError(error);
-        let gId = gcred ? (gcred.idToken || null) : null;
-        let gAccess = gcred ? (gcred.accessToken || null) : null;
-        const tr = (error && error.customData && error.customData._tokenResponse) || {};
-        gId = gId || tr.oauthIdToken || tr.idToken || null;
-        gAccess = gAccess || tr.oauthAccessToken || tr.accessToken || null;
-        if (gId || gAccess) fallbackGoogle = { idToken: gId, accessToken: gAccess };
-      } catch (e) {}
-      // Diagnostic while we confirm Google-token extraction across environments (harmless; remove later).
-      if (!fallbackGoogle) {
-        try {
-          const tr = (error && error.customData && error.customData._tokenResponse) || null;
-          console.warn("[mfa-fallback] no Google token extracted.",
-            "cred:", !!GoogleAuthProvider.credentialFromError(error),
-            "_tokenResponse keys:", tr ? Object.keys(tr) : "(none)");
-        } catch (e) {}
+      if (!fallbackEmail && error && error.customData && error.customData.email) {
+        fallbackEmail = String(error.customData.email).trim();
       }
       // Always offer the fallback on the authenticator screen. The security control on it is the
       // alert email it triggers, not hiding the link.
@@ -797,14 +789,8 @@
     // Switch from the authenticator to an emailed code.
     $("btn-mfa-use-email").addEventListener("click", () => busy($("btn-mfa-use-email"), async () => {
       if (mfaMode === "native") {
-        // Native-MFA wall: no session yet — re-verify the first factor (password or Google) and email a code.
-        if ((fallbackEmail && fallbackPass) || fallbackGoogle) { await startEmailFallback(); return; }
-        let dbg = "";
-        try {
-          const tr = (lastMfaError && lastMfaError.customData && lastMfaError.customData._tokenResponse) || null;
-          dbg = " [debug — cred:" + (!!GoogleAuthProvider.credentialFromError(lastMfaError)) + " keys:" + (tr ? Object.keys(tr).join(",") : "none") + "]";
-        } catch (e) {}
-        setStatus("We couldn't read your sign-in to email a code — start over and sign in again." + dbg, "error");
+        // Native-MFA wall: no session yet — email a code (asks for the email if we don't have it).
+        await startEmailFallback();
         return;
       }
       // Legacy custom path: the user already holds a Firebase session.
