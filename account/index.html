@@ -488,10 +488,21 @@
       return isFirstEntry(user);
     }
 
+    // Did we arrive here straight from the sign-in page? If so, /login/ has already vetted this
+    // session and sent us on — accept it even when the per-session flag didn't survive (storage
+    // blocked, private window, the desktop app's browser context). Without this, a lost flag makes
+    // /account/ and /login/ redirect into each other forever.
+    function cameFromLogin() {
+      try {
+        const r = new URL(document.referrer);
+        return r.origin === location.origin && r.pathname.replace(/\/+$/, "") === "/login";
+      } catch (e) { return false; }
+    }
+
     // ── This page is signed-in AND second-factor-cleared only. Otherwise → /login/ and come back. ──
     onAuthStateChanged(auth, (user) => {
       if (!user) { window.location.replace("/login/?next=/account/"); return; }
-      if (!twoFactorCleared(user)) { window.location.replace("/login/?next=/account/"); return; }
+      if (!twoFactorCleared(user) && !cameFromLogin()) { window.location.replace("/login/?next=/account/"); return; }
       show("acct-loading", false);
       show("acct-signedin", true);
       setStatus("");
