@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Dock/app-icon source: the Archie mark grounded by a soft dark radial glow, so the floating
+     mark reads as an icon in the dock without a hard square tile. Rasterized by `tauri icon`;
+     the glow fades to full transparency before the edge so the dock shows through the corners. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="halo" cx="50%" cy="53%" r="50%">
+      <stop offset="0%"   stop-color="#14100D" stop-opacity="0.82" />
+      <stop offset="40%"  stop-color="#14100D" stop-opacity="0.66" />
+      <stop offset="72%"  stop-color="#14100D" stop-opacity="0.30" />
+      <stop offset="100%" stop-color="#14100D" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="archieGrad" gradientUnits="userSpaceOnUse" x1="512" y1="85" x2="512" y2="888"><stop offset="0" stop-color="#F0AB80"/><stop offset="0.55" stop-color="#E28D5E"/><stop offset="1" stop-color="#C36A3D"/></linearGradient>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#halo)" />
+  <g transform="translate(512 510) scale(1.14) translate(-512 -486)"><polygon fill="url(#archieGrad)" stroke="url(#archieGrad)" stroke-width="34" stroke-linejoin="round" stroke-linecap="round" points="328,887 512,727 696,887"/><path fill="url(#archieGrad)" stroke="url(#archieGrad)" stroke-width="34" stroke-linejoin="round" stroke-linecap="round" fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/></g>
+</svg>
