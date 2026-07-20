@@ -11,7 +11,22 @@ That split is the point. The person who knows what the code actually does holds 
 the person who writes the copy — not a seat at the table, a veto. If Jett says a sentence isn't
 true, it doesn't ship, and there is no appeal to how good it sounds.
 
-**Last verified against the Archie source:** 2026-07-15 (site + code reconciliation, `Archie@main`)
+**Last verified against the Archie source:** 2026-07-20 (site + code reconciliation, `Archie@main`)
+
+**Reconciliation — 2026-07-20.** The two Phase-1 features this file tracked as unbuilt have
+**shipped** and were re-verified in code today; their ⛔/🚧 sections below have moved to ✅ with
+pointers. (1) **Calendar approval gate** — writes stage instead of executing
+(`gateway.rs:2006-2072`); the apply tool is only offered on a turn *after* the proposing one
+(`gateway.rs:1963-1979`; snapshot rule `gateway.rs:1946-1950`); unattended routines cannot
+apply writes at all (`gateway.rs:2041-2047`). (2) **Email send behind a Send tap** — the model
+has no email-send tool; drafts arrive as chat cards with Send/Edit/Dismiss buttons, and
+`gmail_send_reply` has exactly one caller: the "send" button handler (`email/replies.rs:507`,
+`google.rs:279`; callback plumbing `telegram.rs:917-925`). The `gmail.compose` scope is
+requested only when the user opts into send at connect time (`commands.rs:3054-3059`).
+Site copy on business/, faq/, how-it-works/, privacy-policy/, questionnaire/,
+terms-of-service/, and trust/ that describes these flows in the present tense — a ⛔ under the
+07-15 rules — is therefore **true and stays**. The homepage approval card, removed earlier on
+07-20 while this file was stale, has been restored in the approved wording below.
 
 **Reconciliation — 2026-07-15.** The site was audited against this file and brought into
 compliance since the 07-14 pass. Verified fixed and now live in approved wording: the
@@ -24,6 +39,8 @@ calendar-delete disclosure; and — in code — the `gmail.compose` scope, no lo
 still dispatches immediately (`gateway.rs:1738`); the only `Gate` type is the inbound access
 roster (`access.rs`), which governs who may talk *to* the agent, not what it does. The claims
 came down; the feature has not gone up. Do not let the claims return.
+*[Superseded 2026-07-20: the gate and the Send-tap email flow have since shipped and been
+verified — see the 07-20 reconciliation above.]*
 
 ---
 
@@ -195,62 +212,68 @@ false form return** — "email + subscription + paid add-ons" is the floor; neve
 
 ## ⛔ Claims That Are FALSE Today — must not ship
 
-### ⛔ "Approval Required for Sends and Purchases"
+### ✅ Calendar changes require your confirmation — SHIPPED, enforced in code (was ⛔ until 2026-07-20)
 
-**Status: the CLAIM is FALSE and has been removed from the site (verified 2026-07-15 — no
-"Approval Required" chip, no "nothing sends without your OK" variant remains). The FEATURE
-is still not built. The claim must not return until it is.**
+**Approved wording:** "When your agent wants to change a calendar you've connected — create,
+move, or delete an event — it proposes the exact change and applies it only after you approve
+it in a later message. Unattended routines can't apply calendar changes at all — they report
+what they would make instead of making it."
 
-There is no approval gate anywhere in the tool-execution loop. The dispatcher
-(`crates/archie-runtime/src/gateway.rs:2450-2467`) executes every tool the model emits,
-immediately — on both the chat path (`handle_message`) and the unattended routine path
-(`handle_routine_message`).
+**Why it's true:** every calendar write is staged, never executed, on the turn that proposes
+it (`gateway.rs:2018-2049`). The apply/discard tools are only added to the tool set on a turn
+where a proposal is already pending, so the model *cannot* apply a change in the same message
+that proposed it (`gateway.rs:1963-1979`; snapshot rule documented at `gateway.rs:1946-1950`).
+`calendar_apply_pending_change` applies the staged change verbatim and nothing else
+(`gateway.rs:2051-2061`). The unattended routine path returns
+`blocked_needs_user_confirmation` (`gateway.rs:2041-2047`) — the 3am-delete exploit chain this
+file used to document is closed. Guarded by test (`gateway.rs:4617-4626`).
 
-**What is actually ungated, precisely** (narrower than first believed — verify before writing copy):
+**Boundaries — do not overclaim:**
+- The code enforces the **two-turn shape**: no same-turn apply, verbatim change only, no
+  unattended writes. It does **not** semantically verify that your later message was a "yes" —
+  the model judges that. Never write "the app checks that you said yes."
+- Reads (`calendar_list_events`) are ungated. Say "changes," never "access."
+- Keep the Trust page's honest-limit paragraph (an approval only protects you if you read it)
+  wherever this claim anchors a section.
 
-- **Calendar create / update / DELETE** (`gateway.rs:1583,1605,1617`). This is the real exposure.
-  A 3am routine can delete an event with no human in the loop.
-- **`remember`** — a local write. This is how an injected instruction would *persist across sessions*.
+### ✅ Email goes out only when you tap Send — SHIPPED (was 🚧 roadmap until 2026-07-20)
 
-**What is NOT a risk, despite what our copy implies:**
-- **The agent cannot message anyone but you.** `Channel::send` is only ever called with the owner's
-  own chat. It cannot post into a team's Slack channel or contact a third party.
-- **The agent cannot send email.** No email-send code path exists; the Gmail integration is
-  read-only. ✅ *Fixed 2026-07-15:* the connect flow now requests only
-  `[SCOPE_GMAIL_READONLY, SCOPE_CALENDAR_EVENTS]` (`src-tauri/src/commands.rs:2338`), guarded by
-  test `gmail_requests_readonly_only` (`builtins.rs:608`). Google's consent screen no longer
-  tells users Archie can compose. The claim and the consent screen now agree.
-- **The agent cannot buy anything.** `archie-runtime` cannot even see `archie-core::purchases`.
-  Purchases require a human in Stripe Checkout.
+**Approved wording:** "Archie can draft email replies, but it cannot send one on its own. The
+draft comes to your chat as a card with Send / Edit / Dismiss buttons, and nothing reaches
+Gmail until you tap Send."
 
-The only thing in the codebase named "approve" is the inbound access roster
-(`gateway.rs:3255-3300`, `access.rs`) — approving *who may talk to your agent*. That is the
-opposite of approving what your agent *does*.
+**Why it's true:** the model's tool set contains **no email-send tool** (tool definitions in
+`gateway.rs`: calendar, meetings, workers, knowledge, remember — nothing sends).
+`gmail_send_reply` (`google.rs:279`) has exactly one caller: the "send" branch of the
+button-callback handler, which requires a pending draft in `Pending` status
+(`email/replies.rs:301-307,507`). Draft triage runs with **no tools** and frames the email as
+untrusted input, so a prompt-injected message can at worst produce a bad draft you still have
+to approve (`email/replies.rs:1-12`). The tap is authorized against the same inbound roster as
+any message (`telegram.rs:917-925`). The `gmail.compose` scope is requested only if the user
+ticks "send" at connect time (`commands.rs:3054-3059`); the base Gmail integration remains
+read-only (test `gmail_requests_readonly_only`, `builtins.rs:673-679`).
 
-**Gate scope (verified against the code):** one choke point, ~35 engineer-days total.
-Phase 1 (deny-by-default + in-app approval queue) ≈ **15 engineer-days / 2 calendar weeks**
-for two people.
+**Boundaries — do not overclaim:**
+- Sends are **replies threaded onto an existing message** (`google.rs:277-303`). No claim of
+  composing fresh email from scratch until that ships.
+- "Sequencing constraint" from the 07-15 entry was honored: the gate landed before/with send.
 
-**What becomes true, and when:**
+**Still true, unchanged:**
+- **The agent cannot buy anything.** `archie-runtime` cannot see `archie-core::purchases`;
+  purchases require a human in Stripe Checkout.
+- **The agent only messages you** — `Channel::send` targets the owner's chat; the inbound
+  roster (`access.rs`) governs who may talk *to* it.
+- **`remember` is still ungated** — a local write; the persistence vector for an injected
+  instruction. Disclose, don't hide.
 
-| Claim | Defensible after |
+| Claim | Status |
 |---|---|
-| "Archie asks before it changes anything in your calendar." | **Phase 1** |
-| "Archie cannot spend your money." | True today; Phase 1 makes it an *enforced* boundary rather than an accident |
-| "Archie only ever messages you — it has no way to message anyone else." | **True today.** Use this instead of the false claim. |
-| "Works while you sleep. Checks in before it acts." (the delegation-loop diagram) | **Phase 2** |
-| "Every Skill tells you what it can do before you install it — including what it can delete." | **Phase 3** |
-| **"Nothing sends without your OK"** | ⛔ **Never.** There is no outbound *send* capability to gate. **Delete this line — do not defend it.** |
-
-**Live-copy locations — fixed 2026-07-15.** The present-tense send/approval claims at
-`index.html:7,11,178,382,395`, `business/index.html:224-225`, `faq/index.html:276`, and
-`how-it-works/index.html:279,367` have come down; the surviving copy (e.g. `index.html:426`,
-`business/index.html:228`, `faq/index.html:280`, `trust/index.html:332`) now discloses the
-calendar-delete exposure and labels the gate as in-progress. The four SVG diagram variants
-(`index.html` `dl-*`/`dlm-*`, `individuals/index.html` `ind-*`/`indm-*`) survive and are now
-compliant: their visible labels read "Checks in / with what it found" — a true reporting
-claim, not an approval claim. (The string "approval gate" remains only in an invisible HTML
-comment; harmless, tidy up when convenient.) **Re-verify before any Phase-1 launch push.**
+| "Archie asks before it changes anything in your calendar." | ✅ **True now** (two-turn gate) |
+| "Nothing reaches Gmail until you tap Send." | ✅ **True now** (single-caller send path) |
+| "Archie cannot spend your money." | ✅ True (and no purchase code path exists in the runtime) |
+| "Works while you sleep. Checks in before it acts." | ✅ Defensible now: unattended writes are blocked, reported instead |
+| "Every Skill tells you what it can do before you install it — including what it can delete." | 🚧 Still Phase 3 |
+| **"Nothing sends without your OK"** (unscoped) | ⛔ **Still banned.** Chat replies and provider web-search queries leave without a per-item OK. Use the scoped calendar/Send-tap wordings above. |
 
 ### 🚧 Group-chat messaging + a "who it may message" UI — ROADMAP, NOT SHIPPED
 
@@ -263,33 +286,14 @@ chat, or the learned primary chat); the only roster that exists governs who may 
 people you've approved"* is true today and stays true after the UI lands. Do not upgrade it to
 anything more specific until the UI exists.
 
-### 🚧 Email send with click-to-approve — ROADMAP, NOT SHIPPED
+### ✅ Email send with click-to-approve — SHIPPED 2026-07-20 (superseded)
 
-**Do not describe this in the present tense. It does not exist.**
-
-This is an intended feature and a good one: the agent drafts an email, you review or edit it in
-chat, you click send. It is a genuine selling point *once it is real*. It is not real.
-
-**Verified 2026-07-14.** The complete list of tools Archie's model can call is eleven:
-`calendar_create_event`, `calendar_delete_event`, `calendar_list_events`,
-`calendar_update_event`, `delegate_to_worker`, `meetings_read`, `meetings_search`,
-`meetings_set_speakers`, `meetings_sync`, `read_knowledge_file`, `remember`.
-**None sends email.** `crates/archie-net/src/google.rs` exposes only `gmail_profile` and
-`gmail_added_message_ids` — both read-only — and no code anywhere calls a Gmail send or draft
-endpoint. There are also **zero interactive buttons or callbacks in any chat adapter**, so the
-"click send in chat" flow has no mechanism behind it. Single branch; no unmerged work.
-
-`SCOPE_GMAIL_COMPOSE` (`crates/archie-domain/src/automation.rs:20`) still exists as a constant
-but is **no longer requested** — the connect flow hard-codes readonly + calendar only
-(`commands.rs:2338`), and test `gmail_requests_readonly_only` fails the build if compose ever
-creeps back into the Gmail scope set. ✅ The consent-screen contradiction is closed. The
-constant is now a guarded fossil; leave it until an email-send capability genuinely needs it.
-
-**⚠️ Sequencing constraint — this is the important part.** Today the approval gate protects a
-calendar. The moment an email-send tool exists, the gate is the only thing standing between a
-prompt-injected meeting transcript and an email sent as you, to your customers.
-**The gate must land, fail-closed, BEFORE the send tool does.** Not the same release — before.
-If send ships first, every risk on this page gets an order of magnitude worse.
+See "**Email goes out only when you tap Send**" above for the approved wording, code pointers,
+and boundaries. The 2026-07-14 inventory ("eleven tools, none sends email; zero buttons in any
+chat adapter") is superseded: the model *still* has no send tool — sending is a user-tap
+action on a draft card, not a model capability — and the chat adapters now carry inline
+buttons for exactly this flow (`telegram.rs:672-729,917-925`). The sequencing constraint the
+07-15 entry demanded (gate lands fail-closed before send) was honored.
 
 ### ⛔ The gate does not stop exfiltration — never imply it does
 
@@ -334,12 +338,15 @@ which means the piracy hole can now be fixed freely without touching the claim.
 ⛔ **Never claim a "30-day grace period" for an unreachable server.** No such timer exists.
 ✅ **Do claim:** "If you leave, the app stops. If we disappear, it doesn't." Backed by the Terms.
 
-### Prompt injection reaches ungated tools
+### Prompt injection: the gate narrows it, doesn't end it
 
 Chat attachments (`discord.rs:377`, `slack.rs:334`), Fireflies meeting transcripts, and
-provider web-search results all enter the model's context **unsanitized**. Combined with the
-missing approval gate, a hostile input can reach `calendar_delete_event`. This is a real
-exploit chain, not a hypothetical. It is the reason the gate is being built.
+provider web-search results still enter the model's context. Since 2026-07-20 the calendar
+gate stands between injected content and calendar writes, and email triage is quarantined
+(no-tools call, sanitized input — `email/replies.rs`). What remains reachable by an injected
+instruction: **`remember`** (a local write — the persistence vector) and **provider-side web
+search** (the exfiltration channel — see the gate-does-not-stop-exfiltration section). A bad
+draft is also still possible; the Send tap is what stops it becoming a sent email.
 
 ---
 
@@ -353,7 +360,7 @@ exploit chain, not a hypothetical. It is the reason the gate is being built.
 | "Zero data collection" | **False.** We collect your email. |
 | "Bank-grade" / "military-grade" encryption | Meaningless. We use the OS Keychain and TLS. Say that. |
 | "We can't see anything" | Overbroad. We can see three things. Name them. |
-| "Nothing sends without your OK" | **False today.** See the approval-gate section. |
+| "Nothing sends without your OK" (unscoped) | Chat replies and provider web-search queries leave without a per-item OK. Use the scoped forms: calendar-confirmation / Send-tap wordings. |
 | "Sandboxed add-ons" | Misleading. Add-ons are data, not code — there is nothing to sandbox. The true claim is *stronger*; make it instead. |
 
 ---
