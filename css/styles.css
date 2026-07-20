@@ -6139,3 +6139,66 @@ html[data-theme="dark"] .booking-container iframe {
   border-radius: 5px;
   box-shadow: 0 1px 2px rgba(74, 66, 58, 0.12);
 }
+
+/* ==============================
+   37. Reviews
+   ============================== */
+
+.review-card blockquote {
+  margin: 0;
+}
+
+.review-card blockquote p {
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: var(--text-primary);
+}
+
+.review-attrib {
+  margin-top: 14px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* ==============================
+   38. Account billing badge
+   ============================== */
+
+/* Red dot on the nav avatar while the signed-in user has an outstanding balance
+   (set by js/account-nav.js). Ring matches the page background so it reads as a
+   cutout on the round button. */
+.nav-account-btn.has-due {
+  position: relative;
+}
+
+.nav-account-btn.has-due::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #e03131;
+  border: 2px solid var(--bg-primary);
+}
+
+/* "$100 due" pill on the Billing item in the account dropdown. Same palette as the
+   account pages' error banner so "money owed" reads consistently across the site. */
+.nav-account-due {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  background: rgba(224, 49, 49, 0.12);
+  color: #b3261e;
+}
+
+[data-theme="dark"] .nav-account-due {
+  background: rgba(224, 49, 49, 0.18);
+  color: #ff9f97;
+}
