@@ -5,7 +5,7 @@
 // the viewport, and returns a setStatus(msg, type) with the contract the pages already use:
 // "" hides it, "error"/"ok" style it, any other message shows neutral. Every toast slides up
 // on show, slides down on hide (styles.css §39), carries an × button, and auto-dismisses
-// after 5 seconds — a new message resets the clock. The old scroll-the-banner-into-view hack
+// after 10 seconds — a new message resets the clock. The old scroll-the-banner-into-view hack
 // is gone on purpose: a fixed toast is always in view.
 
 export function bindStatusToast(el) {
@@ -33,6 +33,6 @@ export function bindStatusToast(el) {
     if (!msg) { hide(); return; }
     text.textContent = msg;
     el.className = "status-toast is-shown" + (type ? " " + type : "");
-    timer = setTimeout(hide, 5000);
+    timer = setTimeout(hide, 10000);
   };
 }
