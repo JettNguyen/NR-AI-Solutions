@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Invoice a Client | Otian AI</title>
+  <title>Manage Tiers | Otian AI</title>
   <meta name="robots" content="noindex, nofollow" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,14 +20,13 @@
     }
     .acct-lead { text-align: center; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.55; margin: 0; }
     .acct-fields { display: flex; flex-direction: column; gap: 10px; }
-    .acct-fields input, .acct-fields textarea {
+    .acct-fields input {
       width: 100%; padding: 12px 14px; border-radius: var(--radius-sm);
       border: 1px solid var(--field-border); background: var(--bg-secondary);
       color: var(--text-primary); font-family: inherit; font-size: 0.9rem; outline: none;
       transition: border-color var(--transition), box-shadow var(--transition);
     }
-    .acct-fields input:focus, .acct-fields textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-subtle); }
-    .acct-fields textarea { resize: vertical; min-height: 74px; }
+    .acct-fields input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-subtle); }
     .acct-field-label { font-size: 0.75rem; font-weight: 600; color: var(--text-secondary); margin-top: 4px; }
     .acct-field-label:first-child { margin-top: 0; }
 
@@ -47,7 +46,6 @@
     .pill-off { background: var(--surface-hover-strong); color: var(--text-muted); }
     .btn.btn-mini { padding: 8px 14px; font-size: 0.8rem; }
 
-
     .acct-hidden { display: none !important; }
     .acct-spinner {
       width: 40px; height: 40px; margin: 4px auto 16px; border-radius: 50%;
@@ -59,33 +57,20 @@
     .acct-foot-note a { color: var(--text-secondary); }
   </style>
   <style>
-    .act-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 10px 0; border-top: 1px solid var(--border); }
-    .act-row:first-child { border-top: none; }
-    .act-main { min-width: 0; }
-    .act-title { font-size: 0.9rem; color: var(--text-primary); font-weight: 500; }
-    .act-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
-    .act-note { font-size: 0.78rem; color: var(--text-secondary); margin-top: 3px; line-height: 1.45; }
-    .act-amount { font-size: 0.9rem; color: var(--text-primary); font-weight: 600; white-space: nowrap; }
-    .act-amount.owed { color: var(--accent); }
-    .act-empty { font-size: 0.85rem; color: var(--text-muted); padding: 6px 0; }
-    .bal-big { font-size: 1.8rem; font-weight: 700; color: var(--text-primary); }
+    .act-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; line-height: 1.5; }
 
-    /* Amount field with a fixed $ prefix, so the number reads as dollars at a glance. */
-    .adm-amount-wrap { position: relative; }
-    .adm-amount-wrap::before {
-      content: "$"; position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
-      color: var(--text-muted); font-size: 0.9rem; pointer-events: none;
+    /* Tier toggle pills — same idea as the desktop admin console: tap to toggle what they hold. */
+    .tier-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .tier-toggle {
+      border: 1px solid var(--field-border); background: var(--bg-secondary);
+      color: var(--text-secondary); font-family: inherit; font-size: 0.85rem; font-weight: 600;
+      text-transform: capitalize; padding: 8px 16px; border-radius: 999px; cursor: pointer;
+      transition: color var(--transition), border-color var(--transition),
+                  background var(--transition), box-shadow var(--transition);
     }
-    .adm-amount-wrap input { padding-left: 28px; }
-
-    .act-remove {
-      flex: 0 0 auto; border: 1px solid var(--border); background: transparent;
-      color: var(--text-muted); font-family: inherit; font-size: 0.72rem; font-weight: 600;
-      padding: 4px 10px; border-radius: 999px; cursor: pointer;
-      transition: color var(--transition), border-color var(--transition);
-    }
-    .act-remove:hover { color: #b3261e; border-color: rgba(224, 49, 49, 0.42); }
-    [data-theme="dark"] .act-remove:hover { color: #ff9f97; }
+    .tier-toggle:hover { border-color: var(--accent); color: var(--text-primary); }
+    .tier-toggle[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-subtle); color: var(--accent); }
+    .adm-uid { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.72rem; }
   </style>
 </head>
 <body>
@@ -191,12 +176,12 @@
     <section class="page-hero" aria-label="Page introduction">
       <div class="page-hero-inner">
         <span class="section-label fade-up">Admin</span>
-        <h1 class="fade-up delay-1">Invoice a Client</h1>
-        <p class="fade-up delay-2">Log a guided session onto a client&rsquo;s account &mdash; they pay it from their billing page.</p>
+        <h1 class="fade-up delay-1">Manage Tiers</h1>
+        <p class="fade-up delay-2">Look up an account and set the access tiers it holds &mdash; the same controls as Archie&rsquo;s admin console.</p>
       </div>
     </section>
 
-    <section class="section" aria-label="Invoice a client">
+    <section class="section" aria-label="Manage tiers">
       <div class="container">
         <div class="acct-wrap">
 
@@ -211,45 +196,49 @@
 
           <div id="adm-content" class="acct-hidden">
             <div class="acct-section">
-              <div class="acct-section-title">New invoice</div>
+              <div class="acct-section-title">Account</div>
               <div class="acct-fields" style="margin-top:12px;">
-                <label class="acct-field-label" for="adm-email">Client email</label>
-                <input type="email" id="adm-email" placeholder="client@example.com" autocomplete="off" />
-                <label class="acct-field-label" for="adm-amount">Amount</label>
-                <div class="adm-amount-wrap">
-                  <input type="number" id="adm-amount" value="100" min="1" step="0.01" inputmode="decimal" />
-                </div>
-                <label class="acct-field-label" for="adm-desc">Description</label>
-                <input type="text" id="adm-desc" placeholder="Guided session" autocomplete="off" />
-                <label class="acct-field-label" for="adm-date">Session date</label>
-                <input type="date" id="adm-date" />
-                <label class="acct-field-label" for="adm-notes">Invoice details <span style="font-weight:400;">(the client sees these)</span></label>
-                <textarea id="adm-notes" placeholder="What the session covered &mdash; e.g. &ldquo;Set up Archie with the Calendar skill and a morning briefing routine.&rdquo;"></textarea>
+                <label class="acct-field-label" for="adm-email">Account email</label>
+                <input type="email" id="adm-email" placeholder="person@example.com" autocomplete="off" />
               </div>
               <div class="acct-row">
-                <button class="btn btn-primary btn-mini" id="btn-add">Add invoice</button>
-                <button class="btn btn-secondary btn-mini" id="btn-lookup">Look up client</button>
+                <button class="btn btn-secondary btn-mini" id="btn-lookup">Look up</button>
+              </div>
+              <div id="adm-account" class="acct-hidden" style="margin-top:16px;">
+                <div class="acct-section-head">
+                  <div class="acct-section-title" id="adm-account-title">&mdash;</div>
+                  <span class="pill" id="adm-account-pill">&mdash;</span>
+                </div>
+                <div class="tier-row" id="adm-held" style="margin-top:10px;"></div>
+                <div class="act-sub" id="adm-account-sub" style="margin-top:8px;"></div>
               </div>
             </div>
 
-            <div class="acct-section acct-hidden" id="adm-client">
-              <div class="acct-section-head">
-                <div class="acct-section-title" id="adm-client-title">Client</div>
-                <span class="pill" id="adm-pill">&mdash;</span>
+            <div class="acct-section">
+              <div class="acct-section-title">Set tiers</div>
+              <p class="act-sub" style="margin-top:6px;">A user can hold several at once &mdash; click to toggle. Applying replaces everything they hold; none selected = no access.</p>
+              <div class="tier-row" id="tier-toggles"></div>
+              <div class="acct-row">
+                <button class="btn btn-primary btn-mini" id="btn-apply">Apply</button>
               </div>
-              <div class="bal-big" id="adm-balance" style="margin-top:6px;">$0</div>
-              <div id="adm-owed-list" style="margin-top:10px;"></div>
-              <div class="acct-section-title" style="margin-top:16px;">Paid</div>
-              <div id="adm-paid-list" style="margin-top:6px;"></div>
+            </div>
+
+            <div class="acct-section">
+              <div class="acct-section-head">
+                <div>
+                  <div class="acct-section-title">Replay pending add-on grants</div>
+                  <div class="act-sub" style="margin-top:4px;">Applies add-on grants parked for accounts that have since signed in. Parked <em>tier</em> grants don&rsquo;t replay &mdash; re-apply them above once the person signs in.</div>
+                </div>
+                <button class="btn btn-secondary btn-mini" id="btn-replay">Replay</button>
+              </div>
             </div>
           </div>
 
           <div id="acct-status" role="status" aria-live="polite"></div>
 
           <p class="acct-foot-note">
-            Invoices default to $100 &mdash; one guided session. Clients pay their balance at
-            otianai.com/billing/ through Stripe Checkout; payments mark the covered sessions paid automatically.
-            Also see <a href="../tiers/">Manage tiers</a>.
+            Tiers: admin &middot; client &middot; lifetime &middot; subscriber. Grants take effect the next
+            time the app checks access. Also see <a href="../billing/">Invoice a client</a>.
           </p>
         </div>
       </div>
@@ -341,14 +330,6 @@
       try { return await fn(); }
       finally { btn.classList.remove("is-busy"); btn.removeAttribute("aria-busy"); btn.disabled = wasDisabled; }
     }
-    function money(cents) {
-      const n = Number(cents || 0) / 100;
-      return "$" + (n % 1 === 0 ? n.toFixed(0) : n.toFixed(2));
-    }
-    function fmtMs(ms) {
-      if (!ms) return "";
-      try { return new Date(ms).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" }); } catch (e) { return ""; }
-    }
     function escapeHtml(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
 
     // Same second-factor clearance rule as the login/account pages.
@@ -364,7 +345,9 @@
     }
 
     // Authenticated call to the billing service. The server re-checks the admin tier on every
-    // request — the tier gate below is only there to fail politely for non-admins.
+    // request — the tier gate below is only there to fail politely for non-admins. Errors carry
+    // the response body (err.status / err.data) because a 404 here is meaningful: "no account
+    // yet" comes back with pending info the UI renders rather than treats as failure.
     async function api(path, { method = "GET", body } = {}) {
       const user = auth.currentUser;
       if (!user) throw new Error("signed out");
@@ -378,13 +361,17 @@
         });
       } catch (err) { throw new Error("Couldn't reach the billing service — try again in a moment."); }
       const d = await r.json().catch(() => ({}));
-      if (!r.ok) throw new Error(d.error || "Request failed.");
+      if (!r.ok) {
+        const e = new Error(d.error || "Request failed.");
+        e.status = r.status; e.data = d;
+        throw e;
+      }
       return d;
     }
 
     onAuthStateChanged(auth, async (user) => {
-      if (!user) { window.location.replace("/login/?next=/admin/billing/"); return; }
-      if (!twoFactorCleared(user)) { window.location.replace("/login/?next=/admin/billing/"); return; }
+      if (!user) { window.location.replace("/login/?next=/admin/tiers/"); return; }
+      if (!twoFactorCleared(user)) { window.location.replace("/login/?next=/admin/tiers/"); return; }
       let tier = "none";
       try { const snap = await getDoc(doc(db, "users", user.uid)); if (snap.exists()) tier = (snap.data() || {}).access_tier || "none"; } catch (e) {}
       show("adm-loading", false);
@@ -393,86 +380,106 @@
       $("adm-email").focus();
     });
 
-    let lastClient = null; // { uid, email } from the most recent lookup/invoice
+    // Must match ACCESS_TIERS in the Render service (minus "none", which is the empty set).
+    const TIERS = ["admin", "client", "lifetime", "subscriber"];
+    let selected = new Set();
+    let lastLookupEmail = null; // guards Apply: never replace a tier set we haven't shown
 
-    function renderClient(d) {
-      lastClient = { uid: d.uid, email: d.email };
-      $("adm-client-title").textContent = d.email;
-      $("adm-balance").textContent = money(d.balance_cents);
-      const pill = $("adm-pill");
-      pill.textContent = d.balance_cents > 0 ? "Due" : "Paid up";
-      pill.className = "pill " + (d.balance_cents > 0 ? "pill-off" : "pill-on");
-
-      const owed = d.sessions.filter((s) => s.status === "owed");
-      const paid = d.sessions.filter((s) => s.status === "paid");
-      $("adm-owed-list").innerHTML = owed.length
-        ? owed.map((s) => row(s, true)).join("")
-        : '<div class="act-empty">Nothing owed.</div>';
-      $("adm-paid-list").innerHTML = paid.length
-        ? paid.map((s) => row(s, false)).join("")
-        : '<div class="act-empty">No paid sessions yet.</div>';
-      show("adm-client", true);
-
-      document.querySelectorAll("[data-remove]").forEach((btn) => {
-        btn.addEventListener("click", () => busy(btn, async () => {
-          const id = btn.getAttribute("data-remove");
-          if (!confirm("Remove this invoice? The client will no longer owe it.")) return;
-          setStatus("Removing invoice…");
-          try {
-            await api("/admin/billing/remove-session", { method: "POST", body: { uid: lastClient.uid, session_id: id } });
-            setStatus("Invoice removed.", "ok");
-            await lookup(lastClient.email);
-          } catch (e) { setStatus(e.message, "error"); }
-        }));
+    const togglesEl = $("tier-toggles");
+    TIERS.forEach((t) => {
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "tier-toggle"; b.dataset.tier = t;
+      b.setAttribute("aria-pressed", "false"); b.textContent = t;
+      b.addEventListener("click", () => { selected.has(t) ? selected.delete(t) : selected.add(t); syncToggles(); });
+      togglesEl.appendChild(b);
+    });
+    function syncToggles() {
+      togglesEl.querySelectorAll(".tier-toggle").forEach((b) => {
+        const on = selected.has(b.dataset.tier);
+        b.setAttribute("aria-pressed", on ? "true" : "false");
+        b.textContent = (on ? "✓ " : "") + b.dataset.tier;
       });
     }
 
-    function row(s, owed) {
-      const date = s.session_date || fmtMs(owed ? s.created_at_ms : s.paid_at_ms);
-      return '<div class="act-row"><div class="act-main">' +
-        '<div class="act-title">' + escapeHtml(s.description || "Guided session") + "</div>" +
-        (date ? '<div class="act-sub">' + escapeHtml(date) + "</div>" : "") +
-        (s.notes ? '<div class="act-note">' + escapeHtml(s.notes) + "</div>" : "") +
-        '</div><div class="act-amount' + (owed ? " owed" : "") + '">' + escapeHtml(money(s.amount_cents)) + "</div>" +
-        (owed ? '<button type="button" class="act-remove" data-remove="' + escapeHtml(s.id) + '">Remove</button>' : "") +
-        "</div>";
+    function renderAccount(d) {
+      $("adm-account-title").textContent = d.email;
+      const pill = $("adm-account-pill");
+      pill.textContent = "Active"; pill.className = "pill pill-on";
+      const held = d.tiers || [];
+      $("adm-held").innerHTML = held.length
+        ? held.map((t) => '<span class="pill pill-on">' + escapeHtml(t) + "</span>").join("")
+        : '<span class="pill pill-off">none</span>';
+      $("adm-account-sub").innerHTML = '<span class="adm-uid">' + escapeHtml(d.uid) + "</span>" +
+        (d.subscription_status ? " &middot; subscription: " + escapeHtml(d.subscription_status) : "");
+      show("adm-account", true);
+    }
+    function renderNoAccount(email, data) {
+      $("adm-account-title").textContent = email;
+      const pill = $("adm-account-pill");
+      pill.textContent = "No account yet"; pill.className = "pill pill-off";
+      const parked = (data && data.pending_tiers) || [];
+      $("adm-held").innerHTML = parked.length
+        ? parked.map((t) => '<span class="pill pill-off">' + escapeHtml(t) + " (parked)</span>").join("")
+        : '<span class="pill pill-off">none</span>';
+      $("adm-account-sub").textContent = "They haven't signed in yet. Applying now parks the grant as pending — re-apply after their first sign-in.";
+      show("adm-account", true);
     }
 
+    // Look up an account; a 404 is "no account yet", not an error. Either way the toggles are
+    // preloaded with what they hold (or what's parked), so Apply edits the real current set.
     async function lookup(email) {
-      const d = await api("/admin/billing/client?email=" + encodeURIComponent(email));
-      renderClient(d);
-      return d;
+      try {
+        const d = await api("/admin/tier/lookup?email=" + encodeURIComponent(email));
+        renderAccount(d);
+        selected = new Set(d.tiers || []);
+      } catch (e) {
+        if (e.status !== 404) throw e;
+        renderNoAccount(email, e.data);
+        selected = new Set((e.data && e.data.pending_tiers) || []);
+      }
+      syncToggles();
+      lastLookupEmail = email.toLowerCase();
     }
 
     $("btn-lookup").addEventListener("click", () => busy($("btn-lookup"), async () => {
       const email = $("adm-email").value.trim();
-      if (!email) { setStatus("Enter the client's email first.", "error"); return; }
+      if (!email) { setStatus("Enter the account email first.", "error"); return; }
       setStatus("Looking up…");
       try { await lookup(email); setStatus(""); }
-      catch (e) { show("adm-client", false); setStatus(e.message, "error"); }
+      catch (e) { show("adm-account", false); setStatus(e.message, "error"); }
+    }));
+    $("adm-email").addEventListener("keydown", (e) => { if (e.key === "Enter") $("btn-lookup").click(); });
+
+    $("btn-apply").addEventListener("click", () => busy($("btn-apply"), async () => {
+      const email = $("adm-email").value.trim();
+      if (!email) { setStatus("Enter the account email first.", "error"); return; }
+      // The grant REPLACES the account's whole tier set, so never apply to an account whose
+      // current set hasn't been shown: first Apply on a fresh email loads it instead.
+      if (email.toLowerCase() !== lastLookupEmail) {
+        setStatus("Loading what they currently hold…");
+        try { await lookup(email); } catch (e) { show("adm-account", false); setStatus(e.message, "error"); return; }
+        setStatus("Loaded — review the toggles above, adjust, then press Apply again.", "ok");
+        return;
+      }
+      const tiers = Array.from(selected);
+      setStatus("Applying…");
+      try {
+        const d = await api("/admin/tier/grant", { method: "POST", body: { email, tiers } });
+        setStatus("Set " + email + " → " + (d.tiers && d.tiers.length ? d.tiers.join(", ") : "none") + ".", "ok");
+        try { await lookup(email); } catch (e) { /* grant landed; refresh is best-effort */ }
+      } catch (e) {
+        if (e.data && e.data.pending) {
+          setStatus("No account for " + email + " yet — the grant is parked as pending. Re-apply once they've signed in.", "ok");
+          try { await lookup(email); } catch (err) {}
+        } else setStatus(e.message, "error");
+      }
     }));
 
-    $("btn-add").addEventListener("click", () => busy($("btn-add"), async () => {
-      const email = $("adm-email").value.trim();
-      if (!email) { setStatus("Enter the client's email.", "error"); return; }
-      const dollars = parseFloat($("adm-amount").value);
-      if (!Number.isFinite(dollars) || dollars <= 0) { setStatus("Enter an amount above zero.", "error"); return; }
-      const amount_cents = Math.round(dollars * 100);
-      setStatus("Adding invoice…");
+    $("btn-replay").addEventListener("click", () => busy($("btn-replay"), async () => {
+      setStatus("Replaying pending add-on grants…");
       try {
-        const d = await api("/admin/billing/add-session", {
-          method: "POST",
-          body: {
-            email,
-            amount_cents,
-            description: $("adm-desc").value.trim(),
-            session_date: $("adm-date").value,
-            notes: $("adm-notes").value.trim(),
-          },
-        });
-        setStatus("Invoice added — " + money(d.amount_cents) + " for " + email + ". They'll see it at otianai.com/billing/.", "ok");
-        $("adm-desc").value = ""; $("adm-notes").value = ""; $("adm-date").value = ""; $("adm-amount").value = "100";
-        try { await lookup(email); } catch (e) { /* invoice added; lookup is best-effort */ }
+        const d = await api("/admin/access/grant-pending", { method: "POST" });
+        setStatus("Replayed — " + d.granted.length + " granted, " + d.still_pending.length + " still pending, " + d.failed.length + " failed.", d.failed.length ? "error" : "ok");
       } catch (e) { setStatus(e.message, "error"); }
     }));
   </script>

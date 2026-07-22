@@ -137,7 +137,8 @@ if (root) {
       if (s.isAdmin && billingItem) {
         billingItem.insertAdjacentHTML(
           "afterend",
-          '<a role="menuitem" href="/admin/billing/"' + activeAttr("/admin/billing/") + ">Invoice a client</a>"
+          '<a role="menuitem" href="/admin/billing/"' + activeAttr("/admin/billing/") + ">Invoice a client</a>" +
+          '<a role="menuitem" href="/admin/tiers/"' + activeAttr("/admin/tiers/") + ">Manage tiers</a>"
         );
       }
     });
