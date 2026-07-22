@@ -12,7 +12,7 @@
   <link rel="apple-touch-icon" href="../../assets/icon-1024.png" />
   <link rel="stylesheet" href="../../css/styles.css" />
   <style>
-    /* ── Account page (page-scoped) — reuses global tokens so it themes light/dark ── */
+    /* ── Account page (page-scoped): reuses global tokens so it themes light/dark ── */
     .acct-wrap { max-width: 520px; margin: 0 auto; }
     .acct-card {
       background: var(--bg-card); border: 1px solid var(--border);
@@ -192,7 +192,7 @@
       <div class="page-hero-inner">
         <span class="section-label fade-up">Admin</span>
         <h1 class="fade-up delay-1">Invoice a Client</h1>
-        <p class="fade-up delay-2">Log a guided session onto a client&rsquo;s account &mdash; they pay it from their billing page.</p>
+        <p class="fade-up delay-2">Log a guided session onto a client&rsquo;s account, and they pay it from their billing page.</p>
       </div>
     </section>
 
@@ -224,7 +224,7 @@
                 <label class="acct-field-label" for="adm-date">Session date</label>
                 <input type="date" id="adm-date" />
                 <label class="acct-field-label" for="adm-notes">Invoice details <span style="font-weight:400;">(the client sees these)</span></label>
-                <textarea id="adm-notes" placeholder="What the session covered &mdash; e.g. &ldquo;Set up Archie with the Calendar skill and a morning briefing routine.&rdquo;"></textarea>
+                <textarea id="adm-notes" placeholder="What the session covered, e.g. &ldquo;Set up Archie with the Calendar skill and a morning briefing routine.&rdquo;"></textarea>
               </div>
               <div class="acct-row">
                 <button class="btn btn-primary btn-mini" id="btn-add">Add invoice</button>
@@ -235,7 +235,7 @@
             <div class="acct-section acct-hidden" id="adm-client">
               <div class="acct-section-head">
                 <div class="acct-section-title" id="adm-client-title">Client</div>
-                <span class="pill" id="adm-pill">&mdash;</span>
+                <span class="pill" id="adm-pill">-</span>
               </div>
               <div class="bal-big" id="adm-balance" style="margin-top:6px;">$0</div>
               <div id="adm-owed-list" style="margin-top:10px;"></div>
@@ -247,7 +247,7 @@
           <div id="acct-status" role="status" aria-live="polite"></div>
 
           <p class="acct-foot-note">
-            Invoices default to $100 &mdash; one guided session. Clients pay their balance at
+            Invoices default to $100, one guided session. Clients pay their balance at
             otianai.com/billing/ through Stripe Checkout; payments mark the covered sessions paid automatically.
             Also see <a href="../tiers/">Manage tiers</a>.
           </p>
@@ -364,7 +364,7 @@
     }
 
     // Authenticated call to the billing service. The server re-checks the admin tier on every
-    // request — the tier gate below is only there to fail politely for non-admins.
+    // request; the tier gate below is only there to fail politely for non-admins.
     async function api(path, { method = "GET", body } = {}) {
       const user = auth.currentUser;
       if (!user) throw new Error("signed out");
@@ -376,7 +376,7 @@
           headers: { "Content-Type": "application/json", Authorization: "Bearer " + idToken },
           body: body ? JSON.stringify(body) : undefined,
         });
-      } catch (err) { throw new Error("Couldn't reach the billing service — try again in a moment."); }
+      } catch (err) { throw new Error("Couldn't reach the billing service. Try again in a moment."); }
       const d = await r.json().catch(() => ({}));
       if (!r.ok) throw new Error(d.error || "Request failed.");
       return d;
@@ -470,7 +470,7 @@
             notes: $("adm-notes").value.trim(),
           },
         });
-        setStatus("Invoice added — " + money(d.amount_cents) + " for " + email + ". They'll see it at otianai.com/billing/.", "ok");
+        setStatus("Invoice added: " + money(d.amount_cents) + " for " + email + ". They'll see it at otianai.com/billing/.", "ok");
         $("adm-desc").value = ""; $("adm-notes").value = ""; $("adm-date").value = ""; $("adm-amount").value = "100";
         try { await lookup(email); } catch (e) { /* invoice added; lookup is best-effort */ }
       } catch (e) { setStatus(e.message, "error"); }

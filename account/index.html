@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Your Account | Otian AI</title>
-  <meta name="description" content="Manage your Otian AI account — one account for everything at Otian AI: the Archie app, Add-ons, guided sessions, and billing. Secure it and manage your purchases." />
+  <meta name="description" content="Manage your Otian AI account, your one account for everything at Otian AI: the Archie app, Add-ons, guided sessions, and billing. Secure it and manage your purchases." />
   <meta name="robots" content="noindex" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,7 +13,7 @@
   <link rel="apple-touch-icon" href="../assets/icon-1024.png" />
   <link rel="stylesheet" href="../css/styles.css" />
   <style>
-    /* ── Account page (page-scoped) — reuses global tokens so it themes light/dark ── */
+    /* ── Account page (page-scoped), reuses global tokens so it themes light/dark ── */
     .acct-wrap { max-width: 460px; margin: 0 auto; }
     .acct-card {
       background: var(--bg-card); border: 1px solid var(--border);
@@ -70,7 +70,7 @@
     .acct-foot-note { text-align: center; font-size: 0.78rem; color: var(--text-muted); margin-top: 22px; line-height: 1.55; }
     .acct-foot-note a { color: var(--text-secondary); }
 
-    /* Delete account — an understated link that expands to a small confirm box */
+    /* Delete account: an understated link that expands to a small confirm box */
     .acct-delete { text-align: center; margin-top: 20px; }
     .acct-delete-link { background: none; border: none; font-family: inherit; font-size: 0.78rem; color: var(--text-muted); cursor: pointer; text-decoration: underline; padding: 4px; }
     .acct-delete-link:hover { color: #b3261e; }
@@ -209,26 +209,26 @@
               <div class="acct-section-head">
                 <div>
                   <div class="acct-section-title" id="acct-name">Signed in</div>
-                  <div class="acct-email" id="acct-who">&mdash;</div>
+                  <div class="acct-email" id="acct-who">…</div>
                 </div>
                 <button class="btn btn-secondary btn-mini" id="btn-signout">Sign out</button>
               </div>
             </div>
 
-            <!-- Emailed code at sign-in — always on for every account, no setup -->
+            <!-- Emailed code at sign-in: always on for every account, no setup -->
             <div class="acct-section" id="sec-emfa">
               <div class="acct-section-head">
                 <div class="acct-section-title">Emailed code at sign-in</div>
                 <span class="pill pill-on">On</span>
               </div>
-              <div class="acct-section-body">We email a 6-digit code to <span class="acct-email" id="emfa-email-who">your inbox</span> each time you sign in. Always on &mdash; add an authenticator app below for an app-code option too.</div>
+              <div class="acct-section-body">We email a 6-digit code to <span class="acct-email" id="emfa-email-who">your inbox</span> each time you sign in. Always on. Add an authenticator app below for an app-code option too.</div>
             </div>
 
             <!-- Authenticator app (TOTP MFA) -->
             <div class="acct-section" id="sec-totp">
               <div class="acct-section-head">
                 <div class="acct-section-title">Authenticator app</div>
-                <span class="pill" id="totp-pill">&mdash;</span>
+                <span class="pill" id="totp-pill">…</span>
               </div>
               <div class="acct-section-body" id="totp-body">Add a 6-digit code from an app like Google Authenticator or 1Password, asked for when you sign in.</div>
               <div class="acct-row" id="totp-actions">
@@ -240,7 +240,7 @@
               <div class="acct-hidden" id="totp-enroll" style="margin-top:14px;">
                 <!-- Desktop: scan a QR with your phone's authenticator app -->
                 <div class="acct-hidden" id="totp-qr-wrap">
-                  <div class="acct-section-body">Open an authenticator app on your phone &mdash; Google Authenticator, 1Password, Authy &mdash; and scan this:</div>
+                  <div class="acct-section-body">Open an authenticator app on your phone (Google Authenticator, 1Password, Authy) and scan this:</div>
                   <div class="qr-box" id="totp-qr" aria-hidden="false"></div>
                 </div>
                 <!-- Mobile: open the authenticator app directly -->
@@ -253,7 +253,7 @@
                 <!-- Manual fallback for either -->
                 <details class="totp-manual">
                   <summary>Can&rsquo;t scan? Enter a setup key instead</summary>
-                  <div class="code" id="totp-secret" style="margin-top:8px;">&mdash;</div>
+                  <div class="code" id="totp-secret" style="margin-top:8px;">…</div>
                 </details>
                 <!-- Code entry -->
                 <div class="acct-section-body" style="margin-top:14px;">Then type the 6-digit code it shows:</div>
@@ -271,11 +271,11 @@
             <div class="acct-section" id="sec-archie">
               <div class="acct-section-head">
                 <div class="acct-section-title">Archie app</div>
-                <span class="pill" id="archie-pill">&mdash;</span>
+                <span class="pill" id="archie-pill">…</span>
               </div>
               <div class="acct-section-body" id="archie-body">Checking your purchases&hellip;</div>
               <div class="acct-row acct-hidden" id="archie-actions">
-                <button class="btn btn-primary btn-mini" id="btn-buy-archie">Buy Archie &mdash; $149</button>
+                <button class="btn btn-primary btn-mini" id="btn-buy-archie">Buy Archie: $149</button>
               </div>
             </div>
 
@@ -288,7 +288,7 @@
               </div>
             </div>
 
-            <!-- Delete account — deliberately understated; not an everyday action -->
+            <!-- Delete account: deliberately understated; not an everyday action -->
             <div class="acct-delete" id="sec-delete">
               <button class="acct-delete-link" id="btn-delete">Delete account</button>
               <div class="acct-hidden acct-delete-confirm" id="delete-confirm">
@@ -307,8 +307,8 @@
           <div id="acct-status" role="status" aria-live="polite"></div>
 
           <p class="acct-foot-note">
-            One Otian AI account for everything &mdash; the Archie app, Add-ons, guided sessions, and billing.
-            <a href="../trust/">See what we store</a> &mdash; and what we don&rsquo;t.
+            One Otian AI account for everything: the Archie app, Add-ons, guided sessions, and billing.
+            <a href="../trust/">See what we store</a>, and what we don&rsquo;t.
           </p>
         </div>
       </div>
@@ -371,7 +371,7 @@
 
   <script src="../js/nav.js"></script>
   <script type="module" src="../js/account-nav.js"></script>
-  <!-- Vendored QR generator (MIT, Kazuhiko Arase) — renders the TOTP setup QR entirely in-browser
+  <!-- Vendored QR generator (MIT, Kazuhiko Arase) that renders the TOTP setup QR entirely in-browser
        so the authenticator secret is never sent to any third-party QR service. -->
   <script src="../js/qrcode.min.js"></script>
 
@@ -406,7 +406,7 @@
 
     // Email-code MFA talks to the Render service (/mfa/*), which owns the codes (hashed, TTL'd) and
     // the on/off flag on the user doc. Identity always comes from the verified ID token.
-    // The mailer/MFA service runs on Render's free tier, which sleeps after inactivity — the first
+    // The mailer/MFA service runs on Render's free tier, which sleeps after inactivity. The first
     // request can take up to ~a minute to wake it. We bound each attempt (so it never hangs forever)
     // and tag network/timeout failures as `kind:"network"` so callers can retry through a cold start
     // rather than give up instantly.
@@ -435,7 +435,7 @@
     const setStatus = bindStatusToast(statusEl);
     function show(el, on) { (typeof el === "string" ? $(el) : el).classList.toggle("acct-hidden", !on); }
 
-    // Run an async button action with a visible in-button spinner, always re-enabling after — so
+    // Run an async button action with a visible in-button spinner, always re-enabling after, so
     // it's obvious when a button is working versus stuck.
     async function busy(btn, fn) {
       if (!btn) return fn();
@@ -460,7 +460,7 @@
     }
 
     // Did we arrive here straight from the sign-in page? If so, /login/ has already vetted this
-    // session and sent us on — accept it even when the per-session flag didn't survive (storage
+    // session and sent us on; accept it even when the per-session flag didn't survive (storage
     // blocked, private window, the desktop app's browser context). Without this, a lost flag makes
     // /account/ and /login/ redirect into each other forever.
     function cameFromLogin() {
@@ -499,13 +499,13 @@
     async function renderArchie(user) {
       const pill = $("archie-pill");
       const body = $("archie-body");
-      pill.textContent = "—"; pill.className = "pill pill-off";
+      pill.textContent = "…"; pill.className = "pill pill-off";
       show("archie-actions", false);
       body.textContent = "Checking your purchases…";
       let tier = "none", subStatus = "";
       try {
         // A user may read their own users/{uid} doc (Firestore rules). A missing doc just means
-        // nothing bought yet — but backfill it here (fire-and-forget; rules only allow create,
+        // nothing bought yet, but backfill it here (fire-and-forget; rules only allow create,
         // never update, so an existing doc is untouchable) so accounts that predate the login
         // page's ensureUserDoc(), e.g. old Google sign-ups, get their row without re-signing-in.
         const ref = doc(db, "users", user.uid);
@@ -537,7 +537,7 @@
         show("archie-actions", false);
       } else {
         setPill("archie-pill", "Not yet", false);
-        body.textContent = "Buy Archie once and own it — $149, one-time, no subscription. The version you buy is yours to keep.";
+        body.textContent = "Buy Archie once and own it: $149, one-time, no subscription. The version you buy is yours to keep.";
         show("archie-actions", true);
       }
     }
@@ -575,7 +575,7 @@
       const user = auth.currentUser; if (!user) return;
       const typed = ($("delete-email").value || "").trim().toLowerCase();
       const actual = (user.email || "").trim().toLowerCase();
-      if (!typed || typed !== actual) { setStatus("That doesn't match your email — type it exactly to confirm.", "error"); return; }
+      if (!typed || typed !== actual) { setStatus("That doesn't match your email. Type it exactly to confirm.", "error"); return; }
       setStatus("Deleting your account…");
       try {
         await mfaApi("/account/delete"); // reuses the timeout + id-token helper (posts to /account/*)
@@ -603,14 +603,14 @@
       } catch (e) {
         if (e.kind === "network" && attempt < 2) {
           setPill("totp-pill", "…", false);
-          $("totp-body").textContent = "Waking the security service — this can take up to a minute on the first load…";
+          $("totp-body").textContent = "Waking the security service. This can take up to a minute on the first load…";
           show("btn-totp-start", false); show("btn-totp-remove", false); show("btn-totp-retry", false);
           await new Promise((r) => setTimeout(r, 2500));
           return refreshTotp(user, attempt + 1);
         }
-        setPill("totp-pill", "—", false);
+        setPill("totp-pill", "…", false);
         $("totp-body").textContent = e.kind === "network"
-          ? "Couldn't reach the security service — it may still be waking up. Give it a moment, then try again."
+          ? "Couldn't reach the security service. It may still be waking up. Give it a moment, then try again."
           : "Couldn't check this right now: " + ((e && e.message) || "unknown error") + ".";
         show("btn-totp-start", false); show("btn-totp-remove", false); show("btn-totp-retry", true);
         return;
@@ -618,10 +618,10 @@
       const on = customOn || !!legacyFactor;
       setPill("totp-pill", on ? "On" : "Off", on);
       $("totp-body").textContent = !on
-        ? "Optional. Add a 6-digit code from an app like Google Authenticator or 1Password — then at sign-in you can use either the app code or an emailed code."
+        ? "Optional. Add a 6-digit code from an app like Google Authenticator or 1Password, then at sign-in you can use either the app code or an emailed code."
         : (legacyFactor && !customOn
             ? "On, but set up with our previous system. Turn it off and set it up again to also be able to fall back to an emailed code at sign-in."
-            : "On. At sign-in you can enter a code from your authenticator app — or choose an emailed code instead.");
+            : "On. At sign-in you can enter a code from your authenticator app, or choose an emailed code instead.");
       show("btn-totp-start", !on);
       show("btn-totp-remove", on);
       show("btn-totp-retry", false);
@@ -633,12 +633,12 @@
     function prettyMfaError(e) {
       const m = (e && e.message) || "";
       if (/not configured/.test(m)) return "That isn't available right now.";
-      if (e && e.kind === "network") return "Couldn't reach the security service — try again in a moment.";
+      if (e && e.kind === "network") return "Couldn't reach the security service. Try again in a moment.";
       return m || "Something went wrong.";
     }
 
     // Authenticator app (TOTP)
-    // Render an otpauth:// string to a QR code as inline SVG — dark modules on a forced-white
+    // Render an otpauth:// string to a QR code as inline SVG: dark modules on a forced-white
     // background so authenticator apps scan it in either site theme. Nothing leaves the browser.
     function renderQrSvg(text) {
       const qr = window.qrcode(0, "M");   // type 0 = auto-size, "M" = ~15% error correction
@@ -657,7 +657,7 @@
       return `<svg viewBox="0 0 ${size} ${size}" width="${size}" height="${size}" role="img" aria-label="Authenticator setup QR code" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect width="${size}" height="${size}" fill="#ffffff"/><g fill="#2A2521">${rects}</g></svg>`;
     }
 
-    // On a phone, scanning a QR shown on that same phone is awkward — offer a one-tap deep link
+    // On a phone, scanning a QR shown on that same phone is awkward, so offer a one-tap deep link
     // into the authenticator app instead. On desktop, show the QR to scan with a phone.
     const isTouchDevice = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
 

@@ -1,12 +1,12 @@
 // Shared submission logic for the four add-on submit pages (skill / worker / routine /
-// personality). Each page differs only in its copy, its field labels, and one line —
+// personality). Each page differs only in its copy, its field labels, and one line:
 // `<form data-addon-type="…">`. Everything below is type-agnostic: sign-in, the required
 // proof-of-work screenshot upload, and the Firestore write.
 //
 // Sign-in has two paths:
 //   • Opened from inside Archie, the URL carries a one-time Firebase custom token (?ct=…) minted
 //     for the developer's Archie account. We sign in with it, so the page shows the SAME account
-//     they use in the app — fixing the "signed in as someone else" mismatch that a plain browser
+//     they use in the app, fixing the "signed in as someone else" mismatch that a plain browser
 //     Google session caused.
 //   • Opened directly, it falls back to the Google popup.
 
@@ -48,7 +48,7 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
 
-const MAX_SHOT_BYTES = 8 * 1024 * 1024; // 8 MB — matches the copy and the Storage rule.
+const MAX_SHOT_BYTES = 8 * 1024 * 1024; // 8 MB, matches the copy and the Storage rule.
 
 const form = document.getElementById("skillForm");
 const addonType = form.dataset.addonType || "skill";
@@ -59,7 +59,7 @@ const signinError = document.getElementById("signinError");
 const formError = document.getElementById("formError");
 
 // Panel shown to a signed-in account that isn't an active Archie user. Submissions require an active
-// subscription — we only list add-ons that were built and tested inside the app, and you can't do
+// subscription: we only list add-ons that were built and tested inside the app, and you can't do
 // that without one. The server-side gate is the Firestore /submissions rule and the Storage rule;
 // this is only the friendly front door so a non-subscriber sees WHY up front instead of filling out
 // the whole form and hitting a permission error at submit. Built in JS so all four submit pages
@@ -81,7 +81,7 @@ subGate.querySelector("#subGateSignOut").addEventListener("click", (e) => {
 
 // Whether the signed-in account may submit: the same "active Archie account" the app and the
 // security rules require (admin / client / active subscriber). Reads the caller's own user doc,
-// which the Firestore rules allow. Fails OPEN on a read error — a network blip shouldn't lock out a
+// which the Firestore rules allow. Fails OPEN on a read error: a network blip shouldn't lock out a
 // real subscriber, and the /submissions rule still blocks the actual write for anyone who isn't.
 async function isEntitledUser(user) {
   try {
@@ -111,7 +111,7 @@ const customToken = params.get("ct");
 if (customToken) {
   gate.querySelector("h2").textContent = "Signing you in…";
   signInWithCustomToken(auth, customToken).catch((e) => {
-    showSigninError("Couldn't sign in from Archie automatically — sign in with Google instead. (" + (e.code || e.message) + ")");
+    showSigninError("Couldn't sign in from Archie automatically. Sign in with Google instead. (" + (e.code || e.message) + ")");
   });
   const clean = window.location.pathname;
   window.history.replaceState({}, document.title, clean);
@@ -174,13 +174,13 @@ form.addEventListener("submit", async (e) => {
     return fail("Please fill in the required fields and confirm the license checkbox.");
   }
   if (!shot) {
-    return fail("Attach a screenshot showing your add-on working — it's required for review.");
+    return fail("Attach a screenshot showing your add-on working; it's required for review.");
   }
   if (!shot.type.startsWith("image/")) {
     return fail("The proof needs to be an image (PNG, JPG, or WebP).");
   }
   if (shot.size > MAX_SHOT_BYTES) {
-    return fail("That screenshot is over 8 MB — please attach a smaller image.");
+    return fail("That screenshot is over 8 MB. Please attach a smaller image.");
   }
 
   const btn = document.getElementById("btnSubmit");
@@ -198,7 +198,7 @@ form.addEventListener("submit", async (e) => {
     const screenshot_url = await getDownloadURL(shotRef);
 
     btn.textContent = "Submitting…";
-    // Field names + limits mirror the Firestore rules for /submissions — keep in sync.
+    // Field names + limits mirror the Firestore rules for /submissions; keep in sync.
     await addDoc(collection(db, "submissions"), {
       type: addonType,
       submitter_uid: user.uid,

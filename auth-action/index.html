@@ -161,7 +161,7 @@
           <!-- Working -->
           <div id="action-loading" class="auth-card">
             <div class="auth-spinner" aria-hidden="true"></div>
-            <p class="auth-lead" style="margin:0;">Confirming your email &mdash; this only takes a second&hellip;</p>
+            <p class="auth-lead" style="margin:0;">Confirming your email. This only takes a second&hellip;</p>
           </div>
 
           <!-- Result (verify / recover / change) -->
@@ -252,7 +252,7 @@
 
   <!-- Bulletproof safety net: a classic (non-module) script, so it runs even if the Firebase
        module below fails to load or stalls. If the handler hasn't resolved the page in 8s, it
-       replaces the endless spinner with a way forward — no Firebase involved, so it cannot hang. -->
+       replaces the endless spinner with a way forward. No Firebase involved, so it cannot hang. -->
   <script>
     (function () {
       setTimeout(function () {
@@ -260,7 +260,7 @@
         if (!load || load.classList.contains("auth-hidden")) return; // the handler already resolved
         load.innerHTML =
           '<div style="font-size:1.1rem;font-weight:600;color:var(--text-primary);margin-bottom:8px">This is taking a moment</div>' +
-          '<p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.55;margin:0 0 16px">Your email may already be confirmed. Go to your account to check &mdash; or reopen the link from your email.</p>' +
+          '<p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.55;margin:0 0 16px">Your email may already be confirmed. Go to your account to check, or reopen the link from your email.</p>' +
           '<a href="/account/" style="display:inline-block;padding:0.7rem 1.4rem;border-radius:12px;background:var(--accent);color:var(--text-on-accent);font-weight:600;font-size:0.875rem;text-decoration:none">Go to your account</a>';
         var h1 = document.querySelector(".page-hero h1"); if (h1) h1.textContent = "Almost there";
       }, 14000);
@@ -270,7 +270,7 @@
   <script type="module">
     import { bindStatusToast } from "../js/status-toast.js";
     // No Firebase SDK here. Applying an email action code is a single Identity Toolkit REST call,
-    // so this page never waits on SDK auth/persistence init — which was the thing stalling this
+    // so this page never waits on SDK auth/persistence init, which was the thing stalling this
     // popup (the code applied server-side, but the SDK's promise never resolved). The apiKey is the
     // public web key: it identifies the project for the API, it is not a secret.
     const API_KEY = "AIzaSyA46RqJV4tcJD8h4mdcSZ26dDoikA9L64M";
@@ -343,7 +343,7 @@
           showResult({
             ok: true,
             title: mode === "verifyAndChangeEmail" ? "Email updated" : "Email confirmed",
-            body: "You&rsquo;re all set &mdash; your email is confirmed. You can head to your account, or return to the tab where you started.",
+            body: "You&rsquo;re all set. Your email is confirmed. You can head to your account, or return to the tab where you started.",
             ctaText: "Go to your account",
             ctaHref: safeContinue("/account/"),
           });
@@ -376,7 +376,7 @@
           body: bad
             ? "This link has already been used or has expired. Request a fresh one and try again."
             : offline
-              ? "We couldn’t confirm your email just now — check your connection and reopen the link from your email."
+              ? "We couldn’t confirm your email just now. Check your connection and reopen the link from your email."
               : prettyErr(e),
           ctaText: bad || offline ? "Go to sign in" : "Go to your account",
           ctaHref: bad || offline ? "/login/" : "/account/",
@@ -405,7 +405,7 @@
         const tag = e.itk || "";
         setStatus(
           /WEAK_PASSWORD/.test(tag) ? "Choose a stronger password (at least 6 characters)."
-          : /TIMEOUT|NETWORK/.test(tag) ? "Couldn’t reach the server — check your connection and try again."
+          : /TIMEOUT|NETWORK/.test(tag) ? "Couldn’t reach the server. Check your connection and try again."
           : prettyErr(e), "error");
       }
     }));

@@ -148,38 +148,38 @@
           <ul>
             <li><strong>Your email address</strong>, so you can sign in. It is held in our account system (Google Firebase).</li>
             <li><strong>Whether you own a license</strong>, so the app can let you in. Payments are processed by Stripe; we never receive or store your card details.</li>
-            <li><strong>Which paid add-ons you have bought.</strong> Each purchase creates a permanent record &mdash; the add-on, the amount, and the date &mdash; so that you can re-install what you have paid for. This means we know which <em>paid</em> add-ons you own. Installing a <em>free</em> add-on makes no network request at all, so we have no record of it.</li>
+            <li><strong>Which paid add-ons you have bought.</strong> Each purchase creates a permanent record (the add-on, the amount, and the date) so that you can re-install what you have paid for. This means we know which <em>paid</em> add-ons you own. Installing a <em>free</em> add-on makes no network request at all, so we have no record of it.</li>
           </ul>
           <p>Archie also checks our website for a new version. That request carries no version number, no device identifier, and no account information; our server records only the originating IP address and a timestamp, as any web server does.</p>
 
           <h3>What stays on your computer</h3>
           <p>Your agent's instructions, the files and notes you give it, everything it remembers, and your entire conversation history are stored on your own device, in Archie's application folder. <strong>We do not receive, store, or have any means of accessing them.</strong> There is no Otian server that these are sent to. If you delete the app, that data goes with it.</p>
-          <p>The app contains <strong>no analytics, telemetry, or tracking software of any kind</strong> &mdash; not disabled by default, but absent. If Archie crashes, it writes a diagnostic log to your own disk; the app has no ability to upload it, and it reaches us only if you choose to send it to us yourself.</p>
+          <p>The app contains <strong>no analytics, telemetry, or tracking software of any kind</strong>: not disabled by default, but absent. If Archie crashes, it writes a diagnostic log to your own disk; the app has no ability to upload it, and it reaches us only if you choose to send it to us yourself.</p>
 
           <h3>Your AI provider</h3>
-          <p>To think, your agent must send your request to an AI model. Archie connects <strong>directly from your computer</strong> to the provider you chose &mdash; Anthropic (Claude) or OpenAI (ChatGPT) &mdash; using your own account and your own API key. That traffic does not pass through us, is not relayed or proxied by us, and we keep no copy of it. It is governed by your agreement with that provider, not with us, and we encourage you to read their terms. If your agent searches the web, that search runs on the provider's infrastructure and is billed to your account.</p>
+          <p>To think, your agent must send your request to an AI model. Archie connects <strong>directly from your computer</strong> to the provider you chose, Anthropic (Claude) or OpenAI (ChatGPT), using your own account and your own API key. That traffic does not pass through us, is not relayed or proxied by us, and we keep no copy of it. It is governed by your agreement with that provider, not with us, and we encourage you to read their terms. If your agent searches the web, that search runs on the provider's infrastructure and is billed to your account.</p>
           <p>Your API key is stored in your operating system's Keychain. It is transmitted only to the AI provider itself, and we have no means of reading it.</p>
 
           <h3>Accounts you connect</h3>
-          <p>You may connect accounts you already use &mdash; Google (Gmail and Calendar), Slack, Telegram, Discord, or Fireflies. Archie talks to those services <strong>directly from your computer</strong>, using access tokens issued to you and stored in your operating system's Keychain. The contents of those accounts are not sent to us, and we have no ability to access them. You can disconnect any of them at any time from within the app.</p>
+          <p>You may connect accounts you already use: Google (Gmail and Calendar), Slack, Telegram, Discord, or Fireflies. Archie talks to those services <strong>directly from your computer</strong>, using access tokens issued to you and stored in your operating system's Keychain. The contents of those accounts are not sent to us, and we have no ability to access them. You can disconnect any of them at any time from within the app.</p>
 
           <h3>Google user data (Gmail and Calendar)</h3>
           <p>When you connect Google, Archie requests read access to your Gmail and the ability to manage events on your Google Calendar, so it can help you with email and scheduling. This Google user data is handled under Google's rules for apps that use its APIs:</p>
           <p><strong>Archie's use and transfer of information received from Google APIs adheres to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google API Services User Data Policy</a>, including its Limited Use requirements.</strong> Concretely, your Gmail and Calendar data is:</p>
           <ul>
             <li>used only to provide and improve the email and calendar features you see in the app, and for no other purpose;</li>
-            <li>processed <strong>directly between your computer and Google</strong> &mdash; it is never sent to, stored on, or accessible by Otian's servers;</li>
+            <li>processed <strong>directly between your computer and Google</strong>: it is never sent to, stored on, or accessible by Otian's servers;</li>
             <li><strong>never used to train any generalized or artificial-intelligence model</strong>, ours or anyone else's;</li>
             <li>never sold, and never transferred to others except as needed to provide the feature at your direction, to comply with the law, or in connection with a merger of which you are notified;</li>
             <li>never read by a human except with your explicit consent (for example, to troubleshoot a problem you report to us), where required for security, or to comply with the law.</li>
           </ul>
 
           <h3>What your agent can and cannot do on its own</h3>
-          <p>We think you should know this before you connect anything, so we state it plainly. Archie can send email and change a calendar you connect &mdash; but never on its own: every send and every calendar change waits for your explicit approval of that specific action. It <strong>cannot spend money or make purchases</strong> &mdash; those abilities do not exist in the app. Your agent can only communicate in the chats you have connected it to, with people you have approved; it has no way to contact anyone else.</p>
-          <p>When your agent wants to send an email or change your calendar, it proposes the exact action and carries it out only after you approve &mdash; nothing is sent, changed, or deleted until you say yes. Review what it proposes before you approve it; an approval only protects you if you read it. The current status is always on our <a href="../trust/">Trust page</a>.</p>
+          <p>We think you should know this before you connect anything, so we state it plainly. Archie can send email and change a calendar you connect, but never on its own: every send and every calendar change waits for your explicit approval of that specific action. It <strong>cannot spend money or make purchases</strong>. Those abilities do not exist in the app. Your agent can only communicate in the chats you have connected it to, with people you have approved; it has no way to contact anyone else.</p>
+          <p>When your agent wants to send an email or change your calendar, it proposes the exact action and carries it out only after you approve: nothing is sent, changed, or deleted until you say yes. Review what it proposes before you approve it; an approval only protects you if you read it. The current status is always on our <a href="../trust/">Trust page</a>.</p>
 
           <h2>Our Website and Guided Services</h2>
-          <p>The rest of this policy concerns our website and the guided sessions, calls, and communications that are part of our services &mdash; not the app.</p>
+          <p>The rest of this policy concerns our website and the guided sessions, calls, and communications that are part of our services, not the app.</p>
 
           <h2>Information We Collect</h2>
           <p>We collect information you choose to give us, including:</p>
@@ -202,18 +202,18 @@
           <p>We do not sell your personal information, and we do not share it with third parties for their own marketing purposes.</p>
 
           <h2>Access to Your Accounts During Setup</h2>
-          <p>Building your agent sometimes involves connecting it to accounts you already use, such as email or a calendar. We only ever connect or configure something after you've explicitly approved it during a guided session &mdash; nothing is set up behind the scenes. We do not retain copies of your account credentials once a session ends, and we do not access your connected accounts outside of scheduled sessions unless you've asked us to for support.</p>
+          <p>Building your agent sometimes involves connecting it to accounts you already use, such as email or a calendar. We only ever connect or configure something after you've explicitly approved it during a guided session; nothing is set up behind the scenes. We do not retain copies of your account credentials once a session ends, and we do not access your connected accounts outside of scheduled sessions unless you've asked us to for support.</p>
 
           <h2>Third-Party AI Providers</h2>
-          <p>The agents we build typically run on AI models from providers such as Anthropic (Claude) or OpenAI (ChatGPT). You create and pay for your own account directly with the provider you choose &mdash; we do not resell or mark up that cost. Information you send to your agent (for example, an email draft it helps you write) is processed by that provider under their own privacy policy and terms, which we encourage you to review. We don't control, and aren't responsible for, how those providers handle data on their end.</p>
+          <p>The agents we build typically run on AI models from providers such as Anthropic (Claude) or OpenAI (ChatGPT). You create and pay for your own account directly with the provider you choose. We do not resell or mark up that cost. Information you send to your agent (for example, an email draft it helps you write) is processed by that provider under their own privacy policy and terms, which we encourage you to review. We don't control, and aren't responsible for, how those providers handle data on their end.</p>
 
           <h2>Service Providers We Use</h2>
           <p>We rely on a small number of trusted companies ("subprocessors") to run our accounts, billing, and communications. Each processes only the limited information described above, only to provide its service to us, and under its own terms and security practices:</p>
           <ul>
-            <li><strong>Google Firebase</strong> &mdash; sign-in and the account record (your email and license status).</li>
-            <li><strong>Stripe</strong> &mdash; payment processing. Stripe handles your card details directly; we never receive or store them.</li>
-            <li><strong>Resend</strong> &mdash; delivery of transactional email such as sign-in codes, verification, and account notices. Resend receives your email address in order to deliver these messages.</li>
-            <li><strong>Render</strong> &mdash; hosting for the small service that handles sign-in, licensing, and account management.</li>
+            <li><strong>Google Firebase</strong>: sign-in and the account record (your email and license status).</li>
+            <li><strong>Stripe</strong>: payment processing. Stripe handles your card details directly; we never receive or store them.</li>
+            <li><strong>Resend</strong>: delivery of transactional email such as sign-in codes, verification, and account notices. Resend receives your email address in order to deliver these messages.</li>
+            <li><strong>Render</strong>: hosting for the small service that handles sign-in, licensing, and account management.</li>
           </ul>
           <p>We do not use third-party advertising or analytics services.</p>
 
@@ -230,8 +230,8 @@
           <p>You can ask us to access, correct, or delete the personal information we hold about you, or ask us to stop using it for a particular purpose, by emailing us at the address below. We'll respond as quickly as we reasonably can. You can also delete your account and its associated data yourself at any time from your <a href="../account/">account page</a>.</p>
 
           <h2>Your Privacy Rights (GDPR &amp; U.S. State Laws)</h2>
-          <p>Depending on where you live, you may have rights over your personal information &mdash; including the right to access it, correct it, delete it, receive a portable copy, or object to or restrict certain uses. To exercise any of these, email us at the address below; we will not discriminate against you for doing so.</p>
-          <p>If you are in the European Economic Area or the United Kingdom, our lawful bases for processing your information are: <strong>performance of a contract</strong> (to provide the app, licensing, and services you buy), <strong>legitimate interests</strong> (to secure our systems and communicate with you about your account), and <strong>consent</strong> (for anything you optionally connect, such as your Google account &mdash; which you can withdraw at any time by disconnecting it in the app).</p>
+          <p>Depending on where you live, you may have rights over your personal information, including the right to access it, correct it, delete it, receive a portable copy, or object to or restrict certain uses. To exercise any of these, email us at the address below; we will not discriminate against you for doing so.</p>
+          <p>If you are in the European Economic Area or the United Kingdom, our lawful bases for processing your information are: <strong>performance of a contract</strong> (to provide the app, licensing, and services you buy), <strong>legitimate interests</strong> (to secure our systems and communicate with you about your account), and <strong>consent</strong> (for anything you optionally connect, such as your Google account, which you can withdraw at any time by disconnecting it in the app).</p>
           <p>We do not sell your personal information, and we do not share it for cross-context behavioral advertising, as those terms are defined under California and other U.S. state privacy laws.</p>
 
           <h2>Changes to This Policy</h2>

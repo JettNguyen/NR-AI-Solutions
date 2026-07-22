@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sign In | Otian AI</title>
-  <meta name="description" content="Sign in or create your Otian AI account — one sign-in for everything at Otian AI: the Archie app, Add-ons, guided sessions, and billing." />
+  <meta name="description" content="Sign in or create your Otian AI account, one sign-in for everything at Otian AI: the Archie app, Add-ons, guided sessions, and billing." />
   <meta name="robots" content="noindex" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,7 +13,7 @@
   <link rel="apple-touch-icon" href="../assets/icon-1024.png" />
   <link rel="stylesheet" href="../css/styles.css" />
   <style>
-    /* ── Auth card (page-scoped) — reuses global tokens so it themes light/dark ── */
+    /* ── Auth card (page-scoped), reuses global tokens so it themes light/dark ── */
     .auth-wrap { max-width: 420px; margin: 0 auto; }
     .auth-card {
       background: var(--bg-card); border: 1px solid var(--border);
@@ -205,9 +205,9 @@
           <div id="auth-verify" class="auth-card auth-hidden">
             <div class="auth-section">
               <div class="auth-section-title">Confirm your email</div>
-              <div class="auth-section-body">We sent a link to <span class="auth-email" id="auth-verify-email">your inbox</span>. Click it &mdash; this page signs you in automatically the moment you do.</div>
+              <div class="auth-section-body">We sent a link to <span class="auth-email" id="auth-verify-email">your inbox</span>. Click it. This page signs you in automatically the moment you do.</div>
               <div class="auth-row">
-                <button class="btn btn-primary btn-mini" id="btn-verified">I&rsquo;ve verified &mdash; continue</button>
+                <button class="btn btn-primary btn-mini" id="btn-verified">I&rsquo;ve verified, continue</button>
                 <button class="btn btn-secondary btn-mini" id="btn-resend">Resend link</button>
               </div>
               <div class="auth-row">
@@ -234,7 +234,7 @@
 
           <!-- Already signed in (only shown in the desktop-app flow) -->
           <div id="auth-continue" class="auth-card auth-hidden">
-            <p class="auth-lead">You&rsquo;re signed in as <span class="auth-email" id="auth-continue-email">&mdash;</span>.</p>
+            <p class="auth-lead">You&rsquo;re signed in as <span class="auth-email" id="auth-continue-email">…</span>.</p>
             <div class="auth-btns">
               <button class="btn btn-primary" id="btn-continue">Continue to Archie</button>
               <button class="btn btn-secondary" id="btn-switch">Use a different account</button>
@@ -268,8 +268,8 @@
           <div id="auth-status" role="status" aria-live="polite"></div>
 
           <p class="auth-foot-note">
-            One Otian AI account for everything &mdash; the Archie app, Add-ons, guided sessions, and billing.
-            <a href="../trust/">See what we store</a> &mdash; and what we don&rsquo;t.
+            One Otian AI account for everything: the Archie app, Add-ons, guided sessions, and billing.
+            <a href="../trust/">See what we store</a>, and what we don&rsquo;t.
           </p>
         </div>
       </div>
@@ -358,7 +358,7 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
-    // Render billing/mailer service — sends the branded verification/reset emails from
+    // Render billing/mailer service: sends the branded verification/reset emails from
     // noreply@otianai.com via Resend. If it's unreachable we fall back to Firebase's built-in
     // email so a user is never left without one.
     const BILLING_API = "https://archie-4f35.onrender.com";
@@ -400,7 +400,7 @@
     const setStatus = bindStatusToast(statusEl);
     function show(id, on) { $(id).classList.toggle("auth-hidden", !on); }
 
-    // Run an async button action with a visible in-button spinner, and always re-enable it after —
+    // Run an async button action with a visible in-button spinner, and always re-enable it after,
     // so a working button clearly reads as "in progress", and a failed one clearly comes back to life.
     async function busy(btn, fn) {
       if (!btn) return fn();
@@ -430,7 +430,7 @@
     let pendingVerifyUser = null;
     let initialResolved = false;
     let routedUser = false;    // have we already sent a signed-in user onward (continue/verify/proceed)?
-    let explicitAuth = false;  // a form/Google sign-in is in flight and owns its own routing — auth-state observer stands down
+    let explicitAuth = false;  // a form/Google sign-in is in flight and owns its own routing; auth-state observer stands down
     let mfaMode = null; // "totp" (authenticator, custom) or "native" (legacy Firebase MFA) during a challenge
     let emfaMode = null;       // "session" (legacy) or "fallback" (native-MFA email escape) on the emailed-code card
     let fallbackEmail = null;  // credentials captured at the native-MFA wall, used only for the email fallback
@@ -457,7 +457,7 @@
     }
 
     // ── Second factor ────────────────────────────────────────────────────────
-    // Every account gets an emailed 6-digit code at sign-in by default — no setup. If the account
+    // Every account gets an emailed 6-digit code at sign-in by default. No setup. If the account
     // also has an authenticator app, the user can choose either at sign-in. The ONLY entry that
     // skips the second step is the very first one right after signup (confirming the email already
     // proved control). Clearance is per browser session (sessionStorage), so a fresh tab re-checks.
@@ -523,12 +523,12 @@
         $("emfa-code").focus();
       } catch (e) {
         onlyCard("auth-emfa"); // still show the card so they can Resend
-        setStatus(e.kind === "network" ? "Couldn't reach the security service — try Resend in a moment." : ((e && e.message) || "Couldn't email a code."), "error");
+        setStatus(e.kind === "network" ? "Couldn't reach the security service. Try Resend in a moment." : ((e && e.message) || "Couldn't email a code."), "error");
       }
     }
 
     // Native-MFA email fallback: re-verify the password server-side, then email a code. Unlike the
-    // legacy path there is no Firebase session yet — /mfa/email-fallback/verify returns a custom token.
+    // legacy path there is no Firebase session yet; /mfa/email-fallback/verify returns a custom token.
     // Toggle the emailed-code card between asking for the account email and entering the code.
     function setEmfaView(view) {
       const asking = view === "ask-email";
@@ -541,7 +541,7 @@
     }
 
     // Start the authenticator fallback. If we already know the email (password sign-in) send a code
-    // straight away; otherwise show an inline email field on the card — no browser prompt.
+    // straight away; otherwise show an inline email field on the card, with no browser prompt.
     async function startEmailFallback() {
       emfaMode = "fallback";
       if (fallbackEmail) { await doSendFallbackCode(); return; }
@@ -572,7 +572,7 @@
         $("emfa-code").value = "";
         $("emfa-code").focus();
       } catch (e) {
-        setStatus(e.kind === "network" ? "Couldn't reach the security service — try again in a moment." : ((e && e.message) || "Couldn't email a code."), "error");
+        setStatus(e.kind === "network" ? "Couldn't reach the security service. Try again in a moment." : ((e && e.message) || "Couldn't email a code."), "error");
       }
     }
 
@@ -580,19 +580,19 @@
     async function handleUser(user) {
       if (!user.emailVerified && accountIsNew(user)) { showVerifyGate(user); return; }
       // The real second factor (authenticator/TOTP) is enforced by Firebase itself: an enrolled
-      // account throws auth/multi-factor-auth-required DURING sign-in — caught by handleMaybeMfa and
-      // resolved through the native challenge below — and never reaches here with usable tokens.
+      // account throws auth/multi-factor-auth-required DURING sign-in, caught by handleMaybeMfa and
+      // resolved through the native challenge below, and never reaches here with usable tokens.
       // So there is no client-side gate to apply. A post-authentication check (the old emailed-code
       // step) would be security theatre: the tokens already exist by then and a direct SDK sign-in
       // would skip it entirely. Real protection = enrolling TOTP on the security page.
       await proceed(user);
     }
     // Every completed sign-in funnels through proceed(), so this is where we guarantee the
-    // users/{uid} doc exists — the Google/OAuth path has no signup branch, so without this a
+    // users/{uid} doc exists. The Google/OAuth path has no signup branch, so without this a
     // Google account exists in Auth but never gets a Firestore row until first app launch.
     // Read-then-create, not a blind set: rules deny updates today, and a blind set would clobber
     // admin-granted tiers if that ever loosened. Raced against a 5s cap so a blocked or slow
-    // Firestore (ad blockers) can never stall sign-in; best-effort — the app's verify_access
+    // Firestore (ad blockers) can never stall sign-in; best-effort, since the app's verify_access
     // also creates the doc on first launch, so a miss here strands nobody.
     async function ensureUserDoc(user) {
       const write = (async () => {
@@ -616,7 +616,7 @@
       window.location.href = nextDest();
     }
 
-    // Deliver tokens to Archie's loopback by POSTing a form — never a GET redirect. A GET would put
+    // Deliver tokens to Archie's loopback by POSTing a form, never a GET redirect. A GET would put
     // the long-lived refresh token in the URL (and browser history); a POST keeps it in the body.
     async function deliverToApp(user) {
       setStatus("Returning to Archie…");
@@ -652,7 +652,7 @@
     }
 
     // Firebase caches emailVerified in this tab and only updates on reload(), and the verify link
-    // opens elsewhere — so we poll while the gate is showing (and re-check the instant the user
+    // opens elsewhere, so we poll while the gate is showing (and re-check the instant the user
     // switches back to this tab) and let them through the moment it flips to verified.
     let verifyPoll = null;
     async function verifyCheck() {
@@ -661,10 +661,10 @@
         await pendingVerifyUser.reload();
         if (pendingVerifyUser.emailVerified) {
           stopVerifyPolling();
-          setStatus("Email confirmed — signing you in…", "ok");
+          setStatus("Email confirmed. Signing you in…", "ok");
           await handleUser(pendingVerifyUser);
         }
-      } catch (e) { /* transient network/error — keep polling */ }
+      } catch (e) { /* transient network/error, keep polling */ }
     }
     function verifyOnVisible() { if (document.visibilityState === "visible") verifyCheck(); }
     function startVerifyPolling() {
@@ -689,7 +689,7 @@
       if (callbackUrl) { showContinue(user); }               // desktop app flow: confirm before handing tokens back
       else { proceed(user); }                                // website: proceed() stamps the per-session 2FA-cleared flag /account/ reads, then navigates
     }
-    // Firebase usually delivers the restored session on the very FIRST callback — but a cold tab
+    // Firebase usually delivers the restored session on the very FIRST callback, but a cold tab
     // (notably the desktop app opening a fresh browser window) can fire `null` first and only surface
     // the signed-in user a beat later. So route the first time a user actually APPEARS, not merely on
     // the first callback; otherwise a logged-in person is stranded on the sign-in form ("it keeps
@@ -734,7 +734,7 @@
     // ── Two-step challenge: authenticator app (native Firebase MFA) ──────────
     // This is THE real second factor. An account with an authenticator enrolled (via the security
     // page's native multiFactor().enroll) makes Firebase throw auth/multi-factor-auth-required during
-    // sign-in — no usable tokens are issued until it's resolved here with the Firebase resolver
+    // sign-in: no usable tokens are issued until it's resolved here with the Firebase resolver
     // (mfaMode "native"). The old custom path (mfaMode "totp", verified post-sign-in by our own
     // service) is retained only to not break any account mid-migration; native is the path that
     // actually withholds tokens.
@@ -754,7 +754,7 @@
       mfaMode = "native";
       // Capture what we can to email a code if the user can't reach their authenticator: the account
       // email (from the field, or from the error), and the password if this was a password sign-in.
-      // Google sign-ins have neither in hand — we ask for the email and confirm it server-side by provider.
+      // Google sign-ins have neither in hand, so we ask for the email and confirm it server-side by provider.
       fallbackEmail = $("auth-email").value.trim();
       fallbackPass = $("auth-pass").value;
       fallbackGoogle = null;
@@ -790,7 +790,7 @@
           setStatus("");
           await proceed(cred.user);
         } catch (e) {
-          setStatus(e.code === "auth/invalid-verification-code" ? "That code didn't match — try the current one." : prettyAuthError(e), "error");
+          setStatus(e.code === "auth/invalid-verification-code" ? "That code didn't match. Try the current one." : prettyAuthError(e), "error");
         }
         return;
       }
@@ -805,7 +805,7 @@
         setStatus("");
         await proceed(user);
       } catch (e) {
-        setStatus(e.kind === "network" ? "Couldn't reach the security service — try again." : ((e && e.message) || "That code didn't match."), "error");
+        setStatus(e.kind === "network" ? "Couldn't reach the security service. Try again." : ((e && e.message) || "That code didn't match."), "error");
       }
     }));
     $("mfa-code").addEventListener("keydown", (e) => { if (e.key === "Enter") $("btn-mfa-verify").click(); });
@@ -814,13 +814,13 @@
       fallbackEmail = null; fallbackPass = null; fallbackGoogle = null;
       if (fallbackRevealTimer) { clearTimeout(fallbackRevealTimer); fallbackRevealTimer = null; }
       setStatus("");
-      // For the custom flow the user is signed into Firebase — sign out so they aren't left half-in.
+      // For the custom flow the user is signed into Firebase, so sign out so they aren't left half-in.
       if (auth.currentUser) { try { await signOut(auth); } catch (e) {} } else { showAuthCard(); }
     });
     // Switch from the authenticator to an emailed code.
     $("btn-mfa-use-email").addEventListener("click", () => busy($("btn-mfa-use-email"), async () => {
       if (mfaMode === "native") {
-        // Native-MFA wall: no session yet — email a code (asks for the email if we don't have it).
+        // Native-MFA wall: no session yet, so email a code (asks for the email if we don't have it).
         await startEmailFallback();
         return;
       }
@@ -839,7 +839,7 @@
         setStatus("");
         await handleUser(result.user);
       } catch (e) {
-        if (handleMaybeMfa(e)) return; // MFA challenge is now in flight — stay armed
+        if (handleMaybeMfa(e)) return; // MFA challenge is now in flight, stay armed
         explicitAuth = false;
         if (e.code !== "auth/popup-closed-by-user") setStatus(prettyAuthError(e), "error");
       }
@@ -874,7 +874,7 @@
           } catch (dbErr) { /* the app will create the doc later if this didn't land */ }
           await sendVerificationEmail(cred.user, name);
           showVerifyGate(cred.user);
-          setStatus("Account created — confirm your email to finish.", "ok");
+          setStatus("Account created. Confirm your email to finish.", "ok");
         } catch (e) { explicitAuth = false; setStatus(prettyAuthError(e), "error"); }
       } else {
         setStatus("Signing in…");
@@ -893,7 +893,7 @@
       const email = $("auth-email").value.trim();
       if (!email) { setStatus("Enter your email above first, then tap Forgot password.", "error"); return; }
       setStatus("Sending reset email…");
-      try { await sendResetEmail(email); setStatus("Reset email sent — check your inbox, then sign in.", "ok"); }
+      try { await sendResetEmail(email); setStatus("Reset email sent. Check your inbox, then sign in.", "ok"); }
       catch (e) { setStatus(prettyAuthError(e), "error"); }
     }));
 
@@ -904,13 +904,13 @@
       try {
         await pendingVerifyUser.reload();
         if (pendingVerifyUser.emailVerified) { setStatus(""); await handleUser(pendingVerifyUser); }
-        else { setStatus("Not verified yet — click the link in your email, then try again.", "error"); }
+        else { setStatus("Not verified yet. Click the link in your email, then try again.", "error"); }
       } catch (e) { setStatus(prettyAuthError(e), "error"); }
     }));
     $("btn-resend").addEventListener("click", () => busy($("btn-resend"), async () => {
       if (!pendingVerifyUser) return;
       setStatus("Resending…");
-      try { await sendVerificationEmail(pendingVerifyUser); setStatus("Sent — check your inbox (and spam).", "ok"); }
+      try { await sendVerificationEmail(pendingVerifyUser); setStatus("Sent. Check your inbox (and spam).", "ok"); }
       catch (e) { setStatus(prettyAuthError(e), "error"); }
     }));
     $("btn-verify-back").addEventListener("click", async () => { try { await signOut(auth); } catch (e) {} setStatus(""); });
@@ -937,7 +937,7 @@
           markTwoFactorCleared(cred.user);
           setStatus("");
           await proceed(cred.user);
-        } catch (e) { setStatus(e.kind === "network" ? "Couldn't reach the security service — try again." : ((e && e.message) || "That code didn't match."), "error"); }
+        } catch (e) { setStatus(e.kind === "network" ? "Couldn't reach the security service. Try again." : ((e && e.message) || "That code didn't match."), "error"); }
         return;
       }
       // Legacy path: the user already holds a Firebase session; verify against it.
@@ -950,7 +950,7 @@
         markTwoFactorCleared(user);
         setStatus("");
         await proceed(user);
-      } catch (e) { setStatus(e.kind === "network" ? "Couldn't reach the security service — try again." : ((e && e.message) || "That code didn't match."), "error"); }
+      } catch (e) { setStatus(e.kind === "network" ? "Couldn't reach the security service. Try again." : ((e && e.message) || "That code didn't match."), "error"); }
     }));
     $("btn-emfa-resend").addEventListener("click", () => busy($("btn-emfa-resend"), async () => {
       setStatus("Resending…");
@@ -959,8 +959,8 @@
           const payload = fallbackPass ? { email: fallbackEmail, password: fallbackPass } : { email: fallbackEmail };
           const r = await billingPost("/mfa/email-fallback/start", payload);
           if (!r.ok) { const d = await r.json().catch(() => ({})); throw new Error(d.error || "couldn't resend"); }
-          setStatus("Sent — check your inbox (and spam).", "ok");
-        } catch (e) { setStatus(e.kind === "network" ? "Couldn't reach the security service — try again." : ((e && e.message) || "Couldn't resend."), "error"); }
+          setStatus("Sent. Check your inbox (and spam).", "ok");
+        } catch (e) { setStatus(e.kind === "network" ? "Couldn't reach the security service. Try again." : ((e && e.message) || "Couldn't resend."), "error"); }
         return;
       }
       const user = auth.currentUser; if (!user) return;
@@ -968,8 +968,8 @@
         const idToken = await user.getIdToken();
         const r = await billingPost("/mfa/send-code", { id_token: idToken });
         if (!r.ok) { const d = await r.json().catch(() => ({})); throw new Error(d.error || "couldn't resend"); }
-        setStatus("Sent — check your inbox (and spam).", "ok");
-      } catch (e) { setStatus(e.kind === "network" ? "Couldn't reach the security service — try again." : "Couldn't resend. Try again.", "error"); }
+        setStatus("Sent. Check your inbox (and spam).", "ok");
+      } catch (e) { setStatus(e.kind === "network" ? "Couldn't reach the security service. Try again." : "Couldn't resend. Try again.", "error"); }
     }));
     $("emfa-code").addEventListener("keydown", (e) => { if (e.key === "Enter") $("btn-emfa-verify").click(); });
     // Inline "enter your email" step (Google fallback) → send the code.

@@ -1,4 +1,4 @@
-// account-nav.js — powers the account avatar + dropdown in the site nav on every page.
+// account-nav.js: powers the account avatar + dropdown in the site nav on every page.
 //
 // It reflects Firebase auth state (shared with the Archie desktop app, project archie-77170):
 //   • signed out → "Log in" / "Sign up"   (links to /login/)
@@ -55,7 +55,7 @@ if (root) {
 
   function renderSignedOut() {
     btn.classList.remove("is-authed", "has-due");
-    btn.setAttribute("aria-label", "Account — sign in");
+    btn.setAttribute("aria-label", "Account: sign in");
     avatar.textContent = "";
     avatar.innerHTML = USER_GLYPH;
     menu.innerHTML =
@@ -65,7 +65,7 @@ if (root) {
 
   // Outstanding-balance + admin check for the signed-in menu. One user-doc read and one
   // owed-sessions query, cached in sessionStorage for 5 minutes so every page load doesn't
-  // re-query — except on billing pages and right after a payment, where staleness would show.
+  // re-query, except on billing pages and right after a payment, where staleness would show.
   const BILL_CACHE_KEY = "otian_nav_billing";
   function fmtMoney(cents) {
     const n = Number(cents || 0) / 100;
@@ -90,7 +90,7 @@ if (root) {
       ]);
       isAdmin = userSnap.exists() && (userSnap.data() || {}).access_tier === "admin";
       owedSnap.forEach((d) => { owedCents += Number((d.data() || {}).amount_cents) || 0; });
-    } catch (e) { /* signed-in UX only — fail quiet, badge just doesn't show */ }
+    } catch (e) { /* signed-in UX only; fail quiet, badge just doesn't show */ }
     const out = { uid: user.uid, owedCents, isAdmin, ts: Date.now() };
     try { sessionStorage.setItem(BILL_CACHE_KEY, JSON.stringify(out)); } catch (e) {}
     return out;
@@ -100,7 +100,7 @@ if (root) {
     const name = (user.displayName || "").trim();
     const email = (user.email || "").trim();
     btn.classList.add("is-authed");
-    btn.setAttribute("aria-label", "Account menu" + (name || email ? " — " + (name || email) : ""));
+    btn.setAttribute("aria-label", "Account menu" + (name || email ? ": " + (name || email) : ""));
     avatar.innerHTML = "";
     // Initial from the name if we have it, else the email.
     avatar.textContent = ((name || email)[0] || "U").toUpperCase();

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sign-in & security — Archie</title>
+  <title>Sign-in & security: Archie</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -102,7 +102,7 @@
         <div class="section-head">
           <div>
             <div class="section-title">Signed in</div>
-            <div class="section-body" id="acct-email">—</div>
+            <div class="section-body" id="acct-email">–</div>
           </div>
           <button class="btn btn-secondary mini" id="btn-signout">Sign out</button>
         </div>
@@ -112,7 +112,7 @@
       <div class="section">
         <div class="section-head">
           <div class="section-title">Email verification</div>
-          <span class="pill" id="verify-pill">—</span>
+          <span class="pill" id="verify-pill">–</span>
         </div>
         <div class="section-body" id="verify-body">Checking…</div>
         <div class="row" id="verify-actions" style="margin-top:10px;">
@@ -125,7 +125,7 @@
       <div class="section">
         <div class="section-head">
           <div class="section-title">Authenticator app</div>
-          <span class="pill" id="totp-pill">—</span>
+          <span class="pill" id="totp-pill">–</span>
         </div>
         <div class="section-body" id="totp-body">Your second factor: a 6-digit code from an app like Google Authenticator or 1Password, required at every sign-in. Turn this on to protect your account even if your password is stolen.</div>
         <div class="stack" id="totp-actions" style="margin-top:10px;">
@@ -135,7 +135,7 @@
         <!-- Enrollment sub-flow -->
         <div class="stack hidden" id="totp-enroll" style="margin-top:12px;">
           <div class="section-body">In your authenticator app, add an account by <b>entering a setup key</b>, paste this key, then type the 6-digit code it shows:</div>
-          <div class="code" id="totp-secret">—</div>
+          <div class="code" id="totp-secret">–</div>
           <input type="text" id="totp-code" inputmode="numeric" autocomplete="one-time-code" placeholder="6-digit code" />
           <div class="row">
             <button class="btn btn-primary mini grow" id="btn-totp-confirm">Confirm</button>
@@ -144,15 +144,15 @@
         </div>
       </div>
 
-      <!-- Email login code — RETIRED as a second factor. It can't withhold Firebase tokens (the
+      <!-- Email login code: RETIRED as a second factor. It can't withhold Firebase tokens (the
            email check happened after sign-in), so it was security theatre sitting in front of the
            real native-TOTP factor. Hidden; the authenticator above is the real second factor. -->
       <div class="section hidden" id="emailcode-section">
         <div class="section-head">
           <div class="section-title">Email a code at login</div>
-          <span class="pill" id="emailcode-pill">—</span>
+          <span class="pill" id="emailcode-pill">–</span>
         </div>
-        <div class="section-body">A 6-digit code emailed to confirm each sign-in — a simpler second step than an app.</div>
+        <div class="section-body">A 6-digit code emailed to confirm each sign-in: a simpler second step than an app.</div>
         <div class="stack" id="emailcode-actions" style="margin-top:10px;">
           <button class="btn btn-secondary mini" id="btn-emailcode-start">Turn on</button>
           <button class="btn btn-secondary mini hidden" id="btn-emailcode-off">Turn off</button>
@@ -213,7 +213,7 @@
   let totpSecret = null; // held between "Set up" and "Confirm"
 
   // A one-time custom token can be passed by the desktop app (?token=…) so the page opens already
-  // signed in as the same account — same mechanism the marketplace submit pages use.
+  // signed in as the same account, the same mechanism the marketplace submit pages use.
   const tokenParam = new URLSearchParams(window.location.search).get("token");
   if (tokenParam) {
     signInWithCustomToken(auth, tokenParam).catch((e) => setStatus(e.message, "error"));
@@ -251,7 +251,7 @@
     show("totp-enroll", false);
     $("btn-totp-remove").dataset.uid = enrolledTotp ? enrolledTotp.uid : "";
 
-    // Email login code is retired as a second factor (see #emailcode-section) — not rendered.
+    // Email login code is retired as a second factor (see #emailcode-section); not rendered.
   }
 
   async function renderEmailCode(user) {
@@ -263,8 +263,8 @@
       show("btn-emailcode-start", !email_enabled);
       show("btn-emailcode-off", email_enabled);
     } catch {
-      // Service unreachable (not deployed yet, say) — leave the card inert rather than erroring.
-      $("emailcode-pill").textContent = "—";
+      // Service unreachable (not deployed yet, say); leave the card inert rather than erroring.
+      $("emailcode-pill").textContent = "–";
       $("emailcode-pill").className = "pill pill-off";
     }
   }
@@ -318,7 +318,7 @@
   $("btn-resend").addEventListener("click", async () => {
     const user = auth.currentUser; if (!user) return;
     setStatus("Sending…");
-    try { await sendEmailVerification(user); setStatus("Sent — check your inbox (and spam).", "ok"); }
+    try { await sendEmailVerification(user); setStatus("Sent. Check your inbox (and spam).", "ok"); }
     catch (e) { setStatus(e.message, "error"); }
   });
   $("btn-recheck").addEventListener("click", async () => {
@@ -361,7 +361,7 @@
       totpSecret = null;
       renderDashboard(auth.currentUser);
       setStatus("Authenticator app turned on.", "ok");
-    } catch (e) { setStatus(e.code === "auth/invalid-verification-code" ? "That code didn't match — try the current one." : e.message, "error"); }
+    } catch (e) { setStatus(e.code === "auth/invalid-verification-code" ? "That code didn't match. Try the current one." : e.message, "error"); }
   });
   $("btn-totp-cancel").addEventListener("click", () => { totpSecret = null; show("totp-enroll", false); setStatus(""); });
   $("btn-totp-remove").addEventListener("click", async (ev) => {

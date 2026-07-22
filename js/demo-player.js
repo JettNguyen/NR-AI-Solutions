@@ -1,18 +1,18 @@
-/* Demo player — the Archie recording plays by itself, silently, on a loop.
+/* Demo player: the Archie recording plays by itself, silently, on a loop.
  *
  * Four things this has to get right, none of which a bare `autoplay loop` attribute does:
  *
  *  0. Send the right encode. The same recording ships as AV1, HEVC and H.264 at two widths, and
- *     the choice is made on decode COST, not just codec support — see pickSource below. This is
+ *     the choice is made on decode COST, not just codec support (see pickSource below). This is
  *     the difference between a hero that idles at nothing and one that pins a core on an old
  *     laptop.
  *
  *  1. Don't fetch megabytes until they're wanted. Neither the <video> nor its <source>s carry a
- *     real src — only data-src — so the browser fetches nothing but the poster until an
+ *     real src, only data-src, so the browser fetches nothing but the poster until an
  *     IntersectionObserver says the figure is actually on screen. Someone who bounces never pays.
  *
  *  2. Don't play to an empty room. Playback pauses when the figure scrolls away and resumes
- *     when it comes back, so we're not decoding video into a viewport nobody is looking at —
+ *     when it comes back, so we're not decoding video into a viewport nobody is looking at,
  *     which on a laptop is just battery, quietly.
  *
  *  3. Respect prefers-reduced-motion. Anyone who has asked the OS for less movement gets the
@@ -32,14 +32,14 @@
   /* ── Which of the encodes does this machine actually want? ──
    *
    * The markup offers the same recording as AV1, HEVC and H.264, at two widths. Picking with a
-   * plain <source> list would be wrong, because the browser only asks "can I decode this?" — and
+   * plain <source> list would be wrong, because the browser only asks "can I decode this?", and
    * the answer is yes far more often than it should be. A 2019 laptop will cheerfully claim it
    * supports AV1 and then software-decode 2560px of it, burning a core to do it. "Supported" and
    * "free to play" are different questions.
    *
    * MediaCapabilities answers the second one: powerEfficient means there is a hardware decoder
    * behind it. So we take the best candidate that is hardware-decoded and skip anything that
-   * would be decoded in software — which is how a machine that can't do AV1 in hardware quietly
+   * would be decoded in software, which is how a machine that can't do AV1 in hardware quietly
    * ends up on the HEVC or H.264 line instead of stuttering through the pretty one.
    *
    * If nothing is hardware-decoded, we take the LAST candidate rather than the first: the list is
@@ -47,7 +47,7 @@
    * out in software.
    *
    * Browsers too old to have MediaCapabilities are also too old to have AV1 (it shipped in Chrome
-   * 70; MediaCapabilities in 66), so canPlayType alone is safe for them — they cannot pick the
+   * 70; MediaCapabilities in 66), so canPlayType alone is safe for them: they cannot pick the
    * expensive option even if we let them.
    */
   function currentTheme() {
@@ -61,7 +61,7 @@
     if (!sources.length) return Promise.resolve(video.getAttribute('data-src'));
 
     var matching = sources.filter(function (s) {
-      // The recording exists in a light build and a dark build — the app itself is themed, so a
+      // The recording exists in a light build and a dark build; the app itself is themed, so a
       // light screenshot on a dark page would look like a bug. A source with no data-theme is
       // theme-agnostic and always eligible.
       var forTheme = s.getAttribute('data-theme');
@@ -118,7 +118,7 @@
     var chosenTheme = null;
     var loaded = false;
     // Set when the visitor pauses by hand, so scrolling away and back doesn't override them and
-    // start it up again — the one thing more annoying than autoplay is autoplay you can't stop.
+    // start it up again; the one thing more annoying than autoplay is autoplay you can't stop.
     var pausedByUser = false;
 
     // The poster is themed too, for the same reason the video is.
@@ -128,7 +128,7 @@
     }
     applyPoster(currentTheme());
 
-    // Choosing a source means asking the browser about its decoders, which is async — so load()
+    // Choosing a source means asking the browser about its decoders, which is async, so load()
     // hands back a promise and everything downstream waits on it. It resolves once per theme;
     // later calls get the same promise back and no second fetch.
     function load() {
@@ -153,7 +153,7 @@
       chosenTheme = theme;
       applyPoster(theme);
 
-      // Nothing has been fetched yet — whenever load() does run, it will read the new theme.
+      // Nothing has been fetched yet; whenever load() does run, it will read the new theme.
       if (!loaded) {
         chosen = null;
         return;
@@ -177,7 +177,7 @@
           }
         });
         // The <video> ships preload="none", so simply pointing src at the new build fires
-        // loadstart and then waits — nothing is fetched until something asks to play, and the
+        // loadstart and then waits: nothing is fetched until something asks to play, and the
         // seek-and-resume above is gated behind loadedmetadata, which would never arrive. Lifting
         // preload makes the browser pull the metadata on its own, so the swap completes even for a
         // player that is currently paused. We have already fetched one build by now, so this isn't

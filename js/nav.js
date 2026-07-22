@@ -84,7 +84,7 @@
   }
 
   function mountThemeToggles() {
-    // Main nav only — the toggle stays visible at every width, so the
+    // Main nav only; the toggle stays visible at every width, so the
     // mobile drawer doesn't need (or get) its own copy.
     var navInner = document.querySelector('.nav-inner');
     if (navInner && !navInner.querySelector('.theme-toggle')) {
@@ -106,7 +106,7 @@
      like "../about/" work correctly from any directory depth.
 
      Most specific link wins. A link also matches as an ancestor of the current page, so that
-     /skills-marketplace/browse/skills/calendar-management/ still lights "Browse" — but only the
+     /skills-marketplace/browse/skills/calendar-management/ still lights "Browse", but only the
      LONGEST match is highlighted. Without that, /archie/ ("What Is Archie?") is a prefix of
      /archie/see-it-work/ and would light up alongside "See It Work"; those two are siblings in
      the dropdown, not parent and child. Every link tied at the longest match lights up, which is
@@ -139,7 +139,7 @@
     });
   }
 
-  /* Account & auth pages aren't in the menus — they hang off the avatar. Light the avatar button
+  /* Account & auth pages aren't in the menus; they hang off the avatar. Light the avatar button
      when you're on one, so the nav still shows where you are. (account-nav.js marks the matching
      item inside the dropdown itself.) */
   var accountPaths = ['/login', '/account', '/activity', '/billing', '/auth-action', '/app-auth', '/app-security'];

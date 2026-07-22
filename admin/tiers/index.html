@@ -12,7 +12,7 @@
   <link rel="apple-touch-icon" href="../../assets/icon-1024.png" />
   <link rel="stylesheet" href="../../css/styles.css" />
   <style>
-    /* ── Account page (page-scoped) — reuses global tokens so it themes light/dark ── */
+    /* ── Account page (page-scoped): reuses global tokens so it themes light/dark ── */
     .acct-wrap { max-width: 520px; margin: 0 auto; }
     .acct-card {
       background: var(--bg-card); border: 1px solid var(--border);
@@ -59,7 +59,7 @@
   <style>
     .act-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; line-height: 1.5; }
 
-    /* Tier toggle pills — same idea as the desktop admin console: tap to toggle what they hold. */
+    /* Tier toggle pills, same idea as the desktop admin console: tap to toggle what they hold. */
     .tier-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
     .tier-toggle {
       border: 1px solid var(--field-border); background: var(--bg-secondary);
@@ -177,7 +177,7 @@
       <div class="page-hero-inner">
         <span class="section-label fade-up">Admin</span>
         <h1 class="fade-up delay-1">Manage Tiers</h1>
-        <p class="fade-up delay-2">Look up an account and set the access tiers it holds &mdash; the same controls as Archie&rsquo;s admin console.</p>
+        <p class="fade-up delay-2">Look up an account and set the access tiers it holds, the same controls as Archie&rsquo;s admin console.</p>
       </div>
     </section>
 
@@ -206,8 +206,8 @@
               </div>
               <div id="adm-account" class="acct-hidden" style="margin-top:16px;">
                 <div class="acct-section-head">
-                  <div class="acct-section-title" id="adm-account-title">&mdash;</div>
-                  <span class="pill" id="adm-account-pill">&mdash;</span>
+                  <div class="acct-section-title" id="adm-account-title">-</div>
+                  <span class="pill" id="adm-account-pill">-</span>
                 </div>
                 <div class="tier-row" id="adm-held" style="margin-top:10px;"></div>
                 <div class="act-sub" id="adm-account-sub" style="margin-top:8px;"></div>
@@ -216,7 +216,7 @@
 
             <div class="acct-section">
               <div class="acct-section-title">Set tiers</div>
-              <p class="act-sub" style="margin-top:6px;">A user can hold several at once &mdash; click to toggle. Applying replaces everything they hold; none selected = no access.</p>
+              <p class="act-sub" style="margin-top:6px;">A user can hold several at once; click to toggle. Applying replaces everything they hold; none selected = no access.</p>
               <div class="tier-row" id="tier-toggles"></div>
               <div class="acct-row">
                 <button class="btn btn-primary btn-mini" id="btn-apply">Apply</button>
@@ -227,7 +227,7 @@
               <div class="acct-section-head">
                 <div>
                   <div class="acct-section-title">Replay pending add-on grants</div>
-                  <div class="act-sub" style="margin-top:4px;">Applies add-on grants parked for accounts that have since signed in. Parked <em>tier</em> grants don&rsquo;t replay &mdash; re-apply them above once the person signs in.</div>
+                  <div class="act-sub" style="margin-top:4px;">Applies add-on grants parked for accounts that have since signed in. Parked <em>tier</em> grants don&rsquo;t replay, so re-apply them above once the person signs in.</div>
                 </div>
                 <button class="btn btn-secondary btn-mini" id="btn-replay">Replay</button>
               </div>
@@ -345,7 +345,7 @@
     }
 
     // Authenticated call to the billing service. The server re-checks the admin tier on every
-    // request — the tier gate below is only there to fail politely for non-admins. Errors carry
+    // request; the tier gate below is only there to fail politely for non-admins. Errors carry
     // the response body (err.status / err.data) because a 404 here is meaningful: "no account
     // yet" comes back with pending info the UI renders rather than treats as failure.
     async function api(path, { method = "GET", body } = {}) {
@@ -359,7 +359,7 @@
           headers: { "Content-Type": "application/json", Authorization: "Bearer " + idToken },
           body: body ? JSON.stringify(body) : undefined,
         });
-      } catch (err) { throw new Error("Couldn't reach the billing service — try again in a moment."); }
+      } catch (err) { throw new Error("Couldn't reach the billing service. Try again in a moment."); }
       const d = await r.json().catch(() => ({}));
       if (!r.ok) {
         const e = new Error(d.error || "Request failed.");
@@ -421,7 +421,7 @@
       $("adm-held").innerHTML = parked.length
         ? parked.map((t) => '<span class="pill pill-off">' + escapeHtml(t) + " (parked)</span>").join("")
         : '<span class="pill pill-off">none</span>';
-      $("adm-account-sub").textContent = "They haven't signed in yet. Applying now parks the grant as pending — re-apply after their first sign-in.";
+      $("adm-account-sub").textContent = "They haven't signed in yet. Applying now parks the grant as pending; re-apply after their first sign-in.";
       show("adm-account", true);
     }
 
@@ -458,7 +458,7 @@
       if (email.toLowerCase() !== lastLookupEmail) {
         setStatus("Loading what they currently hold…");
         try { await lookup(email); } catch (e) { show("adm-account", false); setStatus(e.message, "error"); return; }
-        setStatus("Loaded — review the toggles above, adjust, then press Apply again.", "ok");
+        setStatus("Loaded. Review the toggles above, adjust, then press Apply again.", "ok");
         return;
       }
       const tiers = Array.from(selected);
@@ -469,7 +469,7 @@
         try { await lookup(email); } catch (e) { /* grant landed; refresh is best-effort */ }
       } catch (e) {
         if (e.data && e.data.pending) {
-          setStatus("No account for " + email + " yet — the grant is parked as pending. Re-apply once they've signed in.", "ok");
+          setStatus("No account for " + email + " yet; the grant is parked as pending. Re-apply once they've signed in.", "ok");
           try { await lookup(email); } catch (err) {}
         } else setStatus(e.message, "error");
       }
@@ -479,7 +479,7 @@
       setStatus("Replaying pending add-on grants…");
       try {
         const d = await api("/admin/access/grant-pending", { method: "POST" });
-        setStatus("Replayed — " + d.granted.length + " granted, " + d.still_pending.length + " still pending, " + d.failed.length + " failed.", d.failed.length ? "error" : "ok");
+        setStatus("Replayed: " + d.granted.length + " granted, " + d.still_pending.length + " still pending, " + d.failed.length + " failed.", d.failed.length ? "error" : "ok");
       } catch (e) { setStatus(e.message, "error"); }
     }));
   </script>

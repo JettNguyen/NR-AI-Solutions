@@ -36,7 +36,7 @@
   --bg-wash-one: rgba(251, 228, 211, 0.42);
   --bg-wash-two: rgba(240, 184, 168, 0.24);
 
-  /* Add-on type accents — mirror the Archie app so a Worker, Routine, and
+  /* Add-on type accents: mirror the Archie app so a Worker, Routine, and
      Personality read as blue/teal/plum; Skills use the brand accent above. */
   --c-blue: #5988CB;
   --c-blue-subtle: rgba(89, 136, 203, 0.13);
@@ -499,7 +499,7 @@ p { color: var(--text-secondary); line-height: 1.8; }
   flex-shrink: 0;
 }
 
-/* An icon button, not a switch: the icon shows the theme that's ON —
+/* An icon button, not a switch: the icon shows the theme that's ON,
    sun while light, moon while dark. nav.js swaps aria-label per state. */
 .theme-toggle {
   display: inline-flex;
@@ -698,12 +698,12 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 
 /* ── Nav responsive ──────────────────────────────────────────────────────────
    Three tiers, sized to what actually fits:
-   • > 1100px          full row — logo (icon + wordmark + tagline), all menus,
+   • > 1100px          full row: logo (icon + wordmark + tagline), all menus,
                        theme toggle, Get Started, avatar.
    • 901–1100px        drop the wordmark + tagline to their icon so the full set
                        of menus keeps fitting on one line; controls stay put.
    • ≤ 900px           menus + Get Started move into the drawer, hamburger appears,
-                       and the wordmark returns (there's room again — and it keeps
+                       and the wordmark returns (there's room again, and it keeps
                        the company name on screen at phone widths, which Google
                        OAuth verification requires on the home page). */
 @media (max-width: 1100px) and (min-width: 901px) {
@@ -857,7 +857,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   overflow-y: auto;
   visibility: hidden;
   /* Closed = fully off the right edge, not just shifted. The panel sits at right: 220px (just left
-     of the 220px drawer), so a plain translateX(100%) only moves it 160px — its own width — and
+     of the 220px drawer), so a plain translateX(100%) only moves it 160px (its own width) and
      leaves it ON screen, relying on visibility: hidden alone to hide it. On mobile Safari that
      visibility transition intermittently fails to repaint, and the submenu is left sitting there
      after the drawer closes. Translating a full 100% + 220px carries it past the viewport edge
@@ -1213,7 +1213,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 }
 
 /* The demo panel runs past the right edge of the centred container so it meets the edge
-   of the screen — the product reads as part of the page instead of a video in a box.
+   of the screen, so the product reads as part of the page instead of a video in a box.
    The bleed is exactly the distance to that edge (the gutter, or .hero's 24px padding
    when there is no gutter), so the panel lands flush and nothing is cropped off it. */
 .hero-visual {
@@ -1576,7 +1576,7 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
   margin-top: 0;
 }
 
-/* Buttons inside a CTA banner are always centered — .hero-actions is a flex
+/* Buttons inside a CTA banner are always centered: .hero-actions is a flex
    row (left-aligned by default), which text-align:center can't correct. */
 .cta-banner .hero-actions {
   justify-content: center;
@@ -2712,7 +2712,7 @@ html[data-theme="dark"] .availability-widget iframe {
 .page-hero-inner--with-video {
   max-width: 1100px;
   display: grid;
-  /* Gallery column is a capped proportion of the row, not `auto` — `auto`
+  /* Gallery column is a capped proportion of the row, not `auto`: `auto`
      balloons to the leftover space and leaves a gap to the right of the
      fixed-width gallery while crushing the text to its min-content. */
   grid-template-columns: minmax(0, 1fr) min(46%, 520px);
@@ -2957,7 +2957,7 @@ html[data-theme="dark"] .availability-widget iframe {
   gap: 0;
 }
 
-/* .arch-flow-track--rev: arrowhead is first in DOM, line second — no flex reversal needed */
+/* .arch-flow-track--rev: arrowhead is first in DOM, line second, so no flex reversal needed */
 
 .arch-flow-line {
   flex: 1;
@@ -3029,7 +3029,7 @@ html[data-theme="dark"] .availability-widget iframe {
     gap: 12px;
   }
 
-  /* Only outer connector tracks go vertical on mobile — internal --down/--up tracks stay as-is */
+  /* Only outer connector tracks go vertical on mobile; internal --down/--up tracks stay as-is */
   .arch-flow .arch-flow-track {
     flex-direction: column;
     width: auto;
@@ -3690,7 +3690,7 @@ html[data-theme="dark"] .availability-widget iframe {
   }
 
   /* Edge to edge on a phone: cancel .hero's 24px side padding so the recording
-     touches both edges of the screen. Nothing frames it, nothing lifts it —
+     touches both edges of the screen. Nothing frames it, nothing lifts it;
      it just is the top of the page. */
   .hero-visual {
     order: -1;
@@ -3706,8 +3706,8 @@ html[data-theme="dark"] .availability-widget iframe {
 
   /* Crop the recording to the Archie window by SHAPE, not by transform. The frame is set a touch
      narrower than the recording's own 1.42 aspect, so object-fit: cover trims a sliver off each
-     side — enough to carry the dark desktop wallpaper that flanks the window off the screen edges,
-     keeping the bleed clean — while showing the FULL height. Full height is the whole point: it
+     side, enough to carry the dark desktop wallpaper that flanks the window off the screen edges,
+     keeping the bleed clean, while showing the FULL height. Full height is the whole point: it
      leaves the top strip of desktop above the window in view (that's intended), and it stops
      cropping the bottom, which is what used to shove the closing logo card's tagline down under
      the fade. Nothing vertical is cropped, so the card sits exactly as it does in the recording,
@@ -3727,8 +3727,8 @@ html[data-theme="dark"] .availability-widget iframe {
   }
 
   /* The recording dissolves into the page across its whole bottom third, and the headline rises
-     into what it leaves behind. A long, even ramp — solid to ~62% of the frame, then a gradual
-     slope to fully transparent right at the edge — so the picture melts out instead of ending on
+     into what it leaves behind. A long, even ramp (solid to ~62% of the frame, then a gradual
+     slope to fully transparent right at the edge) so the picture melts out instead of ending on
      a line. This matters most in dark mode: the app's footer bar and the desktop strip below the
      window are bright against a near-black page, and a short ramp left a visible seam there; the
      long ramp carries them all the way to nothing. On the closing card it is just empty cream (or
@@ -3738,17 +3738,17 @@ html[data-theme="dark"] .availability-widget iframe {
     mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 100%);
   }
 
-  /* No backdrop-filter blur down here, deliberately — it was tried and it made things worse.
+  /* No backdrop-filter blur down here, deliberately: it was tried and it made things worse.
      Two reasons, and they compound. It can't help: backdrop-filter blurs the backdrop, but in
      the fade zone the mask above has already taken the video away, so the backdrop IS the page
      background and there is nothing left to blur. And it actively hurts: the filter clamps at
      its own bottom edge, so it drags bright pixels down from where the video is still opaque
      into rows that should be empty, repainting them right up to the frame's edge, where
-     overflow: hidden then guillotines them. That is a hard line — measured, it tripled the
+     overflow: hidden then guillotines them. That is a hard line: measured, it tripled the
      brightness step at the boundary. The crop above is what removes the line; the alpha ramp
      is what makes it smooth. */
 
-  /* Ride the headline up onto the faded tail of the video — just the cap-line of its first row,
+  /* Ride the headline up onto the faded tail of the video, just the cap-line of its first row,
      into the part that has already dissolved toward nothing. The fade now begins at ~62% of the
      frame, so the whole bottom third is a soft ramp; the headline sits low in that ramp, covering
      little of the live picture and resting on pixels that are mostly gone. A small pull, so the
@@ -4754,7 +4754,7 @@ html[data-theme="dark"] .booking-container iframe {
   margin-bottom: 16px;
 }
 
-/* Pre-release notice — Archie has not shipped, so nothing here is installable yet. */
+/* Pre-release notice: Archie has not shipped, so nothing here is installable yet. */
 .prerelease-banner {
   max-width: 780px;
   margin: 32px auto 0;
@@ -4798,7 +4798,7 @@ html[data-theme="dark"] .booking-container iframe {
   }
 }
 
-/* Archie product wordmark lockup — used where Archie the app is introduced. */
+/* Archie product wordmark lockup, used where Archie the app is introduced. */
 .archie-lockup {
   display: flex;
   flex-direction: column;
@@ -4867,7 +4867,7 @@ html[data-theme="dark"] .booking-container iframe {
   max-width: 640px;
   margin: -8px auto 0;
 }
-/* When notes stack, don't pull each one up under the previous — give an even, readable gap. */
+/* When notes stack, don't pull each one up under the previous; give an even, readable gap. */
 .marketplace-split-note + .marketplace-split-note {
   margin-top: 16px;
 }
@@ -4983,7 +4983,7 @@ html[data-theme="dark"] .booking-container iframe {
   transition: color var(--transition), background var(--transition), border-color var(--transition);
 }
 
-/* Each type tab carries its add-on color (matching the badges) — as text at rest and a
+/* Each type tab carries its add-on color (matching the badges): as text at rest and a
    solid fill when active. The All tab sets no --tab-color and falls back to the brand accent. */
 .mp-type-tab[data-type="skill"]       { --tab-color: var(--accent); }
 .mp-type-tab[data-type="worker"]      { --tab-color: var(--c-blue); }
@@ -5015,7 +5015,7 @@ html[data-theme="dark"] .booking-container iframe {
   margin-bottom: 0;
 }
 
-/* Price toggle group — a recessed segmented switch (inset track + raised active chip) so it
+/* Price toggle group: a recessed segmented switch (inset track + raised active chip) so it
    reads as one control, distinct from the flat category filter pills beside it. */
 .mp-price-toggle {
   display: flex;
@@ -5490,7 +5490,7 @@ html[data-theme="dark"] .booking-container iframe {
 /* ========================================
    35. Responsive overrides for late sections
    Sections 27-34 are defined after the main responsive blocks
-   (25/26), so their small-screen rules must live here — an
+   (25/26), so their small-screen rules must live here; an
    identically-specific rule earlier in the file loses.
    ======================================== */
 @media (max-width: 1024px) {
@@ -5530,7 +5530,7 @@ html[data-theme="dark"] .booking-container iframe {
 
 @media (max-width: 640px) {
   /* Diagrams swap to portrait variants that rearrange the same content
-     vertically — no horizontal scrolling. */
+     vertically, no horizontal scrolling. */
   .explain-figure svg.explain-svg--desktop {
     display: none;
   }
@@ -5564,7 +5564,7 @@ html[data-theme="dark"] .booking-container iframe {
 
 
 /* ==========================================================================
-   Demo player — the Archie product recording
+   Demo player: the Archie product recording
    Plays itself, silently, on a loop. Lazy-loaded and pause-able; see js/demo-player.js.
    ========================================================================== */
 .demo-player {
@@ -5590,7 +5590,7 @@ html[data-theme="dark"] .booking-container iframe {
   object-fit: cover;
 }
 
-/* The only control. Invisible until you look for it — hover, focus, or the paused state —
+/* The only control. Invisible until you look for it (hover, focus, or the paused state),
    so the demo reads as something happening rather than something to operate. */
 .demo-player-toggle {
   position: absolute;
@@ -5665,7 +5665,7 @@ html[data-theme="dark"] .booking-container iframe {
 
 .demo-player.is-paused .demo-player-icon-play {
   display: block;
-  margin-left: 4px; /* optical centring — a triangle's mass sits left of its bounding box */
+  margin-left: 4px; /* optical centring: a triangle's mass sits left of its bounding box */
 }
 
 .demo-player-caption {
@@ -5749,7 +5749,7 @@ html[data-theme="dark"] .booking-container iframe {
    equals the $-figure line box (2.5rem x 1.6) so the four cards' body
    text starts level across a row. */
 /* Word amounts ("Free or one-time", "Pay as you go") stand in for a "$20" figure, so they
-   reserve the same height and centre inside it — rather than faking it with a 4rem
+   reserve the same height and centre inside it, rather than faking it with a 4rem
    line-height, which doubled the card's height the moment the words wrapped to two lines. */
 .price-card-amount--words {
   font-size: 1.75rem;
@@ -5801,7 +5801,7 @@ html[data-theme="dark"] .booking-container iframe {
 .trust-prose p strong { color: var(--text-primary); }
 .trust-prose p:last-child { margin-bottom: 0; }
 
-/* An aside is the "you didn't ask, but you'd have found out" voice — set apart
+/* An aside is the "you didn't ask, but you'd have found out" voice, set apart
    so it reads as volunteered rather than buried. */
 .trust-aside {
   border-left: 3px solid var(--accent);
@@ -5887,7 +5887,7 @@ html[data-theme="dark"] .booking-container iframe {
 .trust-table tbody tr:last-child td { border-bottom: none; }
 
 /* The row that carries actual user content is the one people came to find.
-   Don't hide it — mark it. */
+   Don't hide it; mark it. */
 .trust-table tr.is-content td { background: var(--accent-subtle); }
 .trust-table tr.is-content td:first-child { box-shadow: inset 3px 0 0 var(--accent); }
 .trust-table tr.is-none td { background: var(--c-teal-subtle); }
@@ -6269,7 +6269,7 @@ html[data-theme="dark"] .booking-container iframe {
   opacity: 1;
 }
 
-/* Type variants — same palette as the old inline banners, with the leading icon. Backgrounds are
+/* Type variants: same palette as the old inline banners, with the leading icon. Backgrounds are
    solid (not rgba over the page) because the toast floats over arbitrary content. */
 .status-toast.error,
 .status-toast.ok {
